@@ -42,16 +42,18 @@ function characters(text: string): number {
   return count;
 }
 
-export function estimateTokens(classification: Classification): number {
+function blockTokens(text: string): number {
   let ascii = 0;
   let wide = 0;
-  for (const index of classification.candidates) {
-    for (const character of classification.blocks[index]) {
-      if (character.charCodeAt(0) < 128) ascii += 1;
-      else wide += 1;
-    }
+  for (const character of text) {
+    if (character.charCodeAt(0) < 128) ascii += 1;
+    else wide += 1;
   }
-  return Math.ceil(ascii / 4) + wide + classification.candidates.length * 150;
+  return Math.ceil(ascii / 4 + wide * 1.1) + 400;
+}
+
+export function estimateTokens(classification: Classification): number {
+  return classification.candidates.reduce((total, index) => total + blockTokens(classification.blocks[index]), 0);
 }
 
 export class JevError extends Error {
@@ -93,7 +95,7 @@ async function askAbout(text: string, apiKey: string): Promise<{ probability: nu
   if (typeof probability !== "number" || probability < 0 || probability > 1) throw new Error("jev left a block unanswered");
   const input = body.usage?.input_tokens;
   const output = body.usage?.output_tokens;
-  const tokens = typeof input === "number" ? input + (typeof output === "number" ? output : 0) : Math.ceil(text.length / 4) + 150;
+  const tokens = typeof input === "number" ? input + (typeof output === "number" ? output : 0) : blockTokens(text);
   return { probability, tokens };
 }
 
