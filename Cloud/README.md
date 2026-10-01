@@ -1,6 +1,6 @@
 # SakuraCloud
 
-The server side of Sakura: one Cloudflare Worker that asks TypeSafe's Jev whether the blocks Sakura's extractor is unsure of belong to an article. Every call is signed with App Attest, and each device has a Durable Object that holds its key, its assertion counter, and the tokens it spent in the last minute.
+The server side of Sakura: one Cloudflare Worker that asks TypeSafe's Jev whether each block Sakura's extractor is unsure of is a meaningful part of an article. Every call is signed with App Attest, and each device has a Durable Object that holds its key, its assertion counter, and the tokens it spent in the last minute.
 
 ## Develop and deploy
 
@@ -56,6 +56,6 @@ Everything is `POST` except `/health`. The signed endpoints take two headers:
 | `/v1/classify` | Yes | Takes `{ title, site, blocks: [string], candidates: [index] }` and returns `{ probabilities, remaining }`: for each candidate, in order, the probability that the block is part of the article |
 | `/v1/limits` | Yes | Returns `{ tokens: { limit, used, remaining } }` for the last 60 seconds, without spending anything |
 
-`blocks` holds up to 400 blocks of up to 4,000 characters, 60,000 in all, and `candidates` up to 120 distinct indexes into it. Only the candidates are asked about; the other blocks are context.
+`blocks` holds up to 400 blocks of up to 4,000 characters, 60,000 in all, and `candidates` up to 120 distinct indexes into it. Each candidate goes to Jev in its own call, six at a time, as `{ "text": block }` with one `noul` question, `meaningfulness_check`. Jev sees only the candidates.
 
-Before calling Jev the Worker sets aside an estimate of the tokens, then settles on the `usage` Jev reports. A call that fails upstream is given back. Every classify response carries `X-Sakura-Remaining`. A call that would go past the limit gets 429 with `Retry-After` in seconds, and one bigger than the whole limit gets 413.
+Before calling Jev the Worker sets aside an estimate of the tokens, then settles on the `usage` Jev reports. When a Jev call fails the request answers 502, and only the tokens of the calls Jev answered are kept. Every classify response carries `X-Sakura-Remaining`. A call that would go past the limit gets 429 with `Retry-After` in seconds, and one bigger than the whole limit gets 413.

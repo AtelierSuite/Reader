@@ -1,6 +1,6 @@
 import { checkChallenge, issueChallenge, verifyAttestation } from "./attest";
 import { base64Decode, base64UrlEncode } from "./bytes";
-import { askJev, estimateTokens, parseClassification } from "./classify";
+import { JevError, askJev, estimateTokens, parseClassification } from "./classify";
 import { Device } from "./device";
 import { type Env, appId, limit } from "./env";
 
@@ -99,7 +99,9 @@ async function classify(request: Request, env: Env): Promise<Response> {
     const left = await stub.settle(reservation.id, verdict.tokens, most);
     return json({ probabilities: verdict.probabilities, remaining: left }, 200, { "X-Sakura-Remaining": String(left) });
   } catch (error) {
-    await stub.release(reservation.id);
+    const spent = error instanceof JevError ? error.tokens : 0;
+    if (spent > 0) await stub.settle(reservation.id, spent, most);
+    else await stub.release(reservation.id);
     return failure(502, (error as Error).message);
   }
 }

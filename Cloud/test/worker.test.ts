@@ -17,13 +17,18 @@ const article = {
   candidates: [1, 3],
 };
 
-function jev(nouls: { [key: string]: number }, status = 200, usage = { input_tokens: 300, output_tokens: 4 }) {
-  return vi.spyOn(globalThis, "fetch").mockImplementation(async () => new Response(JSON.stringify({
-    model: "jev-1.13.0",
-    answers: Object.fromEntries(Object.entries(nouls).map(([key, noul]) => [key, { type: "noul", noul }])),
-    usage,
-  }), { status }));
+function jev(nouls: { [text: string]: number }, status = 200, usage = { input_tokens: 300, output_tokens: 4 }) {
+  return vi.spyOn(globalThis, "fetch").mockImplementation(async (_, init) => {
+    const noul = nouls[JSON.parse(init!.body as string).state.text];
+    return new Response(JSON.stringify({
+      model: "jev-1.13.0",
+      answers: noul === undefined ? {} : { meaningfulness_check: { type: "noul", noul } },
+      usage,
+    }), { status });
+  });
 }
+
+const [, newsletter, , share] = article.blocks;
 
 afterEach(() => vi.restoreAllMocks());
 
@@ -74,7 +79,7 @@ describe("signing", () => {
 
   it("refuses a replayed assertion", async () => {
     const phone = await Phone.create();
-    jev({ b2: 0.1, b4: 0.05 });
+    jev({ [newsletter]: 0.1, [share]: 0.05 });
     const body = new TextEncoder().encode(JSON.stringify(article));
     const assertion = await phone.assertion(body);
     expect((await phone.post("/v1/classify", article, { assertion })).status).toBe(200);
@@ -82,7 +87,7 @@ describe("signing", () => {
   });
 
   it("skips App Attest only on localhost when told to", async () => {
-    jev({ b2: 0.1, b4: 0.05 });
+    jev({ [newsletter]: 0.1, [share]: 0.05 });
     const post = (host: string) => worker.fetch(
       new Request(`http://${host}/v1/classify`, { method: "POST", body: JSON.stringify(article) }),
       { ...env, SKIP_APP_ATTEST: "true" } as Env,
@@ -93,29 +98,31 @@ describe("signing", () => {
 });
 
 describe("classifying", () => {
-  it("asks Jev one yes/no question per candidate and returns the answers in order", async () => {
+  it("asks Jev about each candidate on its own and returns the answers in order", async () => {
     const phone = await Phone.create();
-    const fetch = jev({ b4: 0.02, b2: 0.07 });
+    const fetch = jev({ [share]: 0.02, [newsletter]: 0.07 });
     const response = await phone.post("/v1/classify", article);
-    expect(await response.json()).toEqual({ probabilities: [0.07, 0.02], remaining: 1696 });
-    expect(response.headers.get("X-Sakura-Remaining")).toBe("1696");
+    expect(await response.json()).toEqual({ probabilities: [0.07, 0.02], remaining: 1392 });
+    expect(response.headers.get("X-Sakura-Remaining")).toBe("1392");
+    expect(fetch).toHaveBeenCalledTimes(2);
     expect(fetch.mock.calls[0][0]).toBe("https://api.typesafe.ai/v1/systemone");
-    const sent = JSON.parse(fetch.mock.calls[0][1]!.body as string);
-    expect(sent.model).toBe("jev-latest");
-    expect(sent.state.blocks).toEqual({ b1: article.blocks[0], b2: article.blocks[1], b3: article.blocks[2], b4: article.blocks[3] });
-    expect(Object.keys(sent.questions)).toEqual(["b2", "b4"]);
-    expect(sent.questions.b2.type).toBe("noul");
-    expect(sent.questions.b2.instructions).toContain("`blocks.b2`");
+    const sent = fetch.mock.calls.map((call) => JSON.parse(call[1]!.body as string));
+    expect(sent.map((request) => request.state)).toEqual([{ text: newsletter }, { text: share }]);
+    expect(sent[0].model).toBe("jev-latest");
+    expect(Object.keys(sent[0].questions)).toEqual(["meaningfulness_check"]);
+    expect(sent[0].questions.meaningfulness_check.type).toBe("noul");
   });
 
-  it("gives back the tokens of a failed call", async () => {
+  it("gives back the tokens of a failed call but keeps those Jev spent", async () => {
     const phone = await Phone.create();
     jev({}, 500);
     expect((await phone.post("/v1/classify", article)).status).toBe(502);
     vi.restoreAllMocks();
-    jev({ b2: 0.5 });
-    expect((await phone.post("/v1/classify", article)).status).toBe(502);
     expect(await (await phone.post("/v1/limits", {})).json()).toEqual({ tokens: { limit: 2000, used: 0, remaining: 2000 } });
+    vi.restoreAllMocks();
+    jev({ [newsletter]: 0.5 });
+    expect((await phone.post("/v1/classify", article)).status).toBe(502);
+    expect(await (await phone.post("/v1/limits", {})).json()).toEqual({ tokens: { limit: 2000, used: 304, remaining: 1696 } });
   });
 
   it("rejects bodies it will not pass on", async () => {
@@ -130,7 +137,7 @@ describe("classifying", () => {
 describe("limits", () => {
   it("stops at the per-minute token limit and says when to retry", async () => {
     const phone = await Phone.create();
-    jev({ b2: 0.1, b4: 0.1 }, 200, { input_tokens: 900, output_tokens: 0 });
+    jev({ [newsletter]: 0.1, [share]: 0.1 }, 200, { input_tokens: 450, output_tokens: 0 });
     expect((await phone.post("/v1/classify", article)).status).toBe(200);
     expect((await phone.post("/v1/classify", article)).status).toBe(200);
     const over = await phone.post("/v1/classify", article);
@@ -154,7 +161,7 @@ describe("limits", () => {
 
   it("refuses a request that could never fit in a minute", async () => {
     const phone = await Phone.create();
-    const response = await phone.post("/v1/classify", { ...article, blocks: [...article.blocks, "x".repeat(3999), "x".repeat(3999)] });
+    const response = await phone.post("/v1/classify", { ...article, blocks: [...article.blocks, "x".repeat(3999), "x".repeat(3999)], candidates: [4, 5] });
     expect(response.status).toBe(413);
   });
 
@@ -181,7 +188,7 @@ describe("limits", () => {
   it("keeps each device's tokens apart", async () => {
     const phone = await Phone.create();
     const other = await Phone.create();
-    jev({ b2: 0.1, b4: 0.1 }, 200, { input_tokens: 1900, output_tokens: 0 });
+    jev({ [newsletter]: 0.1, [share]: 0.1 }, 200, { input_tokens: 950, output_tokens: 0 });
     expect((await phone.post("/v1/classify", article)).status).toBe(200);
     expect((await other.post("/v1/classify", article)).status).toBe(200);
   });

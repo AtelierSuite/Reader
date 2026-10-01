@@ -1,6 +1,7 @@
 export const JEV_URL = "https://api.typesafe.ai/v1/systemone";
 export const JEV_MODEL = "jev-latest";
 const JEV_TIMEOUT_MS = 15_000;
+const JEV_CONCURRENCY = 6;
 
 const MOST_BLOCKS = 400;
 const LONGEST_BLOCK = 4000;
@@ -38,57 +39,76 @@ export function parseClassification(body: unknown): Classification | string {
 export function estimateTokens(classification: Classification): number {
   let ascii = 0;
   let wide = 0;
-  for (const block of [classification.title, ...classification.blocks]) {
-    for (const character of block) {
+  for (const index of classification.candidates) {
+    for (const character of classification.blocks[index]) {
       if (character.charCodeAt(0) < 128) ascii += 1;
       else wide += 1;
     }
   }
-  return Math.ceil(ascii / 4) + wide + classification.candidates.length * 60 + 200;
+  return Math.ceil(ascii / 4) + wide + classification.candidates.length * 150;
 }
 
-function blockKey(index: number): string {
-  return `b${index + 1}`;
+export class JevError extends Error {
+  constructor(message: string, readonly tokens: number) {
+    super(message);
+  }
 }
 
-export function jevRequest(classification: Classification): object {
+export function jevRequest(text: string): object {
   return {
     model: JEV_MODEL,
-    state: {
-      title: classification.title,
-      site: classification.site,
-      blocks: Object.fromEntries(classification.blocks.map((block, index) => [blockKey(index), block])),
-    },
-    questions: Object.fromEntries(classification.candidates.map((index) => [blockKey(index), {
-      type: "noul",
-      instructions: `Is \`blocks.${blockKey(index)}\` part of the main content of the article titled \`title\`?`,
-      criteria: {
-        true: "Body text, a heading, a quote, a list item, or a caption that belongs to the article itself",
-        false: "Navigation, an advertisement, a promotion, a newsletter or subscription prompt, related or recommended links, a share or comment prompt, an author bio, a copyright or legal notice, or other site boilerplate",
+    state: { text },
+    questions: {
+      meaningfulness_check: {
+        type: "noul",
+        instructions: "Is this a meaningful part of an article?",
+        criteria: {
+          true: "The text, Markdown, or HTML reflect a meaningful part of an article that is part of the article's content.",
+          false: "The text, Markdown, or HTML do not contribute to the article contents, and/or are noise that is part of the article's UI.",
+        },
       },
-    }])),
+    },
   };
 }
 
-export async function askJev(classification: Classification, apiKey: string): Promise<Verdict> {
+async function askAbout(text: string, apiKey: string): Promise<{ probability: number; tokens: number }> {
   const response = await fetch(JEV_URL, {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify(jevRequest(classification)),
+    body: JSON.stringify(jevRequest(text)),
     signal: AbortSignal.timeout(JEV_TIMEOUT_MS),
   });
   if (!response.ok) throw new Error(`jev returned ${response.status}`);
   const body = (await response.json()) as {
-    answers?: { [key: string]: { noul?: unknown } };
+    answers?: { meaningfulness_check?: { noul?: unknown } };
     usage?: { input_tokens?: unknown; output_tokens?: unknown };
   };
-  const probabilities = classification.candidates.map((index) => {
-    const value = body.answers?.[blockKey(index)]?.noul;
-    if (typeof value !== "number" || value < 0 || value > 1) throw new Error("jev left a block unanswered");
-    return value;
-  });
+  const probability = body.answers?.meaningfulness_check?.noul;
+  if (typeof probability !== "number" || probability < 0 || probability > 1) throw new Error("jev left a block unanswered");
   const input = body.usage?.input_tokens;
   const output = body.usage?.output_tokens;
-  const tokens = typeof input === "number" ? input + (typeof output === "number" ? output : 0) : estimateTokens(classification);
+  const tokens = typeof input === "number" ? input + (typeof output === "number" ? output : 0) : Math.ceil(text.length / 4) + 150;
+  return { probability, tokens };
+}
+
+export async function askJev(classification: Classification, apiKey: string): Promise<Verdict> {
+  const texts = classification.candidates.map((index) => classification.blocks[index]);
+  const probabilities: number[] = [];
+  let tokens = 0;
+  let next = 0;
+  let failure: Error | undefined;
+  await Promise.all(Array.from({ length: Math.min(JEV_CONCURRENCY, texts.length) }, async () => {
+    while (!failure && next < texts.length) {
+      const position = next++;
+      try {
+        const answer = await askAbout(texts[position], apiKey);
+        probabilities[position] = answer.probability;
+        tokens += answer.tokens;
+      } catch (error) {
+        failure ??= error as Error;
+      }
+    }
+  }));
+  if (failure) throw new JevError(failure.message, tokens);
   return { probabilities, tokens };
 }
