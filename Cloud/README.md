@@ -56,6 +56,6 @@ Everything is `POST` except `/health`. The signed endpoints take two headers:
 | `/v1/classify` | Yes | Takes `{ title, site, blocks: [string], candidates: [index] }` and returns `{ probabilities, remaining }`: for each candidate, in order, the probability that the block is part of the article |
 | `/v1/limits` | Yes | Returns `{ tokens: { limit, used, remaining } }` for the last 60 seconds, without spending anything |
 
-`blocks` holds up to 400 blocks of up to 4,000 characters, 60,000 in all, and `candidates` up to 120 distinct indexes into it. Each candidate goes to Jev in its own call, six at a time, as `{ "text": block }` with one `noul` question, `meaningfulness_check`. Jev sees only the candidates.
+`title` and `site` are optional and not sent to Jev. `blocks` holds up to 400 blocks of up to 4,000 characters, 60,000 in all, counted as Swift's `String.count` counts them, and `candidates` up to 120 distinct indexes into it. Each candidate goes to Jev in its own call, six at a time, as `{ "text": block }` with one `noul` question, `meaningfulness_check`. Jev sees only the candidates.
 
 Before calling Jev the Worker sets aside an estimate of the tokens, then settles on the `usage` Jev reports. When a Jev call fails the request answers 502, and only the tokens of the calls Jev answered are kept. Every classify response carries `X-Sakura-Remaining`. A call that would go past the limit gets 429 with `Retry-After` in seconds, and one bigger than the whole limit gets 413.

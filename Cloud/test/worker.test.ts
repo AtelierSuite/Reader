@@ -132,6 +132,12 @@ describe("classifying", () => {
     expect((await phone.post("/v1/classify", { ...article, candidates: [1, 1] })).status).toBe(400);
     expect((await phone.post("/v1/classify", { ...article, blocks: ["x".repeat(4001)] })).status).toBe(400);
   });
+
+  it("counts characters as the app does", async () => {
+    const phone = await Phone.create();
+    const family = { title: "t".repeat(800), site: "example.com", blocks: ["👨‍👩‍👧".repeat(4000)], candidates: [0] };
+    expect((await phone.post("/v1/classify", family)).status).toBe(413);
+  });
 });
 
 describe("limits", () => {

@@ -7,12 +7,10 @@ const MOST_BLOCKS = 400;
 const LONGEST_BLOCK = 4000;
 const MOST_CHARACTERS = 60_000;
 const MOST_CANDIDATES = 120;
-const LONGEST_TITLE = 500;
-const LONGEST_SITE = 253;
+
+const graphemes = new Intl.Segmenter(undefined, { granularity: "grapheme" });
 
 export interface Classification {
-  title: string;
-  site: string;
   blocks: string[];
   candidates: number[];
 }
@@ -25,15 +23,23 @@ export interface Verdict {
 export function parseClassification(body: unknown): Classification | string {
   if (typeof body !== "object" || body === null) return "body must be an object";
   const { title, site, blocks, candidates } = body as { [key: string]: unknown };
-  if (title !== undefined && (typeof title !== "string" || title.length > LONGEST_TITLE)) return `title must be under ${LONGEST_TITLE} characters`;
-  if (site !== undefined && (typeof site !== "string" || site.length > LONGEST_SITE)) return "site must be a host name";
+  if (title !== undefined && typeof title !== "string") return "title must be a string";
+  if (site !== undefined && typeof site !== "string") return "site must be a string";
   if (!Array.isArray(blocks) || blocks.length === 0 || blocks.length > MOST_BLOCKS) return `blocks must hold 1 to ${MOST_BLOCKS} entries`;
-  if (!blocks.every((block) => typeof block === "string" && block.length <= LONGEST_BLOCK)) return `each block must be a string under ${LONGEST_BLOCK} characters`;
-  if (blocks.reduce((total, block) => total + block.length, 0) > MOST_CHARACTERS) return `blocks must total under ${MOST_CHARACTERS} characters`;
+  if (!blocks.every((block) => typeof block === "string")) return "each block must be a string";
+  const lengths = blocks.map(characters);
+  if (lengths.some((length) => length > LONGEST_BLOCK)) return `each block must be under ${LONGEST_BLOCK} characters`;
+  if (lengths.reduce((total, length) => total + length, 0) > MOST_CHARACTERS) return `blocks must total under ${MOST_CHARACTERS} characters`;
   if (!Array.isArray(candidates) || candidates.length === 0 || candidates.length > MOST_CANDIDATES) return `candidates must hold 1 to ${MOST_CANDIDATES} entries`;
   if (!candidates.every((index) => Number.isSafeInteger(index) && index >= 0 && index < blocks.length)) return "candidates must be indexes into blocks";
   if (new Set(candidates).size !== candidates.length) return "candidates must not repeat";
-  return { title: (title as string | undefined) ?? "", site: (site as string | undefined) ?? "", blocks, candidates };
+  return { blocks, candidates };
+}
+
+function characters(text: string): number {
+  let count = 0;
+  for (const _ of graphemes.segment(text)) count += 1;
+  return count;
 }
 
 export function estimateTokens(classification: Classification): number {
