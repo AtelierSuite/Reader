@@ -1,0 +1,75 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+  staging:
+    if: (github.event_name == 'release' && github.event.release.prerelease) || github.event_name == 'workflow_dispatch'
+    needs: test
+    runs-on: ubuntu-latest
+    environment: staging
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CHALLENGE_SECRET: ${{ secrets.CHALLENGE_SECRET }}
+      JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
+      APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
+      APP_BUNDLE_ID: ${{ vars.APP_BUNDLE_ID }}
+      APP_ATTEST_ENVIRONMENT: ${{ vars.APP_ATTEST_ENVIRONMENT }}
+      TOKENS_PER_MINUTE: ${{ vars.TOKENS_PER_MINUTE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node -e 'const { CHALLENGE_SECRET, JEV_API_KEY } = process.env; require("fs").writeFileSync(process.argv[1], JSON.stringify({ CHALLENGE_SECRET, JEV_API_KEY }))' "$RUNNER_TEMP/secrets.json"
+      - run: npx cf deploy --mode staging --secrets-file "$RUNNER_TEMP/secrets.json"
+
+  production:
+    if: github.event_name == 'release' && !github.event.release.prerelease
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CHALLENGE_SECRET: ${{ secrets.CHALLENGE_SECRET }}
+      JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
+      APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
+      APP_BUNDLE_ID: ${{ vars.APP_BUNDLE_ID }}
+      APP_ATTEST_ENVIRONMENT: ${{ vars.APP_ATTEST_ENVIRONMENT }}
+      TOKENS_PER_MINUTE: ${{ vars.TOKENS_PER_MINUTE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node -e 'const { CHALLENGE_SECRET, JEV_API_KEY } = process.env; require("fs").writeFileSync(process.argv[1], JSON.stringify({ CHALLENGE_SECRET, JEV_API_KEY }))' "$RUNNER_TEMP/secrets.json"
+      - run: npx cf deploy --mode production --secrets-file "$RUNNER_TEMP/secrets.json"
