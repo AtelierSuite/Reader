@@ -16,6 +16,7 @@ public extension YouTubePlaylistProvider {
         var request = URLRequest(url: url)
         request.setValue(sakuraUserAgent, forHTTPHeaderField: "User-Agent")
         request.setValue(sakuraAcceptLanguage, forHTTPHeaderField: "Accept-Language")
+        request.setValue(youTubeConsentCookie, forHTTPHeaderField: "Cookie")
 
         let empty = YouTubePlaylistFetchResult(
             videos: [], playlistTitle: nil, channelAvatarURL: nil
@@ -117,6 +118,7 @@ public extension YouTubePlaylistProvider {
         var request = URLRequest(url: url)
         request.setValue(sakuraUserAgent, forHTTPHeaderField: "User-Agent")
         request.setValue(sakuraAcceptLanguage, forHTTPHeaderField: "Accept-Language")
+        request.setValue(youTubeConsentCookie, forHTTPHeaderField: "Cookie")
 
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
