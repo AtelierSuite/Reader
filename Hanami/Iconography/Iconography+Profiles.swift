@@ -32,13 +32,11 @@ public extension Iconography {
         return false
     }
 
-    /// YouTube redirects cookieless EU requests to a consent page that has no
-    /// `og:image`; a rejected-consent `SOCS` cookie skips it.
     nonisolated static func profilePageRequest(for url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         if let host = url.host?.lowercased(),
            host == "youtube.com" || host.hasSuffix(".youtube.com") {
-            request.setValue("SOCS=CAA", forHTTPHeaderField: "Cookie")
+            request.setValue(youTubeConsentCookie, forHTTPHeaderField: "Cookie")
         }
         return request
     }

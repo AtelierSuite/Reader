@@ -2,6 +2,10 @@ import Foundation
 
 public nonisolated let sakuraUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/605.1.15"
 
+/// YouTube redirects cookieless EU requests to a consent page. `SOCS` values
+/// starting with `CAA` mean no choice was made and still get redirected.
+public nonisolated let youTubeConsentCookie = "SOCS=CAI"
+
 public nonisolated var sakuraAcceptLanguage: String {
     let preferred = Locale.preferredLanguages.prefix(5)
     guard !preferred.isEmpty else { return "en-US,en;q=0.9" }
