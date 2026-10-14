@@ -51,6 +51,7 @@ struct ScrollArticlePage: View {
                 if isExpanded {
                     ScrollExpandedArticleView(
                         article: expandedArticle ?? article,
+                        isFullArticleLoaded: expandedArticle != nil,
                         feedName: feedName,
                         icon: icon,
                         acronymIcon: acronymIcon,
