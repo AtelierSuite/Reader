@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ScrollExpandedToolbar: View {
 
-    static let buttonSize: CGFloat = 36
+    static let buttonSize: CGFloat = 44
 
     let isRefreshing: Bool
     let onBack: () -> Void
@@ -10,28 +10,28 @@ struct ScrollExpandedToolbar: View {
 
     var body: some View {
         HStack {
-            Button(action: onBack) {
-                Image(systemName: "chevron.left")
-                    .font(.body.weight(.semibold))
-                    .frame(width: Self.buttonSize, height: Self.buttonSize)
-            }
-            .compatibleGlassButtonStyle()
-            .buttonBorderShape(.circle)
-            .accessibilityLabel(String(localized: "Scroll.Back", table: "Articles"))
+            toolbarButton(systemImage: "chevron.down", action: onBack)
+                .accessibilityLabel(String(localized: "Scroll.Back", table: "Articles"))
 
             Spacer(minLength: 0)
 
-            Button(action: onRefresh) {
-                Image(systemName: "arrow.clockwise")
-                    .font(.body.weight(.semibold))
-                    .frame(width: Self.buttonSize, height: Self.buttonSize)
-            }
-            .compatibleGlassButtonStyle()
-            .buttonBorderShape(.circle)
-            .disabled(isRefreshing)
-            .accessibilityLabel(String(localized: "Scroll.Refresh", table: "Articles"))
+            toolbarButton(systemImage: "arrow.clockwise", action: onRefresh)
+                .disabled(isRefreshing)
+                .accessibilityLabel(String(localized: "Scroll.Refresh", table: "Articles"))
         }
-        .foregroundStyle(.white)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 16)
+    }
+
+    private func toolbarButton(systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 17, weight: .medium))
+                .imageScale(.large)
+                .foregroundStyle(.white)
+                .frame(width: Self.buttonSize, height: Self.buttonSize)
+                .contentShape(.circle)
+        }
+        .buttonStyle(.plain)
+        .compatibleGlassEffect(in: .circle, interactive: true)
     }
 }

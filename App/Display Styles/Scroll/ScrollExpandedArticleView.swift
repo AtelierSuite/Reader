@@ -72,7 +72,7 @@ struct ScrollExpandedArticleView: View {
                     Task { await refreshArticleContent() }
                 }
             )
-            .padding(.top, 8 + contextInsets.top)
+            .padding(.top, contextInsets.top)
         }
         .overlay(alignment: .leading) {
             Color.clear
