@@ -112,7 +112,12 @@ struct SingleFeedProvider: AppIntentTimelineProvider {
         let feedTitle = (try database.feed(byID: params.feedID))?.title ?? feed.title
         let perPage = params.layout == .text ? 9 : params.columns * params.columns
         let totalLimit = perPage * 3
-        let dbArticles = try database.articlesList(forFeedID: params.feedID, limit: totalLimit)
+        let rules = FeedManager.filterRules(forFeedID: params.feedID, database: database)
+        let dbArticles = try FeedManager.visibleArticles(
+            limit: totalLimit,
+            fetch: { try database.articlesList(forFeedID: params.feedID, limit: $0) },
+            filter: { FeedManager.applyRules($0, rules: rules) }
+        )
         let totalPages = max(1, Int(ceil(Double(dbArticles.count) / Double(perPage))))
         let currentPage = min(params.storedPage, totalPages - 1)
         let pageStart = currentPage * perPage
