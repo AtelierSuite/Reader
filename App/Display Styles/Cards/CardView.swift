@@ -16,6 +16,7 @@ struct CardView: View {
     @State private var cardImage: UIImage?
     @State private var shouldCenterImage = false
     @State private var isCircleIcon = false
+    @State private var feed: Feed?
 
     private var rotation: Double {
         Double(offset.width) / 20.0
@@ -66,6 +67,16 @@ struct CardView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Spacer()
 
+                    if let feed {
+                        HStack(spacing: 6) {
+                            FeedIcon(feed: feed, size: 20)
+                            Text(feed.title)
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(cardTextColor)
+                                .lineLimit(1)
+                        }
+                    }
+
                     Text(article.displayTitle)
                         .font(.system(.title, weight: .bold))
                         .fontWidth(.condensed)
@@ -108,6 +119,7 @@ struct CardView: View {
         }
         .task {
             if let feed = feedManager.feed(forArticle: article) {
+                self.feed = feed
                 shouldCenterImage = CenteredImageDomains.shouldCenterImage(feedDomain: feed.domain)
                 isCircleIcon = feed.isCircleIcon
                 icon = await Iconography.shared.icon(for: feed)
