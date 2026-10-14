@@ -26,6 +26,7 @@ struct ScrollExpandedArticleView: View {
     @State private var imageViewerURL: URL?
     @Namespace private var imageViewerNamespace
     private static let overscrollThreshold: CGFloat = 80
+    private static let toolbarClearance: CGFloat = 72
 
     var displayText: String? {
         extractedText ?? article.summary
@@ -58,9 +59,19 @@ struct ScrollExpandedArticleView: View {
                 Spacer(minLength: 40)
             }
             .padding(.horizontal, 20)
-            .padding(.top, 20 + contextInsets.top)
+            .padding(.top, Self.toolbarClearance + contextInsets.top)
             .padding(.bottom, 40 + contextInsets.bottom)
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .overlay(alignment: .top) {
+            ScrollExpandedToolbar(
+                isRefreshing: isExtracting,
+                onBack: onTapToCollapse,
+                onRefresh: {
+                    Task { await refreshArticleContent() }
+                }
+            )
+            .padding(.top, 8 + contextInsets.top)
         }
         .overlay(alignment: .leading) {
             Color.clear
