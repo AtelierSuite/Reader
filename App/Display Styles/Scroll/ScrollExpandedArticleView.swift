@@ -4,6 +4,7 @@ import Hanami
 struct ScrollExpandedArticleView: View {
     @Environment(FeedManager.self) var feedManager
     let article: Article
+    let isFullArticleLoaded: Bool
     let feedName: String?
     let icon: UIImage?
     let acronymIcon: UIImage?
@@ -115,7 +116,10 @@ struct ScrollExpandedArticleView: View {
                 symbolName: "photo"
             )
         }
-        .task {
+        // List rows omit `content`, so waiting for the full row keeps the
+        // feed text source from falling back to the summary.
+        .task(id: isFullArticleLoaded) {
+            guard isFullArticleLoaded else { return }
             await extractArticleContent()
         }
     }
