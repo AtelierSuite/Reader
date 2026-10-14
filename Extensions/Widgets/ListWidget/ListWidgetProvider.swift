@@ -104,7 +104,8 @@ struct ListWidgetProvider: AppIntentTimelineProvider {
     ) async throws -> ListWidgetEntry {
         let listID = params.listID
         let listTitle = (try database.list(byID: listID))?.name ?? listEntity.title
-        let feedIDs = try database.feedIDs(forListID: listID)
+        let mutedFeedIDs = Set(try database.allFeeds().filter(\.isMuted).map(\.id))
+        let feedIDs = try database.feedIDs(forListID: listID).filter { !mutedFeedIDs.contains($0) }
         guard !feedIDs.isEmpty else {
             return Self.emptyListWidgetEntry(
                 listID: listID, listTitle: listTitle,
@@ -114,7 +115,9 @@ struct ListWidgetProvider: AppIntentTimelineProvider {
 
         let perPage = params.layout == .text ? 9 : params.columns * params.columns
         let totalLimit = perPage * 3
-        let dbArticles = try database.articlesList(forFeedIDs: feedIDs, limit: totalLimit)
+        let dbArticles = try Self.visibleArticles(
+            listID: listID, feedIDs: feedIDs, limit: totalLimit, database: database
+        )
         let totalPages = max(1, Int(ceil(Double(dbArticles.count) / Double(perPage))))
         let currentPage = min(params.storedPage, totalPages - 1)
         let pageStart = currentPage * perPage
@@ -143,6 +146,23 @@ struct ListWidgetProvider: AppIntentTimelineProvider {
             columns: params.columns,
             currentPage: currentPage,
             totalPages: totalPages
+        )
+    }
+
+    private static func visibleArticles(
+        listID: Int64, feedIDs: [Int64], limit: Int, database: DatabaseManager
+    ) throws -> [Article] {
+        let rulesByFeed = FeedManager.allFilterRules(database: database)
+        let listRules = FeedManager.listFilterRules(listID: listID, database: database)
+        return try FeedManager.visibleArticles(
+            limit: limit,
+            fetch: { try database.articlesList(forFeedIDs: feedIDs, limit: $0) },
+            filter: { articles in
+                FeedManager.applyRules(
+                    FeedManager.applyAllRules(articles, rulesByFeed: rulesByFeed),
+                    rules: listRules
+                )
+            }
         )
     }
 

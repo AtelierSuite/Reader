@@ -36,10 +36,22 @@ struct ArticleProvider: TimelineProvider {
     private func loadEntry() -> ArticleEntry {
         let database = DatabaseManager.shared
         do {
-            let articles = try database.unreadArticlesList(limit: 10)
+            let feeds = try database.allFeeds()
             let feedTitlesByID = Dictionary(
-                try database.allFeeds().map { ($0.id, $0.title) },
+                feeds.map { ($0.id, $0.title) },
                 uniquingKeysWith: { first, _ in first }
+            )
+            let mutedFeedIDs = Set(feeds.filter(\.isMuted).map(\.id))
+            let rulesByFeed = FeedManager.allFilterRules(database: database)
+            let articles = try FeedManager.visibleArticles(
+                limit: 10,
+                fetch: { try database.unreadArticlesList(limit: $0) },
+                filter: { articles in
+                    FeedManager.applyAllRules(
+                        articles.filter { !mutedFeedIDs.contains($0.feedID) },
+                        rulesByFeed: rulesByFeed
+                    )
+                }
             )
 
             let widgetArticles = articles.map { article in
