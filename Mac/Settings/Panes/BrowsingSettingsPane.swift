@@ -60,6 +60,11 @@ struct BrowsingSettingsPane: View {
                     Text(SettingsText.settings("LinkOpenMode.Browser")).tag(LinkOpenMode.browser)
                     Text(SettingsText.settings("LinkOpenMode.InAppViewer")).tag(LinkOpenMode.inAppViewer)
                 }
+                LabeledContent {
+                    SettingsNote(text: SettingsText.settings("LinkOpenMode.Footer"))
+                } label: {
+                    Text(verbatim: "")
+                }
             }
         }
     }
