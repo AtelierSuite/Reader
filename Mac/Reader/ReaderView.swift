@@ -75,7 +75,7 @@ struct ReaderView: View {
     private func openLink(_ url: URL) -> OpenURLAction.Result {
         let mode = UserDefaults.standard.string(forKey: LinkOpenMode.storageKey)
             .flatMap(LinkOpenMode.init(rawValue:)) ?? .inAppViewer
-        let opensInApp = mode == .inAppViewer
+        let opensInApp = mode == .inAppViewer && !url.isFileLink
         guard opensInApp, let actions, ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
             return .systemAction
         }
