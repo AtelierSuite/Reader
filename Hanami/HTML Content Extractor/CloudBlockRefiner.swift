@@ -12,6 +12,7 @@ public nonisolated enum CloudBlockRefiner {
     static let longestBlock = 4000
     static let mostCharacters = 60_000
     static let mostDroppedShare = 0.4
+    static let leastKeptLength = 280
 
     private static let markerRegex = try? NSRegularExpression(
         pattern: #"\{\{(IMG|CODE|VIDEO|AUDIO|YOUTUBE|XPOST|EMBED|TABLE|DL|MATH)\}\}.*?\{\{/\1\}\}"#,
@@ -48,27 +49,31 @@ public nonisolated enum CloudBlockRefiner {
         }
     }
 
+    /// Footers like follow-topic widgets can outweigh a short article, so a dropped run at the end
+    /// is exempt from `mostDroppedShare` as long as `leastKeptLength` of text survives.
     static func refined(_ text: String, pieces: [Piece], dropping dropped: Set<Int>) -> String {
         guard !dropped.isEmpty else { return text }
-        let textLength = pieces.reduce(0) { total, piece in
-            if case .text(let paragraph) = piece { return total + paragraph.count }
-            return total
-        }
-        let droppedLength = dropped.reduce(0) { total, index in
-            if case .text(let paragraph) = pieces[index] { return total + paragraph.count }
-            return total
-        }
-        guard Double(droppedLength) <= Double(textLength) * mostDroppedShare else {
+        let textIndexes = pieces.indices.filter { textLength(of: pieces[$0]) != nil }
+        let tail = droppedTail(of: textIndexes, dropping: dropped)
+        let totalLength = textLength(of: textIndexes, in: pieces)
+        let bodyDroppedLength = textLength(of: dropped.subtracting(tail), in: pieces)
+        let keptLength = totalLength - textLength(of: dropped, in: pieces)
+        guard Double(bodyDroppedLength) <= Double(totalLength) * mostDroppedShare,
+              keptLength >= leastKeptLength else {
             log("CloudRefine", "Kept text: dropping \(dropped.count) blocks would remove too much")
             return text
         }
-        for index in dropped.sorted() {
+        var removed = dropped
+        if let tailStart = tail.min(), let lastTextIndex = textIndexes.last {
+            removed.formUnion(tailStart...lastTextIndex)
+        }
+        for index in removed.sorted() {
             if case .text(let paragraph) = pieces[index] {
                 log("CloudRefine", "Dropped: \(paragraph.prefix(80))")
             }
         }
         return pieces.enumerated()
-            .filter { !dropped.contains($0.offset) }
+            .filter { !removed.contains($0.offset) }
             .map { _, piece in
                 switch piece {
                 case .marker(let raw, _): raw
@@ -76,6 +81,19 @@ public nonisolated enum CloudBlockRefiner {
                 }
             }
             .joined(separator: "\n\n")
+    }
+
+    private static func droppedTail(of textIndexes: [Int], dropping dropped: Set<Int>) -> Set<Int> {
+        Set(textIndexes.reversed().prefix { dropped.contains($0) })
+    }
+
+    private static func textLength(of piece: Piece) -> Int? {
+        if case .text(let paragraph) = piece { return paragraph.count }
+        return nil
+    }
+
+    private static func textLength(of indexes: some Sequence<Int>, in pieces: [Piece]) -> Int {
+        indexes.reduce(0) { $0 + (textLength(of: pieces[$1]) ?? 0) }
     }
 
     static func pieces(of text: String) -> [Piece] {
