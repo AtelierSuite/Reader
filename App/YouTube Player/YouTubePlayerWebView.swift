@@ -69,7 +69,12 @@ struct YouTubePlayerWebView {
         #endif
         webView.customUserAgent = Self.youTubeUserAgent
         if let url = URL(string: urlString) {
-            webView.load(URLRequest(url: Self.normalizedURL(url)))
+            let request = URLRequest(url: Self.normalizedURL(url))
+            let dataStore = config.websiteDataStore
+            Task { [weak webView] in
+                await YouTubeConsentCookie.ensure(in: dataStore)
+                webView?.load(request)
+            }
         }
         if autoplay {
             coordinator.beginAutoplayKick(in: webView)

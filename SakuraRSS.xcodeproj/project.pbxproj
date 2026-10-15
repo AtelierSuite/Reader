@@ -319,6 +319,7 @@
 				"YouTube Player/InjectedUserScript.swift",
 				"YouTube Player/YouTubeAudioSession.swift",
 				"YouTube Player/YouTubeChapter.swift",
+				"YouTube Player/YouTubeConsentCookie.swift",
 				"YouTube Player/YouTubePlaybackEvent.swift",
 				"YouTube Player/YouTubePlaybackTimeTracker.swift",
 				"YouTube Player/YouTubePlayerScripts.swift",
