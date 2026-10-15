@@ -121,12 +121,12 @@ public nonisolated extension HTMLContentExtractor {
 
     /// Layout wrappers can carry noise-like class names (Future plc's main
     /// column is `widget-area`), so never strip the bulk of the prose.
-    private static func holdsMostParagraphText(_ element: Element, of total: Int) -> Bool {
+    static func holdsMostParagraphText(_ element: Element, of total: Int) -> Bool {
         guard total >= 500 else { return false }
         return paragraphCharacterCount(in: element) * 2 > total
     }
 
-    private static func paragraphCharacterCount(in element: Element) -> Int {
+    static func paragraphCharacterCount(in element: Element) -> Int {
         let paragraphs = (try? element.select("p").array()) ?? []
         return paragraphs.reduce(0) { total, paragraph in
             total + ((try? paragraph.text().count) ?? 0)

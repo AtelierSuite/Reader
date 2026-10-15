@@ -41,15 +41,18 @@ public nonisolated extension HTMLContentExtractor {
         ]
 
         do {
+            let totalParagraphCharacters = paragraphCharacterCount(in: element)
             let headings = try element.select("h2, h3, h4, h5, h6")
             for heading in headings {
                 let text = (try? heading.text())?.lowercased() ?? ""
                 let isSuggestionHeading = suggestionHeadingPatterns.contains { text.contains($0) }
                 guard isSuggestionHeading else { continue }
 
+                // A body-level heading like "Best Apple-related deals" has the whole article as its parent.
                 if let parent = heading.parent(),
                    parent.tagName().lowercased() != "body",
-                   !["article", "main"].contains(parent.tagName().lowercased()) {
+                   !["article", "main"].contains(parent.tagName().lowercased()),
+                   !holdsMostParagraphText(parent, of: totalParagraphCharacters) {
                     let parentLinks = (try? parent.select("a"))?.size() ?? 0
                     if parentLinks >= 2 {
                         try parent.remove()
