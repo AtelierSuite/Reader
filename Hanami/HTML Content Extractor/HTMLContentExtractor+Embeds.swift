@@ -6,10 +6,25 @@ public nonisolated extension HTMLContentExtractor {
     /// Converts supported social embeds into marker paragraphs.
     /// Must run before `removeNoise` so embed elements aren't stripped.
     static func promoteInlineEmbeds(in doc: Document, baseURL: URL? = nil) {
+        promoteLazyIframeSources(in: doc)
         promoteYouTubeEmbeds(in: doc)
         promoteXEmbeds(in: doc)
         promoteGenericEmbeds(in: doc)
         promoteAudioEmbeds(in: doc, baseURL: baseURL)
+    }
+
+    private static func promoteLazyIframeSources(in doc: Document) {
+        guard let iframes = try? doc.select("iframe[data-src], iframe[data-lazy-src]") else { return }
+        for iframe in iframes {
+            let currentSource = (try? iframe.attr("src")) ?? ""
+            guard currentSource.isEmpty || currentSource.hasPrefix("about:") else { continue }
+            var lazySource = (try? iframe.attr("data-src")) ?? ""
+            if lazySource.isEmpty {
+                lazySource = (try? iframe.attr("data-lazy-src")) ?? ""
+            }
+            guard !lazySource.isEmpty else { continue }
+            _ = try? iframe.attr("src", lazySource)
+        }
     }
 
     // MARK: - YouTube
