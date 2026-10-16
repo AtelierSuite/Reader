@@ -298,7 +298,6 @@
 				Shared/AppleIntelligenceAvailability.swift,
 				Shared/BorderedIcon.swift,
 				Shared/IconImage.swift,
-				"Shared/Image+PlatformImage.swift",
 				Shared/InitialsAvatarView.swift,
 				Shared/SeekBarView.swift,
 				"Shared/UIImage+SwiftUIColors.swift",

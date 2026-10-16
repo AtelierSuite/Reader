@@ -6,7 +6,7 @@ struct SingleFeedMediumTextView: View {
     let entry: SingleFeedEntry
 
     private var articleCount: Int {
-        UIDevice.current.userInterfaceIdiom == .phone ? 3 : 2
+        WidgetDevice.isPhone ? 3 : 2
     }
 
     var body: some View {
@@ -53,7 +53,7 @@ struct SingleFeedLargeTextView: View {
     let entry: SingleFeedEntry
 
     private var articleCount: Int {
-        UIDevice.current.userInterfaceIdiom == .phone ? 8 : 7
+        WidgetDevice.isPhone ? 8 : 7
     }
 
     var body: some View {

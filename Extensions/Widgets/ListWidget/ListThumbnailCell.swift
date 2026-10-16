@@ -11,8 +11,8 @@ struct ListThumbnailCell: View {
         Link(destination: URL(string: "sakura://article/\(article.id)")!) {
             VStack(spacing: 0) {
                 GeometryReader { geo in
-                    if let imageData = article.imageData, let uiImage = UIImage(data: imageData) {
-                        Image(uiImage: uiImage)
+                    if let imageData = article.imageData, let image = PlatformImage(data: imageData) {
+                        Image(platformImage: image)
                             .renderingMode(.original)
                             .resizable()
                             .widgetAccentedRenderingMode(.fullColor)
