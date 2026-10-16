@@ -10,8 +10,7 @@ extension NSViewController {
         presentHostedSheet(
             content
                 .environment(feedManager)
-                .formStyle(.grouped)
-                .frame(minWidth: 560, minHeight: 560)
+                .sheetLayout()
         )
     }
 

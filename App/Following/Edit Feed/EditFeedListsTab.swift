@@ -25,6 +25,7 @@ struct EditFeedListsTab: View {
         .sheet(isPresented: $isShowingNewList) {
             ListEditSheet(list: nil)
                 .environment(feedManager)
+                .sheetLayout()
                 .presentationDetents([.large])
                 .interactiveDismissDisabled()
         }
