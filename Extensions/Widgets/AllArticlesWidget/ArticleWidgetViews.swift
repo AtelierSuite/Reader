@@ -24,7 +24,7 @@ struct MediumWidgetView: View {
     let entry: ArticleEntry
 
     private var articleCount: Int {
-        UIDevice.current.userInterfaceIdiom == .phone ? 4 : 3
+        WidgetDevice.isPhone ? 4 : 3
     }
 
     var body: some View {
@@ -69,7 +69,7 @@ struct LargeWidgetView: View {
     let entry: ArticleEntry
 
     private var articleCount: Int {
-        UIDevice.current.userInterfaceIdiom == .phone ? 9 : 8
+        WidgetDevice.isPhone ? 9 : 8
     }
 
     var body: some View {

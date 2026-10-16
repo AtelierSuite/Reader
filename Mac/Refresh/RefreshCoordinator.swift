@@ -22,7 +22,7 @@ final class RefreshCoordinator {
     func refresh(respectingCooldown: Bool = false) {
         guard !feedManager.isLoading else { return }
         Task {
-            await feedManager.refreshAllFeeds(respectCooldown: respectingCooldown, runNLPAfter: true)
+            await refreshAllFeedsAndReloadWidgets(respectingCooldown: respectingCooldown)
         }
     }
 
@@ -48,10 +48,15 @@ final class RefreshCoordinator {
                     completion(.finished)
                     return
                 }
-                await self.feedManager.refreshAllFeeds(respectCooldown: true, runNLPAfter: true)
+                await self.refreshAllFeedsAndReloadWidgets(respectingCooldown: true)
                 completion(.finished)
             }
         }
         self.scheduler = scheduler
+    }
+
+    private func refreshAllFeedsAndReloadWidgets(respectingCooldown: Bool) async {
+        await feedManager.refreshAllFeeds(respectCooldown: respectingCooldown, runNLPAfter: true)
+        feedManager.reloadWidgetTimelines()
     }
 }

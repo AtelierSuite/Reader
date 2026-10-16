@@ -10,8 +10,8 @@ struct SingleFeedSmallView: View {
         if let article = entry.articles.first {
             VStack(spacing: 0) {
                 GeometryReader { geo in
-                    if let imageData = article.imageData, let uiImage = UIImage(data: imageData) {
-                        Image(uiImage: uiImage)
+                    if let imageData = article.imageData, let image = PlatformImage(data: imageData) {
+                        Image(platformImage: image)
                             .renderingMode(.original)
                             .resizable()
                             .widgetAccentedRenderingMode(.fullColor)
