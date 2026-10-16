@@ -198,6 +198,10 @@ extension ArticleDetailView: ArticleActions {
     }
 
     func handleLinkTap(_ url: URL) {
+        guard !url.isFileLink else {
+            openURL(url)
+            return
+        }
         switch linkOpenMode {
         case .browser:
             openURL(url)

@@ -96,6 +96,8 @@ struct BrowsingSettingsView: View {
                 }
             } header: {
                 Text(String(localized: "Section.Links", table: "Settings"))
+            } footer: {
+                Text(String(localized: "LinkOpenMode.Footer", table: "Settings"))
             }
         }
         .settingsListStyle()
