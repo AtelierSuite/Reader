@@ -2306,13 +2306,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このパッケージはリーダーが読み込める上限を超えています。"
+            "value" : "このパッケージはReaderが読み込める上限を超えています。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 패키지는 리더가 가져올 수 있는 크기보다 큽니다."
+            "value" : "이 패키지는 Reader가 가져올 수 있는 크기보다 큽니다."
           }
         },
         "nl" : {
@@ -2330,13 +2330,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此包超出了阅读器可导入的大小。"
+            "value" : "此包超出了 Reader 可导入的大小。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此套件超出了閱讀器可匯入的大小。"
+            "value" : "此套件超出了 Reader 可匯入的大小。"
           }
         }
       }
@@ -2371,13 +2371,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このパッケージはより新しいバージョンのリーダーで作成されました。アプリを更新してからもう一度お試しください。"
+            "value" : "このパッケージはより新しいバージョンのReaderで作成されました。アプリを更新してからもう一度お試しください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 패키지는 더 최신 버전의 리더에서 만들어졌습니다. 앱을 업데이트한 후 다시 시도하세요."
+            "value" : "이 패키지는 더 최신 버전의 Reader에서 만들어졌습니다. 앱을 업데이트한 후 다시 시도하세요."
           }
         },
         "nl" : {
@@ -2395,13 +2395,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此包是用更新版本的阅读器制作的。请更新应用后重试。"
+            "value" : "此包是用更新版本的 Reader 制作的。请更新应用后重试。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此套件是用更新版本的閱讀器製作的。請更新 App 後重試。"
+            "value" : "此套件是用更新版本的 Reader 製作的。請更新 App 後重試。"
           }
         }
       }

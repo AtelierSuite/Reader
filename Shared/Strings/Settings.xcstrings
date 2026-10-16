@@ -2761,13 +2761,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "リーダー"
+            "value" : "Reader"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "리더"
+            "value" : "Reader"
           }
         },
         "nl" : {
@@ -2785,13 +2785,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "阅读器"
+            "value" : "Reader"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "閱讀器"
+            "value" : "Reader"
           }
         }
       }
@@ -7898,13 +7898,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「集中モードフィルタ」で「フィルタを追加」をタップし、「リーダー」を選択します。"
+            "value" : "「集中モードフィルタ」で「フィルタを追加」をタップし、「Reader」を選択します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "집중 모드 필터에서 필터 추가를 탭한 다음 리더를 선택하세요."
+            "value" : "집중 모드 필터에서 필터 추가를 탭한 다음 Reader를 선택하세요."
           }
         },
         "nl" : {
@@ -7922,13 +7922,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在“专注模式过滤器”下，轻点“添加过滤器”，然后选择“阅读器”。"
+            "value" : "在“专注模式过滤器”下，轻点“添加过滤器”，然后选择“Reader”。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在「專注模式過濾器」下，點一下「加入過濾器」，然後選擇「閱讀器」。"
+            "value" : "在「專注模式過濾器」下，點一下「加入過濾器」，然後選擇「Reader」。"
           }
         }
       }

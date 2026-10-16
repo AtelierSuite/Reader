@@ -1916,13 +1916,13 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "指定されたコンテンツをリーダーで開きます。"
+            "value": "指定されたコンテンツをReaderで開きます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "지정된 콘텐츠를 리더에서 엽니다."
+            "value": "지정된 콘텐츠를 Reader에서 엽니다."
           }
         },
         "nl": {
@@ -1940,13 +1940,13 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在阅读器中打开给定内容。"
+            "value": "在 Reader 中打开给定内容。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "在閱讀器中開啟指定內容。"
+            "value": "在 Reader 中開啟指定內容。"
           }
         }
       }

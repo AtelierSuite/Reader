@@ -1,72 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "CFBundleName" : {
-      "comment" : "Bundle name",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reader"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reader"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reader"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reader"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "リーダー"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "리더"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reader"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reader"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "阅读器"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "閱讀器"
-          }
-        }
-      }
-    },
     "NSHumanReadableCopyright" : {
       "comment" : "Copyright (human-readable)",
       "extractionState" : "extracted_with_value",
@@ -109,13 +43,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "リーダーは「Today」タブにローカルの天気を表示するために位置情報を使用します。"
+            "value" : "Readerは「Today」タブにローカルの天気を表示するために位置情報を使用します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "리더는 Today 탭에 현지 날씨를 표시하기 위해 위치 정보를 사용합니다."
+            "value" : "Reader는 Today 탭에 현지 날씨를 표시하기 위해 위치 정보를 사용합니다."
           }
         },
         "nl" : {
@@ -133,13 +67,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "阅读器使用您的位置，在「Today」标签页中显示本地天气。"
+            "value" : "Reader 使用您的位置，在「Today」标签页中显示本地天气。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "閱讀器使用您的位置，在「Today」分頁中顯示本地天氣。"
+            "value" : "Reader 使用您的位置，在「Today」分頁中顯示本地天氣。"
           }
         }
       }
@@ -174,13 +108,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "リーダーは「Today」タブにローカルの天気を表示するために位置情報を使用します。"
+            "value" : "Readerは「Today」タブにローカルの天気を表示するために位置情報を使用します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "리더는 Today 탭에 현지 날씨를 표시하기 위해 위치 정보를 사용합니다."
+            "value" : "Reader는 Today 탭에 현지 날씨를 표시하기 위해 위치 정보를 사용합니다."
           }
         },
         "nl" : {
@@ -198,13 +132,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "阅读器使用您的位置，在「Today」标签页中显示本地天气。"
+            "value" : "Reader 使用您的位置，在「Today」标签页中显示本地天气。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "閱讀器使用您的位置，在「Today」分頁中顯示本地天氣。"
+            "value" : "Reader 使用您的位置，在「Today」分頁中顯示本地天氣。"
           }
         }
       }
@@ -241,13 +175,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "リーダーWebフィード"
+            "value" : "Reader Webフィード"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "리더 웹 피드"
+            "value" : "Reader 웹 피드"
           }
         },
         "nl" : {
@@ -265,13 +199,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "阅读器网页订阅源"
+            "value" : "Reader 网页订阅源"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "閱讀器網頁訂閱源"
+            "value" : "Reader 網頁訂閱源"
           }
         }
       }

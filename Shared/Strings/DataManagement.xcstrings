@@ -167,7 +167,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "켜면 리더가 선택한 기간보다 오래된 콘텐츠를 백그라운드에서 주기적으로 삭제합니다."
+            "value": "켜면 Reader가 선택한 기간보다 오래된 콘텐츠를 백그라운드에서 주기적으로 삭제합니다."
           }
         },
         "nl": {
@@ -185,13 +185,13 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "启用后,阅读器会在后台定期删除早于所选时间间隔的内容。"
+            "value": "启用后,Reader 会在后台定期删除早于所选时间间隔的内容。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "啟用後,閱讀器會在背景定期刪除早於所選時間間隔的內容。"
+            "value": "啟用後,Reader 會在背景定期刪除早於所選時間間隔的內容。"
           }
         }
       }

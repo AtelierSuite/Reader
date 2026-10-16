@@ -876,13 +876,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このコンテンツは安全でないため、リーダーでは表示できません。"
+            "value" : "このコンテンツは安全でないため、Readerでは表示できません。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 콘텐츠는 안전하지 않아 리더에서 볼 수 없습니다."
+            "value" : "이 콘텐츠는 안전하지 않아 Reader에서 볼 수 없습니다."
           }
         },
         "nl" : {
@@ -900,13 +900,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此内容不安全,无法在阅读器中查看。"
+            "value" : "此内容不安全,无法在 Reader 中查看。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此內容不安全,無法在閱讀器中檢視。"
+            "value" : "此內容不安全,無法在 Reader 中檢視。"
           }
         }
       }
@@ -12251,13 +12251,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "リーダーはまずページのプレビュー画像を探し、見つからない場合はサイトのアイコンを使います。"
+            "value" : "Readerはまずページのプレビュー画像を探し、見つからない場合はサイトのアイコンを使います。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "리더는 먼저 페이지의 미리보기 이미지를 찾고, 없으면 사이트 아이콘을 사용합니다."
+            "value" : "Reader는 먼저 페이지의 미리보기 이미지를 찾고, 없으면 사이트 아이콘을 사용합니다."
           }
         },
         "nl" : {
@@ -12275,13 +12275,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "阅读器会先尝试页面的预览图，找不到时改用网站图标。"
+            "value" : "Reader 会先尝试页面的预览图，找不到时改用网站图标。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "閱讀器會先嘗試頁面的預覽圖，找不到時改用網站圖示。"
+            "value" : "Reader 會先嘗試頁面的預覽圖，找不到時改用網站圖示。"
           }
         }
       }

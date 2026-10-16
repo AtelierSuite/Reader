@@ -10560,13 +10560,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "追加するにはリーダーでサインイン"
+            "value" : "追加するにはReaderでサインイン"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "추가하려면 리더에서 로그인"
+            "value" : "추가하려면 Reader에서 로그인"
           }
         },
         "nl" : {
@@ -10584,13 +10584,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登录阅读器后添加"
+            "value" : "登录 Reader 后添加"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登入閱讀器後加入"
+            "value" : "登入 Reader 後加入"
           }
         }
       }
