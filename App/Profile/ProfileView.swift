@@ -85,11 +85,11 @@ struct ProfileView: View {
                 }
 
                 Section {
-                    Link(destination: URL(string: "https://github.com/katagaki/SakuraRSS")!) {
+                    Link(destination: URL(string: "https://github.com/AtelierSuite/Reader")!) {
                         HStack {
                             Text("More.SourceCode")
                             Spacer()
-                            Text("katagaki/SakuraRSS")
+                            Text("AtelierSuite/Reader")
                                 .foregroundStyle(.secondary)
                         }
                     }

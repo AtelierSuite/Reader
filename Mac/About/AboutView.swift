@@ -23,7 +23,7 @@ struct AboutView: View {
                     Text(version)
                         .foregroundStyle(.secondary)
                         .textSelection(.enabled)
-                    Link(destination: URL(string: "https://github.com/katagaki/SakuraRSS")!) {
+                    Link(destination: URL(string: "https://github.com/AtelierSuite/Reader")!) {
                         Text("More.SourceCode")
                     }
                 }

@@ -190,6 +190,17 @@
         }
       }
     },
+    "AtelierSuite/Reader" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AtelierSuite/Reader"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
     "bookmarks.%@" : {
       "shouldTranslate" : false
     },
@@ -528,17 +539,6 @@
       "shouldTranslate" : false
     },
     "JSON" : {
-      "shouldTranslate" : false
-    },
-    "katagaki/SakuraRSS" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "katagaki/SakuraRSS"
-          }
-        }
-      },
       "shouldTranslate" : false
     },
     "List ID" : {
