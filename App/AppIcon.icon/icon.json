@@ -1,4 +1,7 @@
 {
+  "features" : [
+    "specular-location"
+  ],
   "fill" : {
     "automatic-gradient" : "extended-srgb:0.83500,0.27800,0.68800,1.00000"
   },
@@ -10,19 +13,19 @@
           "fill-specializations" : [
             {
               "value" : {
-                "solid" : "srgb:0.47860,0.56434,1.00000,1.00000"
+                "automatic-gradient" : "srgb:0.47843,0.56471,1.00000,1.00000"
               }
             },
             {
               "appearance" : "dark",
               "value" : {
-                "solid" : "srgb:1.00000,1.00000,1.00000,1.00000"
+                "automatic-gradient" : "srgb:0.47843,0.56471,1.00000,1.00000"
               }
             },
             {
               "appearance" : "tinted",
               "value" : {
-                "solid" : "srgb:0.00000,0.00000,0.00000,1.00000"
+                "solid" : "extended-gray:0.74965,1.00000"
               }
             }
           ],
@@ -56,19 +59,19 @@
           "fill-specializations" : [
             {
               "value" : {
-                "solid" : "srgb:1.00000,0.76688,0.40756,1.00000"
+                "automatic-gradient" : "srgb:1.00000,0.76863,0.40784,1.00000"
               }
             },
             {
               "appearance" : "dark",
               "value" : {
-                "solid" : "srgb:1.00000,1.00000,1.00000,1.00000"
+                "automatic-gradient" : "srgb:1.00000,0.76863,0.40784,1.00000"
               }
             },
             {
               "appearance" : "tinted",
               "value" : {
-                "solid" : "srgb:0.00000,0.00000,0.00000,1.00000"
+                "solid" : "extended-gray:0.57483,1.00000"
               }
             }
           ],
@@ -101,9 +104,20 @@
         {
           "fill-specializations" : [
             {
+              "value" : {
+                "automatic-gradient" : "srgb:1.00000,1.00000,1.00000,1.00000"
+              }
+            },
+            {
               "appearance" : "dark",
               "value" : {
-                "solid" : "srgb:1.00000,1.00000,1.00000,1.00000"
+                "automatic-gradient" : "srgb:1.00000,1.00000,1.00000,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "extended-gray:0.70594,1.00000"
               }
             }
           ],
@@ -111,33 +125,15 @@
           "hidden" : false,
           "image-name" : "Hero.svg",
           "name" : "Hero",
-          "position-specializations" : [
+          "opacity-specializations" : [
             {
-              "value" : {
-                "scale" : 1,
-                "translation-in-points" : [
-                  0,
-                  0
-                ]
-              }
+              "value" : 0.8
             },
             {
-              "idiom" : "square",
-              "value" : {
-                "scale" : 1.15,
-                "translation-in-points" : [
-                  0,
-                  0
-                ]
-              }
+              "appearance" : "dark",
+              "value" : 1
             }
-          ]
-        },
-        {
-          "glass" : true,
-          "hidden" : false,
-          "image-name" : "Blossom.svg",
-          "name" : "Blossom",
+          ],
           "position-specializations" : [
             {
               "value" : {
@@ -161,15 +157,66 @@
           ]
         }
       ],
+      "lighting" : "individual",
       "shadow" : {
-        "kind" : "neutral",
-        "opacity" : 0.5
+        "kind" : "layer-color",
+        "opacity" : 0
       },
-      "specular" : true,
+      "specular" : "inside",
       "translucency" : {
         "enabled" : true,
         "value" : 0.5
       }
+    },
+    {
+      "layers" : [
+        {
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "Blossom.svg",
+          "name" : "Blossom",
+          "position-specializations" : [
+            {
+              "value" : {
+                "scale" : 1,
+                "translation-in-points" : [
+                  0,
+                  0
+                ]
+              }
+            },
+            {
+              "idiom" : "square",
+              "value" : {
+                "scale" : 1.25,
+                "translation-in-points" : [
+                  0,
+                  0
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 1
+      },
+      "translucency-specializations" : [
+        {
+          "value" : {
+            "enabled" : true,
+            "value" : 0.2
+          }
+        },
+        {
+          "appearance" : "dark",
+          "value" : {
+            "enabled" : true,
+            "value" : 0.5
+          }
+        }
+      ]
     }
   ],
   "supported-platforms" : {
