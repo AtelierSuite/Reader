@@ -1455,7 +1455,7 @@
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extensions/Open Article/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Open in App";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open in Reader";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1490,7 +1490,7 @@
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extensions/Open Article/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Open in App";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open in Reader";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (

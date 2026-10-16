@@ -7,61 +7,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In App öffnen"
+            "value" : "In Reader öffnen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open in App"
+            "value" : "Open in Reader"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir dans l’app"
+            "value" : "Ouvrir dans Reader"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri nell’app"
+            "value" : "Apri in Reader"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アプリで開く"
+            "value" : "Readerで開く"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱에서 열기"
+            "value" : "Reader에서 열기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Openen in app"
+            "value" : "Openen in Reader"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở trong ứng dụng"
+            "value" : "Mở trong Reader"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在应用中打开"
+            "value" : "在 Reader 中打开"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 App 中開啟"
+            "value" : "在 Reader 中開啟"
           }
         }
       }
@@ -72,61 +72,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In App öffnen"
+            "value" : "In Reader öffnen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open in App"
+            "value" : "Open in Reader"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir dans l’app"
+            "value" : "Ouvrir dans Reader"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri nell’app"
+            "value" : "Apri in Reader"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アプリで開く"
+            "value" : "Readerで開く"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱에서 열기"
+            "value" : "Reader에서 열기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Openen in app"
+            "value" : "Openen in Reader"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở trong ứng dụng"
+            "value" : "Mở trong Reader"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在应用中打开"
+            "value" : "在 Reader 中打开"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 App 中開啟"
+            "value" : "在 Reader 中開啟"
           }
         }
       }
