@@ -5,7 +5,6 @@ import Hanami
 #if !os(visionOS)
 struct ThemePreviewSection: View {
 
-    @AppStorage("Display.SakuraBackground") private var sakuraBackgroundEnabled: Bool = true
     @AppStorage("Display.FeedBackground") private var feedBackgroundEnabled: Bool = true
     @AppStorage("Display.DefaultStyle") private var defaultDisplayStyle: FeedDisplayStyle = .inbox
 
@@ -17,7 +16,6 @@ struct ThemePreviewSection: View {
         HStack {
             Spacer(minLength: 0)
             DeviceMockupView(
-                sakuraBackgroundEnabled: sakuraBackgroundEnabled,
                 feedBackgroundEnabled: feedBackgroundEnabled,
                 colors: Self.feedPreviewColors,
                 style: defaultDisplayStyle,
@@ -44,7 +42,6 @@ struct ThemePreviewSection: View {
 
 private struct DeviceMockupView: View {
 
-    let sakuraBackgroundEnabled: Bool
     let feedBackgroundEnabled: Bool
     let colors: [Color]
     let style: FeedDisplayStyle
@@ -79,18 +76,14 @@ private struct DeviceMockupView: View {
         let feedColumnWidth = isPad ? width * 0.30 : width
 
         ZStack(alignment: .top) {
-            if sakuraBackgroundEnabled {
-                LinearGradient(
-                    colors: [
-                        Color("BackgroundGradientTop"),
-                        Color("BackgroundGradientBottom")
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            } else {
-                Color(uiColor: .systemBackground)
-            }
+            LinearGradient(
+                colors: [
+                    Color("BackgroundGradientTop"),
+                    Color("BackgroundGradientBottom")
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
             HStack(spacing: 0) {
                 ZStack(alignment: .top) {
                     if feedBackgroundEnabled {
@@ -113,18 +106,14 @@ private struct DeviceMockupView: View {
             }
             if !isPad {
                 ZStack {
-                    if sakuraBackgroundEnabled {
-                        LinearGradient(
-                            colors: [
-                                Color("BackgroundGradientTop"),
-                                Color("BackgroundGradientBottom")
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    } else {
-                        Color(uiColor: .systemBackground)
-                    }
+                    LinearGradient(
+                        colors: [
+                            Color("BackgroundGradientTop"),
+                            Color("BackgroundGradientBottom")
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
                     ArticlePreviewContent(
                         deviceWidth: width,
                         topSafeArea: hasRoundedScreen ? cornerRadius : 0

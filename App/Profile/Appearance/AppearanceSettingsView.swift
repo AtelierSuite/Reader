@@ -9,7 +9,6 @@ struct AppearanceSettingsView: View {
     @AppStorage("Search.DisplayStyle") private var searchDisplayStyle: FeedDisplayStyle = .inbox
     @AppStorage("Display.UnreadBadgeMode") private var unreadBadgeMode: UnreadBadgeMode = .none
     @AppStorage("Display.ShowStatusBar") private var showStatusBar: Bool = true
-    @AppStorage("Display.SakuraBackground") private var sakuraBackgroundEnabled: Bool = true
     @AppStorage("Display.FeedBackground") private var feedBackgroundEnabled: Bool = true
     @AppStorage(ArticleWidthStyle.storageKey) private var articleWidthStyle: ArticleWidthStyle = .default
 
@@ -18,9 +17,6 @@ struct AppearanceSettingsView: View {
             #if !os(visionOS)
             Section {
                 ThemePreviewSection()
-                Toggle(String(localized: "SakuraBackground", table: "Settings"),
-                       isOn: $sakuraBackgroundEnabled)
-                .tint(.accent)
                 Toggle(String(localized: "FeedBackground", table: "Settings"),
                        isOn: $feedBackgroundEnabled)
             } header: {
