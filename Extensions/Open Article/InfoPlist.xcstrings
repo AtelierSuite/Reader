@@ -7,61 +7,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In Sakura öffnen"
+            "value" : "In App öffnen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open in Sakura"
+            "value" : "Open in App"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir dans Sakura"
+            "value" : "Ouvrir dans l’app"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri in Sakura"
+            "value" : "Apri nell’app"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラで開く"
+            "value" : "アプリで開く"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura에서 열기"
+            "value" : "앱에서 열기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Openen in Sakura"
+            "value" : "Openen in app"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở trong Sakura"
+            "value" : "Mở trong ứng dụng"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中打开"
+            "value" : "在应用中打开"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中開啟"
+            "value" : "在 App 中開啟"
           }
         }
       }
@@ -72,61 +72,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In Sakura öffnen"
+            "value" : "In App öffnen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open in Sakura"
+            "value" : "Open in App"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir dans Sakura"
+            "value" : "Ouvrir dans l’app"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri in Sakura"
+            "value" : "Apri nell’app"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラで開く"
+            "value" : "アプリで開く"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura에서 열기"
+            "value" : "앱에서 열기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Openen in Sakura"
+            "value" : "Openen in app"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở trong Sakura"
+            "value" : "Mở trong ứng dụng"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中打开"
+            "value" : "在应用中打开"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中開啟"
+            "value" : "在 App 中開啟"
           }
         }
       }

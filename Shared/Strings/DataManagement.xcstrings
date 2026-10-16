@@ -137,25 +137,25 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wenn aktiviert, löscht Sakura im Hintergrund regelmäßig Inhalte, die älter als das gewählte Intervall sind."
+            "value": "Wenn aktiviert, löscht Reader im Hintergrund regelmäßig Inhalte, die älter als das gewählte Intervall sind."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "When on, Sakura periodically deletes content older than the chosen interval in the background."
+            "value": "When on, Reader periodically deletes content older than the chosen interval in the background."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lorsqu’activé, Sakura supprime périodiquement en arrière-plan les contenus plus anciens que l’intervalle choisi."
+            "value": "Lorsqu’activé, Reader supprime périodiquement en arrière-plan les contenus plus anciens que l’intervalle choisi."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Se attivata, Sakura elimina periodicamente in background i contenuti più vecchi dell’intervallo scelto."
+            "value": "Se attivata, Reader elimina periodicamente in background i contenuti più vecchi dell’intervallo scelto."
           }
         },
         "ja": {
@@ -167,31 +167,31 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "켜면 Sakura가 선택한 기간보다 오래된 콘텐츠를 백그라운드에서 주기적으로 삭제합니다."
+            "value": "켜면 리더가 선택한 기간보다 오래된 콘텐츠를 백그라운드에서 주기적으로 삭제합니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Indien ingeschakeld verwijdert Sakura periodiek op de achtergrond content die ouder is dan het gekozen interval."
+            "value": "Indien ingeschakeld verwijdert Reader periodiek op de achtergrond content die ouder is dan het gekozen interval."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Khi bật, Sakura sẽ định kỳ xóa nội dung cũ hơn khoảng thời gian đã chọn trong nền."
+            "value": "Khi bật, Reader sẽ định kỳ xóa nội dung cũ hơn khoảng thời gian đã chọn trong nền."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "启用后,Sakura 会在后台定期删除早于所选时间间隔的内容。"
+            "value": "启用后,阅读器会在后台定期删除早于所选时间间隔的内容。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "啟用後,Sakura 會在背景定期刪除早於所選時間間隔的內容。"
+            "value": "啟用後,閱讀器會在背景定期刪除早於所選時間間隔的內容。"
           }
         }
       }

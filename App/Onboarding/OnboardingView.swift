@@ -22,7 +22,7 @@ struct OnboardingView: View {
     var onComplete: () -> Void
 
     var appName: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Sakura"
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Reader"
     }
 
     var body: some View {

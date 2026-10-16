@@ -852,61 +852,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieser Inhalt ist unsicher und kann in Sakura nicht angezeigt werden."
+            "value" : "Dieser Inhalt ist unsicher und kann in Reader nicht angezeigt werden."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This content is insecure and cannot be viewed in Sakura."
+            "value" : "This content is insecure and cannot be viewed in Reader."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce contenu n’est pas sécurisé et ne peut pas être consulté dans Sakura."
+            "value" : "Ce contenu n’est pas sécurisé et ne peut pas être consulté dans Reader."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questo contenuto non è sicuro e non può essere visualizzato in Sakura."
+            "value" : "Questo contenuto non è sicuro e non può essere visualizzato in Reader."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このコンテンツは安全でないため、サクラでは表示できません。"
+            "value" : "このコンテンツは安全でないため、リーダーでは表示できません。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 콘텐츠는 안전하지 않아 Sakura에서 볼 수 없습니다."
+            "value" : "이 콘텐츠는 안전하지 않아 리더에서 볼 수 없습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze content is onveilig en kan niet in Sakura worden bekeken."
+            "value" : "Deze content is onveilig en kan niet in Reader worden bekeken."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nội dung này không an toàn và không thể xem trong Sakura."
+            "value" : "Nội dung này không an toàn và không thể xem trong Reader."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此内容不安全,无法在 Sakura 中查看。"
+            "value" : "此内容不安全,无法在阅读器中查看。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此內容不安全,無法在 Sakura 中檢視。"
+            "value" : "此內容不安全,無法在閱讀器中檢視。"
           }
         }
       }
@@ -6962,61 +6962,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In Sakura lesen"
+            "value" : "In App lesen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Read in Sakura"
+            "value" : "Read in App"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lire dans Sakura"
+            "value" : "Lire dans l’app"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leggi in Sakura"
+            "value" : "Leggi nell’app"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラで読む"
+            "value" : "アプリで読む"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura에서 읽기"
+            "value" : "앱에서 읽기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lezen in Sakura"
+            "value" : "Lezen in app"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đọc trong Sakura"
+            "value" : "Đọc trong ứng dụng"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中阅读"
+            "value" : "在应用中阅读"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中閱讀"
+            "value" : "在 App 中閱讀"
           }
         }
       }
@@ -12227,61 +12227,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura versucht zuerst das Vorschaubild der Seite und greift sonst auf das Website-Symbol zurück."
+            "value" : "Reader versucht zuerst das Vorschaubild der Seite und greift sonst auf das Website-Symbol zurück."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura tries the page's preview image first, then falls back to the site icon."
+            "value" : "Reader tries the page's preview image first, then falls back to the site icon."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura essaie d’abord l’image d’aperçu de la page, puis se rabat sur l’icône du site."
+            "value" : "Reader essaie d’abord l’image d’aperçu de la page, puis se rabat sur l’icône du site."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura prova prima l’immagine di anteprima della pagina, poi ripiega sull’icona del sito."
+            "value" : "Reader prova prima l’immagine di anteprima della pagina, poi ripiega sull’icona del sito."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura はまずページのプレビュー画像を探し、見つからない場合はサイトのアイコンを使います。"
+            "value" : "リーダーはまずページのプレビュー画像を探し、見つからない場合はサイトのアイコンを使います。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura는 먼저 페이지의 미리보기 이미지를 찾고, 없으면 사이트 아이콘을 사용합니다."
+            "value" : "리더는 먼저 페이지의 미리보기 이미지를 찾고, 없으면 사이트 아이콘을 사용합니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura probeert eerst de voorvertoning van de pagina en valt anders terug op het sitepictogram."
+            "value" : "Reader probeert eerst de voorvertoning van de pagina en valt anders terug op het sitepictogram."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura thử ảnh xem trước của trang trước, nếu không có thì dùng biểu tượng trang web."
+            "value" : "Reader thử ảnh xem trước của trang trước, nếu không có thì dùng biểu tượng trang web."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 会先尝试页面的预览图，找不到时改用网站图标。"
+            "value" : "阅读器会先尝试页面的预览图，找不到时改用网站图标。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 會先嘗試頁面的預覽圖，找不到時改用網站圖示。"
+            "value" : "閱讀器會先嘗試頁面的預覽圖，找不到時改用網站圖示。"
           }
         }
       }

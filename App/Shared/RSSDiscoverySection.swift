@@ -6,7 +6,7 @@ struct RSSDiscoverySection: View {
     private let appName: String
 
     init() {
-        appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Sakura"
+        appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Reader"
     }
 
     var body: some View {
@@ -36,7 +36,7 @@ struct RSSDiscoveryInlineSection: View {
     private let appName: String
 
     init() {
-        appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Sakura"
+        appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Reader"
     }
 
     var body: some View {

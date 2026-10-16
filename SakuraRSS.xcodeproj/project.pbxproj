@@ -1430,7 +1430,7 @@
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extensions/Open Article/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Open in Sakura";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open in App";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1465,7 +1465,7 @@
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extensions/Open Article/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Open in Sakura";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open in App";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1640,8 +1640,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is used to show local weather on the Today tab.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Sakura can save images in feed articles to your Photo Library.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Sakura uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Reader can save images in feed content to your Photo Library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Reader uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1691,8 +1691,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is used to show local weather on the Today tab.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Sakura can save images in feed articles to your Photo Library.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Sakura uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Reader can save images in feed content to your Photo Library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Reader uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

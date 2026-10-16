@@ -9,7 +9,7 @@ struct AddFeedSearchSection: View {
     var onSubmit: () -> Void
 
     private var appName: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Sakura"
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Reader"
     }
 
     var body: some View {
