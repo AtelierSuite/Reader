@@ -11,17 +11,25 @@ extension InstagramProvider {
             guard let body = try? script.html(),
                   let data = body.data(using: .utf8),
                   let payload = try? JSONSerialization.jsonObject(with: data) else { continue }
-            dtsgToken = dtsgToken ?? bootstrapToken(named: "DTSGInitialData", in: payload)
-            lsdToken = lsdToken ?? bootstrapToken(named: "LSD", in: payload)
+            dtsgToken = dtsgToken
+                ?? bootstrapToken(named: "DTSGInitialData", in: payload) { $0["token"] }
+                ?? bootstrapToken(named: "DTSGInitData", in: payload) { $0["token"] }
+                ?? bootstrapToken(named: "MRequestConfig", in: payload) {
+                    ($0["dtsg"] as? [String: Any])?["token"]
+                }
+            lsdToken = lsdToken ?? bootstrapToken(named: "LSD", in: payload) { $0["token"] }
             if dtsgToken != nil, lsdToken != nil { break }
         }
-        guard let dtsgToken, !dtsgToken.isEmpty, let lsdToken, !lsdToken.isEmpty,
-              let metadata = parseProfileMetadata(document, username: username) else { return nil }
+        if dtsgToken == nil {
+            log("InstagramProvider", "Profile page has no DTSG token")
+        }
+        guard let lsdToken else { return nil }
+        let metadata = parseProfileMetadata(document, username: username)
         return InstagramProfileBootstrap(
             dtsgToken: dtsgToken,
             lsdToken: lsdToken,
-            displayName: metadata.displayName,
-            profileImageURL: metadata.profileImageURL
+            displayName: metadata?.displayName,
+            profileImageURL: metadata?.profileImageURL
         )
     }
 
@@ -46,20 +54,27 @@ extension InstagramProvider {
         return String(title[..<handleRange.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private static func bootstrapToken(named name: String, in payload: Any, depth: Int = 0) -> String? {
+    private static func bootstrapToken(
+        named name: String, in payload: Any, depth: Int = 0,
+        extract: ([String: Any]) -> Any?
+    ) -> String? {
         guard depth < 40 else { return nil }
         if let values = payload as? [Any] {
             if values.count > 2, values[0] as? String == name,
                let properties = values[2] as? [String: Any],
-               let token = properties["token"] as? String, !token.isEmpty {
+               let token = extract(properties) as? String, !token.isEmpty {
                 return token
             }
             for value in values {
-                if let token = bootstrapToken(named: name, in: value, depth: depth + 1) { return token }
+                if let token = bootstrapToken(named: name, in: value, depth: depth + 1, extract: extract) {
+                    return token
+                }
             }
         } else if let properties = payload as? [String: Any] {
             for value in properties.values {
-                if let token = bootstrapToken(named: name, in: value, depth: depth + 1) { return token }
+                if let token = bootstrapToken(named: name, in: value, depth: depth + 1, extract: extract) {
+                    return token
+                }
             }
         }
         return nil
