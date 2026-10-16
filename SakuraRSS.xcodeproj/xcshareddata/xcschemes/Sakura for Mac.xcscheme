@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4D41430A000000000000000B"
-               BuildableName = "Sakura.app"
+               BuildableName = "Reader.app"
                BlueprintName = "Sakura for Mac"
                ReferencedContainer = "container:SakuraRSS.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D41430A000000000000000B"
-            BuildableName = "Sakura.app"
+            BuildableName = "Reader.app"
             BlueprintName = "Sakura for Mac"
             ReferencedContainer = "container:SakuraRSS.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D41430A000000000000000B"
-            BuildableName = "Sakura.app"
+            BuildableName = "Reader.app"
             BlueprintName = "Sakura for Mac"
             ReferencedContainer = "container:SakuraRSS.xcodeproj">
          </BuildableReference>

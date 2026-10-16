@@ -30,7 +30,7 @@ while (( $# > 0 )); do
 done
 
 build_dir=${TMPDIR:-/tmp}/sakura-capture-build
-app_path=$build_dir/Build/Products/Release-iphonesimulator/Sakura.app
+app_path=$build_dir/Build/Products/Release-iphonesimulator/Reader.app
 if ! $skip_build || [[ ! -d $app_path ]]; then
     step "Building Sakura"
     xcodebuild -project "$repo_dir/SakuraRSS.xcodeproj" -scheme Sakura -configuration Release \

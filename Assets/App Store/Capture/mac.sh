@@ -2,7 +2,7 @@
 #
 # The capture runs a Debug build re-signed ad hoc under its own bundle ID, sandboxed and
 # without the app group, so its database and preferences live in a container of their own
-# and the library of the Sakura you use every day is never touched.
+# and the library of the Reader you use every day is never touched.
 
 bundle_id=com.tsubuzaki.SakuraRSS.MacCapture
 container_data=~/Library/Containers/$bundle_id/Data
@@ -36,7 +36,7 @@ prepare_app() {
 # By the end of the path only: $TMPDIR ends in a slash and resolves under /private,
 # so the full path never matches the running process.
 app_pids() {
-    pgrep -f "${app_path:h:t}/Sakura.app/Contents/MacOS/Sakura" || true
+    pgrep -f "${app_path:h:t}/Reader.app/Contents/MacOS/Reader" || true
 }
 
 quit_app() {
