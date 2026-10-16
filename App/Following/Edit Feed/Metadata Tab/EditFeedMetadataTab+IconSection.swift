@@ -9,10 +9,15 @@ extension EditFeedMetadataTab {
     func iconSection(for feed: Feed) -> some View {
         Section {
             iconPreview(for: feed)
+            #if os(macOS)
+            macIconURLField
+            macIconActionsRow(for: feed)
+            #else
             iconURLField
             photosPickerRow
             fetchIconButton
             deleteIconButton(for: feed)
+            #endif
         } header: {
             Text(String(localized: "FeedEdit.Icon", table: "Feeds"))
         }
@@ -51,6 +56,49 @@ extension EditFeedMetadataTab {
             }
         }
     }
+
+    #if os(macOS)
+    private var macIconURLField: some View {
+        HStack {
+            TextField(
+                String(localized: "FeedEdit.IconURL", table: "Feeds"),
+                text: $iconURLInput,
+                prompt: Text(verbatim: "https://example.com/icon.png")
+            )
+            .urlTextInput()
+            .onSubmit {
+                Task {
+                    if await fetchIconFromURL() {
+                        commitNameAndIcon()
+                    }
+                }
+            }
+            if isFetchingIcon {
+                ProgressView()
+                    .controlSize(.small)
+            }
+        }
+    }
+
+    private func macIconActionsRow(for feed: Feed) -> some View {
+        HStack {
+            PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                Text(String(localized: "FeedEdit.ChooseFromPhotos", table: "Feeds"))
+            }
+            Button {
+                Task {
+                    await fetchIconFromFeed()
+                    commitNameAndIcon()
+                }
+            } label: {
+                Text(String(localized: "FeedEdit.FetchIconFromFeed", table: "Feeds"))
+            }
+            .disabled(isFetchingIcon)
+            Spacer()
+            deleteIconButton(for: feed)
+        }
+    }
+    #endif
 
     private var iconURLField: some View {
         HStack {
