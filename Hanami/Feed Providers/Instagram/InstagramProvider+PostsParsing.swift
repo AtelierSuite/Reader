@@ -23,7 +23,7 @@ extension InstagramProvider {
                   !authorHandle.isEmpty,
                   let post = parseV1Item(
                     item: node, username: authorHandle, displayName: user["full_name"] as? String
-                  ) else { return nil }
+                  ) else { continue }
             if authorHandle.caseInsensitiveCompare(username) == .orderedSame {
                 displayName = user["full_name"] as? String ?? displayName
                 profileImageURL = user["profile_pic_url"] as? String ?? profileImageURL

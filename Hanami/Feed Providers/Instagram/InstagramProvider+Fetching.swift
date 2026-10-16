@@ -31,10 +31,23 @@ public extension InstagramProvider {
         }
         let sessionCookies = session.configuration.httpCookieStorage?.cookies ?? []
         let currentCookies = Self.instagramCookies(from: sessionCookies) ?? cookies
-        let postsRequest = try buildPostsRequest(username: handle, bootstrap: bootstrap, cookies: currentCookies)
-        let postsData = try await Self.performRequest(postsRequest, session: session)
-        guard let result = Self.parsePostsResponse(data: postsData, username: handle, bootstrap: bootstrap) else {
+        let query = await resolvePostsQuery(profileHTML: html, session: session)
+        let postsRequest = try buildPostsRequest(
+            username: handle, query: query, bootstrap: bootstrap, cookies: currentCookies
+        )
+        let result: InstagramProfileFetchResult
+        do {
+            let postsData = try await Self.performRequest(postsRequest, session: session)
+            guard let parsed = Self.parsePostsResponse(data: postsData, username: handle, bootstrap: bootstrap) else {
+                throw InstagramFetchError.invalidResponse
+            }
+            result = parsed
+        } catch InstagramFetchError.invalidResponse {
+            Self.cachedPostsQuery = nil
             throw InstagramFetchError.invalidResponse
+        } catch InstagramFetchError.httpStatus(let statusCode) {
+            Self.cachedPostsQuery = nil
+            throw InstagramFetchError.httpStatus(statusCode)
         }
         log("InstagramProvider", "Fetched @\(handle) posts=\(result.posts.count)")
         return result
