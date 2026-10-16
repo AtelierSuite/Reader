@@ -8777,6 +8777,71 @@
           }
         }
       }
+    },
+    "LinkOpenMode.Footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links zu Dateien wie Dokumenten oder Archiven werden immer im Standardbrowser geöffnet."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links to files, such as documents and archives, always open in your default browser."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les liens vers des fichiers, comme des documents ou des archives, s’ouvrent toujours dans votre navigateur par défaut."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I link a file, come documenti e archivi, si aprono sempre nel browser predefinito."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "書類やアーカイブなどのファイルへのリンクは、常にデフォルトのブラウザで開きます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "문서나 압축 파일 등 파일로 연결되는 링크는 항상 기본 브라우저에서 열립니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koppelingen naar bestanden, zoals documenten en archieven, worden altijd in je standaardbrowser geopend."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liên kết đến tệp, chẳng hạn như tài liệu và tệp nén, luôn mở trong trình duyệt mặc định."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指向文件（如文档和压缩包）的链接将始终在默认浏览器中打开。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指向檔案（例如文件和壓縮檔）的連結將一律在預設瀏覽器中開啟。"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"
