@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    The title line of the content set on the blossom. Drawn in white; the layer
+    fill in icon.json gives it its color.
+  -->
+  <rect x="350" y="400" width="324" height="28" rx="14" fill="#FFFFFF"/>
+</svg>

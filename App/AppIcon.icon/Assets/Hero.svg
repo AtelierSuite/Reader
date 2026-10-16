@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    The hero image of the content set on the blossom, inset evenly from the
+    petals around it. Drawn in white; the layer is filled solid white in dark
+    mode, where Icon Composer would otherwise tint it into the blossom behind it.
+  -->
+  <rect x="350" y="524" width="324" height="140" rx="28" fill="#FFFFFF" opacity="0.72"/>
+</svg>
