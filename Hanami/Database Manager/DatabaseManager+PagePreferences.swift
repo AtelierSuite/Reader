@@ -39,7 +39,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allPagePreferences() throws -> [PagePreference] {
-        try database.prepare(pagePreferences).map(rowToPagePreference)
+        try database.rows(pagePreferences).map(rowToPagePreference)
     }
 
     func pagePreference(bySyncID syncID: String) throws -> PagePreference? {
@@ -67,13 +67,13 @@ public nonisolated extension DatabaseManager {
     }
 
     func pagePreferenceSyncIDsNeedingSync() throws -> [String] {
-        try database.prepare(
+        try database.rows(
             pagePreferences.filter(pagePreferenceNeedsSync == true).select(pagePreferenceSyncID)
         ).map { $0[pagePreferenceSyncID] }
     }
 
     func allPagePreferenceSyncIDs() throws -> [String] {
-        try database.prepare(pagePreferences.select(pagePreferenceSyncID)).map { $0[pagePreferenceSyncID] }
+        try database.rows(pagePreferences.select(pagePreferenceSyncID)).map { $0[pagePreferenceSyncID] }
     }
 
     func clearPagePreferencesNeedSync(syncIDs: [String]) throws {

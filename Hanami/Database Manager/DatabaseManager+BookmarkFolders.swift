@@ -18,7 +18,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allBookmarkFolders() throws -> [BookmarkFolder] {
-        try database.prepare(
+        try database.rows(
             bookmarkFolders.order(bookmarkFolderSortOrder.asc, bookmarkFolderName.asc)
         ).map(rowToBookmarkFolder)
     }
@@ -60,7 +60,7 @@ public nonisolated extension DatabaseManager {
         }
         guard !optionsByFolderID.isEmpty else { return [:] }
         var result: [Int64: BookmarkFolderReadingOptions] = [:]
-        for row in try database.prepare(bookmarkFolderItems) {
+        for row in try database.rows(bookmarkFolderItems) {
             let folderID = row[bookmarkFolderItemFolderID]
             guard let options = optionsByFolderID[folderID] else { continue }
             result[row[bookmarkFolderItemArticleID]] = options
@@ -106,7 +106,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func articleIDs(inFolderID fid: Int64) throws -> [Int64] {
-        try database.prepare(
+        try database.rows(
             bookmarkFolderItems
                 .filter(bookmarkFolderItemFolderID == fid)
                 .select(bookmarkFolderItemArticleID)
@@ -129,18 +129,18 @@ public nonisolated extension DatabaseManager {
         let query = articles
             .filter(ids.contains(articleID) && articleIsBookmarked == true)
             .order(articlePublishedDate.desc)
-        return try database.prepare(query).map(rowToArticle)
+        return try database.rows(query).map(rowToArticle)
     }
 
     func unorganizedBookmarkedArticles() throws -> [Article] {
-        let organizedIDs = try database.prepare(
+        let organizedIDs = try database.rows(
             bookmarkFolderItems.select(bookmarkFolderItemArticleID)
         ).map { $0[bookmarkFolderItemArticleID] }
         var query = articles.filter(articleIsBookmarked == true)
         if !organizedIDs.isEmpty {
             query = query.filter(!organizedIDs.contains(articleID))
         }
-        return try database.prepare(query.order(articlePublishedDate.desc)).map(rowToArticle)
+        return try database.rows(query.order(articlePublishedDate.desc)).map(rowToArticle)
     }
 
     func bookmarkCount(inFolderID fid: Int64) throws -> Int {
@@ -159,7 +159,7 @@ public nonisolated extension DatabaseManager {
             JOIN articles ON articles.id = items.article_id
             WHERE articles.is_bookmarked = 1 GROUP BY items.folder_id
             """
-        for row in try database.prepare(query) {
+        for row in try database.rows(query) {
             if let folderID = row[0] as? Int64, let count = row[1] as? Int64 {
                 counts[folderID] = Int(count)
             }
@@ -177,7 +177,7 @@ public nonisolated extension DatabaseManager {
             .order(articlePublishedDate.desc)
             .limit(limit)
             .select(articleImageURL)
-        return try database.prepare(query).compactMap { $0[articleImageURL] }
+        return try database.rows(query).compactMap { $0[articleImageURL] }
     }
 
     /// Drops folder links whose article was deleted or is no longer bookmarked.

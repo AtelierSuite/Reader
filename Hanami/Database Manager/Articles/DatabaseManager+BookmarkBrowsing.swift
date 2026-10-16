@@ -8,7 +8,7 @@ public nonisolated extension DatabaseManager {
             .filter(articleIsBookmarked == true && articleIsRead == false)
             .order(articlePublishedDate.desc)
             .limit(limit)
-        return try database.prepare(query).map(rowToListArticle)
+        return try database.rows(query).map(rowToListArticle)
     }
 
     func unreadBookmarkedCount() throws -> Int {
@@ -18,7 +18,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func unorganizedBookmarkedCount() throws -> Int {
-        let organizedIDs = try database.prepare(
+        let organizedIDs = try database.rows(
             bookmarkFolderItems.select(bookmarkFolderItemArticleID)
         ).map { $0[bookmarkFolderItemArticleID] }
         var query = articles.filter(articleIsBookmarked == true)
@@ -36,7 +36,7 @@ public nonisolated extension DatabaseManager {
         )
         guard !namesByTagID.isEmpty else { return [:] }
         var result: [Int64: [String]] = [:]
-        for row in try database.prepare(bookmarkTagItems) {
+        for row in try database.rows(bookmarkTagItems) {
             guard let name = namesByTagID[row[bookmarkTagItemTagID]] else { continue }
             result[row[bookmarkTagItemArticleID], default: []].append(name)
         }

@@ -20,7 +20,7 @@ public nonisolated extension DatabaseManager {
             .filter(articleLastAccessed != nil)
             .order(articleLastAccessed.desc)
             .limit(limit)
-        return try database.prepare(query).map(rowToArticle)
+        return try database.rows(query).map(rowToArticle)
     }
 
     func clearAccessHistory() throws {
@@ -39,7 +39,7 @@ public nonisolated extension DatabaseManager {
             """
         log("SQLite", "feedAccessCounts(since:) - \(sql)")
         var result: [Int64: Int] = [:]
-        for row in try database.prepare(sql, date.timeIntervalSince1970) {
+        for row in try database.rows(sql, date.timeIntervalSince1970) {
             guard let feedId = row[0] as? Int64,
                   let count = row[1] as? Int64 else { continue }
             result[feedId] = Int(count)
@@ -76,7 +76,7 @@ public nonisolated extension DatabaseManager {
             """
         log("SQLite", "topAccessedEntities(types:since:limit:) - \(sql)")
         var results: [(name: String, count: Int)] = []
-        for row in try database.prepare(sql, bindings) {
+        for row in try database.rows(sql, bindings) {
             if let name = row[0] as? String, let count = row[1] as? Int64 {
                 results.append((name: name, count: Int(count)))
             }

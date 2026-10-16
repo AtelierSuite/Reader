@@ -13,7 +13,7 @@ public nonisolated extension DatabaseManager {
             .order(articlePublishedDate.desc)
             .limit(limit)
             .select(articleID, articleURL)
-        return try database.prepare(query).map { row in
+        return try database.rows(query).map { row in
             (id: row[articleID], url: row[articleURL])
         }
     }

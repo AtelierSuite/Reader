@@ -38,7 +38,7 @@ public nonisolated extension DatabaseManager {
             )
             .order(articlePublishedDate.desc)
             .limit(limit)
-        return try database.prepare(query).map { row in
+        return try database.rows(query).map { row in
             UnprocessedNLPArticle(
                 id: row[articleID],
                 needsSentiment: !row[articleSentimentProcessed],
@@ -66,7 +66,7 @@ public nonisolated extension DatabaseManager {
         let query = nlpEntities
             .filter(nlpEntityArticleID == articleId)
             .order(nlpEntityID.asc)
-        return try database.prepare(query).map {
+        return try database.rows(query).map {
             (name: $0[nlpEntityName], type: $0[nlpEntityType])
         }
     }
@@ -82,7 +82,7 @@ public nonisolated extension DatabaseManager {
             """
         let bindings: [Binding?] = ids.map { $0 as Binding? }
         var result: [Int64: Set<String>] = [:]
-        for row in try database.prepare(sql, bindings) {
+        for row in try database.rows(sql, bindings) {
             guard let articleId = row[0] as? Int64,
                   let name = row[1] as? String,
                   !name.isEmpty else { continue }
@@ -106,7 +106,7 @@ public nonisolated extension DatabaseManager {
             """
         log("SQLite", "topEntities(type:, since:, limit:) - \(sql)")
         var results: [(name: String, count: Int)] = []
-        for row in try database.prepare(sql, type, date.timeIntervalSince1970, limit) {
+        for row in try database.rows(sql, type, date.timeIntervalSince1970, limit) {
             if let name = row[0] as? String, let count = row[1] as? Int64 {
                 results.append((name: name, count: Int(count)))
             }
@@ -132,7 +132,7 @@ public nonisolated extension DatabaseManager {
         bindings.append(date.timeIntervalSince1970)
         bindings.append(limit)
         var results: [(name: String, count: Int)] = []
-        for row in try database.prepare(sql, bindings) {
+        for row in try database.rows(sql, bindings) {
             if let name = row[0] as? String, let count = row[1] as? Int64 {
                 results.append((name: name, count: Int(count)))
             }
@@ -152,7 +152,7 @@ public nonisolated extension DatabaseManager {
             """
         log("SQLite", "articleIDs(forEntity:, type:) - \(sql)")
         var ids: [Int64] = []
-        for row in try database.prepare(sql, name, type) {
+        for row in try database.rows(sql, name, type) {
             if let id = row[0] as? Int64 {
                 ids.append(id)
             }
@@ -176,7 +176,7 @@ public nonisolated extension DatabaseManager {
         var bindings: [Binding?] = [name as Binding?]
         bindings.append(contentsOf: types.map { $0 as Binding? })
         var ids: [Int64] = []
-        for row in try database.prepare(sql, bindings) {
+        for row in try database.rows(sql, bindings) {
             if let id = row[0] as? Int64 {
                 ids.append(id)
             }
@@ -198,7 +198,7 @@ public nonisolated extension DatabaseManager {
                     && articleID != article.id)
             .order(articlePublishedDate.desc)
             .limit(limit)
-        return try database.prepare(query).map(rowToArticle)
+        return try database.rows(query).map(rowToArticle)
     }
 
     func sentimentScore(for articleId: Int64) throws -> Double? {
@@ -239,7 +239,7 @@ public nonisolated extension DatabaseManager {
         let query = similarArticles
             .filter(similarSourceID == sourceID)
             .order(similarRank.asc)
-        return try database.prepare(query).map {
+        return try database.rows(query).map {
             (id: $0[similarTargetID], distance: $0[similarDistance])
         }
     }
@@ -312,7 +312,7 @@ public nonisolated extension DatabaseManager {
         let calendar = Calendar.current
         var expectedDate = calendar.startOfDay(for: Date())
 
-        for row in try database.prepare(sql) {
+        for row in try database.rows(sql) {
             guard let dayString = row[0] as? String,
                   let readDate = formatter.date(from: dayString) else { continue }
             let readDay = calendar.startOfDay(for: readDate)
@@ -337,7 +337,7 @@ public nonisolated extension DatabaseManager {
             DESC LIMIT 1
             """
         log("SQLite", "mostReadFeedID() - \(sql)")
-        for row in try database.prepare(sql) {
+        for row in try database.rows(sql) {
             if let feedID = row[0] as? Int64 {
                 return feedID
             }

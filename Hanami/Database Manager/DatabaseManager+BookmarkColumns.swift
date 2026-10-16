@@ -33,7 +33,7 @@ nonisolated extension DatabaseManager {
 
     func columnNames(ofTable table: String) throws -> Set<String> {
         var names: Set<String> = []
-        for row in try database.prepare("PRAGMA table_info(\(table))") {
+        for row in try database.rows("PRAGMA table_info(\(table))") {
             if let name = row[1] as? String {
                 names.insert(name)
             }

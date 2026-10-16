@@ -32,7 +32,7 @@ public nonisolated extension DatabaseManager {
         if let limit {
             query = query.limit(limit)
         }
-        return try readDatabase.prepare(query).compactMap { row in
+        return try readDatabase.rows(query).compactMap { row in
             guard let timestamp = row[articlePublishedDate] else { return nil }
             return ArticleIDEntry(id: row[articleID], publishedDate: Date(timeIntervalSince1970: timestamp))
         }
@@ -48,7 +48,7 @@ public nonisolated extension DatabaseManager {
             query = query.filter(articleIsRead == false)
         }
         return try readDatabase
-            .prepare(query.order(articlePublishedDate.desc).limit(limit))
+            .rows(query.order(articlePublishedDate.desc).limit(limit))
             .map(rowToListArticle)
     }
 }

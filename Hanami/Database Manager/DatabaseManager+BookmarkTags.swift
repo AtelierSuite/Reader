@@ -23,7 +23,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allBookmarkTags() throws -> [BookmarkTag] {
-        try database.prepare(bookmarkTags.order(bookmarkTagName.asc)).map(rowToBookmarkTag)
+        try database.rows(bookmarkTags.order(bookmarkTagName.asc)).map(rowToBookmarkTag)
     }
 
     /// Tags applied to at least one bookmark, most used first.
@@ -77,31 +77,31 @@ public nonisolated extension DatabaseManager {
     }
 
     func bookmarkTags(forArticleID aid: Int64) throws -> [BookmarkTag] {
-        let ids = try database.prepare(
+        let ids = try database.rows(
             bookmarkTagItems.filter(bookmarkTagItemArticleID == aid).select(bookmarkTagItemTagID)
         ).map { $0[bookmarkTagItemTagID] }
         guard !ids.isEmpty else { return [] }
-        return try database.prepare(
+        return try database.rows(
             bookmarkTags.filter(ids.contains(bookmarkTagID)).order(bookmarkTagName.asc)
         ).map(rowToBookmarkTag)
     }
 
     func bookmarkedArticles(taggedWithID tagID: Int64) throws -> [Article] {
-        let ids = try database.prepare(
+        let ids = try database.rows(
             bookmarkTagItems.filter(bookmarkTagItemTagID == tagID).select(bookmarkTagItemArticleID)
         ).map { $0[bookmarkTagItemArticleID] }
         guard !ids.isEmpty else { return [] }
         let query = selectingListColumns(articles)
             .filter(ids.contains(articleID) && articleIsBookmarked == true)
             .order(articlePublishedDate.desc)
-        return try database.prepare(query).map(rowToListArticle)
+        return try database.rows(query).map(rowToListArticle)
     }
 
     // MARK: - Maintenance
 
     func bookmarkTagCounts() throws -> [Int64: Int] {
         var counts: [Int64: Int] = [:]
-        for row in try database.prepare(bookmarkTagItems.select(bookmarkTagItemTagID)) {
+        for row in try database.rows(bookmarkTagItems.select(bookmarkTagItemTagID)) {
             counts[row[bookmarkTagItemTagID], default: 0] += 1
         }
         return counts

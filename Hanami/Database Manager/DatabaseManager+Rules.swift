@@ -6,7 +6,7 @@ public nonisolated extension DatabaseManager {
     // MARK: - Feed Rules CRUD
 
     func rules(forFeedID feedID: Int64, type: String) throws -> [String] {
-        try readDatabase.prepare(
+        try readDatabase.rows(
             feedRules
                 .filter(ruleFeedID == feedID && ruleType == type)
                 .order(ruleValue.asc)
@@ -18,7 +18,7 @@ public nonisolated extension DatabaseManager {
         let query = feedRules
             .filter(ruleFeedID == feedID)
             .order(ruleValue.asc)
-        for row in try readDatabase.prepare(query) {
+        for row in try readDatabase.rows(query) {
             result[row[ruleType], default: []].append(row[ruleValue])
         }
         return result
@@ -26,7 +26,7 @@ public nonisolated extension DatabaseManager {
 
     func allRulesByFeedID() throws -> [Int64: [String: [String]]] {
         var result: [Int64: [String: [String]]] = [:]
-        for row in try readDatabase.prepare(feedRules.order(ruleValue.asc)) {
+        for row in try readDatabase.rows(feedRules.order(ruleValue.asc)) {
             result[row[ruleFeedID], default: [:]][row[ruleType], default: []].append(row[ruleValue])
         }
         return result

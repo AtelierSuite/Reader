@@ -40,7 +40,7 @@ public nonisolated extension DatabaseManager {
     /// Returns every recorded refresh metric, keyed by feed id.
     func allFeedRefreshMetrics() throws -> [Int64: FeedRefreshMetric] {
         var results: [Int64: FeedRefreshMetric] = [:]
-        for row in try database.prepare(feedRefreshMetrics) {
+        for row in try database.rows(feedRefreshMetrics) {
             let metric = rowToFeedRefreshMetric(row)
             results[metric.feedID] = metric
         }

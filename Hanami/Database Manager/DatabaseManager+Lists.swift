@@ -19,7 +19,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allLists() throws -> [FeedList] {
-        try readDatabase.prepare(lists.order(listSortOrder.asc, listName.asc)).map(rowToList)
+        try readDatabase.rows(lists.order(listSortOrder.asc, listName.asc)).map(rowToList)
     }
 
     func list(byID id: Int64) throws -> FeedList? {
@@ -68,21 +68,21 @@ public nonisolated extension DatabaseManager {
     }
 
     func feedIDs(forListID lid: Int64) throws -> [Int64] {
-        try readDatabase.prepare(
+        try readDatabase.rows(
             listFeeds.filter(listFeedListID == lid).select(listFeedFeedID)
         ).map { $0[listFeedFeedID] }
     }
 
     func allListFeedIDs() throws -> [Int64: Set<Int64>] {
         var membership: [Int64: Set<Int64>] = [:]
-        for row in try readDatabase.prepare(listFeeds.select(listFeedListID, listFeedFeedID)) {
+        for row in try readDatabase.rows(listFeeds.select(listFeedListID, listFeedFeedID)) {
             membership[row[listFeedListID], default: []].insert(row[listFeedFeedID])
         }
         return membership
     }
 
     func listIDs(forFeedID fid: Int64) throws -> [Int64] {
-        try readDatabase.prepare(
+        try readDatabase.rows(
             listFeeds.filter(listFeedFeedID == fid).select(listFeedListID)
         ).map { $0[listFeedListID] }
     }
@@ -90,7 +90,7 @@ public nonisolated extension DatabaseManager {
     // MARK: - List Rules CRUD
 
     func listRules(forListID lid: Int64, type: String) throws -> [String] {
-        try readDatabase.prepare(
+        try readDatabase.rows(
             listRules
                 .filter(listRuleListID == lid && listRuleType == type)
                 .order(listRuleValue.asc)
@@ -102,7 +102,7 @@ public nonisolated extension DatabaseManager {
         let query = listRules
             .filter(listRuleListID == lid)
             .order(listRuleValue.asc)
-        for row in try readDatabase.prepare(query) {
+        for row in try readDatabase.rows(query) {
             result[row[listRuleType], default: []].append(row[listRuleValue])
         }
         return result

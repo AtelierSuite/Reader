@@ -26,7 +26,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allContentOverrides() throws -> [ContentOverride] {
-        try database.prepare(contentOverrides).map(rowToContentOverride)
+        try database.rows(contentOverrides).map(rowToContentOverride)
     }
 
     private func rowToContentOverride(_ row: Row) -> ContentOverride {

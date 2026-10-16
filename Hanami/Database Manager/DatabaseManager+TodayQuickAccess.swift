@@ -26,7 +26,7 @@ public nonisolated extension DatabaseManager {
     func todayQuickAccessSettings() throws -> TodayQuickAccessSettings {
         var orderedIDs: [(id: String, sortOrder: Int)] = []
         var hiddenIDs = Set<String>()
-        for row in try database.prepare(todayQuickAccess) {
+        for row in try database.rows(todayQuickAccess) {
             let itemID = row[todayQuickAccessItemID]
             if let sortOrder = row[todayQuickAccessSortOrder] {
                 orderedIDs.append((itemID, sortOrder))

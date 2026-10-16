@@ -18,7 +18,7 @@ public nonisolated extension DatabaseManager {
     }
 
     private func accumulateBytesByFeed(sql: String, into sizes: inout [Int64: Int64]) throws {
-        for row in try database.prepare(sql) {
+        for row in try database.rows(sql) {
             guard let feedID = row[0] as? Int64 else { continue }
             let bytes = (row[1] as? Int64) ?? Int64((row[1] as? Double) ?? 0)
             sizes[feedID, default: 0] += bytes
@@ -105,7 +105,7 @@ public nonisolated extension DatabaseManager {
             WHERE id IN (\(bytesByArticleID.keys.map { "\($0)" }.joined(separator: ",")))
             """
         var perFeed: [Int64: Int64] = [:]
-        if let rows = try? database.prepare(sql) {
+        if let rows = try? database.rows(sql) {
             for row in rows {
                 guard let articleID = row[0] as? Int64,
                       let feedID = row[1] as? Int64,
@@ -153,7 +153,7 @@ public nonisolated extension DatabaseManager {
     /// Sum of bytes stored in the `image_cache` table.
     func imageCacheTableSize() -> Int64 {
         let sql = "SELECT COALESCE(SUM(LENGTH(data)), 0) FROM image_cache"
-        guard let row = try? database.prepare(sql).makeIterator().next() else { return 0 }
+        guard let row = try? database.rows(sql).first else { return 0 }
         return (row[0] as? Int64) ?? Int64((row[0] as? Double) ?? 0)
     }
 }

@@ -9,7 +9,7 @@ public nonisolated extension DatabaseManager {
             uniqueKeysWithValues: try allBookmarkFolders().map { ($0.id, $0.name) }
         )
         var folderNameByArticleID: [Int64: String] = [:]
-        for row in try database.prepare(bookmarkFolderItems) {
+        for row in try database.rows(bookmarkFolderItems) {
             guard let name = folderNamesByID[row[bookmarkFolderItemFolderID]] else { continue }
             folderNameByArticleID[row[bookmarkFolderItemArticleID]] = name
         }
@@ -18,7 +18,7 @@ public nonisolated extension DatabaseManager {
             uniqueKeysWithValues: try allBookmarkTags().map { ($0.id, $0.name) }
         )
         var tagNamesByArticleID: [Int64: [String]] = [:]
-        for row in try database.prepare(bookmarkTagItems) {
+        for row in try database.rows(bookmarkTagItems) {
             guard let name = tagNamesByID[row[bookmarkTagItemTagID]] else { continue }
             tagNamesByArticleID[row[bookmarkTagItemArticleID], default: []].append(name)
         }
@@ -26,7 +26,7 @@ public nonisolated extension DatabaseManager {
         let query = articles
             .filter(articleIsBookmarked == true)
             .order(articlePublishedDate.desc)
-        return try database.prepare(query).map { row in
+        return try database.rows(query).map { row in
             let identifier = row[articleID]
             return ExportedBookmark(
                 title: rowToArticle(row).displayTitle,

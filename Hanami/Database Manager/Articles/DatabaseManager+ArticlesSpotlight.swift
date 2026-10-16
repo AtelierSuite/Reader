@@ -20,7 +20,7 @@ public nonisolated extension DatabaseManager {
             )
             .filter(articleFeedID == fid)
             .order(articlePublishedDate.desc)
-        return try database.prepare(query).map { row in
+        return try database.rows(query).map { row in
             Article(
                 id: row[articleID],
                 feedID: row[articleFeedID],

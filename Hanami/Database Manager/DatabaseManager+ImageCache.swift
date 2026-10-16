@@ -61,7 +61,7 @@ public nonisolated extension DatabaseManager {
             .select(imageCacheURL)
             .filter(lengthExpression > byteCount)
             .limit(limit)
-        return try imageDatabase.prepare(query).map { $0[imageCacheURL] }
+        return try imageDatabase.rows(query).map { $0[imageCacheURL] }
     }
 
     /// Swaps a blob in place without bumping `cached_at`, so age-based cleanup is unaffected.

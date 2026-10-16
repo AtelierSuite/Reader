@@ -83,7 +83,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func backfillFeedSyncIDs() throws -> [String] {
-        let rowsWithoutSyncID = try database.prepare(feeds.filter(feedSyncID == nil))
+        let rowsWithoutSyncID = try database.rows(feeds.filter(feedSyncID == nil))
         var assignedSyncIDs: [String] = []
         for row in rowsWithoutSyncID {
             let newSyncID = UUID().uuidString
@@ -95,7 +95,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allFeedSyncIDs() throws -> [String] {
-        try database.prepare(feeds.select(feedSyncID)).compactMap { row in
+        try database.rows(feeds.select(feedSyncID)).compactMap { row in
             try? row.get(feedSyncID)
         }
     }
@@ -174,7 +174,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allSyncTombstoneIDs() throws -> [String] {
-        try database.prepare(syncTombstones).map { row in
+        try database.rows(syncTombstones).map { row in
             row[tombstoneSyncID]
         }
     }

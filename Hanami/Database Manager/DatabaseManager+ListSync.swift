@@ -74,7 +74,7 @@ nonisolated extension DatabaseManager {
 
     func backfillListSyncIDs() throws -> [String] {
         var assignedSyncIDs: [String] = []
-        let unsyncedLists = try database.prepare(lists.filter(listSyncID == nil).select(listID, listName))
+        let unsyncedLists = try database.rows(lists.filter(listSyncID == nil).select(listID, listName))
             .map { (id: $0[listID], name: $0[listName]) }
         for unsyncedList in unsyncedLists {
             let preSyncID = Self.preSyncListSyncID(forName: unsyncedList.name)
@@ -90,7 +90,7 @@ nonisolated extension DatabaseManager {
     }
 
     func allListSyncIDs() throws -> [String] {
-        try database.prepare(lists.select(listSyncID)).compactMap { row in
+        try database.rows(lists.select(listSyncID)).compactMap { row in
             (try? row.get(listSyncID)) ?? nil
         }
     }
@@ -117,7 +117,7 @@ nonisolated extension DatabaseManager {
     /// re-uploading a list never drops members this device can't see.
     func memberFeedSyncIDs(forListID id: Int64, listSyncID syncID: String?) throws -> [String] {
         let localFeedIDs = try feedIDs(forListID: id)
-        var memberSyncIDs = Set(try database.prepare(
+        var memberSyncIDs = Set(try database.rows(
             feeds.filter(localFeedIDs.contains(feedID)).select(feedSyncID)
         ).compactMap { (try? $0.get(feedSyncID)) ?? nil })
         if let syncID {
@@ -127,7 +127,7 @@ nonisolated extension DatabaseManager {
     }
 
     func pendingMemberFeedSyncIDs(forListSyncID syncID: String) throws -> [String] {
-        try database.prepare(
+        try database.rows(
             listPendingMembers.filter(pendingMemberListSyncID == syncID)
         ).map { $0[pendingMemberFeedSyncID] }
     }

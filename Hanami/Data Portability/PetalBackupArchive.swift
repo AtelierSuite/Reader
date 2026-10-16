@@ -41,7 +41,7 @@ nonisolated enum PetalBackupArchive {
         guard tableCount > 0 else { return [] }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return try connection.prepare(table).map { row in
+        return try connection.rows(table).map { row in
             let recipe = try decoder.decode(PetalRecipe.self, from: Data(row[recipeData].bytes))
             guard recipe.version <= PetalRecipe.currentVersion else {
                 throw CocoaError(.coderReadCorrupt)

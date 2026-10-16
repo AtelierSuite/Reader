@@ -8,7 +8,7 @@ public nonisolated extension DatabaseManager {
         let query = comments
             .filter(commentArticleID == id)
             .order(commentRank.asc)
-        return try database.prepare(query).map(rowToComment)
+        return try database.rows(query).map(rowToComment)
     }
 
     /// True if comments have ever been fetched for this article (even if zero).

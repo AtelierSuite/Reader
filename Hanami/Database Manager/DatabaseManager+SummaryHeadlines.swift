@@ -32,7 +32,7 @@ public nonisolated extension DatabaseManager {
         var results: [SummaryHeadline] = []
         var partial = false
         var articleCount = 0
-        for row in try database.prepare(query) {
+        for row in try database.rows(query) {
             let headline = row[summaryHeadlineText]
             let articleIDs = decodeIDs(row[summaryHeadlineArticleIDs])
             let feedIDs = decodeIDs(row[summaryHeadlineFeedIDs])

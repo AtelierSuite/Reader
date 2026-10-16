@@ -87,7 +87,7 @@ nonisolated extension DatabaseManager {
     /// Returns whether any list gained a member.
     @discardableResult
     func resolvePendingListMembers() throws -> Bool {
-        let pendingRows = try database.prepare(listPendingMembers).map { row in
+        let pendingRows = try database.rows(listPendingMembers).map { row in
             (listSyncID: row[pendingMemberListSyncID], feedSyncID: row[pendingMemberFeedSyncID])
         }
         guard !pendingRows.isEmpty else { return false }

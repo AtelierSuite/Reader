@@ -28,7 +28,7 @@ public nonisolated extension DatabaseManager {
     }
 
     func allFeeds() throws -> [Feed] {
-        try database.prepare(feeds.order(feedTitle.asc)).map(rowToFeed)
+        try database.rows(feeds.order(feedTitle.asc)).map(rowToFeed)
     }
 
     func feed(byID id: Int64) throws -> Feed? {

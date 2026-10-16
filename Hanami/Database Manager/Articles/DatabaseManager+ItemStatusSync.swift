@@ -19,7 +19,7 @@ public nonisolated extension DatabaseManager {
         if let limit {
             query = query.limit(limit)
         }
-        return try database.prepare(query).map { row in
+        return try database.rows(query).map { row in
             ItemStatusChange(
                 url: row[articleURL],
                 isRead: row[articleIsRead],
@@ -117,7 +117,7 @@ public nonisolated extension DatabaseManager {
         if !keeping.isEmpty {
             query = query.filter(!Array(keeping).contains(articleID))
         }
-        return try database.prepare(query.select(articleStatusSyncID)).compactMap { try? $0.get(articleStatusSyncID) }
+        return try database.rows(query.select(articleStatusSyncID)).compactMap { try? $0.get(articleStatusSyncID) }
     }
 
     func allUploadedStatusSyncIDs(includeBookmarks: Bool, keeping: Set<Int64> = []) throws -> [String] {
@@ -128,6 +128,6 @@ public nonisolated extension DatabaseManager {
         if !keeping.isEmpty {
             query = query.filter(!Array(keeping).contains(articleID))
         }
-        return try database.prepare(query.select(articleStatusSyncID)).compactMap { try? $0.get(articleStatusSyncID) }
+        return try database.rows(query.select(articleStatusSyncID)).compactMap { try? $0.get(articleStatusSyncID) }
     }
 }

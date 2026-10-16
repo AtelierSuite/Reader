@@ -18,12 +18,12 @@ public nonisolated extension DatabaseManager {
 
     func downloadedArticleIDs() throws -> [Int64] {
         let query = articles.filter(articleDownloadPath != nil).select(articleID)
-        return try database.prepare(query).map { $0[articleID] }
+        return try database.rows(query).map { $0[articleID] }
     }
 
     func downloadedArticlePaths() throws -> [(id: Int64, path: String)] {
         let query = articles.filter(articleDownloadPath != nil).select(articleID, articleDownloadPath)
-        return try database.prepare(query).compactMap { row in
+        return try database.rows(query).compactMap { row in
             guard let path = row[articleDownloadPath] else { return nil }
             return (row[articleID], path)
         }
