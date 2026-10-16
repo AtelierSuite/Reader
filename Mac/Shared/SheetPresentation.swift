@@ -19,8 +19,11 @@ extension NSViewController {
     func presentHostedSheet<Content: View>(_ content: Content) {
         let sheet = NSHostingController(rootView: AnyView(EmptyView()))
         sheet.rootView = AnyView(
-            content.environment(\.hostedSheetDismissAction, SheetDismissAction { [weak sheet] in
-                sheet?.dismiss(nil)
+            content.environment(\.hostedSheetDismissAction, HostedSheetDismissAction { [weak sheet] in
+                // SwiftUI sheets inherit this action, and attach to the hosted sheet's window.
+                guard let sheet, sheet.view.window?.attachedSheet == nil else { return false }
+                sheet.dismiss(nil)
+                return true
             })
         )
         // Shared sheets set no window title, which macOS shows as "Untitled".
