@@ -2737,61 +2737,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura"
+            "value" : "Reader"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura"
+            "value" : "Reader"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura"
+            "value" : "Reader"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura"
+            "value" : "Reader"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラ"
+            "value" : "Reader"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "사쿠라"
+            "value" : "Reader"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura"
+            "value" : "Reader"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura"
+            "value" : "Reader"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "樱花阅读器"
+            "value" : "Reader"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "櫻花閱讀器"
+            "value" : "Reader"
           }
         }
       }
@@ -4484,71 +4484,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "安全模式"
-          }
-        }
-      }
-    },
-    "SakuraBackground" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura-Hintergrund"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura Background"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arrière-plan Sakura"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sfondo Sakura"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サクラの背景"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "사쿠라 배경"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura-achtergrond"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nền Sakura"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "樱花背景"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "櫻花背景"
           }
         }
       }
@@ -7939,61 +7874,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tippe unter „Fokusfilter“ auf „Filter hinzufügen“ und dann auf „Sakura“."
+            "value" : "Tippe unter „Fokusfilter“ auf „Filter hinzufügen“ und dann auf „Reader“."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Under Focus Filters, tap Add Filter, then Sakura."
+            "value" : "Under Focus Filters, tap Add Filter, then Reader."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sous Filtres de Concentration, touchez Ajouter un filtre, puis Sakura."
+            "value" : "Sous Filtres de Concentration, touchez Ajouter un filtre, puis Reader."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In Filtri Full Immersion, tocca Aggiungi filtro, poi Sakura."
+            "value" : "In Filtri Full Immersion, tocca Aggiungi filtro, poi Reader."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「集中モードフィルタ」で「フィルタを追加」をタップし、「Sakura」を選択します。"
+            "value" : "「集中モードフィルタ」で「フィルタを追加」をタップし、「Reader」を選択します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "집중 모드 필터에서 필터 추가를 탭한 다음 Sakura를 선택하세요."
+            "value" : "집중 모드 필터에서 필터 추가를 탭한 다음 Reader를 선택하세요."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tik onder Focusfilters op Voeg filter toe en daarna op Sakura."
+            "value" : "Tik onder Focusfilters op Voeg filter toe en daarna op Reader."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trong Bộ lọc Tập trung, chạm vào Thêm bộ lọc, rồi chọn Sakura."
+            "value" : "Trong Bộ lọc Tập trung, chạm vào Thêm bộ lọc, rồi chọn Reader."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在“专注模式过滤器”下，轻点“添加过滤器”，然后选择“Sakura”。"
+            "value" : "在“专注模式过滤器”下，轻点“添加过滤器”，然后选择“Reader”。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在「專注模式過濾器」下，點一下「加入過濾器」，然後選擇「Sakura」。"
+            "value" : "在「專注模式過濾器」下，點一下「加入過濾器」，然後選擇「Reader」。"
           }
         }
       }

@@ -2152,25 +2152,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Das sieht nicht nach einem gültigen Sakura-RSS-Paket aus."
+            "value" : "Das sieht nicht nach einem gültigen Web-Feed-Paket aus."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This doesn't look like a valid Sakura RSS package."
+            "value" : "This doesn't look like a valid Web Feed package."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cela ne ressemble pas à un paquet Sakura RSS valide."
+            "value" : "Cela ne ressemble pas à un paquet de flux web valide."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non sembra un pacchetto Sakura RSS valido."
+            "value" : "Non sembra un pacchetto di feed web valido."
           }
         },
         "ja" : {
@@ -2182,31 +2182,31 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "유효한 Sakura RSS 패키지가 아닌 것 같습니다."
+            "value" : "유효한 웹 피드 패키지가 아닌 것 같습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dit lijkt geen geldig Sakura RSS-pakket te zijn."
+            "value" : "Dit lijkt geen geldig webfeedpakket te zijn."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đây không giống một gói Sakura RSS hợp lệ."
+            "value" : "Đây không giống một gói nguồn cấp web hợp lệ."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "这看起来不是有效的 Sakura RSS 包。"
+            "value" : "这看起来不是有效的网页订阅源包。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "這看起來不是有效的 Sakura RSS 套件。"
+            "value" : "這看起來不是有效的網頁訂閱源套件。"
           }
         }
       }
@@ -2282,61 +2282,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieses Paket ist größer, als Sakura importieren kann."
+            "value" : "Dieses Paket ist größer, als Reader importieren kann."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This package is larger than Sakura will import."
+            "value" : "This package is larger than Reader will import."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce paquet est plus volumineux que ce que Sakura accepte d’importer."
+            "value" : "Ce paquet est plus volumineux que ce que Reader accepte d’importer."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questo pacchetto è più grande di quanto Sakura possa importare."
+            "value" : "Questo pacchetto è più grande di quanto Reader possa importare."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このパッケージはサクラが読み込める上限を超えています。"
+            "value" : "このパッケージはReaderが読み込める上限を超えています。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 패키지는 Sakura가 가져올 수 있는 크기보다 큽니다."
+            "value" : "이 패키지는 Reader가 가져올 수 있는 크기보다 큽니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dit pakket is groter dan Sakura zal importeren."
+            "value" : "Dit pakket is groter dan Reader zal importeren."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gói này lớn hơn mức Sakura có thể nhập."
+            "value" : "Gói này lớn hơn mức Reader có thể nhập."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此包超出了 Sakura 可导入的大小。"
+            "value" : "此包超出了 Reader 可导入的大小。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此套件超出了 Sakura 可匯入的大小。"
+            "value" : "此套件超出了 Reader 可匯入的大小。"
           }
         }
       }
@@ -2347,61 +2347,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieses Paket wurde mit einer neueren Version von Sakura erstellt. Aktualisiere die App und versuche es erneut."
+            "value" : "Dieses Paket wurde mit einer neueren Version von Reader erstellt. Aktualisiere die App und versuche es erneut."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This package was made with a newer version of Sakura. Update the app and try again."
+            "value" : "This package was made with a newer version of Reader. Update the app and try again."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce paquet a été créé avec une version plus récente de Sakura. Mettez l’application à jour et réessayez."
+            "value" : "Ce paquet a été créé avec une version plus récente de Reader. Mettez l’application à jour et réessayez."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questo pacchetto è stato creato con una versione più recente di Sakura. Aggiorna l’app e riprova."
+            "value" : "Questo pacchetto è stato creato con una versione più recente di Reader. Aggiorna l’app e riprova."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このパッケージはより新しいバージョンのサクラで作成されました。アプリを更新してからもう一度お試しください。"
+            "value" : "このパッケージはより新しいバージョンのReaderで作成されました。アプリを更新してからもう一度お試しください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 패키지는 더 최신 버전의 Sakura에서 만들어졌습니다. 앱을 업데이트한 후 다시 시도하세요."
+            "value" : "이 패키지는 더 최신 버전의 Reader에서 만들어졌습니다. 앱을 업데이트한 후 다시 시도하세요."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dit pakket is gemaakt met een nieuwere versie van Sakura. Werk de app bij en probeer het opnieuw."
+            "value" : "Dit pakket is gemaakt met een nieuwere versie van Reader. Werk de app bij en probeer het opnieuw."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gói này được tạo bằng phiên bản Sakura mới hơn. Hãy cập nhật ứng dụng và thử lại."
+            "value" : "Gói này được tạo bằng phiên bản Reader mới hơn. Hãy cập nhật ứng dụng và thử lại."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此包是用更新版本的 Sakura 制作的。请更新应用后重试。"
+            "value" : "此包是用更新版本的 Reader 制作的。请更新应用后重试。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此套件是用更新版本的 Sakura 製作的。請更新 App 後重試。"
+            "value" : "此套件是用更新版本的 Reader 製作的。請更新 App 後重試。"
           }
         }
       }
@@ -2867,25 +2867,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura-RSS-Pakete (.srss) enthalten ein Rezept und ein optionales Feed-Symbol. Es wird nichts hochgeladen, der Import erfolgt vollständig auf dem Gerät."
+            "value" : "Web-Feed-Pakete (.srss) enthalten ein Rezept und ein optionales Feed-Symbol. Es wird nichts hochgeladen, der Import erfolgt vollständig auf dem Gerät."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura RSS packages (.srss) contain a recipe and an optional feed icon. Nothing is uploaded, import runs entirely on device."
+            "value" : "Web Feed packages (.srss) contain a recipe and an optional feed icon. Nothing is uploaded, import runs entirely on device."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Les paquets Sakura RSS (.srss) contiennent une recette et, facultativement, une icône de flux. Rien n’est envoyé en ligne, l’importation se fait entièrement sur l’appareil."
+            "value" : "Les paquets de flux web (.srss) contiennent une recette et, facultativement, une icône de flux. Rien n’est envoyé en ligne, l’importation se fait entièrement sur l’appareil."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I pacchetti Sakura RSS (.srss) contengono una ricetta e un’icona del feed facoltativa. Non viene caricato nulla, l’importazione avviene interamente sul dispositivo."
+            "value" : "I pacchetti di feed web (.srss) contengono una ricetta e un’icona del feed facoltativa. Non viene caricato nulla, l’importazione avviene interamente sul dispositivo."
           }
         },
         "ja" : {
@@ -2897,31 +2897,31 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura RSS 패키지(.srss)에는 레시피와 선택 사항인 피드 아이콘이 포함됩니다. 업로드되는 항목은 없으며 가져오기는 전적으로 기기에서 수행됩니다."
+            "value" : "웹 피드 패키지(.srss)에는 레시피와 선택 사항인 피드 아이콘이 포함됩니다. 업로드되는 항목은 없으며 가져오기는 전적으로 기기에서 수행됩니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura RSS-pakketten (.srss) bevatten een recept en een optioneel feedsymbool. Er wordt niets geüpload; de import verloopt volledig op het apparaat."
+            "value" : "Webfeedpakketten (.srss) bevatten een recept en een optioneel feedsymbool. Er wordt niets geüpload; de import verloopt volledig op het apparaat."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gói Sakura RSS (.srss) chứa một công thức và tùy chọn biểu tượng nguồn cấp. Không có gì được tải lên, việc nhập diễn ra hoàn toàn trên thiết bị."
+            "value" : "Gói nguồn cấp web (.srss) chứa một công thức và tùy chọn biểu tượng nguồn cấp. Không có gì được tải lên, việc nhập diễn ra hoàn toàn trên thiết bị."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura RSS 包（.srss）包含一个配方和可选的订阅源图标。不会上传任何内容，导入完全在设备上进行。"
+            "value" : "网页订阅源包（.srss）包含一个配方和可选的订阅源图标。不会上传任何内容，导入完全在设备上进行。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura RSS 套件（.srss）包含一個配方和選用的訂閱源圖示。不會上傳任何內容，匯入完全在裝置上進行。"
+            "value" : "網頁訂閱源套件（.srss）包含一個配方和選用的訂閱源圖示。不會上傳任何內容，匯入完全在裝置上進行。"
           }
         }
       }

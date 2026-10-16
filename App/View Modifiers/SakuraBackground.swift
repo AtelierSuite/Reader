@@ -24,12 +24,11 @@ extension EnvironmentValues {
 #if !os(visionOS) && !os(macOS)
 struct SakuraBackground: ViewModifier {
 
-    @AppStorage("Display.SakuraBackground") private var sakuraBackgroundEnabled: Bool = true
     @AppStorage("Display.FeedBackground") private var feedBackgroundEnabled: Bool = true
     @Environment(\.feedBackgroundColors) private var feedColors
     @Environment(\.isSakuraBackgroundDisabled) private var isDisabled
 
-    private var isActive: Bool { sakuraBackgroundEnabled && !isDisabled }
+    private var isActive: Bool { !isDisabled }
 
     @ViewBuilder
     func body(content: Content) -> some View {

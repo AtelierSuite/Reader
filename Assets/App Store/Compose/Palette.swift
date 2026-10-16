@@ -9,7 +9,7 @@ func color(_ hex: UInt32) -> NSColor {
     )
 }
 
-/// Sakura's lavender, and the colors given to each kind of content.
+/// Reader's lavender, and the colors given to each kind of content.
 @MainActor
 enum Palette {
     static let text = color(0x1B1616)

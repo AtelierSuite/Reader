@@ -657,61 +657,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In Sakura lesen"
+            "value" : "In App lesen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Read in Sakura"
+            "value" : "Read in App"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lire dans Sakura"
+            "value" : "Lire dans l’app"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leggi in Sakura"
+            "value" : "Leggi nell’app"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラで読む"
+            "value" : "アプリで読む"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura에서 읽기"
+            "value" : "앱에서 읽기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lezen in Sakura"
+            "value" : "Lezen in app"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đọc trong Sakura"
+            "value" : "Đọc trong ứng dụng"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中阅读"
+            "value" : "在应用中阅读"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中閱讀"
+            "value" : "在 App 中閱讀"
           }
         }
       }

@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>Sakura Web Feed</string>
+			<string>Reader Web Feed</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
@@ -30,7 +30,7 @@
 		</dict>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>Sakura Deep Link</string>
+			<string>Reader Deep Link</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>sakura</string>
@@ -46,7 +46,7 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Sakura Web Feed</string>
+			<string>Reader Web Feed</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.tsubuzaki.SakuraRSS.petal</string>
 			<key>UTTypeTagSpecification</key>

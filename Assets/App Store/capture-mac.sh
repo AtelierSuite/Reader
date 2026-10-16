@@ -32,8 +32,8 @@ while (( $# > 0 )); do
 done
 
 build_dir=${TMPDIR:-/tmp}/sakura-capture-mac-build
-built_app=$build_dir/Build/Products/Debug/Sakura.app
-app_path=${TMPDIR:-/tmp}/sakura-capture-mac/Sakura.app
+built_app=$build_dir/Build/Products/Debug/Reader.app
+app_path=${TMPDIR:-/tmp}/sakura-capture-mac/Reader.app
 # Debug, for the launch arguments that set up each window; on the Mac it draws no
 # layout overlays.
 if ! $skip_build || [[ ! -d $built_app ]]; then

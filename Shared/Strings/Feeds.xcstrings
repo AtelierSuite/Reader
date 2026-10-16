@@ -10471,61 +10471,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In Sakura hinzufügen"
+            "value" : "In App hinzufügen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add in Sakura"
+            "value" : "Add in App"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouter dans Sakura"
+            "value" : "Ajouter dans l’app"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi in Sakura"
+            "value" : "Aggiungi nell’app"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakuraで追加"
+            "value" : "アプリで追加"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura에서 추가"
+            "value" : "앱에서 추가"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toevoegen in Sakura"
+            "value" : "Toevoegen in app"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm trong Sakura"
+            "value" : "Thêm trong ứng dụng"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中添加"
+            "value" : "在应用中添加"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Sakura 中加入"
+            "value" : "在 App 中加入"
           }
         }
       }
@@ -10536,61 +10536,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zum Hinzufügen in Sakura anmelden"
+            "value" : "Zum Hinzufügen in Reader anmelden"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sign in with Sakura to add"
+            "value" : "Sign in with Reader to add"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connectez-vous dans Sakura pour ajouter"
+            "value" : "Connectez-vous dans Reader pour ajouter"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Accedi in Sakura per aggiungere"
+            "value" : "Accedi in Reader per aggiungere"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "追加するにはSakuraでサインイン"
+            "value" : "追加するにはReaderでサインイン"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "추가하려면 Sakura에서 로그인"
+            "value" : "추가하려면 Reader에서 로그인"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Log in bij Sakura om toe te voegen"
+            "value" : "Log in bij Reader om toe te voegen"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đăng nhập bằng Sakura để thêm"
+            "value" : "Đăng nhập bằng Reader để thêm"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登录 Sakura 后添加"
+            "value" : "登录 Reader 后添加"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登入 Sakura 後加入"
+            "value" : "登入 Reader 後加入"
           }
         }
       }

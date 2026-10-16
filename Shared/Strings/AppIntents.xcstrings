@@ -1892,61 +1892,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffnet den angegebenen Inhalt in Sakura."
+            "value": "Öffnet den angegebenen Inhalt in Reader."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Opens the given piece of content in Sakura."
+            "value": "Opens the given piece of content in Reader."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvre le contenu donné dans Sakura."
+            "value": "Ouvre le contenu donné dans Reader."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apre il contenuto fornito in Sakura."
+            "value": "Apre il contenuto fornito in Reader."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "指定されたコンテンツを Sakura で開きます。"
+            "value": "指定されたコンテンツをReaderで開きます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "지정된 콘텐츠를 Sakura에서 엽니다."
+            "value": "지정된 콘텐츠를 Reader에서 엽니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Opent de opgegeven content in Sakura."
+            "value": "Opent de opgegeven content in Reader."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mở nội dung đã cho trong Sakura."
+            "value": "Mở nội dung đã cho trong Reader."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在 Sakura 中打开给定内容。"
+            "value": "在 Reader 中打开给定内容。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "在 Sakura 中開啟指定內容。"
+            "value": "在 Reader 中開啟指定內容。"
           }
         }
       }

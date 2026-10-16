@@ -169,11 +169,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4D41430A0000000000000009 /* Sakura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sakura.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D41430A0000000000000009 /* Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44484142FB09B0E003FDAD4 /* Hanami.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hanami.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45623E3300B95BD0083C0BD /* Bookmark Article.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Bookmark Article.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45EAA162F9FA36900EA7A54 /* Open Article.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Open Article.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E47D101B2F549605006081EF /* Sakura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sakura.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E47D101B2F549605006081EF /* Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E47D10342F54980E006081EF /* Add Feed.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Add Feed.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E47D10362F54980E006081EF /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		E47D104D2F549821006081EF /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -713,13 +713,13 @@
 		E47D101C2F549605006081EF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E47D101B2F549605006081EF /* Sakura.app */,
+				E47D101B2F549605006081EF /* Reader.app */,
 				E47D10342F54980E006081EF /* Add Feed.appex */,
 				E47D104D2F549821006081EF /* WidgetsExtension.appex */,
 				E45EAA162F9FA36900EA7A54 /* Open Article.appex */,
 				E44484142FB09B0E003FDAD4 /* Hanami.framework */,
 				E45623E3300B95BD0083C0BD /* Bookmark Article.appex */,
-				4D41430A0000000000000009 /* Sakura.app */,
+				4D41430A0000000000000009 /* Reader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -771,7 +771,7 @@
 			packageProductDependencies = (
 			);
 			productName = Sakura;
-			productReference = 4D41430A0000000000000009 /* Sakura.app */;
+			productReference = 4D41430A0000000000000009 /* Reader.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E44484132FB09B0E003FDAD4 /* Hanami */ = {
@@ -879,7 +879,7 @@
 				EA0E4A022FC0A00E003FDAD4 /* EnhancedNavigation */,
 			);
 			productName = SakuraRSS;
-			productReference = E47D101B2F549605006081EF /* Sakura.app */;
+			productReference = E47D101B2F549605006081EF /* Reader.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E47D10332F54980E006081EF /* Add Feed */ = {
@@ -1225,7 +1225,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
 				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS.MacDebug;
-				PRODUCT_NAME = Sakura;
+				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1269,7 +1269,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
 				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS;
-				PRODUCT_NAME = Sakura;
+				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1455,7 +1455,7 @@
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extensions/Open Article/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Open in Sakura";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open in App";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1490,7 +1490,7 @@
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extensions/Open Article/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Open in Sakura";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open in App";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1665,8 +1665,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is used to show local weather on the Today tab.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Sakura can save images in feed articles to your Photo Library.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Sakura uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Reader can save images in feed content to your Photo Library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Reader uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1678,7 +1678,7 @@
 				);
 				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1716,8 +1716,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is used to show local weather on the Today tab.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Sakura can save images in feed articles to your Photo Library.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Sakura uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Reader can save images in feed content to your Photo Library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Reader uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1729,7 +1729,7 @@
 				);
 				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

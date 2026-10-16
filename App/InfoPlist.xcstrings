@@ -1,133 +1,67 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "CFBundleName" : {
-      "comment" : "Bundle name",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Sakura"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サクラ"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "사쿠라"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sakura"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "樱花阅读器"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "櫻花閱讀器"
-          }
-        }
-      }
-    },
     "NSLocationWhenInUseUsageDescription" : {
       "comment" : "Privacy - Location When In Use Usage Description",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura verwendet deinen Standort, um auf dem Heute-Tab das lokale Wetter anzuzeigen."
+            "value" : "Reader verwendet deinen Standort, um auf dem Heute-Tab das lokale Wetter anzuzeigen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura uses your location to show local weather on the Today tab."
+            "value" : "Reader uses your location to show local weather on the Today tab."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura utilise votre position pour afficher la météo locale dans l’onglet Aujourd’hui."
+            "value" : "Reader utilise votre position pour afficher la météo locale dans l’onglet Aujourd’hui."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura usa la tua posizione per mostrare il meteo locale nella scheda Oggi."
+            "value" : "Reader usa la tua posizione per mostrare il meteo locale nella scheda Oggi."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラは「Today」タブにローカルの天気を表示するために位置情報を使用します。"
+            "value" : "Readerは「Today」タブにローカルの天気を表示するために位置情報を使用します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura는 Today 탭에 현지 날씨를 표시하기 위해 위치 정보를 사용합니다."
+            "value" : "Reader는 Today 탭에 현지 날씨를 표시하기 위해 위치 정보를 사용합니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura gebruikt je locatie om het lokale weer op het tabblad Vandaag te tonen."
+            "value" : "Reader gebruikt je locatie om het lokale weer op het tabblad Vandaag te tonen."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura sử dụng vị trí của bạn để hiển thị thời tiết tại địa phương trong tab Today."
+            "value" : "Reader sử dụng vị trí của bạn để hiển thị thời tiết tại địa phương trong tab Today."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 使用您的位置，在「Today」标签页中显示本地天气。"
+            "value" : "Reader 使用您的位置，在「Today」标签页中显示本地天气。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 使用您的位置，在「Today」分頁中顯示本地天氣。"
+            "value" : "Reader 使用您的位置，在「Today」分頁中顯示本地天氣。"
           }
         }
       }
@@ -139,61 +73,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura kann Bilder in deiner Fotomediathek speichern."
+            "value" : "Reader kann Bilder in deiner Fotomediathek speichern."
           }
         },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Sakura can save images in feed articles to your Photo Library."
+            "state" : "translated",
+            "value" : "Reader can save images in feed content to your Photo Library."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura peut enregistrer des images dans votre photothèque."
+            "value" : "Reader peut enregistrer des images dans votre photothèque."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura può salvare immagini nella tua libreria foto."
+            "value" : "Reader può salvare immagini nella tua libreria foto."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラは画像を写真ライブラリに保存できます。"
+            "value" : "Readerは画像を写真ライブラリに保存できます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura는 이미지를 사진 보관함에 저장할 수 있습니다."
+            "value" : "Reader는 이미지를 사진 보관함에 저장할 수 있습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura kan afbeeldingen uit feedcontent in je fotobibliotheek bewaren."
+            "value" : "Reader kan afbeeldingen uit feedcontent in je fotobibliotheek bewaren."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura có thể lưu hình ảnh vào Thư viện ảnh của bạn."
+            "value" : "Reader có thể lưu hình ảnh vào Thư viện ảnh của bạn."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 可以将图片保存到您的照片图库。"
+            "value" : "Reader 可以将图片保存到您的照片图库。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 可以將圖片儲存到你的照片圖庫。"
+            "value" : "Reader 可以將圖片儲存到你的照片圖庫。"
           }
         }
       }
@@ -205,61 +139,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura verwendet die geräteinterne Spracherkennung, um heruntergeladene Podcast-Episoden zu transkribieren. Die Audioverarbeitung erfolgt lokal und verlässt Ihr Gerät nicht."
+            "value" : "Reader verwendet die geräteinterne Spracherkennung, um heruntergeladene Podcast-Episoden zu transkribieren. Die Audioverarbeitung erfolgt lokal und verlässt Ihr Gerät nicht."
           }
         },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Sakura uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device."
+            "state" : "translated",
+            "value" : "Reader uses on-device speech recognition to transcribe podcast episodes you download. Audio is processed locally and never leaves your device."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura utilise la reconnaissance vocale sur l'appareil pour transcrire les épisodes de podcast que vous téléchargez. L'audio est traité localement et ne quitte jamais votre appareil."
+            "value" : "Reader utilise la reconnaissance vocale sur l'appareil pour transcrire les épisodes de podcast que vous téléchargez. L'audio est traité localement et ne quitte jamais votre appareil."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura utilizza il riconoscimento vocale sul dispositivo per trascrivere gli episodi podcast scaricati. L'audio viene elaborato localmente e non lascia mai il dispositivo."
+            "value" : "Reader utilizza il riconoscimento vocale sul dispositivo per trascrivere gli episodi podcast scaricati. L'audio viene elaborato localmente e non lascia mai il dispositivo."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラはダウンロードしたポッドキャストエピソードの文字起こしにデバイス上の音声認識を使用します。音声はデバイス上でローカルに処理され、外部に送信されることはありません。"
+            "value" : "Readerはダウンロードしたポッドキャストエピソードの文字起こしにデバイス上の音声認識を使用します。音声はデバイス上でローカルに処理され、外部に送信されることはありません。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura는 다운로드한 팟캐스트 에피소드를 전사하기 위해 기기 내 음성 인식을 사용합니다. 오디오는 로컬에서 처리되며 기기를 떠나지 않습니다."
+            "value" : "Reader는 다운로드한 팟캐스트 에피소드를 전사하기 위해 기기 내 음성 인식을 사용합니다. 오디오는 로컬에서 처리되며 기기를 떠나지 않습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura gebruikt spraakherkenning op het apparaat om podcastafleveringen die je downloadt te transcriberen. De audio wordt lokaal verwerkt en verlaat je apparaat nooit."
+            "value" : "Reader gebruikt spraakherkenning op het apparaat om podcastafleveringen die je downloadt te transcriberen. De audio wordt lokaal verwerkt en verlaat je apparaat nooit."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura sử dụng nhận dạng giọng nói trên thiết bị để chép lời các tập podcast bạn tải xuống. Âm thanh được xử lý cục bộ và không bao giờ rời khỏi thiết bị của bạn."
+            "value" : "Reader sử dụng nhận dạng giọng nói trên thiết bị để chép lời các tập podcast bạn tải xuống. Âm thanh được xử lý cục bộ và không bao giờ rời khỏi thiết bị của bạn."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 使用设备端语音识别来转录您下载的播客单集。音频在本地处理，不会离开您的设备。"
+            "value" : "Reader 使用设备端语音识别来转录您下载的播客单集。音频在本地处理，不会离开您的设备。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 使用裝置端語音辨識來轉錄您下載的Podcast單集。音訊在本機處理，不會離開您的裝置。"
+            "value" : "Reader 使用裝置端語音辨識來轉錄您下載的Podcast單集。音訊在本機處理，不會離開您的裝置。"
           }
         }
       }
@@ -329,66 +263,66 @@
         }
       }
     },
-    "Sakura Web Feed" : {
+    "Reader Web Feed" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura Web-Feed"
+            "value" : "Reader Web-Feed"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura Web Feed"
+            "value" : "Reader Web Feed"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Flux web Sakura"
+            "value" : "Flux web Reader"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed web Sakura"
+            "value" : "Feed web Reader"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サクラWebフィード"
+            "value" : "Reader Webフィード"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 웹 피드"
+            "value" : "Reader 웹 피드"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura-webfeed"
+            "value" : "Reader-webfeed"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nguồn cấp web Sakura"
+            "value" : "Nguồn cấp web Reader"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 网页订阅源"
+            "value" : "Reader 网页订阅源"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sakura 網頁訂閱源"
+            "value" : "Reader 網頁訂閱源"
           }
         }
       }
