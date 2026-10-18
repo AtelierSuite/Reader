@@ -14,11 +14,14 @@ extension SakuraRSSApp {
     private func handleSakuraScheme(_ url: URL) {
         guard let host = url.host else { return }
         if handleNavigationHost(host, url: url) { return }
+        #if DEBUG
         if handleWeatherSimulationHost(host, url: url) { return }
         if handleForceFlagHost(host) { return }
         handleAdminHost(host)
+        #endif
     }
 
+    #if DEBUG
     private func handleWeatherSimulationHost(_ host: String, url: URL) -> Bool {
         switch host {
         case "stormchasers":
@@ -147,6 +150,7 @@ extension SakuraRSSApp {
             defaults.removeObject(forKey: key)
         }
     }
+    #endif
 
     /// Wipes app sandbox directories and tmp, preserving the feeds database in the group container.
     func wipeAllCachesAndData() {
