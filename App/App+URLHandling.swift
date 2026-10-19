@@ -35,6 +35,7 @@ extension SakuraRSSApp {
         }
         return true
     }
+    #endif
 
     private func handleNavigationHost(_ host: String, url: URL) -> Bool {
         switch host {
@@ -58,6 +59,7 @@ extension SakuraRSSApp {
         return true
     }
 
+    #if DEBUG
     private func handleForceFlagHost(_ host: String) -> Bool {
         switch host {
         case "delorean":
