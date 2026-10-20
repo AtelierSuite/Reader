@@ -18,7 +18,7 @@ extension HomeSectionView {
     var title: String {
         switch source {
         case .section(let section):
-            return section?.localizedTitle ?? HomeSection.all.localizedTitle
+            return section?.localizedTitle ?? String(localized: "Location.AllContent", table: "Browser")
         case .list(let list):
             return list.name
         case .topic(let name):

@@ -7,7 +7,7 @@ struct ClassicTabView: View {
 
     @Environment(FeedManager.self) var feedManager
     @AppStorage("YouTube.OpenMode") var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
-    @AppStorage("App.ClassicTabs.SelectedTab") var selectedTab: ClassicTab = .following
+    @AppStorage("App.ClassicTabs.SelectedTab") var selectedTab: ClassicTab = .home
     @State var paths: [ClassicTab: NavigationPath] = [:]
     @State private var addFeedURL = ""
     @State private var isPresentingAddFeed = false
@@ -20,6 +20,11 @@ struct ClassicTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
+            Tab("Tabs.Home", systemImage: "newspaper", value: ClassicTab.home) {
+                ClassicTabStack(path: path(for: .home)) {
+                    ClassicHomePage()
+                }
+            }
             Tab("Tabs.Feeds", systemImage: "dot.radiowaves.up.forward", value: ClassicTab.following) {
                 ClassicTabStack(path: path(for: .following)) {
                     FollowingPage(followingNavigationNamespace: followingZoom)

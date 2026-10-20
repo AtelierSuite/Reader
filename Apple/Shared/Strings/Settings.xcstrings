@@ -8849,61 +8849,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeigt Abonniert, Lesezeichen, Entdecken und Profil in einer Tableiste statt der Browser-Oberfläche."
+            "value" : "Zeigt Startseite, Abonniert, Lesezeichen, Entdecken und Profil in einer Tableiste statt der Browser-Oberfläche."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shows Following, Bookmarks, Discover, and Profile in a tab bar instead of the browser."
+            "value" : "Shows Home, Following, Bookmarks, Discover, and Profile in a tab bar instead of the browser."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Affiche Abonnements, Favoris, Découvrir et Profil dans une barre d’onglets au lieu du navigateur."
+            "value" : "Affiche Accueil, Abonnements, Favoris, Découvrir et Profil dans une barre d’onglets au lieu du navigateur."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra Seguiti, Segnalibri, Scopri e Profilo in una barra dei pannelli anziché nel browser."
+            "value" : "Mostra Home, Seguiti, Segnalibri, Scopri e Profilo in una barra dei pannelli anziché nel browser."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ブラウザの代わりに、フォロー中・ブックマーク・発見・マイページをタブバーで表示します。"
+            "value" : "ブラウザの代わりに、ホーム・フォロー中・ブックマーク・発見・マイページをタブバーで表示します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "브라우저 대신 탭 막대에 팔로잉, 북마크, 탐색, 프로필을 표시합니다."
+            "value" : "브라우저 대신 탭 막대에 홈, 팔로잉, 북마크, 탐색, 프로필을 표시합니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toont Volgend, Bladwijzers, Ontdekken en Profiel in een tabbalk in plaats van de browser."
+            "value" : "Toont Start, Volgend, Bladwijzers, Ontdekken en Profiel in een tabbalk in plaats van de browser."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hiển thị Đang theo dõi, Đánh dấu, Khám phá và Hồ sơ trong thanh tab thay vì trình duyệt."
+            "value" : "Hiển thị Trang chủ, Đang theo dõi, Đánh dấu, Khám phá và Hồ sơ trong thanh tab thay vì trình duyệt."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在标签栏中显示“关注”“收藏”“发现”和“个人中心”，而不是浏览器。"
+            "value" : "在标签栏中显示“首页”“关注”“收藏”“发现”和“个人中心”，而不是浏览器。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在標籤列中顯示「追蹤中」「書籤」「探索」和「個人中心」，而非瀏覽器。"
+            "value" : "在標籤列中顯示「首頁」「追蹤中」「書籤」「探索」和「個人中心」，而非瀏覽器。"
           }
         }
       }

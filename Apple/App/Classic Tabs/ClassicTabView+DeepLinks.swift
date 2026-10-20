@@ -39,10 +39,10 @@ extension ClassicTabView {
     }
 
     /// Profile runs its own settings stack, so content opened from outside
-    /// lands on Following instead.
+    /// lands on Home instead.
     private func pushOntoNavigableTab<Value: Hashable>(_ value: Value) {
         if selectedTab == .profile {
-            selectedTab = .following
+            selectedTab = .home
         }
         var path = paths[selectedTab] ?? NavigationPath()
         path.append(value)
