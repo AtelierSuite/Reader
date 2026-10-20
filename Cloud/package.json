@@ -4,9 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "cf dev",
-    "deploy:staging": "cf deploy --mode staging",
-    "deploy:production": "cf deploy --mode production",
+    "dev": "cf dev --mode development",
+    "deploy": "cf deploy",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },

@@ -7,37 +7,34 @@ The server side of Sakura: one Cloudflare Worker that asks Workers AI's Clef wha
 ```bash
 npm install && npm test
 npm run dev
-npm run deploy:staging
-npm run deploy:production
+npm run deploy
 ```
 
-CI tests every push and deploys on published GitHub Releases: a prerelease goes to staging (`sakura-cloud-beta`), a full release to production (`sakura-cloud`), using a `CLOUDFLARE_API_TOKEN` secret scoped to Edit Cloudflare Workers.
-
-The deploy jobs run in the `staging` and `production` GitHub Environments. Each environment holds the vars below as Variables and the secrets below as Secrets; CI exports both to `cf deploy`, which reads the vars in `cloudflare.config.ts` and uploads the secrets with `--secrets-file`.
+Cloudflare Workers Builds deploys the `sakura-cloud` Worker from the `Cloud` folder of this repository on every push to `main` that touches `Cloud/`, after `npm run typecheck` and `npm test` pass. Other branches only run the checks.
 
 ## Settings
 
-Plain vars are read from the environment by `cloudflare.config.ts` at deploy time, and are empty until set. An endpoint that needs a missing setting answers 503 rather than running unchecked.
+Plain vars are set in `cloudflare.config.ts`. An endpoint that needs a missing setting answers 503 rather than running unchecked.
 
 | Var | Meaning |
 | --- | --- |
-| `APPLE_TEAM_ID` | The 10-character Apple team ID |
+| `APPLE_TEAM_ID` | The 10-character Apple team ID, `YYM4Z6MU8F` |
 | `APP_BUNDLE_ID` | The app's bundle ID, `com.tsubuzaki.SakuraRSS` |
-| `APP_ATTEST_ENVIRONMENT` | `development` for debug builds, `production` for TestFlight and the App Store |
-| `TOKENS_PER_MINUTE` | Clef tokens a device may spend in any rolling 60 seconds, for example `20000` |
+| `APP_ATTEST_ENVIRONMENT` | `development` under `npm run dev`, `production` when deployed |
+| `TOKENS_PER_MINUTE` | Clef tokens a device may spend in any rolling 60 seconds, `20000` |
 
 The limit is a default. A device whose Durable Object has a row in its `limits` table (`kind` is `tokens`, `per_minute` a whole number) uses that instead, so one device can be given more or fewer tokens without a deploy, and `0` shuts a device out. Each device's Durable Object is named by its App Attest key ID in base64url, and `limits` is its only SQL table: the key, the counter, and the spent tokens stay in its key-value storage.
 
 For example, `INSERT OR REPLACE INTO limits (kind, per_minute) VALUES ('tokens', 200000)` gives a device 200,000 tokens a minute.
 
-Outside CI, secrets are uploaded with `npm run deploy:staging -- --secrets-file secrets.json` (or `deploy:production`), or kept in a gitignored `.dev.vars` copied from `.dev.vars.example`:
+Secrets are set on the Worker in the Cloudflare dashboard, or with `npm run deploy -- --secrets-file secrets.json`, and deploys keep them. For `npm run dev` they are kept in a gitignored `.dev.vars` copied from `.dev.vars.example`:
 
 | Secret | Where it comes from |
 | --- | --- |
 | `CHALLENGE_SECRET` | Any long random string; signs attestation challenges |
 | `SKIP_APP_ATTEST` | `true` to accept unsigned requests to `localhost`, so a debug build in Simulator can call `npm run dev`. Ignored on any other host; never set it in a deploy |
 
-`.dev.vars.example` also sets `TOKENS_PER_MINUTE`, since `npm run dev` has no deploy environment to read it from. Clef runs through the Worker's `AI` binding, which needs no key, but even `npm run dev` calls Workers AI on the logged-in account and is billed.
+Clef runs through the Worker's `AI` binding, which needs no key, but even `npm run dev` calls Workers AI on the logged-in account and is billed.
 
 ## Endpoints
 
