@@ -9,22 +9,11 @@ struct AppearanceSettingsView: View {
     @AppStorage("Search.DisplayStyle") private var searchDisplayStyle: FeedDisplayStyle = .inbox
     @AppStorage("Display.UnreadBadgeMode") private var unreadBadgeMode: UnreadBadgeMode = .none
     @AppStorage("Display.ShowStatusBar") private var showStatusBar: Bool = true
-    @AppStorage("Display.FeedBackground") private var feedBackgroundEnabled: Bool = true
     @AppStorage(ArticleWidthStyle.storageKey) private var articleWidthStyle: ArticleWidthStyle = .default
     @AppStorage(AppDisplayMode.storageKey) private var displayMode: AppDisplayMode = .browser
 
     var body: some View {
         List {
-            #if !os(visionOS)
-            Section {
-                ThemePreviewSection()
-                Toggle(String(localized: "FeedBackground", table: "Settings"),
-                       isOn: $feedBackgroundEnabled)
-            } header: {
-                Text(String(localized: "Section.Theme", table: "Settings"))
-            }
-            #endif
-
             if ClassicTabs.isAvailable {
                 Section {
                     Picker(String(localized: "DisplayMode", table: "Settings"), selection: $displayMode) {

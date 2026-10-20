@@ -24,7 +24,6 @@ extension EnvironmentValues {
 #if !os(visionOS) && !os(macOS)
 struct SakuraBackground: ViewModifier {
 
-    @AppStorage("Display.FeedBackground") private var feedBackgroundEnabled: Bool = true
     @Environment(\.feedBackgroundColors) private var feedColors
     @Environment(\.isSakuraBackgroundDisabled) private var isDisabled
 
@@ -46,7 +45,7 @@ struct SakuraBackground: ViewModifier {
                             endPoint: .bottom
                         )
                     }
-                    if feedBackgroundEnabled, !isDisabled, !feedColors.isEmpty {
+                    if !isDisabled, !feedColors.isEmpty {
                         FeedHeaderGradientView(colors: feedColors)
                             .frame(height: 360)
                     }
