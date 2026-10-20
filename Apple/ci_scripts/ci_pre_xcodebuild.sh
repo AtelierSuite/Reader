@@ -1,7 +1,7 @@
 #!/bin/sh
 set -euo pipefail
 
-PLIST="$CI_PRIMARY_REPOSITORY_PATH/App/FeatureKeys.plist"
+PLIST="$CI_PRIMARY_REPOSITORY_PATH/Apple/App/FeatureKeys.plist"
 PREFIX="FEATURE_KEY_"
 
 matching=$(env | grep -E "^${PREFIX}" || true)
@@ -16,7 +16,7 @@ else
     done
 fi
 
-ADDRESS_FILE="$CI_PRIMARY_REPOSITORY_PATH/Hanami/Sakura Cloud/SakuraCloudAddress.swift"
+ADDRESS_FILE="$CI_PRIMARY_REPOSITORY_PATH/Apple/Hanami/Sakura Cloud/SakuraCloudAddress.swift"
 
 if [ -z "${SAKURA_CLOUD_URL:-}" ]; then
     echo "SAKURA_CLOUD_URL is not set; content refinement with SakuraCloud is off in this build."
