@@ -11,7 +11,7 @@ struct AppearanceSettingsView: View {
     @AppStorage("Display.ShowStatusBar") private var showStatusBar: Bool = true
     @AppStorage("Display.FeedBackground") private var feedBackgroundEnabled: Bool = true
     @AppStorage(ArticleWidthStyle.storageKey) private var articleWidthStyle: ArticleWidthStyle = .default
-    @AppStorage(ClassicTabs.storageKey) private var usesClassicTabs: Bool = false
+    @AppStorage(AppDisplayMode.storageKey) private var displayMode: AppDisplayMode = .browser
 
     var body: some View {
         List {
@@ -27,12 +27,16 @@ struct AppearanceSettingsView: View {
 
             if ClassicTabs.isAvailable {
                 Section {
-                    Toggle(String(localized: "ClassicTabs", table: "Settings"),
-                           isOn: $usesClassicTabs)
+                    Picker(String(localized: "DisplayMode", table: "Settings"), selection: $displayMode) {
+                        ForEach(AppDisplayMode.allCases) { mode in
+                            Text(mode.localizedTitle)
+                                .tag(mode)
+                        }
+                    }
                 } header: {
                     Text(String(localized: "Section.Navigation", table: "Settings"))
                 } footer: {
-                    Text(String(localized: "ClassicTabs.Footer", table: "Settings"))
+                    Text(String(localized: "DisplayMode.Footer", table: "Settings"))
                 }
             }
 

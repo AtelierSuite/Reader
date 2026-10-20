@@ -1,8 +1,6 @@
 import SwiftUI
 
 enum ClassicTabs {
-    static let storageKey = "App.UsesClassicTabs"
-
     @MainActor static var isAvailable: Bool {
         UIDevice.current.userInterfaceIdiom == .phone
     }

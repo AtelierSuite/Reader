@@ -7,7 +7,7 @@ struct MainTabView: View {
     @Environment(FeedManager.self) var feedManager
     @AppStorage("Onboarding.Completed") private var onboardingCompleted: Bool = false
     @AppStorage(WhatsNewRelease.lastShownVersionKey) private var whatsNewLastShownVersion: String = ""
-    @AppStorage(ClassicTabs.storageKey) private var usesClassicTabs: Bool = false
+    @AppStorage(AppDisplayMode.storageKey) private var displayMode: AppDisplayMode = .browser
     @Binding var pendingFeedURL: String?
     @Binding var pendingArticleID: Int64?
     @Binding var pendingOpenRequest: OpenArticleRequest?
@@ -46,7 +46,7 @@ struct MainTabView: View {
 
     @ViewBuilder
     private var rootView: some View {
-        if usesClassicTabs && ClassicTabs.isAvailable {
+        if displayMode == .classic && ClassicTabs.isAvailable {
             ClassicTabView(
                 pendingFeedURL: $pendingFeedURL,
                 pendingArticleID: $pendingArticleID,
