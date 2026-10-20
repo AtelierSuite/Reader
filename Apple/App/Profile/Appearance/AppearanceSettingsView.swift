@@ -40,15 +40,17 @@ struct AppearanceSettingsView: View {
                 } label: {
                     Text(String(localized: "DefaultDisplayStyle", table: "Settings"))
                 }
-                Picker(selection: $searchDisplayStyle) {
-                    Text(String(localized: "Style.Inbox", table: "Articles"))
-                        .tag(FeedDisplayStyle.inbox)
-                    Text(String(localized: "Style.Compact", table: "Articles"))
-                        .tag(FeedDisplayStyle.compact)
-                    Text(String(localized: "Style.Feed", table: "Articles"))
-                        .tag(FeedDisplayStyle.feed)
-                } label: {
-                    Text(String(localized: "SearchDisplayStyle", table: "Settings"))
+                if ClassicTabs.isAvailable && displayMode == .classic {
+                    Picker(selection: $searchDisplayStyle) {
+                        Text(String(localized: "Style.Inbox", table: "Articles"))
+                            .tag(FeedDisplayStyle.inbox)
+                        Text(String(localized: "Style.Compact", table: "Articles"))
+                            .tag(FeedDisplayStyle.compact)
+                        Text(String(localized: "Style.Feed", table: "Articles"))
+                            .tag(FeedDisplayStyle.feed)
+                    } label: {
+                        Text(String(localized: "SearchDisplayStyle", table: "Settings"))
+                    }
                 }
             } header: {
                 Text(String(localized: "Section.DisplayStyles", table: "Settings"))
