@@ -1,6 +1,6 @@
 import { checkChallenge, issueChallenge, verifyAttestation } from "./attest";
 import { base64Decode, base64UrlEncode } from "./bytes";
-import { JevError, askJev, estimateTokens, parseClassification } from "./classify";
+import { ClefError, askClef, estimateTokens, parseClassification } from "./classify";
 import { Device } from "./device";
 import { type Env, appId, limit } from "./env";
 
@@ -97,8 +97,7 @@ async function attest(request: Request, env: Env): Promise<Response> {
 
 async function classify(request: Request, env: Env): Promise<Response> {
   const most = limit(env.TOKENS_PER_MINUTE);
-  if (most === null || !env.JEV_API_KEY) return failure(503, "not configured");
-  const key = env.JEV_API_KEY;
+  if (most === null) return failure(503, "not configured");
   const bytes = await body(request);
   if (!bytes) return failure(413, "request too large");
   const classification = parseClassification(parse(bytes));
@@ -112,11 +111,11 @@ async function classify(request: Request, env: Env): Promise<Response> {
     return failure(429, "token limit reached", { ...remaining, "Retry-After": String(reservation.retryAfter) });
   }
   try {
-    const verdict = await askJev(classification, key);
+    const verdict = await askClef(classification, env.AI);
     const left = await stub.settle(reservation.id, verdict.tokens, most);
     return json({ probabilities: verdict.probabilities, remaining: left }, 200, { "X-Sakura-Remaining": String(left) });
   } catch (error) {
-    const spent = error instanceof JevError ? error.tokens : 0;
+    const spent = error instanceof ClefError ? error.tokens : 0;
     if (spent > 0) await stub.settle(reservation.id, spent, most);
     else await stub.release(reservation.id);
     return failure(502, (error as Error).message);

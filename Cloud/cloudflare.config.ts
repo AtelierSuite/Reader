@@ -23,6 +23,7 @@ export default defineConfig((ctx) => {
 				APP_BUNDLE_ID: text("APP_BUNDLE_ID"),
 				APP_ATTEST_ENVIRONMENT: text("APP_ATTEST_ENVIRONMENT"),
 				TOKENS_PER_MINUTE: text("TOKENS_PER_MINUTE"),
+				AI: bindings.ai(),
 				DEVICE: bindings.durableObject({
 					worker: name,
 					exportName: "Device",

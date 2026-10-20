@@ -2,12 +2,12 @@ import type { Device } from "./device";
 
 export interface Env {
   DEVICE: DurableObjectNamespace<Device>;
+  AI: Ai;
   APPLE_TEAM_ID: string;
   APP_BUNDLE_ID: string;
   APP_ATTEST_ENVIRONMENT: string;
   TOKENS_PER_MINUTE: string;
   CHALLENGE_SECRET?: string;
-  JEV_API_KEY?: string;
   SKIP_APP_ATTEST?: string;
 }
 

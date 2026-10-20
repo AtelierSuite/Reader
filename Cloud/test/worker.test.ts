@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { base64Encode } from "../src/bytes";
 import type { Env } from "../src/env";
 import worker from "../src/index";
-import { Phone, call } from "./client";
+import { Phone, call, fakes } from "./client";
 
 const article = {
   title: "The quiet return of the paper map",
@@ -17,20 +17,26 @@ const article = {
   candidates: [1, 3],
 };
 
-function jev(nouls: { [text: string]: number }, status = 200, usage = { input_tokens: 300, output_tokens: 4 }) {
-  return vi.spyOn(globalThis, "fetch").mockImplementation(async (_, init) => {
-    const noul = nouls[JSON.parse(init!.body as string).state.text];
-    return new Response(JSON.stringify({
-      model: "jev-1.13.0",
-      answers: noul === undefined ? {} : { meaningfulness_check: { type: "noul", noul } },
+function clef(contents: { [text: string]: number }, usage = { input_tokens: 300, output_tokens: 4 }, failing = false) {
+  const run = vi.fn(async (_: string, inputs: { state: { text: string } }) => {
+    if (failing) throw new Error("clef is down");
+    const content = contents[inputs.state.text];
+    return {
+      model: "clef",
+      answers: content === undefined ? {} : { role: { type: "choice", probabilities: { content: content / 2, lead_in: content / 4, heading: content / 8, caption: content / 8, promo: 1 - content } } },
       usage,
-    }), { status });
+    };
   });
+  fakes.AI = { run } as unknown as Ai;
+  return run;
 }
 
 const [, newsletter, , share] = article.blocks;
 
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.restoreAllMocks();
+  delete fakes.AI;
+});
 
 describe("routing", () => {
   it("serves health, redirects home, and rejects the rest", async () => {
@@ -46,7 +52,6 @@ describe("routing", () => {
     const challenge = new Request("https://sakura.test/v1/challenge", { method: "POST" });
     expect((await call(challenge, { CHALLENGE_SECRET: "" })).status).toBe(503);
     const classify = () => new Request("https://sakura.test/v1/classify", { method: "POST", body: JSON.stringify(article) });
-    expect((await call(classify(), { JEV_API_KEY: "" })).status).toBe(503);
     expect((await call(classify(), { TOKENS_PER_MINUTE: "" })).status).toBe(503);
   });
 
@@ -79,7 +84,7 @@ describe("signing", () => {
 
   it("refuses a replayed assertion", async () => {
     const phone = await Phone.create();
-    jev({ [newsletter]: 0.1, [share]: 0.05 });
+    clef({ [newsletter]: 0.1, [share]: 0.05 });
     const body = new TextEncoder().encode(JSON.stringify(article));
     const assertion = await phone.assertion(body);
     expect((await phone.post("/v1/classify", article, { assertion })).status).toBe(200);
@@ -87,10 +92,10 @@ describe("signing", () => {
   });
 
   it("skips App Attest only on localhost when told to", async () => {
-    jev({ [newsletter]: 0.1, [share]: 0.05 });
+    clef({ [newsletter]: 0.1, [share]: 0.05 });
     const post = (host: string) => worker.fetch(
       new Request(`http://${host}/v1/classify`, { method: "POST", body: JSON.stringify(article) }),
-      { ...env, SKIP_APP_ATTEST: "true" } as Env,
+      { ...env, ...fakes, SKIP_APP_ATTEST: "true" } as Env,
     );
     expect((await post("localhost:8787")).status).toBe(200);
     expect((await post("sakura.test")).status).toBe(401);
@@ -98,29 +103,28 @@ describe("signing", () => {
 });
 
 describe("classifying", () => {
-  it("asks Jev about each candidate on its own and returns the answers in order", async () => {
+  it("asks Clef the role of each candidate on its own and returns the content roles' share in order", async () => {
     const phone = await Phone.create();
-    const fetch = jev({ [share]: 0.02, [newsletter]: 0.07 });
+    const run = clef({ [share]: 0.02, [newsletter]: 0.08 });
     const response = await phone.post("/v1/classify", article);
-    expect(await response.json()).toEqual({ probabilities: [0.07, 0.02], remaining: 1392 });
+    expect(await response.json()).toEqual({ probabilities: [0.08, 0.02], remaining: 1392 });
     expect(response.headers.get("X-Sakura-Remaining")).toBe("1392");
-    expect(fetch).toHaveBeenCalledTimes(2);
-    expect(fetch.mock.calls[0][0]).toBe("https://api.typesafe.ai/v1/systemone");
-    const sent = fetch.mock.calls.map((call) => JSON.parse(call[1]!.body as string));
+    expect(run).toHaveBeenCalledTimes(2);
+    expect(run.mock.calls[0][0]).toBe("@cf/cloudflare/clef");
+    const sent = run.mock.calls.map((call) => call[1] as unknown as { model: string; state: unknown; questions: { [id: string]: { type: string; criteria: object } } });
     expect(sent.map((request) => request.state)).toEqual([{ text: newsletter }, { text: share }]);
-    expect(sent[0].model).toBe("jev-latest");
-    expect(Object.keys(sent[0].questions)).toEqual(["meaningfulness_check"]);
-    expect(sent[0].questions.meaningfulness_check.type).toBe("noul");
+    expect(sent[0].model).toBe("clef");
+    expect(Object.keys(sent[0].questions)).toEqual(["role"]);
+    expect(sent[0].questions.role.type).toBe("choice");
+    expect(Object.keys(sent[0].questions.role.criteria)).toEqual(["content", "lead_in", "heading", "caption", "credit", "promo", "navigation", "meta"]);
   });
 
-  it("gives back the tokens of a failed call but keeps those Jev spent", async () => {
+  it("gives back the tokens of a failed call but keeps those Clef spent", async () => {
     const phone = await Phone.create();
-    jev({}, 500);
+    clef({}, undefined, true);
     expect((await phone.post("/v1/classify", article)).status).toBe(502);
-    vi.restoreAllMocks();
     expect(await (await phone.post("/v1/limits", {})).json()).toEqual({ tokens: { limit: 2000, used: 0, remaining: 2000 } });
-    vi.restoreAllMocks();
-    jev({ [newsletter]: 0.5 });
+    clef({ [newsletter]: 0.5 });
     expect((await phone.post("/v1/classify", article)).status).toBe(502);
     expect(await (await phone.post("/v1/limits", {})).json()).toEqual({ tokens: { limit: 2000, used: 304, remaining: 1696 } });
   });
@@ -143,7 +147,7 @@ describe("classifying", () => {
 describe("limits", () => {
   it("stops at the per-minute token limit and says when to retry", async () => {
     const phone = await Phone.create();
-    jev({ [newsletter]: 0.1, [share]: 0.1 }, 200, { input_tokens: 450, output_tokens: 0 });
+    clef({ [newsletter]: 0.1, [share]: 0.1 }, { input_tokens: 450, output_tokens: 0 });
     expect((await phone.post("/v1/classify", article)).status).toBe(200);
     expect((await phone.post("/v1/classify", article)).status).toBe(200);
     const over = await phone.post("/v1/classify", article);
@@ -194,7 +198,7 @@ describe("limits", () => {
   it("keeps each device's tokens apart", async () => {
     const phone = await Phone.create();
     const other = await Phone.create();
-    jev({ [newsletter]: 0.1, [share]: 0.1 }, 200, { input_tokens: 950, output_tokens: 0 });
+    clef({ [newsletter]: 0.1, [share]: 0.1 }, { input_tokens: 950, output_tokens: 0 });
     expect((await phone.post("/v1/classify", article)).status).toBe(200);
     expect((await other.post("/v1/classify", article)).status).toBe(200);
   });

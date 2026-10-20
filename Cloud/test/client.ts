@@ -77,6 +77,8 @@ export class Phone {
   }
 }
 
+export const fakes: Partial<Env> = {};
+
 export function call(request: Request, overrides: Partial<Env> = {}): Promise<Response> {
-  return worker.fetch(request, { ...env, ...overrides } as Env);
+  return worker.fetch(request, { ...env, ...fakes, ...overrides } as Env);
 }

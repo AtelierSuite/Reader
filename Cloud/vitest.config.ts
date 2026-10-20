@@ -14,7 +14,6 @@ export default defineConfig({
           APP_ATTEST_ENVIRONMENT: "development",
           TOKENS_PER_MINUTE: "2000",
           CHALLENGE_SECRET: "test-secret",
-          JEV_API_KEY: "jev-test",
         },
       },
     }),

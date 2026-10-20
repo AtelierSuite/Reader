@@ -1,7 +1,7 @@
-export const JEV_URL = "https://api.typesafe.ai/v1/systemone";
-export const JEV_MODEL = "jev-latest";
-const JEV_TIMEOUT_MS = 15_000;
-const JEV_CONCURRENCY = 6;
+export const CLEF_MODEL = "@cf/cloudflare/clef";
+const CLEF_TIMEOUT_MS = 15_000;
+const CLEF_CONCURRENCY = 6;
+const CONTENT_ROLES = ["content", "lead_in", "heading", "caption"];
 
 const MOST_BLOCKS = 400;
 const LONGEST_BLOCK = 4000;
@@ -56,60 +56,60 @@ export function estimateTokens(classification: Classification): number {
   return classification.candidates.reduce((total, index) => total + blockTokens(classification.blocks[index]), 0);
 }
 
-export class JevError extends Error {
+export class ClefError extends Error {
   constructor(message: string, readonly tokens: number) {
     super(message);
   }
 }
 
-export function jevRequest(text: string): object {
+export function clefRequest(text: string): object {
   return {
-    model: JEV_MODEL,
+    model: "clef",
     state: { text },
     questions: {
-      meaningfulness_check: {
-        type: "noul",
-        instructions: "Is this a meaningful part of an article?",
+      role: {
+        type: "choice",
+        instructions: "What role does `text` play on this article page?",
         criteria: {
-          true: "The text, Markdown, or HTML reflect a meaningful part of an article that is part of the article's content.",
-          false: "The text, Markdown, or HTML do not contribute to the article contents, and/or are noise that is part of the article's UI.",
+          content: "Article prose, a quote, or a list item that is part of the article's content.",
+          lead_in: "A short line that introduces what follows, such as a quote, a list, or an excerpt, often ending with a colon.",
+          heading: "A heading or subheading within the article body, including a product or section name.",
+          caption: "A caption describing an image or video in the article.",
+          credit: "A photo, image, or video credit naming a photographer, agency, or company.",
+          promo: "A promotion, sponsorship, newsletter, subscription, app, follow, or share prompt.",
+          navigation: "Links to related or other articles, tags, site navigation, or a comments prompt.",
+          meta: "A byline, dateline, label such as PRESS RELEASE or UPDATE, a media download section, or a repeat of the whole article.",
         },
       },
     },
   };
 }
 
-async function askAbout(text: string, apiKey: string): Promise<{ probability: number; tokens: number }> {
-  const response = await fetch(JEV_URL, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify(jevRequest(text)),
-    signal: AbortSignal.timeout(JEV_TIMEOUT_MS),
-  });
-  if (!response.ok) throw new Error(`jev returned ${response.status}`);
-  const body = (await response.json()) as {
-    answers?: { meaningfulness_check?: { noul?: unknown } };
+async function askAbout(text: string, ai: Ai): Promise<{ probability: number; tokens: number }> {
+  const body = (await ai.run(CLEF_MODEL, clefRequest(text) as Record<string, unknown>, { signal: AbortSignal.timeout(CLEF_TIMEOUT_MS) })) as {
+    answers?: { role?: { probabilities?: { [role: string]: unknown } } };
     usage?: { input_tokens?: unknown; output_tokens?: unknown };
   };
-  const probability = body.answers?.meaningfulness_check?.noul;
-  if (typeof probability !== "number" || probability < 0 || probability > 1) throw new Error("jev left a block unanswered");
+  const roles = body.answers?.role?.probabilities;
+  if (!roles || !CONTENT_ROLES.every((role) => typeof roles[role] === "number")) throw new Error("clef left a block unanswered");
+  const probability = Math.min(1, Math.round(CONTENT_ROLES.reduce((total, role) => total + (roles[role] as number), 0) * 10_000) / 10_000);
   const input = body.usage?.input_tokens;
   const output = body.usage?.output_tokens;
   const tokens = typeof input === "number" ? input + (typeof output === "number" ? output : 0) : blockTokens(text);
   return { probability, tokens };
 }
 
-export async function askJev(classification: Classification, apiKey: string): Promise<Verdict> {
+export async function askClef(classification: Classification, ai: Ai): Promise<Verdict> {
   const texts = classification.candidates.map((index) => classification.blocks[index]);
   const probabilities: number[] = [];
   let tokens = 0;
   let next = 0;
   let failure: Error | undefined;
-  await Promise.all(Array.from({ length: Math.min(JEV_CONCURRENCY, texts.length) }, async () => {
+  await Promise.all(Array.from({ length: Math.min(CLEF_CONCURRENCY, texts.length) }, async () => {
     while (!failure && next < texts.length) {
       const position = next++;
       try {
-        const answer = await askAbout(texts[position], apiKey);
+        const answer = await askAbout(texts[position], ai);
         probabilities[position] = answer.probability;
         tokens += answer.tokens;
       } catch (error) {
@@ -117,6 +117,6 @@ export async function askJev(classification: Classification, apiKey: string): Pr
       }
     }
   }));
-  if (failure) throw new JevError(failure.message, tokens);
+  if (failure) throw new ClefError(failure.message, tokens);
   return { probabilities, tokens };
 }

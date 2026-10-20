@@ -1,6 +1,6 @@
 # SakuraCloud
 
-The server side of Sakura: one Cloudflare Worker that asks TypeSafe's Jev whether each block Sakura's extractor is unsure of is a meaningful part of an article. Every call is signed with App Attest, and each device has a Durable Object that holds its key, its assertion counter, and the tokens it spent in the last minute.
+The server side of Sakura: one Cloudflare Worker that asks Workers AI's Clef what role each block Sakura's extractor is unsure of plays on an article page. Every call is signed with App Attest, and each device has a Durable Object that holds its key, its assertion counter, and the tokens it spent in the last minute.
 
 ## Develop and deploy
 
@@ -24,7 +24,7 @@ Plain vars are read from the environment by `cloudflare.config.ts` at deploy tim
 | `APPLE_TEAM_ID` | The 10-character Apple team ID |
 | `APP_BUNDLE_ID` | The app's bundle ID, `com.tsubuzaki.SakuraRSS` |
 | `APP_ATTEST_ENVIRONMENT` | `development` for debug builds, `production` for TestFlight and the App Store |
-| `TOKENS_PER_MINUTE` | Jev tokens a device may spend in any rolling 60 seconds, for example `20000` |
+| `TOKENS_PER_MINUTE` | Clef tokens a device may spend in any rolling 60 seconds, for example `20000` |
 
 The limit is a default. A device whose Durable Object has a row in its `limits` table (`kind` is `tokens`, `per_minute` a whole number) uses that instead, so one device can be given more or fewer tokens without a deploy, and `0` shuts a device out. Each device's Durable Object is named by its App Attest key ID in base64url, and `limits` is its only SQL table: the key, the counter, and the spent tokens stay in its key-value storage.
 
@@ -35,10 +35,9 @@ Outside CI, secrets are uploaded with `npm run deploy:staging -- --secrets-file 
 | Secret | Where it comes from |
 | --- | --- |
 | `CHALLENGE_SECRET` | Any long random string; signs attestation challenges |
-| `JEV_API_KEY` | A TypeSafe API key |
 | `SKIP_APP_ATTEST` | `true` to accept unsigned requests to `localhost`, so a debug build in Simulator can call `npm run dev`. Ignored on any other host; never set it in a deploy |
 
-`.dev.vars.example` also sets `TOKENS_PER_MINUTE`, since `npm run dev` has no deploy environment to read it from.
+`.dev.vars.example` also sets `TOKENS_PER_MINUTE`, since `npm run dev` has no deploy environment to read it from. Clef runs through the Worker's `AI` binding, which needs no key, but even `npm run dev` calls Workers AI on the logged-in account and is billed.
 
 ## Endpoints
 
@@ -56,6 +55,6 @@ Everything is `POST` except `/health`. The signed endpoints take two headers:
 | `/v1/classify` | Yes | Takes `{ title, site, blocks: [string], candidates: [index] }` and returns `{ probabilities, remaining }`: for each candidate, in order, the probability that the block is part of the article |
 | `/v1/limits` | Yes | Returns `{ tokens: { limit, used, remaining } }` for the last 60 seconds, without spending anything |
 
-`title` and `site` are optional and not sent to Jev. `blocks` holds up to 400 blocks of up to 4,000 characters, 60,000 in all, counted as Swift's `String.count` counts them, and `candidates` up to 120 distinct indexes into it. Each candidate goes to Jev in its own call, six at a time, as `{ "text": block }` with one `noul` question, `meaningfulness_check`. Jev sees only the candidates.
+`title` and `site` are optional and not sent to Clef. `blocks` holds up to 400 blocks of up to 4,000 characters, 60,000 in all, counted as Swift's `String.count` counts them, and `candidates` up to 120 distinct indexes into it. Each candidate goes to `@cf/cloudflare/clef` in its own call, six at a time, as `{ "text": block }` with one `choice` question, `role`, over eight roles: `content`, `lead_in`, `heading`, and `caption`, which are part of the article, and `credit`, `promo`, `navigation`, and `meta`, which are not. A candidate's probability is the sum of the first four, rounded to four places. Clef sees only the candidates.
 
-Before calling Jev the Worker sets aside an estimate of the tokens, then settles on the `usage` Jev reports. When a Jev call fails the request answers 502, and only the tokens of the calls Jev answered are kept. Every classify response carries `X-Sakura-Remaining`. A call that would go past the limit gets 429 with `Retry-After` in seconds, and one bigger than the whole limit gets 413.
+Before calling Clef the Worker sets aside an estimate of the tokens, then settles on the `usage` Clef reports. When a Clef call fails the request answers 502, and only the tokens of the calls Clef answered are kept. Every classify response carries `X-Sakura-Remaining`. A call that would go past the limit gets 429 with `Retry-After` in seconds, and one bigger than the whole limit gets 413.
