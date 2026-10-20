@@ -48,7 +48,7 @@ struct BrowserSearchResultsView: View {
             .navigationTitle(query)
             .toolbarTitleDisplayMode(.inline)
             .sakuraBackground()
-            .tabOmniboxAccessory {
+            .pageMenu {
                 BrowserPageDisplayMenu(options: browserDisplayStyleOptions)
             }
             .task(id: query) {

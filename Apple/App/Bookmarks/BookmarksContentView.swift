@@ -120,9 +120,7 @@ struct BookmarksContentView: View {
         .task(id: scope) {
             await reloadBookmarks()
         }
-        // The browser hides the top bar, so these controls go in the
-        // omnibox's menu instead.
-        .tabOmniboxAccessory {
+        .pageMenu {
             BrowserBookmarksMenu(actions: browserBookmarksActions)
         }
     }

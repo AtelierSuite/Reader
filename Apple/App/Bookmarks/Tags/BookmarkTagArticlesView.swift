@@ -51,7 +51,7 @@ struct BookmarkTagArticlesView: View {
         .navigationTitle(tag.name)
         .toolbarTitleDisplayMode(.inline)
         .animation(.smooth.speed(2.0), value: articleIDs)
-        .tabOmniboxAccessory {
+        .pageMenu {
             BrowserPageDisplayMenu(options: browserDisplayStyleOptions)
         }
         .task(id: feedManager.dataRevision) {
