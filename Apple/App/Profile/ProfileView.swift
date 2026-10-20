@@ -5,6 +5,7 @@ struct ProfileView: View {
 
     /// Sheets want the standard inline title; the tab keeps the large one.
     var titleDisplayMode: ToolbarTitleDisplayMode?
+    var showsCloseButton = true
 
     @Environment(\.dismiss) private var dismiss
     @Environment(FeedManager.self) private var feedManager
@@ -118,9 +119,11 @@ struct ProfileView: View {
                     ?? (UIDevice.current.userInterfaceIdiom == .pad ? .inline : .inlineLarge)
             )
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(role: .close) {
-                        dismiss()
+                if showsCloseButton {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(role: .close) {
+                            dismiss()
+                        }
                     }
                 }
             }

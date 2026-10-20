@@ -7,6 +7,7 @@ struct MainTabView: View {
     @Environment(FeedManager.self) var feedManager
     @AppStorage("Onboarding.Completed") private var onboardingCompleted: Bool = false
     @AppStorage(WhatsNewRelease.lastShownVersionKey) private var whatsNewLastShownVersion: String = ""
+    @AppStorage(ClassicTabs.storageKey) private var usesClassicTabs: Bool = false
     @Binding var pendingFeedURL: String?
     @Binding var pendingArticleID: Int64?
     @Binding var pendingOpenRequest: OpenArticleRequest?
@@ -17,11 +18,7 @@ struct MainTabView: View {
     private let mediaPresenter = MediaPresenter.shared
 
     var body: some View {
-        BrowserView(
-            pendingFeedURL: $pendingFeedURL,
-            pendingArticleID: $pendingArticleID,
-            pendingOpenRequest: $pendingOpenRequest
-        )
+        rootView
         .miniPlayerAccessory(
             audioPlayer: audioPlayer,
             youTubeSession: youTubeSession,
@@ -45,6 +42,23 @@ struct MainTabView: View {
             }
         }
         .compatibleSoftScrollEdgeEffectStyle()
+    }
+
+    @ViewBuilder
+    private var rootView: some View {
+        if usesClassicTabs && ClassicTabs.isAvailable {
+            ClassicTabView(
+                pendingFeedURL: $pendingFeedURL,
+                pendingArticleID: $pendingArticleID,
+                pendingOpenRequest: $pendingOpenRequest
+            )
+        } else {
+            BrowserView(
+                pendingFeedURL: $pendingFeedURL,
+                pendingArticleID: $pendingArticleID,
+                pendingOpenRequest: $pendingOpenRequest
+            )
+        }
     }
 
     private var onboardingSheet: some View {
