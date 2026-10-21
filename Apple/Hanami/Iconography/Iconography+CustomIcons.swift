@@ -14,7 +14,10 @@ public extension Iconography {
                 return nil
             }
             if customURL == "photo" {
-                return customIcon(feedID: feed.id)
+                if let photo = customIcon(feedID: feed.id) {
+                    return photo
+                }
+                return await defaultIcon(for: feed)
             }
             if let cached = customIcon(feedID: feed.id) {
                 return cached
