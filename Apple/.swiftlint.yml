@@ -1,3 +1,2 @@
 excluded:
-  - Tools/*/.build
-  - Tools/*/build
+  - Tools

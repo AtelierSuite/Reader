@@ -1,2 +1,5 @@
 xcuserdata/
 .DS_Store
+
+# Local tool harnesses, kept out of the repository
+Apple/Tools/
