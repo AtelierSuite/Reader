@@ -17,4 +17,15 @@ extension FollowingPage {
             deleteSelected: { isPresentingBulkDeleteAlert = true }
         )
     }
+
+    /// Classic tabs and the wide layout give the page one button for its
+    /// menu, so the edit controls only spread out in the compact capsule.
+    @ViewBuilder
+    var followingPageMenu: some View {
+        if isClassicTabsActive || BrowserLayout.usesWideTabs {
+            BrowserFollowingMenu(actions: browserFollowingActions)
+        } else {
+            BrowserFollowingBarControls(actions: browserFollowingActions)
+        }
+    }
 }

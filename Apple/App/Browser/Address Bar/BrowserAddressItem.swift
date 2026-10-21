@@ -16,24 +16,29 @@ struct BrowserAddressItem: View {
     let onOpenOmnibox: () -> Void
 
     var body: some View {
+        let takesOver = items.hasOmniboxAccessory && slots.displayedOmniboxTakeover(for: tabID, in: store)
         HStack(spacing: 0) {
-            Button(action: onOpenOmnibox) {
-                BrowserLocationLabel(
-                    description: BrowserLocationDescription.describe(
-                        store.displayedTab(for: tabID),
-                        feedManager: feedManager
-                    ),
-                    iconSize: 24,
-                    titleFont: .subheadline,
-                    showsSubtitle: true
-                )
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(.rect)
+            if !takesOver {
+                Button(action: onOpenOmnibox) {
+                    BrowserLocationLabel(
+                        description: BrowserLocationDescription.describe(
+                            store.displayedTab(for: tabID),
+                            feedManager: feedManager
+                        ),
+                        iconSize: 24,
+                        titleFont: .subheadline,
+                        showsSubtitle: true
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(.rect)
+                }
+                .buttonStyle(.plain)
+                .transition(.blurReplace)
             }
-            .buttonStyle(.plain)
 
             if items.hasOmniboxAccessory {
                 items.omniboxAccessory
+                    .environment(\.browserOmniboxTakesOver, takesOver)
                     .environment(
                         \.browserOmniboxMenuInsets,
                         EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: Self.contentInset)
@@ -42,12 +47,13 @@ struct BrowserAddressItem: View {
             }
         }
         .animation(BrowserLocationLabel.contentChange, value: items.hasOmniboxAccessory)
+        .animation(.smooth(duration: 0.35), value: takesOver)
         // Even by construction: both the icon and the glyph sit flush
         // against this inset, so neither side needs a fudge factor. As far
         // in from the capsule's ends as a `.bottomBar` item's content sat.
         // The menu takes the trailing inset into its own label to stay tappable
-        // out to the capsule's end.
-        .padding(.leading, Self.contentInset)
+        // out to the capsule's end, and a takeover takes both.
+        .padding(.leading, takesOver ? 0 : Self.contentInset)
         .padding(.trailing, items.hasOmniboxAccessory ? 0 : Self.contentInset)
         .frame(maxWidth: .infinity, minHeight: TabBottomBarMetrics.itemHeight)
         // Behind the label rather than over the page: the browser has no
@@ -58,5 +64,5 @@ struct BrowserAddressItem: View {
         .animation(.smooth, value: slots.displayedProgress(for: tabID, in: store) == nil)
     }
 
-    private static let contentInset: CGFloat = 17
+    static let contentInset: CGFloat = 17
 }

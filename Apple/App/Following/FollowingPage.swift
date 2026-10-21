@@ -5,6 +5,7 @@ import Hanami
 struct FollowingPage: View {
 
     @Environment(FeedManager.self) var feedManager
+    @Environment(\.isClassicTabsActive) var isClassicTabsActive
     let followingNavigationNamespace: Namespace.ID
     @State var searchText = ""
     @State var isPresentingAddFeedSheet = false
@@ -55,8 +56,9 @@ struct FollowingPage: View {
             isShowingAllDespiteFocus = false
         }
         .pageMenu {
-            BrowserFollowingMenu(actions: browserFollowingActions)
+            followingPageMenu
         }
+        .browserOmniboxTakeover(isEditingFeeds)
         .sheet(isPresented: $isPresentingAddFeedSheet) {
             AddFeedView(session: addFeedSession)
                 .environment(feedManager)

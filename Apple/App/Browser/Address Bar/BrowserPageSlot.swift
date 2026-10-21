@@ -6,6 +6,7 @@ import SwiftUI
 /// untagged report from a background page would take the bar over.
 enum BrowserPageSlotReport {
     case progress(BrowserAddressProgress?)
+    case omniboxTakeover(Bool)
 }
 
 typealias BrowserPageSlot<Value> = PageSlot<BrowserPathToken, Value>
