@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct HomeSectionBarButton: View {
+struct QuickAccessBarButton: View {
 
-    let tab: HomeSectionBarItem
+    let tab: QuickAccessBarItem
     let isSelected: Bool
     let selectedTextColor: Color
     let action: () -> Void

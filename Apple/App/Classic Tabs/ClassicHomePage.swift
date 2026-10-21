@@ -6,7 +6,7 @@ struct ClassicHomePage: View {
     @Environment(FeedManager.self) private var feedManager
     @Environment(\.scenePhase) private var scenePhase
     // Kept out of @AppStorage until the scene goes inactive: a defaults write on
-    // every tap invalidates the toolbar and resets the section bar's scroll.
+    // every tap invalidates the toolbar and resets the Quick Access bar's scroll.
     @State private var selection = ClassicHomeSource(
         token: UserDefaults.standard.string(forKey: ClassicHomeSource.storageKey) ?? ""
     )
@@ -31,9 +31,9 @@ struct ClassicHomePage: View {
     }
 
     var body: some View {
-        let tabs = HomeSectionBarItem.items(feedSections: feedSections, lists: feedManager.lists)
+        let tabs = QuickAccessBarItem.items(feedSections: feedSections, lists: feedManager.lists)
         // HomeSectionView re-identifies its content per source, which re-adds the
-        // toolbar items of a navigation root and makes the section bar's pill grow
+        // toolbar items of a navigation root and makes the Quick Access bar's pill grow
         // from the top left. A stable root keeps the items in place.
         ZStack {
             HomeSectionView(source: contentSource)
@@ -41,7 +41,7 @@ struct ClassicHomePage: View {
         .toolbar {
             if tabs.count > 1 {
                 ToolbarItem(placement: .principal) {
-                    HomeSectionBar(tabs: tabs, selection: $selection)
+                    QuickAccessBar(tabs: tabs, selection: $selection)
                         .frame(maxWidth: .infinity)
                 }
             }

@@ -1,9 +1,9 @@
 import SwiftUI
 import Hanami
 
-struct HomeSectionBar: View {
+struct QuickAccessBar: View {
 
-    let tabs: [HomeSectionBarItem]
+    let tabs: [QuickAccessBarItem]
     @Binding var selection: ClassicHomeSource
 
     @State private var tabFrames: [String: CGRect] = [:]
@@ -28,7 +28,7 @@ struct HomeSectionBar: View {
         }
     }
 
-    private func selectedTextColor(for tab: HomeSectionBarItem) -> Color {
+    private func selectedTextColor(for tab: QuickAccessBarItem) -> Color {
         if case .feedSection(let section) = tab.source, let homeSection = homeSection(for: section) {
             return homeSection.tabSelectedTextColor
         }
@@ -44,7 +44,7 @@ struct HomeSectionBar: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
                     ForEach(tabs) { tab in
-                        HomeSectionBarButton(
+                        QuickAccessBarButton(
                             tab: tab,
                             isSelected: tab.source == selection,
                             selectedTextColor: selectedTextColor(for: tab)
@@ -55,7 +55,7 @@ struct HomeSectionBar: View {
                         .background {
                             GeometryReader { geometry in
                                 Color.clear.preference(
-                                    key: HomeSectionBarFrameKey.self,
+                                    key: QuickAccessBarFrameKey.self,
                                     value: [tab.id: geometry.frame(in: .named(Self.coordinateSpaceID))]
                                 )
                             }
@@ -72,7 +72,7 @@ struct HomeSectionBar: View {
                         .opacity(indicatorFrame.width > 0 ? 1 : 0)
                         .animation(.smooth.speed(2.0), value: indicatorFrame)
                 }
-                .onPreferenceChange(HomeSectionBarFrameKey.self) { newFrames in
+                .onPreferenceChange(QuickAccessBarFrameKey.self) { newFrames in
                     tabFrames.merge(newFrames, uniquingKeysWith: { _, new in new })
                 }
             }
@@ -106,10 +106,10 @@ struct HomeSectionBar: View {
         }
     }
 
-    private static let coordinateSpaceID = "HomeSectionBar"
+    private static let coordinateSpaceID = "QuickAccessBar"
 }
 
-private struct HomeSectionBarFrameKey: PreferenceKey {
+private struct QuickAccessBarFrameKey: PreferenceKey {
     static let defaultValue: [String: CGRect] = [:]
     static func reduce(value: inout [String: CGRect], nextValue: () -> [String: CGRect]) {
         value.merge(nextValue(), uniquingKeysWith: { _, new in new })
