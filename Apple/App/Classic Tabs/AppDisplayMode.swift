@@ -15,3 +15,20 @@ enum AppDisplayMode: String, CaseIterable, Identifiable {
         }
     }
 }
+
+extension AppDisplayMode {
+
+    var switchTitle: String {
+        switch self {
+        case .browser: String(localized: "DisplayMode.Switch.Browser.Title", table: "Settings")
+        case .classic: String(localized: "DisplayMode.Switch.Classic.Title", table: "Settings")
+        }
+    }
+
+    var switchMessage: String {
+        switch self {
+        case .browser: String(localized: "DisplayMode.Switch.Browser.Message", table: "Settings")
+        case .classic: String(localized: "DisplayMode.Switch.Classic.Message", table: "Settings")
+        }
+    }
+}

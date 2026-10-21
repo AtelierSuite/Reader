@@ -1,3 +1,4 @@
+import EnhancedNavigation
 import SwiftUI
 import UserNotifications
 import Hanami
@@ -5,19 +6,21 @@ import Hanami
 struct AppearanceSettingsView: View {
 
     @Environment(FeedManager.self) var feedManager
+    @Environment(BrowserTabStore.self) private var browserTabStore: BrowserTabStore?
     @AppStorage("Display.DefaultStyle") private var defaultDisplayStyle: FeedDisplayStyle = .inbox
     @AppStorage("Search.DisplayStyle") private var searchDisplayStyle: FeedDisplayStyle = .inbox
     @AppStorage("Display.UnreadBadgeMode") private var unreadBadgeMode: UnreadBadgeMode = .none
     @AppStorage("Display.ShowStatusBar") private var showStatusBar: Bool = true
     @AppStorage(ArticleWidthStyle.storageKey) private var articleWidthStyle: ArticleWidthStyle = .default
     @AppStorage(AppDisplayMode.storageKey) private var displayMode: AppDisplayMode = .browser
+    @State private var pendingDisplayMode: AppDisplayMode?
 
     var body: some View {
         List {
             if ClassicTabs.isAvailable {
                 Section {
                     DisplayModePicker(selection: displayMode) { mode in
-                        displayMode = mode
+                        pendingDisplayMode = mode
                     }
                 } header: {
                     Text(String(localized: "DisplayMode", table: "Settings"))
@@ -94,6 +97,29 @@ struct AppearanceSettingsView: View {
         .listStyle(.insetGrouped)
         .navigationTitle(String(localized: "Section.Appearance", table: "Settings"))
         .toolbarTitleDisplayMode(.inline)
+        .alert(
+            pendingDisplayMode?.switchTitle ?? "",
+            isPresented: Binding(
+                get: { pendingDisplayMode != nil },
+                set: { if !$0 { pendingDisplayMode = nil } }
+            ),
+            presenting: pendingDisplayMode
+        ) { mode in
+            Button(String(localized: "DisplayMode.Switch.Confirm", table: "Settings")) {
+                switchDisplayMode(to: mode)
+            }
+            Button(role: .cancel) {}
+        } message: { mode in
+            Text(mode.switchMessage)
+        }
+    }
+
+    /// Classic has no browser tabs, so leaving the browser closes them all.
+    private func switchDisplayMode(to mode: AppDisplayMode) {
+        if mode == .classic {
+            browserTabStore?.closeAll()
+        }
+        displayMode = mode
     }
 
     @ViewBuilder
