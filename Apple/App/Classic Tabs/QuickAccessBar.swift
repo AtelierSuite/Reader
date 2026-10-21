@@ -97,6 +97,9 @@ struct QuickAccessBar: View {
             .onChange(of: selection) {
                 scrollSelectionIntoView(proxy, animated: true)
             }
+            .onChange(of: tabs.map(\.id)) {
+                scrollSelectionIntoView(proxy, animated: true)
+            }
         }
     }
 
