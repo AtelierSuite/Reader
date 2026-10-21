@@ -11,15 +11,20 @@ struct BrowserFollowingBarControls: View {
 
     var body: some View {
         if takesOver {
-            Group {
+            // A ZStack rather than a Group, which would hand the animation
+            // to each branch instead of to the swap between them.
+            ZStack {
                 if actions.isSelecting {
                     selectingControls
+                        .transition(.blurReplace)
                 } else {
                     editingControls
+                        .transition(.blurReplace)
                 }
             }
             .labelStyle(.iconOnly)
             .frame(maxWidth: .infinity)
+            .animation(.smooth(duration: 0.35), value: actions.isSelecting)
             .transition(.blurReplace)
         } else {
             browsingControls
@@ -58,10 +63,19 @@ struct BrowserFollowingBarControls: View {
         }
     }
 
+    /// Cancel is a glyph here so the count keeps its room in a capsule
+    /// squeezed between Back and Tabs, whatever the language.
     private var selectingControls: some View {
         HStack(spacing: 0) {
-            textButton(String(localized: "Shared.Cancel"), edge: .leading, action: actions.toggleSelectMode)
-            Spacer(minLength: 0)
+            iconButton(String(localized: "Shared.Cancel"), systemImage: "xmark", action: actions.toggleSelectMode)
+                .padding(.leading, BrowserAddressItem.contentInset - Self.iconButtonInset)
+            Text(String(localized: "FeedList.Selection.Count.\(actions.selectedCount)", table: "Feeds"))
+                .font(.subheadline.weight(.semibold))
+                .monospacedDigit()
+                .contentTransition(.numericText())
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .frame(maxWidth: .infinity)
             Group {
                 iconButton(String(localized: "FeedList.Selection.Edit", table: "Feeds"),
                            systemImage: "pencil", action: actions.editSelected)
@@ -72,14 +86,6 @@ struct BrowserFollowingBarControls: View {
             .disabled(actions.selectedCount == 0)
         }
         .padding(.trailing, BrowserAddressItem.contentInset - Self.iconButtonInset)
-        .overlay {
-            Text(String(localized: "FeedList.Selection.Count.\(actions.selectedCount)", table: "Feeds"))
-                .font(.subheadline.weight(.semibold))
-                .monospacedDigit()
-                .contentTransition(.numericText())
-                .lineLimit(1)
-                .allowsHitTesting(false)
-        }
     }
 
     /// Runs its tap target out to the capsule's end on the side it sits.
