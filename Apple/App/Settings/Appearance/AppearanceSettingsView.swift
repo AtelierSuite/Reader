@@ -16,14 +16,11 @@ struct AppearanceSettingsView: View {
         List {
             if ClassicTabs.isAvailable {
                 Section {
-                    Picker(String(localized: "DisplayMode", table: "Settings"), selection: $displayMode) {
-                        ForEach(AppDisplayMode.allCases) { mode in
-                            Text(mode.localizedTitle)
-                                .tag(mode)
-                        }
+                    DisplayModePicker(selection: displayMode) { mode in
+                        displayMode = mode
                     }
                 } header: {
-                    Text(String(localized: "Section.Navigation", table: "Settings"))
+                    Text(String(localized: "DisplayMode", table: "Settings"))
                 } footer: {
                     Text(String(localized: "DisplayMode.Footer", table: "Settings"))
                 }
