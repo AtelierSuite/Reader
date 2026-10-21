@@ -6,6 +6,7 @@ struct IntelligenceSettingsPane: View {
     let feedManager: FeedManager
     @AppStorage("Intelligence.ContentInsights.Enabled") private var contentInsightsEnabled = false
     @AppStorage("Intelligence.Personalization.Enabled") private var personalizationEnabled = true
+    @AppStorage(CloudBlockRefiner.enabledKey) private var cleanUpContentEnabled = true
     @State private var isConfirmingClear = false
 
     var body: some View {
@@ -24,6 +25,13 @@ struct IntelligenceSettingsPane: View {
                             isConfirmingClear = true
                         }
                         .padding(.top, 6)
+                    }
+                }
+                LabeledContent(SettingsText.settings("Section.CloudServices")) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Toggle(SettingsText.settings("CleanUpContent"), isOn: $cleanUpContentEnabled)
+                        SettingsNote(text: SettingsText.settings("CleanUpContent.Footer"))
+                            .padding(.leading, 20)
                     }
                 }
             }

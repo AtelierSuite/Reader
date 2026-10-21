@@ -4,6 +4,12 @@ import Foundation
 /// content, and drops the ones it is confident do not. Any failure keeps the text as it was.
 public nonisolated enum CloudBlockRefiner {
 
+    public static let enabledKey = "Intelligence.CleanUpContent.Enabled"
+
+    public static var isEnabled: Bool {
+        (UserDefaults.standard.object(forKey: enabledKey) as? Bool) ?? true
+    }
+
     static let dropBelowProbability = 0.15
     static let shortBlockLength = 280
     static let trailingBlockCount = 4
@@ -25,7 +31,7 @@ public nonisolated enum CloudBlockRefiner {
     }
 
     public static func refine(_ text: String, title: String, url: URL?) async -> String {
-        guard SakuraCloud.isAvailable else { return text }
+        guard isEnabled, SakuraCloud.isAvailable else { return text }
         let pieces = pieces(of: text)
         let candidates = candidateIndexes(in: pieces)
         guard !candidates.isEmpty else { return text }
