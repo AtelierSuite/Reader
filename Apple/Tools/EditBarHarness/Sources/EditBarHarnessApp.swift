@@ -62,7 +62,10 @@ private struct VariantControls: View {
                 }
             }
             .pickerStyle(.segmented)
-            Toggle("Hide Back and Tabs while editing", isOn: $model.collapsesNavigationWhileEditing.animation(FollowingEditModel.barAnimation))
+            Toggle(
+                "Hide Back and Tabs while editing",
+                isOn: $model.collapsesNavigationWhileEditing.animation(FollowingEditModel.barAnimation)
+            )
                 .font(.subheadline)
             Button("Reset Feeds") {
                 withAnimation(.smooth) {
