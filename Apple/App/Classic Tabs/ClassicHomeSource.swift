@@ -30,3 +30,23 @@ enum ClassicHomeSource: Hashable {
         }
     }
 }
+
+extension ClassicHomeSource {
+
+    init?(_ quickAccessItem: TodayQuickAccessItem) {
+        switch quickAccessItem {
+        case .allContent: self = .allContent
+        case .feedSection(let section): self = .feedSection(section)
+        case .list(let listID): self = .list(listID)
+        case .following, .bookmarks, .topics: return nil
+        }
+    }
+
+    var quickAccessItem: TodayQuickAccessItem {
+        switch self {
+        case .allContent: .allContent
+        case .feedSection(let section): .feedSection(section)
+        case .list(let listID): .list(listID)
+        }
+    }
+}

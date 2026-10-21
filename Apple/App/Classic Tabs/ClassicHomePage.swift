@@ -31,7 +31,7 @@ struct ClassicHomePage: View {
     }
 
     var body: some View {
-        let tabs = QuickAccessBarItem.items(feedSections: feedSections, lists: feedManager.lists)
+        let tabs = QuickAccessBarItem.items(feedSections: feedSections, in: feedManager)
         // HomeSectionView re-identifies its content per source, which re-adds the
         // toolbar items of a navigation root and makes the Quick Access bar's pill grow
         // from the top left. A stable root keeps the items in place.
