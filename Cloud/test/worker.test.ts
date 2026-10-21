@@ -43,7 +43,7 @@ describe("routing", () => {
     expect((await call(new Request("https://sakura.test/health"))).status).toBe(200);
     const home = await call(new Request("https://sakura.test/"));
     expect(home.status).toBe(302);
-    expect(home.headers.get("Location")).toBe("https://github.com/katagaki/SakuraCloud");
+    expect(home.headers.get("Location")).toBe("https://atelier.ktgk.app/#reader");
     expect((await call(new Request("https://sakura.test/v1/classify"))).status).toBe(405);
     expect((await call(new Request("https://sakura.test/v1/nothing", { method: "POST" }))).status).toBe(404);
   });
