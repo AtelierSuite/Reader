@@ -73,6 +73,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, RefreshActions {
     private func connectServices() {
         let feedManager = registry.feedManager
         feedManager.connectProviderSessions()
+        FeedIconCache.shared.observeIconChanges(of: feedManager)
         if CloudKitEntitlement.isAvailable {
             feedManager.connectCloudSync()
         }

@@ -6,7 +6,8 @@ final class PostAvatarView: NSImageView {
 
     private let size: CGFloat
     private let cornerRadius: CGFloat
-    private var representedFeedID: Int64?
+    private var representedFeed: Feed?
+    private var iconObserver: ChangeObserver?
 
     init(size: CGFloat, cornerRadius: CGFloat) {
         self.size = size
@@ -21,6 +22,11 @@ final class PostAvatarView: NSImageView {
             widthAnchor.constraint(equalToConstant: size),
             heightAnchor.constraint(equalToConstant: size)
         ])
+        iconObserver = ChangeObserver {
+            _ = FeedIconCache.shared.revision
+        } onChange: { [weak self] in
+            self?.loadIcon()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -28,12 +34,16 @@ final class PostAvatarView: NSImageView {
     }
 
     func configure(feed: Feed?) {
-        representedFeedID = feed?.id
+        representedFeed = feed
         image = nil
         layer?.cornerRadius = feed?.isCircleIcon == true ? size / 2 : cornerRadius
-        guard let feed else { return }
+        loadIcon()
+    }
+
+    private func loadIcon() {
+        guard let feed = representedFeed else { return }
         FeedIconCache.shared.icon(for: feed) { [weak self] icon in
-            guard self?.representedFeedID == feed.id else { return }
+            guard self?.representedFeed?.id == feed.id else { return }
             self?.image = icon
         }
     }
