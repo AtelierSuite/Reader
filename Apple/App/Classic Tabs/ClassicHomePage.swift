@@ -10,6 +10,7 @@ struct ClassicHomePage: View {
     @State private var selection = ClassicHomeSource(
         token: UserDefaults.standard.string(forKey: ClassicHomeSource.storageKey) ?? ""
     )
+    @State private var isPresentingQuickAccessEditor = false
 
     private var feedSections: [FeedSection] {
         let presentSections = Set(feedManager.feeds.map(\.feedSection))
@@ -41,10 +42,17 @@ struct ClassicHomePage: View {
         .toolbar {
             if tabs.count > 1 {
                 ToolbarItem(placement: .principal) {
-                    QuickAccessBar(tabs: tabs, selection: $selection)
-                        .frame(maxWidth: .infinity)
+                    QuickAccessBar(tabs: tabs, selection: $selection) {
+                        isPresentingQuickAccessEditor = true
+                    }
+                    .frame(maxWidth: .infinity)
                 }
             }
+        }
+        .sheet(isPresented: $isPresentingQuickAccessEditor) {
+            QuickAccessBarEditorSheet(items: tabs)
+                .environment(feedManager)
+                .presentationDetents([.medium, .large])
         }
         .onChange(of: scenePhase) {
             if scenePhase != .active {

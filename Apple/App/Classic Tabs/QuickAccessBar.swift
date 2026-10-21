@@ -5,6 +5,7 @@ struct QuickAccessBar: View {
 
     let tabs: [QuickAccessBarItem]
     @Binding var selection: ClassicHomeSource
+    var onEdit: () -> Void
 
     @State private var tabFrames: [String: CGRect] = [:]
     @State private var hasPerformedInitialScroll = false
@@ -50,6 +51,12 @@ struct QuickAccessBar: View {
                             selectedTextColor: selectedTextColor(for: tab)
                         ) {
                             selection = tab.source
+                        }
+                        .contextMenu {
+                            Button(action: onEdit) {
+                                Label(String(localized: "QuickAccessBar.Edit", table: "Home"),
+                                      systemImage: "arrow.up.arrow.down")
+                            }
                         }
                         .id(tab.id)
                         .background {
