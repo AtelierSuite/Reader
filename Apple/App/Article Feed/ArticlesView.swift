@@ -168,6 +168,16 @@ struct ArticlesView: View {
                             HideReadContentToggle(isOn: hideReadContent)
                         }
                     }
+                    if let onMarkAllRead {
+                        Section {
+                            Button {
+                                Task { @MainActor in onMarkAllRead() }
+                            } label: {
+                                Label(String(localized: "MarkAllRead", table: "Articles"),
+                                      systemImage: "envelope.open")
+                            }
+                        }
+                    }
                 } label: {
                     Image(systemName: "line.3.horizontal.decrease")
                 }

@@ -84,7 +84,7 @@ struct BookmarkFolderArticlesView: View {
         .onChange(of: displayStyle) { _, newValue in
             feedManager.updateBookmarkFolderDisplayStyle(currentFolder, displayStyle: newValue.rawValue)
         }
-        .tabOmniboxAccessory {
+        .pageMenu {
             BrowserPageDisplayMenu(options: browserDisplayStyleOptions)
         }
         .task(id: feedManager.dataRevision) {

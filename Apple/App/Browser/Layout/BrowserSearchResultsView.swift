@@ -7,6 +7,7 @@ struct BrowserSearchResultsView: View {
     @Environment(FeedManager.self) private var feedManager
     @AppStorage("Search.DisplayStyle") private var searchDisplayStyle: FeedDisplayStyle = .inbox
     let query: String
+    var recordsSearchTerm = true
     @State private var results: [Article] = []
 
     /// Ranked, then cut to one row: the grid is a fixed four columns.
@@ -48,7 +49,7 @@ struct BrowserSearchResultsView: View {
             .navigationTitle(query)
             .toolbarTitleDisplayMode(.inline)
             .sakuraBackground()
-            .tabOmniboxAccessory {
+            .pageMenu {
                 BrowserPageDisplayMenu(options: browserDisplayStyleOptions)
             }
             .task(id: query) {
@@ -59,7 +60,9 @@ struct BrowserSearchResultsView: View {
                 withAnimation(.smooth.speed(2.0)) {
                     results = found
                 }
-                feedManager.recordSearchTerm(query)
+                if recordsSearchTerm {
+                    feedManager.recordSearchTerm(query)
+                }
             }
     }
 

@@ -54,9 +54,7 @@ struct FollowingPage: View {
         .onChange(of: feedManager.activeFocus) { _, _ in
             isShowingAllDespiteFocus = false
         }
-        // The browser hides the top bar, so these controls go in the
-        // omnibox's menu instead.
-        .tabOmniboxAccessory {
+        .pageMenu {
             BrowserFollowingMenu(actions: browserFollowingActions)
         }
         .sheet(isPresented: $isPresentingAddFeedSheet) {
