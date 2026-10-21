@@ -52,12 +52,6 @@ struct QuickAccessBar: View {
                         ) {
                             selection = tab.source
                         }
-                        .contextMenu {
-                            Button(action: onEdit) {
-                                Label(String(localized: "QuickAccessBar.Edit", table: "Home"),
-                                      systemImage: "arrow.up.arrow.down")
-                            }
-                        }
                         .id(tab.id)
                         .background {
                             GeometryReader { geometry in
@@ -89,6 +83,13 @@ struct QuickAccessBar: View {
                 Color.clear.compatibleGlassEffect(in: .capsule, interactive: true)
             }
             .clipShape(.capsule)
+            .contentShape(.contextMenuPreview, .capsule)
+            .contextMenu {
+                Button(action: onEdit) {
+                    Label(String(localized: "QuickAccessBar.Edit", table: "Home"),
+                          systemImage: "arrow.up.arrow.down")
+                }
+            }
             .onChange(of: tabFrames, initial: true) {
                 guard !hasPerformedInitialScroll, tabFrames[selection.token] != nil else { return }
                 hasPerformedInitialScroll = true
