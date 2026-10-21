@@ -5,6 +5,8 @@ export default defineConfig((ctx) => ({
 		name: "sakura-cloud",
 		compatibilityDate: "2026-08-22",
 		entrypoint: "src/index.ts",
+		workersDev: false,
+		previewUrls: false,
 		observability: {
 			enabled: true,
 		},
