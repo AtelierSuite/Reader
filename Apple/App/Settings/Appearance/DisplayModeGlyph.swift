@@ -3,18 +3,29 @@ import SwiftUI
 /// A phone outline sketching each display mode's bottom chrome: the tab bar
 /// for Classic, and the back button, address bar and tab count for Browser.
 /// Sizes are an iPhone screen's points scaled down, so the glyph keeps the
-/// device's proportions; the bars are drawn slightly heavier to stay legible.
+/// device's proportions. Each bar is inset so its rounded ends share a centre
+/// with the screen's corners.
 struct DisplayModeGlyph: View {
 
     let mode: AppDisplayMode
 
     private let scale: CGFloat = 0.15
     private let bezel: CGFloat = 2
-    private let rowWidths: [CGFloat] = [1, 0.7, 0.9, 0.55, 0.8, 0.65, 1, 0.75, 0.85, 0.6, 0.95, 0.7]
+    private let rowWidths: [CGFloat] = [0.9, 0.6, 0.8, 0.5, 0.75, 0.55]
+
+    private var screenCornerRadius: CGFloat { 62 * scale }
+    private var tabBarHeight: CGFloat { 64 * scale }
+    private var toolbarHeight: CGFloat { 50 * scale }
+
+    /// The inset that keeps a capsule of this height concentric with the
+    /// screen's corners, measured from the outside of the bezel.
+    private func concentricInset(forHeight height: CGFloat) -> CGFloat {
+        screenCornerRadius - height / 2 + bezel
+    }
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            RoundedRectangle(cornerRadius: 62 * scale + bezel, style: .continuous)
+            RoundedRectangle(cornerRadius: screenCornerRadius + bezel, style: .continuous)
                 .strokeBorder(lineWidth: bezel)
             content
             chrome
@@ -29,7 +40,7 @@ struct DisplayModeGlyph: View {
                 .padding(.bottom, 28 * scale)
             ForEach(Array(rowWidths.enumerated()), id: \.offset) { _, width in
                 Capsule()
-                    .frame(width: 362 * scale * width, height: 14 * scale)
+                    .frame(width: 362 * scale * width, height: 10 * scale)
                     .padding(.bottom, 22 * scale)
             }
             Spacer(minLength: 0)
@@ -51,28 +62,26 @@ struct DisplayModeGlyph: View {
                         .frame(maxWidth: .infinity)
                 }
             }
-            .frame(height: 64 * scale)
+            .frame(height: tabBarHeight)
             .background(Capsule().opacity(0.25))
-            .padding(.horizontal, 20 * scale + bezel)
-            .padding(.bottom, 20 * scale + bezel)
+            .padding([.horizontal, .bottom], concentricInset(forHeight: tabBarHeight))
         case .browser:
             HStack(spacing: 10 * scale) {
                 Circle()
                     .opacity(0.25)
-                    .frame(width: 56 * scale, height: 56 * scale)
+                    .frame(width: toolbarHeight, height: toolbarHeight)
                 Capsule()
                     .opacity(0.25)
-                    .frame(height: 56 * scale)
+                    .frame(height: toolbarHeight)
                     .overlay {
                         Capsule()
                             .frame(width: 100 * scale, height: 12 * scale)
                     }
                 Circle()
                     .opacity(0.25)
-                    .frame(width: 56 * scale, height: 56 * scale)
+                    .frame(width: toolbarHeight, height: toolbarHeight)
             }
-            .padding(.horizontal, 20 * scale + bezel)
-            .padding(.bottom, 24 * scale + bezel)
+            .padding([.horizontal, .bottom], concentricInset(forHeight: toolbarHeight))
         }
     }
 }
