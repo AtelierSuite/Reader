@@ -39,18 +39,13 @@ public extension Iconography {
     /// Covers feeds whose icon was prefetched from provider metadata at
     /// add time and stored as a `custom-feed-<id>` photo (X, Instagram, ...).
     private func refetchProviderIcon(for feed: Feed) async {
-        guard let siteURL = URL(string: feed.siteURL),
-              let provider = FeedProviderRegistry.metadataFetcher(forSiteURL: siteURL),
-              let metadata = await provider.fetchMetadata(for: siteURL),
-              let iconURL = metadata.iconURL,
-              let image = await downloadImage(from: iconURL) else { return }
-        let icon = metadata.iconNeedsSquareCrop ? image.centerSquareCropped() : image
+        guard let icon = await fetchProviderPhoto(siteURL: feed.siteURL) else { return }
         replaceCustomIcon(with: icon, feedID: feed.id)
     }
 
     /// Removes the old icon first so stale derived-metrics sidecars are not
     /// attached to the replacement image.
-    private func replaceCustomIcon(with image: PlatformImage, feedID: Int64) {
+    internal func replaceCustomIcon(with image: PlatformImage, feedID: Int64) {
         removeCustomIcon(feedID: feedID)
         setCustomIcon(image, feedID: feedID)
     }

@@ -54,6 +54,7 @@ extension OnboardingView {
                     restoreButton()
                 }
                 continueButton { advanceStep() }
+                    .disabled(isRestoring)
             }
             .padding(.bottom, isiPad ? 20 : 8)
         }

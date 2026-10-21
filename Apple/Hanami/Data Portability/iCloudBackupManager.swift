@@ -137,6 +137,7 @@ public nonisolated final class iCloudBackupManager: @unchecked Sendable {
 
         let backupConnection = try Connection(backupURL.path, readonly: true)
         let restoredRecipes = try PetalBackupArchive.read(from: backupConnection)
+        let restoredCustomIcons = try CustomIconBackupArchive.read(from: backupConnection)
         for entry in restoredRecipes {
             try PetalStore.shared.save(entry.recipe)
             if let iconData = entry.iconData {
@@ -159,6 +160,7 @@ public nonisolated final class iCloudBackupManager: @unchecked Sendable {
 
         try FileManager.default.copyItem(at: backupURL, to: dbURL)
         try DatabaseManager.shared.reconnect()
+        await Iconography.shared.replaceCache(withRestoredCustomIcons: restoredCustomIcons)
         if hasWebFeeds {
             UserDefaults.standard.set(true, forKey: "Labs.PetalRecipes")
         }
@@ -195,6 +197,12 @@ public nonisolated final class iCloudBackupManager: @unchecked Sendable {
             )
         }
         try PetalBackupArchive.write(entries, to: connection)
+        let customIconFeedIDs = try connection.rows(
+            "SELECT id FROM feeds WHERE custom_icon_url IS NOT NULL AND custom_icon_url != 'none'"
+        ).compactMap { $0[0] as? Int64 }
+        try CustomIconBackupArchive.write(
+            Iconography.shared.customIconData(feedIDs: customIconFeedIDs), to: connection
+        )
         try connection.run("VACUUM")
 
         try connection.run("PRAGMA wal_checkpoint(TRUNCATE)")

@@ -64,16 +64,18 @@ public extension FeedManager {
         reloadWidgetTimelines()
     }
 
-    /// Installs the fetchd title + profile photo on the first refresh
-    /// after add.  No-op once `feed.lastFetched != nil`.
+    /// Installs the fetched title on the first refresh after add, and the
+    /// profile photo whenever one is passed in.
     func applyFetcherMetadataRefresh(
         feed: Feed,
         fetchdTitle: String,
         profileImage: PlatformImage?
     ) async {
-        guard feed.lastFetched == nil else { return }
-        let effectiveTitle = feed.isTitleCustomized ? feed.title : fetchdTitle
-        let shouldInstallProfilePhoto = profileImage != nil && feed.customIconURL == nil
+        let isFirstFetch = feed.lastFetched == nil
+        guard isFirstFetch || profileImage != nil else { return }
+        let effectiveTitle = feed.isTitleCustomized || !isFirstFetch ? feed.title : fetchdTitle
+        let shouldInstallProfilePhoto = profileImage != nil
+            && (feed.customIconURL == nil || feed.customIconURL == "photo")
         let database = database
         if shouldInstallProfilePhoto, let image = profileImage {
             await Iconography.shared.setCustomIcon(image, feedID: feed.id)

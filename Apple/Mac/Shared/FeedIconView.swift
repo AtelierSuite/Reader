@@ -21,7 +21,7 @@ struct FeedIconView: View {
         .frame(width: size, height: size)
         .clipShape(shape)
         .contentShape(shape)
-        .task(id: feed.id) {
+        .task(id: [feed.id, Int64(FeedIconCache.shared.revision)]) {
             icon = await Iconography.shared.icon(for: feed)
                 ?? InitialsAvatar.renderToImage(name: feed.title, size: size * 2)
         }

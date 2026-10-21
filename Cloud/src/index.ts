@@ -6,7 +6,7 @@ import { type Env, appId, limit } from "./env";
 
 export { Device };
 
-const HOMEPAGE = "https://github.com/katagaki/SakuraCloud";
+const HOMEPAGE = "https://atelier.ktgk.app/#reader";
 const MAX_BODY_BYTES = 256 * 1024;
 
 function json(body: unknown, status = 200, headers: HeadersInit = {}): Response {

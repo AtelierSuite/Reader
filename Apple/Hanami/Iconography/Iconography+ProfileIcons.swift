@@ -34,6 +34,49 @@ extension Iconography {
         return cache(image, cacheKey: cacheKey, filePath: filePath)
     }
 
+    public func hasProfilePhoto(for feed: Feed) -> Bool {
+        let cacheKey: String
+        switch feed.customIconURL {
+        case "photo":
+            cacheKey = Self.customIconCacheKey(feedID: feed.id)
+        case nil:
+            guard let profileKey = Self.profileCacheKey(siteURL: feed.siteURL) else { return false }
+            cacheKey = profileKey
+        default:
+            return true
+        }
+        if memoryCache[cacheKey] != nil { return true }
+        let filePath = cacheDirectory.appendingPathComponent(sanitizedFileName(cacheKey))
+        return FileManager.default.fileExists(atPath: filePath.path)
+    }
+
+    /// Swaps in the new photo only after it downloads, so a fetch that fails
+    /// keeps the photo already shown.
+    public func refetchProfilePhoto(for feed: Feed) async -> Bool {
+        guard let photo = await fetchProviderPhoto(siteURL: feed.siteURL) else { return false }
+        switch feed.customIconURL {
+        case "photo":
+            replaceCustomIcon(with: photo, feedID: feed.id)
+        case nil:
+            guard let cacheKey = Self.profileCacheKey(siteURL: feed.siteURL) else { return false }
+            forgetProfileIcon(siteURL: feed.siteURL)
+            _ = cache(photo, cacheKey: cacheKey,
+                      filePath: cacheDirectory.appendingPathComponent(sanitizedFileName(cacheKey)))
+        default:
+            break
+        }
+        return true
+    }
+
+    nonisolated func fetchProviderPhoto(siteURL: String) async -> PlatformImage? {
+        guard let url = URL(string: siteURL),
+              let provider = FeedProviderRegistry.metadataFetcher(forSiteURL: url),
+              let metadata = await provider.fetchMetadata(for: url),
+              let iconURL = metadata.iconURL,
+              let image = await downloadImage(from: iconURL) else { return nil }
+        return metadata.iconNeedsSquareCrop ? image.centerSquareCropped() : image
+    }
+
     func forgetProfileIcon(siteURL: String) {
         guard let cacheKey = Self.profileCacheKey(siteURL: siteURL) else { return }
         memoryCache[cacheKey] = nil

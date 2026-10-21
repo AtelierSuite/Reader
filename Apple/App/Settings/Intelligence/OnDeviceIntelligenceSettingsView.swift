@@ -7,6 +7,7 @@ struct OnDeviceIntelligenceSettingsView: View {
 
     @AppStorage("Intelligence.ContentInsights.Enabled") private var contentInsightsEnabled: Bool = false
     @AppStorage("Intelligence.Personalization.Enabled") private var personalizationEnabled: Bool = true
+    @AppStorage(CloudBlockRefiner.enabledKey) private var cleanUpContentEnabled: Bool = true
 
     @State private var showingClearConfirmation = false
 
@@ -25,6 +26,13 @@ struct OnDeviceIntelligenceSettingsView: View {
                     Text(String(localized: "ContentInsights.Footer", table: "Settings"))
                     Text(String(localized: "Personalization.Footer", table: "Settings"))
                 }
+            }
+            Section {
+                Toggle(String(localized: "CleanUpContent", table: "Settings"), isOn: $cleanUpContentEnabled)
+            } header: {
+                Text(String(localized: "Section.CloudServices", table: "Settings"))
+            } footer: {
+                Text(String(localized: "CleanUpContent.Footer", table: "Settings"))
             }
         }
         .navigationTitle(String(localized: "Section.InsightsAndIntelligence", table: "Settings"))

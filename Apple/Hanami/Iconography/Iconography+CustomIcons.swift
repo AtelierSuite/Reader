@@ -14,7 +14,10 @@ public extension Iconography {
                 return nil
             }
             if customURL == "photo" {
-                return customIcon(feedID: feed.id)
+                if let photo = customIcon(feedID: feed.id) {
+                    return photo
+                }
+                return await defaultIcon(for: feed)
             }
             if let cached = customIcon(feedID: feed.id) {
                 return cached
@@ -31,7 +34,7 @@ public extension Iconography {
     }
 
     func setCustomIcon(_ image: PlatformImage, feedID: Int64) {
-        let key = "custom-feed-\(feedID)"
+        let key = Self.customIconCacheKey(feedID: feedID)
         memoryCache[key] = image
         let filePath = cacheDirectory.appendingPathComponent(sanitizedFileName(key))
         if let pngData = image.pngData() {
@@ -41,7 +44,7 @@ public extension Iconography {
     }
 
     func customIcon(feedID: Int64) -> PlatformImage? {
-        let key = "custom-feed-\(feedID)"
+        let key = Self.customIconCacheKey(feedID: feedID)
         if let cached = memoryCache[key] {
             return cached
         }
@@ -55,8 +58,12 @@ public extension Iconography {
         return nil
     }
 
+    nonisolated static func customIconCacheKey(feedID: Int64) -> String {
+        "custom-feed-\(feedID)"
+    }
+
     func removeCustomIcon(feedID: Int64) {
-        let key = "custom-feed-\(feedID)"
+        let key = Self.customIconCacheKey(feedID: feedID)
         memoryCache[key] = nil
         let filePath = cacheDirectory.appendingPathComponent(sanitizedFileName(key))
         try? FileManager.default.removeItem(at: filePath)

@@ -115,10 +115,15 @@ public extension FeedManager {
     private func loadInstagramProfileImage(
         result: InstagramProfileFetchResult, feed: Feed, contentOnly: Bool
     ) async -> PlatformImage? {
-        guard !contentOnly, feed.lastFetched == nil,
+        guard !contentOnly,
               let imageURLString = result.profileImageURL,
-              let imageURL = URL(string: imageURLString),
-              let (imageData, _) = try? await Iconography.urlSession.data(from: imageURL) else {
+              let imageURL = URL(string: imageURLString) else {
+            return nil
+        }
+        if feed.lastFetched != nil, await Iconography.shared.hasProfilePhoto(for: feed) {
+            return nil
+        }
+        guard let (imageData, _) = try? await Iconography.urlSession.data(from: imageURL) else {
             return nil
         }
         return PlatformImage(data: imageData)
