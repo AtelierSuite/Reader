@@ -14,7 +14,11 @@ struct QuickAccessBarEditorSheet: View {
         NavigationStack {
             List {
                 ForEach(orderedItems) { item in
-                    Label(item.title, systemImage: item.symbolName)
+                    Label {
+                        Text(item.title)
+                    } icon: {
+                        TodayQuickAccessItemIcon(item: item.source.quickAccessItem, size: 30)
+                    }
                 }
                 .onMove { source, destination in
                     orderedItems.move(fromOffsets: source, toOffset: destination)

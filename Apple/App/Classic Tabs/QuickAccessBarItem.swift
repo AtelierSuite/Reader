@@ -4,7 +4,6 @@ import Hanami
 struct QuickAccessBarItem: Identifiable, Hashable {
     let title: String
     let source: ClassicHomeSource
-    let symbolName: String
     let listIconName: String?
 
     var id: String { source.token }
@@ -26,7 +25,6 @@ struct QuickAccessBarItem: Identifiable, Hashable {
             return QuickAccessBarItem(
                 title: item.browserTitle(in: feedManager),
                 source: source,
-                symbolName: item.browserSymbolName(in: feedManager),
                 listIconName: listIconName
             )
         }
