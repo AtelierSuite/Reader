@@ -32,22 +32,27 @@ struct ClassicHomePage: View {
 
     var body: some View {
         let tabs = HomeSectionBarItem.items(feedSections: feedSections, lists: feedManager.lists)
-        HomeSectionView(source: contentSource)
-            .toolbar {
-                if tabs.count > 1 {
-                    ToolbarItem(placement: .principal) {
-                        HomeSectionBar(tabs: tabs, selection: $selection)
-                            .frame(maxWidth: .infinity)
-                    }
+        // HomeSectionView re-identifies its content per source, which re-adds the
+        // toolbar items of a navigation root and makes the section bar's pill grow
+        // from the top left. A stable root keeps the items in place.
+        ZStack {
+            HomeSectionView(source: contentSource)
+        }
+        .toolbar {
+            if tabs.count > 1 {
+                ToolbarItem(placement: .principal) {
+                    HomeSectionBar(tabs: tabs, selection: $selection)
+                        .frame(maxWidth: .infinity)
                 }
             }
-            .onChange(of: scenePhase) {
-                if scenePhase != .active {
-                    UserDefaults.standard.set(selection.token, forKey: ClassicHomeSource.storageKey)
-                }
-            }
-            .onDisappear {
+        }
+        .onChange(of: scenePhase) {
+            if scenePhase != .active {
                 UserDefaults.standard.set(selection.token, forKey: ClassicHomeSource.storageKey)
             }
+        }
+        .onDisappear {
+            UserDefaults.standard.set(selection.token, forKey: ClassicHomeSource.storageKey)
+        }
     }
 }
