@@ -2,31 +2,42 @@ import SwiftUI
 
 /// A phone outline sketching each display mode's bottom chrome: the tab bar
 /// for Classic, and the back button, address bar and tab count for Browser.
+/// Sizes are an iPhone screen's points scaled down, so the glyph keeps the
+/// device's proportions; the bars are drawn slightly heavier to stay legible.
 struct DisplayModeGlyph: View {
 
     let mode: AppDisplayMode
 
+    private let scale: CGFloat = 0.15
+    private let bezel: CGFloat = 2
+    private let rowWidths: [CGFloat] = [1, 0.7, 0.9, 0.55, 0.8, 0.65, 1, 0.75, 0.85, 0.6, 0.95, 0.7]
+
     var body: some View {
         ZStack(alignment: .bottom) {
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .strokeBorder(lineWidth: 2.5)
-            VStack(alignment: .leading, spacing: 5) {
-                ForEach([1.0, 0.8, 1.0, 0.6, 0.9], id: \.self) { width in
-                    Capsule()
-                        .frame(height: 4)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .scaleEffect(x: width, anchor: .leading)
-                }
-                Spacer(minLength: 0)
-            }
-            .opacity(0.3)
-            .padding(.horizontal, 10)
-            .padding(.top, 14)
+            RoundedRectangle(cornerRadius: 62 * scale + bezel, style: .continuous)
+                .strokeBorder(lineWidth: bezel)
+            content
             chrome
-                .padding(.horizontal, 6)
-                .padding(.bottom, 7)
         }
-        .frame(width: 66, height: 120)
+        .frame(width: 402 * scale + bezel * 2, height: 874 * scale + bezel * 2)
+    }
+
+    private var content: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Capsule()
+                .frame(width: 180 * scale, height: 24 * scale)
+                .padding(.bottom, 28 * scale)
+            ForEach(Array(rowWidths.enumerated()), id: \.offset) { _, width in
+                Capsule()
+                    .frame(width: 362 * scale * width, height: 14 * scale)
+                    .padding(.bottom, 22 * scale)
+            }
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .opacity(0.3)
+        .padding(.horizontal, 20 * scale + bezel)
+        .padding(.top, 104 * scale + bezel)
     }
 
     @ViewBuilder
@@ -36,28 +47,32 @@ struct DisplayModeGlyph: View {
             HStack(spacing: 0) {
                 ForEach(0..<5, id: \.self) { _ in
                     Circle()
-                        .frame(width: 5, height: 5)
+                        .frame(width: 22 * scale, height: 22 * scale)
                         .frame(maxWidth: .infinity)
                 }
             }
-            .frame(height: 14)
+            .frame(height: 64 * scale)
             .background(Capsule().opacity(0.25))
+            .padding(.horizontal, 20 * scale + bezel)
+            .padding(.bottom, 20 * scale + bezel)
         case .browser:
-            HStack(spacing: 3) {
+            HStack(spacing: 10 * scale) {
                 Circle()
                     .opacity(0.25)
-                    .frame(width: 14, height: 14)
+                    .frame(width: 56 * scale, height: 56 * scale)
                 Capsule()
                     .opacity(0.25)
-                    .frame(height: 14)
+                    .frame(height: 56 * scale)
                     .overlay {
                         Capsule()
-                            .frame(width: 16, height: 3)
+                            .frame(width: 100 * scale, height: 12 * scale)
                     }
                 Circle()
                     .opacity(0.25)
-                    .frame(width: 14, height: 14)
+                    .frame(width: 56 * scale, height: 56 * scale)
             }
+            .padding(.horizontal, 20 * scale + bezel)
+            .padding(.bottom, 24 * scale + bezel)
         }
     }
 }
