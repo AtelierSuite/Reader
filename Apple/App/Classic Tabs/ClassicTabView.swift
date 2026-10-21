@@ -40,8 +40,8 @@ struct ClassicTabView: View {
                     ClassicDiscoverPage()
                 }
             }
-            Tab("Tabs.Profile", systemImage: "person.crop.circle", value: ClassicTab.profile) {
-                ProfileView(showsCloseButton: false)
+            Tab("Tabs.Settings", systemImage: "gearshape", value: ClassicTab.settings) {
+                SettingsView(showsCloseButton: false)
             }
         }
         .tabBarMinimizeBehavior(.onScrollDown)

@@ -38,10 +38,10 @@ extension ClassicTabView {
         ))
     }
 
-    /// Profile runs its own settings stack, so content opened from outside
+    /// Settings runs its own stack, so content opened from outside
     /// lands on Home instead.
     private func pushOntoNavigableTab<Value: Hashable>(_ value: Value) {
-        if selectedTab == .profile {
+        if selectedTab == .settings {
             selectedTab = .home
         }
         var path = paths[selectedTab] ?? NavigationPath()

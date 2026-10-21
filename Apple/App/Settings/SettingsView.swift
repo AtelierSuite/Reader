@@ -1,7 +1,7 @@
 import SwiftUI
 import Hanami
 
-struct ProfileView: View {
+struct SettingsView: View {
 
     /// Sheets want the standard inline title; the tab keeps the large one.
     var titleDisplayMode: ToolbarTitleDisplayMode?
@@ -112,7 +112,7 @@ struct ProfileView: View {
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Tabs.Profile")
+            .navigationTitle("Tabs.Settings")
             .compatibleSoftScrollEdgeEffectStyle()
             .toolbarTitleDisplayMode(
                 titleDisplayMode

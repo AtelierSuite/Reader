@@ -6,7 +6,7 @@ struct BrowserTabSwitcher: View {
 
     @Environment(BrowserTabStore.self) private var store
     @Environment(FeedManager.self) private var feedManager
-    @State private var isShowingProfile = false
+    @State private var isShowingSettings = false
 
     var body: some View {
         TabSwitcher(
@@ -26,21 +26,21 @@ struct BrowserTabSwitcher: View {
                     showsSubtitle: false
                 )
             },
-            topTrailingItem: { profileButton }
+            topTrailingItem: { settingsButton }
         )
-        .sheet(isPresented: $isShowingProfile) {
-            ProfileView(titleDisplayMode: .inline)
+        .sheet(isPresented: $isShowingSettings) {
+            SettingsView(titleDisplayMode: .inline)
                 .environment(feedManager)
         }
     }
 
-    private var profileButton: some View {
+    private var settingsButton: some View {
         Button {
-            isShowingProfile = true
+            isShowingSettings = true
         } label: {
-            Image(systemName: "person.crop.circle")
+            Image(systemName: "gearshape")
         }
-        .accessibilityLabel(String(localized: "Tabs.Profile"))
+        .accessibilityLabel(String(localized: "Tabs.Settings"))
     }
 }
 
