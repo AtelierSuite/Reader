@@ -112,7 +112,7 @@ public actor Iconography {
         return path.isEmpty ? host : host + path
     }
 
-    public func sanitizedFileName(_ key: String) -> String {
+    public nonisolated func sanitizedFileName(_ key: String) -> String {
         key.replacingOccurrences(of: "/", with: "_")
             .replacingOccurrences(of: ":", with: "_") + ".png"
     }
