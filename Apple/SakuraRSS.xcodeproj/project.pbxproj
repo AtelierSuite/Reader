@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4D41430A0000000000000001 /* Hanami.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44484142FB09B0E003FDAD4 /* Hanami.framework */; };
 		4D41430A0000000000000002 /* Hanami.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E44484142FB09B0E003FDAD4 /* Hanami.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4D41430A0000000000000021 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E47D104D2F549821006081EF /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AA000001AABB0001006081EF /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = AA000001AABB0002006081EF /* SQLite */; };
 		AA000001AABB0003006081EF /* SQLite in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = AA000001AABB0004006081EF /* SQLite */; };
 		E41D98A82F8B3B6E00FB2880 /* FluidAudio in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = E41D98A72F8B3B6E00FB2880 /* FluidAudio */; };
@@ -35,7 +36,6 @@
 		E47D13182F549F92006081EF /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = E47D13172F549F92006081EF /* SwiftSoup */; };
 		E4BC0A01300B95BD0083C0BD /* Hanami.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44484142FB09B0E003FDAD4 /* Hanami.framework */; };
 		EA0E4A012FC0A00E003FDAD4 /* EnhancedNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = EA0E4A022FC0A00E003FDAD4 /* EnhancedNavigation */; };
-		4D41430A0000000000000021 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E47D104D2F549821006081EF /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +45,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E44484132FB09B0E003FDAD4;
 			remoteInfo = Hanami;
+		};
+		4D41430A0000000000000022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E47D10132F549605006081EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E47D104C2F549821006081EF;
+			remoteInfo = WidgetsExtension;
 		};
 		E44484182FB09B0E003FDAD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -109,13 +116,6 @@
 			remoteGlobalIDString = E44484132FB09B0E003FDAD4;
 			remoteInfo = Hanami;
 		};
-		4D41430A0000000000000022 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E47D10132F549605006081EF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E47D104C2F549821006081EF;
-			remoteInfo = WidgetsExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -128,6 +128,17 @@
 				4D41430A0000000000000002 /* Hanami.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D41430A0000000000000024 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D41430A0000000000000021 /* WidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E444841C2FB09B0E003FDAD4 /* Embed Frameworks */ = {
@@ -151,17 +162,6 @@
 				E47D105C2F549822006081EF /* WidgetsExtension.appex in Embed Foundation Extensions */,
 				E45EAA222F9FA36900EA7A54 /* Open Article.appex in Embed Foundation Extensions */,
 				E47D10432F54980E006081EF /* Add Feed.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4D41430A0000000000000024 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				4D41430A0000000000000021 /* WidgetsExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1137,6 +1137,11 @@
 			target = E44484132FB09B0E003FDAD4 /* Hanami */;
 			targetProxy = 4D41430A0000000000000003 /* PBXContainerItemProxy */;
 		};
+		4D41430A0000000000000023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E47D104C2F549821006081EF /* WidgetsExtension */;
+			targetProxy = 4D41430A0000000000000022 /* PBXContainerItemProxy */;
+		};
 		E44484192FB09B0E003FDAD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E44484132FB09B0E003FDAD4 /* Hanami */;
@@ -1185,11 +1190,6 @@
 			isa = PBXTargetDependency;
 			target = E44484132FB09B0E003FDAD4 /* Hanami */;
 			targetProxy = E4BC0A02300B95BD0083C0BD /* PBXContainerItemProxy */;
-		};
-		4D41430A0000000000000023 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E47D104C2F549821006081EF /* WidgetsExtension */;
-			targetProxy = 4D41430A0000000000000022 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
