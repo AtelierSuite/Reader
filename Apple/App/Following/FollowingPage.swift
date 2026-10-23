@@ -55,8 +55,13 @@ struct FollowingPage: View {
         .onChange(of: feedManager.activeFocus) { _, _ in
             isShowingAllDespiteFocus = false
         }
-        .pageMenu {
+        .pageMenu(isEnabled: !isClassicTabsActive) {
             followingPageMenu
+        }
+        .toolbar {
+            if isClassicTabsActive {
+                FollowingClassicToolbar(actions: browserFollowingActions)
+            }
         }
         .browserOmniboxTakeover(isEditingFeeds)
         .sheet(isPresented: $isPresentingAddFeedSheet) {
