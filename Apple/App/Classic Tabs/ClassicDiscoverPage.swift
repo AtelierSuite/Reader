@@ -18,7 +18,10 @@ struct ClassicDiscoverPage: View {
                 BrowserSearchResultsView(query: query, recordsSearchTerm: false)
             }
         }
-        .searchable(text: $searchText, prompt: String(localized: "Prompt", table: "Search"))
+        .searchable(
+            text: $searchText,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: String(localized: "Prompt", table: "Search"))
         .onSubmit(of: .search) {
             let submitted = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !submitted.isEmpty else { return }
