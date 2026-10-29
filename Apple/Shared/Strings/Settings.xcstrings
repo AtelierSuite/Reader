@@ -9427,6 +9427,656 @@
           }
         }
       }
+    },
+    "Notifications.BackgroundRefreshOff" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Hintergrundaktualisierung ist für Reader deaktiviert. Neue Inhalte werden daher nur gesucht, während Reader geöffnet ist."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Background App Refresh is off for Reader, so new content is only checked while Reader is open."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'actualisation en arrière-plan est désactivée pour Reader : le nouveau contenu n'est donc recherché que lorsque Reader est ouvert."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'aggiornamento app in background è disattivato per Reader, quindi i nuovi contenuti vengono cercati solo mentre Reader è aperto."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ReaderのAppのバックグラウンド更新がオフになっているため、新着コンテンツはReaderを開いている間にのみ確認されます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reader의 백그라운드 앱 새로 고침이 꺼져 있어 Reader가 열려 있는 동안에만 새 콘텐츠를 확인합니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'Ververs op achtergrond' staat uit voor Reader, dus er wordt alleen op nieuwe content gecontroleerd terwijl Reader open is."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Làm mới ứng dụng trong nền đang tắt cho Reader, vì vậy nội dung mới chỉ được kiểm tra khi Reader đang mở."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reader 的“后台App刷新”已关闭，因此只会在 Reader 打开时检查新内容。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reader 的「背景App重新整理」已關閉，因此只會在 Reader 開啟時檢查新內容。"
+          }
+        }
+      }
+    },
+    "Notifications.CheckInterval" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nach neuen Inhalten suchen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check for New Content"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher du nouveau contenu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca nuovi contenuti"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新着コンテンツの確認"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 콘텐츠 확인"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controleren op nieuwe content"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kiểm tra nội dung mới"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "检查新内容"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "檢查新內容"
+          }
+        }
+      }
+    },
+    "Notifications.Enabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitteilungen über neue Inhalte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Content Notifications"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications de nouveau contenu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifiche di nuovi contenuti"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新着コンテンツの通知"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 콘텐츠 알림"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen voor nieuwe content"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông báo nội dung mới"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新内容通知"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新內容通知"
+          }
+        }
+      }
+    },
+    "Notifications.Feeds.Footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du kannst Mitteilungen auch mit der Glocke auf der Seite eines Feeds ein- oder ausschalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can also turn notifications on or off with the bell button on a feed's page."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez aussi activer ou désactiver les notifications avec le bouton en forme de cloche sur la page d'un flux."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi anche attivare o disattivare le notifiche con il pulsante a forma di campanella nella pagina di un feed."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フィードのページにあるベルボタンでも通知のオン/オフを切り替えられます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피드 페이지의 종 버튼으로도 알림을 켜거나 끌 수 있습니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je kunt meldingen ook in- of uitschakelen met de belknop op de pagina van een feed."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn cũng có thể bật hoặc tắt thông báo bằng nút chuông trên trang của nguồn cấp."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你也可以使用订阅源页面上的铃铛按钮打开或关闭通知。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你也可以使用訂閱源頁面上的鈴鐺按鈕開啟或關閉通知。"
+          }
+        }
+      }
+    },
+    "Notifications.Feeds" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feeds"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feeds"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flux"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feed"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フィード"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피드"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feeds"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nguồn cấp"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "订阅源"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "訂閱源"
+          }
+        }
+      }
+    },
+    "Notifications.Footer.Mac" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitteilungen kommen möglicherweise nicht sofort an. macOS entscheidet, wann Reader im Hintergrund nach neuen Inhalten sucht. Mitteilungen können sich daher verzögern, etwa wenn dein Mac im Ruhezustand ist oder mit Batterie läuft."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications may not be instant. macOS decides when Reader checks for new content in the background, so notifications can arrive late, such as while your Mac is asleep or on battery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications peuvent ne pas être instantanées. macOS décide quand Reader recherche du nouveau contenu en arrière-plan : les notifications peuvent donc arriver en retard, par exemple lorsque votre Mac est en veille ou sur batterie."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le notifiche potrebbero non essere immediate. macOS decide quando Reader cerca nuovi contenuti in background, quindi le notifiche potrebbero arrivare in ritardo, ad esempio quando il Mac è in stop o funziona a batteria."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知はすぐに届かない場合があります。Readerがバックグラウンドで新着コンテンツを確認するタイミングはmacOSが決定するため、Macがスリープ中のときやバッテリー駆動中のときなどは通知が遅れることがあります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림이 즉시 도착하지 않을 수 있습니다. Reader가 백그라운드에서 새 콘텐츠를 확인하는 시점은 macOS가 결정하므로, Mac이 잠자기 상태이거나 배터리로 작동 중일 때 등에는 알림이 늦게 도착할 수 있습니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen komen mogelijk niet direct binnen. macOS bepaalt wanneer Reader op de achtergrond op nieuwe content controleert. Meldingen kunnen daardoor later komen, bijvoorbeeld wanneer je Mac in de sluimerstand staat of op de batterij werkt."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông báo có thể không đến ngay lập tức. macOS quyết định khi nào Reader kiểm tra nội dung mới trong nền, vì vậy thông báo có thể đến muộn, chẳng hạn khi máy Mac đang ngủ hoặc chạy bằng pin."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知可能不会即时送达。macOS 会决定 Reader 何时在后台检查新内容，因此通知可能会延迟，例如在你的 Mac 处于睡眠状态或使用电池供电时。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知可能不會即時送達。macOS 會決定 Reader 何時在背景檢查新內容，因此通知可能會延遲，例如在你的 Mac 處於睡眠狀態或使用電池供電時。"
+          }
+        }
+      }
+    },
+    "Notifications.Footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitteilungen kommen möglicherweise nicht sofort an. Das System entscheidet, wann Reader im Hintergrund nach neuen Inhalten suchen kann. Mitteilungen können sich daher verzögern oder erst beim Öffnen von Reader eintreffen, wenn die Hintergrundaktualisierung aus- oder der Stromsparmodus eingeschaltet ist."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications may not be instant. The system decides when Reader can check for new content in the background, so notifications can arrive late, or wait until you open Reader while Background App Refresh is off or Low Power Mode is on."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications peuvent ne pas être instantanées. Le système décide quand Reader peut rechercher du nouveau contenu en arrière-plan : les notifications peuvent donc arriver en retard, ou attendre que vous ouvriez Reader si l'actualisation en arrière-plan est désactivée ou si le mode Économie d'énergie est activé."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le notifiche potrebbero non essere immediate. Il sistema decide quando Reader può cercare nuovi contenuti in background, quindi le notifiche potrebbero arrivare in ritardo, o solo all'apertura di Reader se l'aggiornamento app in background è disattivato o se il risparmio energetico è attivo."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知はすぐに届かない場合があります。Readerがバックグラウンドで新着コンテンツを確認するタイミングはシステムが決定するため、通知が遅れたり、Appのバックグラウンド更新がオフのときや低電力モードがオンのときはReaderを開くまで届かなかったりすることがあります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림이 즉시 도착하지 않을 수 있습니다. Reader가 백그라운드에서 새 콘텐츠를 확인하는 시점은 시스템이 결정하므로, 알림이 늦게 도착하거나 백그라운드 앱 새로 고침이 꺼져 있거나 저전력 모드가 켜져 있을 때는 Reader를 열 때까지 도착하지 않을 수 있습니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen komen mogelijk niet direct binnen. Het systeem bepaalt wanneer Reader op de achtergrond op nieuwe content kan controleren. Meldingen kunnen daardoor later komen, of pas wanneer je Reader opent als 'Ververs op achtergrond' uit staat of de energiebesparingsmodus aan staat."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông báo có thể không đến ngay lập tức. Hệ thống quyết định khi nào Reader có thể kiểm tra nội dung mới trong nền, vì vậy thông báo có thể đến muộn, hoặc chỉ đến khi bạn mở Reader nếu Làm mới ứng dụng trong nền bị tắt hoặc Chế độ nguồn điện thấp đang bật."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知可能不会即时送达。系统会决定 Reader 何时可以在后台检查新内容，因此通知可能会延迟；如果“后台App刷新”已关闭或“低电量模式”已开启，通知可能要等到你打开 Reader 时才会送达。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知可能不會即時送達。系統會決定 Reader 何時可以在背景檢查新內容，因此通知可能會延遲；若「背景App重新整理」已關閉或「低耗電模式」已開啟，通知可能要等到你打開 Reader 時才會送達。"
+          }
+        }
+      }
+    },
+    "Notifications.OpenSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen öffnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Réglages"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri Impostazioni"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定を開く"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 열기"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Instellingen"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mở Cài đặt"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开设置"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打開設定"
+          }
+        }
+      }
+    },
+    "Notifications.PermissionDenied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitteilungen sind für Reader deaktiviert. Aktiviere sie in den Einstellungen, um über neue Inhalte informiert zu werden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications are turned off for Reader. Turn them on in Settings to be notified of new content."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications sont désactivées pour Reader. Activez-les dans Réglages pour être averti du nouveau contenu."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le notifiche sono disattivate per Reader. Attivale in Impostazioni per ricevere avvisi sui nuovi contenuti."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Readerの通知がオフになっています。新着コンテンツの通知を受け取るには、設定で通知をオンにしてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reader의 알림이 꺼져 있습니다. 새 콘텐츠 알림을 받으려면 설정에서 알림을 켜십시오."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen staan uit voor Reader. Schakel ze in via Instellingen om meldingen over nieuwe content te krijgen."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông báo đang tắt cho Reader. Hãy bật trong Cài đặt để nhận thông báo về nội dung mới."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reader 的通知已关闭。请在“设置”中打开通知，以便接收新内容通知。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reader 的通知已關閉。請在「設定」中開啟通知，以接收新內容通知。"
+          }
+        }
+      }
+    },
+    "Section.Notifications" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitteilungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifiche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông báo"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"

@@ -142,6 +142,8 @@ struct FeedHeaderView: View {
                 .buttonBorderShape(.capsule)
                 .compatibleGlassEffectID("MuteToggle", in: namespace)
 
+                FeedNotifyButton(feed: feed, size: actionButtonHeight, namespace: namespace)
+
                 Button {
                     isEditingFeed = true
                 } label: {
