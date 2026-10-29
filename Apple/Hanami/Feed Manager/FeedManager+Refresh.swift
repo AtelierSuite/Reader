@@ -175,6 +175,7 @@ public extension FeedManager {
         _ = await work.value
         await loadFromDatabaseInBackground(animated: true)
         let finalCompleted = await finalizeRefreshAll()
+        await postNotificationsForNewContent()
         log("FeedRefresh.All", "end completed=\(finalCompleted)/\(feedsToRefresh.count)")
     }
 

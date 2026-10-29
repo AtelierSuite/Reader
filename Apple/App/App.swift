@@ -44,6 +44,9 @@ struct SakuraRSSApp: App {
                 .keepScreenOnDuringPodcastWork()
                 .task {
                     OpenContent.feedManager = feedManager
+                    NewContentNotificationResponder.shared.setOpenArticleHandler { articleID in
+                        pendingArticleID = articleID
+                    }
                     feedManager.onBookmarkAdded = { [feedManager] article in
                         BookmarkToastManager.shared.show(article: article, feedManager: feedManager)
                     }
@@ -110,6 +113,11 @@ struct SakuraRSSApp: App {
                 .onChange(of: refreshInterval) {
                     scheduleAppRefresh()
                 }
+                .onReceive(
+                    NotificationCenter.default.publisher(for: NewContentNotifications.didChangeNotification)
+                ) { _ in
+                    scheduleAppRefresh()
+                }
                 .onChange(of: iCloudBackupInterval) {
                     scheduleiCloudBackup()
                 }
@@ -164,6 +172,7 @@ struct SakuraRSSApp: App {
 
         defaults.set(defaults.integer(forKey: "App.LaunchCount") + 1, forKey: "App.LaunchCount")
         registerBackgroundTask()
+        NewContentNotificationResponder.shared.activate()
         try? Tips.configure()
     }
 

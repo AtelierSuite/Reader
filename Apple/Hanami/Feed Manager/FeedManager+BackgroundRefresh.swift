@@ -11,12 +11,15 @@ public extension FeedManager {
     /// returns how many eligible feeds were left over. The next run picks those
     /// up first, since the feeds refreshed this time become the freshest.
     func refreshFeedsInBackground(
+        limitedTo feedIDs: Set<Int64>? = nil,
         skipImageFetch: Bool,
         skipImagePreload: Bool
     ) async -> Int {
         let cooldownRaw = UserDefaults.standard.string(forKey: "BackgroundRefresh.Cooldown")
         let cooldownSeconds = (cooldownRaw.flatMap(FeedRefreshCooldown.init(rawValue:)) ?? .fiveMinutes).seconds
-        let candidates = feeds.filter { !PetalRecipe.isPetalFeedURL($0.url) }
+        let candidates = feeds.filter {
+            !PetalRecipe.isPetalFeedURL($0.url) && (feedIDs?.contains($0.id) ?? true)
+        }
         let attempts = Self.loadBackgroundAttempts(keepingFeedIDs: Set(feeds.map(\.id)))
         let lastRefreshed = { (feed: Feed) in Self.stalenessDate(of: feed, attempts: attempts) }
         let eligible = filterByRefreshCooldown(
@@ -46,10 +49,13 @@ public extension FeedManager {
             queues.instagram, maxConcurrent: FeedRefreshQueueLimits.throttled, options: options
         )
         let deferredCount = await regular + slow + xRefresh + instagramRefresh
-        await MainActor.run {
-            self.lastRefreshedAt = Date()
-            self.scopedLastRefreshedAt = [:]
+        if feedIDs == nil {
+            await MainActor.run {
+                self.lastRefreshedAt = Date()
+                self.scopedLastRefreshedAt = [:]
+            }
         }
+        await postNotificationsForNewContent()
         log("FeedRefresh.Background", "end eligible=\(eligible.count) deferred=\(deferredCount)")
         return deferredCount
     }

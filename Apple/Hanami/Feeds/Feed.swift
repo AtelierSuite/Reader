@@ -11,6 +11,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
     public var category: String?
     public var isPodcast: Bool
     public var isMuted: Bool
+    public var notifiesNewContent: Bool = false
     public var customIconURL: String?
     public var acronymIcon: Data?
     /// `true` when the user has manually edited the feed's title; refreshes must not overwrite it.

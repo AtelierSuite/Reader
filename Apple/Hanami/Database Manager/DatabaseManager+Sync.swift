@@ -12,12 +12,13 @@ public nonisolated struct SyncedFeed: Sendable {
     public var isPodcast: Bool
     public var isMuted: Bool
     public var isTitleCustomized: Bool
+    public var notifiesNewContent: Bool
     public var userModifiedAt: Date?
 
     public init(syncID: String, url: String, title: String, siteURL: String,
                 feedDescription: String, iconURL: String?, category: String?,
                 isPodcast: Bool, isMuted: Bool, isTitleCustomized: Bool,
-                userModifiedAt: Date?) {
+                notifiesNewContent: Bool, userModifiedAt: Date?) {
         self.syncID = syncID
         self.url = url
         self.title = title
@@ -28,6 +29,7 @@ public nonisolated struct SyncedFeed: Sendable {
         self.isPodcast = isPodcast
         self.isMuted = isMuted
         self.isTitleCustomized = isTitleCustomized
+        self.notifiesNewContent = notifiesNewContent
         self.userModifiedAt = userModifiedAt
     }
 }
@@ -126,6 +128,7 @@ public nonisolated extension DatabaseManager {
             feedIsPodcast <- synced.isPodcast,
             feedIsMuted <- synced.isMuted,
             feedIsTitleCustomized <- synced.isTitleCustomized,
+            feedNotifiesNewContent <- synced.notifiesNewContent,
             feedSyncID <- synced.syncID,
             feedUserModifiedAt <- synced.userModifiedAt?.timeIntervalSince1970
         ))
@@ -151,6 +154,7 @@ public nonisolated extension DatabaseManager {
             feedIsPodcast <- synced.isPodcast,
             feedIsMuted <- synced.isMuted,
             feedIsTitleCustomized <- synced.isTitleCustomized,
+            feedNotifiesNewContent <- synced.notifiesNewContent,
             feedUserModifiedAt <- synced.userModifiedAt?.timeIntervalSince1970
         ))
     }

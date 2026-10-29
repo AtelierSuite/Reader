@@ -7,6 +7,7 @@ DEFINE SCHEMA
         isMuted           INT64 QUERYABLE SORTABLE,
         isPodcast         INT64 QUERYABLE SORTABLE,
         isTitleCustomized INT64 QUERYABLE SORTABLE,
+        notifiesNewContent INT64 QUERYABLE SORTABLE,
         siteURL           STRING QUERYABLE SEARCHABLE SORTABLE,
         title             STRING QUERYABLE SEARCHABLE SORTABLE,
         url               STRING QUERYABLE SEARCHABLE SORTABLE,

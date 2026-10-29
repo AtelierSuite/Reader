@@ -50,6 +50,7 @@ public extension FeedManager {
         let containingListIDs = (try? database.listIDs(forFeedID: feed.id)) ?? []
         try database.deleteFeed(id: feed.id)
         captureUserFeedDeletion(syncID: syncID)
+        Task { await NewContentNotifier.shared.removeDeliveredNotifications(forFeedID: feed.id) }
         containingListIDs.forEach(captureUserListEdit(listID:))
         PodcastDownloadManager.cleanupOrphanedDownloads()
         SpotlightIndexer.removeArticles(feedID: feed.id, articleIDs: articleIDs)

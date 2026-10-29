@@ -96,7 +96,7 @@ public nonisolated enum SpotlightIndexer {
         return Int64(identifier.dropFirst("article.".count))
     }
 
-    private static func stripMarkup(_ text: String) -> String? {
+    static func stripMarkup(_ text: String) -> String? {
         var result = text
         result = replacingMatches(result, imageMarkerExpression, with: "")
         result = replacingMatches(result, markdownImageExpression, with: "")
