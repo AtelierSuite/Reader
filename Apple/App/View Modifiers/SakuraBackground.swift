@@ -36,16 +36,9 @@ struct SakuraBackground: ViewModifier {
             .background(alignment: .top) {
                 ZStack(alignment: .top) {
                     if isActive {
-                        LinearGradient(
-                            colors: [
-                                Color("BackgroundGradientTop"),
-                                Color("BackgroundGradientBottom")
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
+                        Color(uiColor: .systemBackground)
                     }
-                    if !isDisabled, !feedColors.isEmpty {
+                    if isActive, !feedColors.isEmpty {
                         FeedHeaderGradientView(colors: feedColors)
                             .frame(height: 360)
                     }
