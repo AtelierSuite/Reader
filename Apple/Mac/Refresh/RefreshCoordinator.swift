@@ -8,6 +8,7 @@ final class RefreshCoordinator {
 
     let feedManager: FeedManager
     private var scheduler: NSBackgroundActivityScheduler?
+    private var notificationScheduler: NSBackgroundActivityScheduler?
 
     init(feedManager: FeedManager) {
         self.feedManager = feedManager
@@ -53,6 +54,30 @@ final class RefreshCoordinator {
             }
         }
         self.scheduler = scheduler
+    }
+
+    /// Fetches only the feeds that notify, more often than the full refresh.
+    func scheduleNotificationChecks() {
+        notificationScheduler?.invalidate()
+        notificationScheduler = nil
+        guard let minutes = NewContentNotifications.activeCheckIntervalMinutes() else { return }
+        let interval = TimeInterval(minutes * 60)
+        let scheduler = NSBackgroundActivityScheduler(identifier: "com.tsubuzaki.SakuraRSS.CheckNotifications")
+        scheduler.repeats = true
+        scheduler.interval = interval
+        scheduler.tolerance = interval / 4
+        scheduler.qualityOfService = .utility
+        scheduler.schedule { [weak self] completion in
+            Task { @MainActor in
+                guard let self, !self.feedManager.isLoading, NewContentNotifications.isEnabled else {
+                    completion(.finished)
+                    return
+                }
+                await self.feedManager.refreshFeeds(scope: "Notifications", feeds: self.feedManager.notifyingFeeds)
+                completion(.finished)
+            }
+        }
+        notificationScheduler = scheduler
     }
 
     private func refreshAllFeedsAndReloadWidgets(respectingCooldown: Bool) async {

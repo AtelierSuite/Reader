@@ -13,6 +13,9 @@ final class SettingsWindowController: NSWindowController {
         tabs.transitionOptions = [.allowUserInteraction]
         let panes = [
             SettingsTab("Section.Refreshing", "arrow.triangle.2.circlepath") { RefreshingSettingsPane() },
+            SettingsTab("Section.Notifications", "bell.badge") {
+                NotificationsSettingsPane(feedManager: feedManager)
+            },
             SettingsTab("Section.Browsing", "book") { BrowsingSettingsPane() },
             SettingsTab("Section.Sidebar", "sidebar.left") { SidebarSettingsPane(feedManager: feedManager) },
             SettingsTab("Section.Focus", "moon") { FocusSettingsPane(feedManager: feedManager) },

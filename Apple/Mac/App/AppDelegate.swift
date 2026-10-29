@@ -12,6 +12,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, RefreshActions {
     private let backupScheduler = BackupScheduler()
     private var defaultsObserver: NSObjectProtocol?
     private var openContentObserver: NSObjectProtocol?
+    private var notificationSettingsObserver: NSObjectProtocol?
     private var schedulingSettings = SchedulingSettings.current
 
     func applicationWillFinishLaunching(_ notification: Notification) {
@@ -19,6 +20,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, RefreshActions {
         UserDefaults.standard.register(defaults: ["Intelligence.ContentInsights.Enabled": true])
         UnreadBadgeMode.migrateRemovedHomeTabModes(defaults: .standard)
         NSApp.mainMenu = MainMenuBuilder.build()
+        NewContentNotificationResponder.shared.activate()
         let feedManager = FeedManager()
         registry = BrowserWindowRegistry(feedManager: feedManager)
         refreshCoordinator = RefreshCoordinator(feedManager: feedManager)
@@ -36,10 +38,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, RefreshActions {
         registry.feedManager.reindexSpotlightIfSchemaChanged()
         refreshCoordinator.refreshOnLaunchIfEnabled()
         refreshCoordinator.schedulePeriodicRefresh()
+        refreshCoordinator.scheduleNotificationChecks()
         AutomaticCleanupScheduler.scheduleNextCleanup()
         backupScheduler.schedule()
         observeSchedulingSettings()
         observeOpenContentRequests()
+        observeNotificationSettings()
         dockBadgeCoordinator = DockBadgeCoordinator(feedManager: registry.feedManager)
         presentWelcomeIfNeeded()
         #if DEBUG
@@ -124,6 +128,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, RefreshActions {
             MainActor.assumeIsolated {
                 guard let articleID else { return }
                 self?.openContent(articleID)
+            }
+        }
+    }
+
+    private func observeNotificationSettings() {
+        NewContentNotificationResponder.shared.setOpenArticleHandler { [weak self] articleID in
+            self?.openContent(articleID)
+        }
+        notificationSettingsObserver = NotificationCenter.default.addObserver(
+            forName: NewContentNotifications.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
+                self?.refreshCoordinator.scheduleNotificationChecks()
             }
         }
     }

@@ -65,6 +65,7 @@ extension SidebarViewController: NSMenuDelegate {
         menu.addItem(ActionMenuItem(muteTitle, symbolName: feed.isMuted ? "bell" : "bell.slash") { [weak self] in
             self?.feedManager.toggleMuted(feed)
         })
+        menu.addItem(notifyItem(for: feed))
         if let url = URL(string: feed.url) {
             menu.addItem(ActionMenuItem(String(localized: "Article.CopyLink", table: "Articles"), symbolName: "link") {
                 NSPasteboard.general.clearContents()
