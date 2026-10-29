@@ -37,9 +37,8 @@ public actor NewContentNotifier {
         guard !feedIDs.isEmpty else { return }
         let center = UNUserNotificationCenter.current()
         let settings = await center.notificationSettings()
-        guard settings.authorizationStatus == .authorized
-                || settings.authorizationStatus == .provisional else {
-            log("Notifications", "skipping: not authorized status=\(settings.authorizationStatus.rawValue)")
+        guard NewContentNotifications.isAllowingAlerts(settings) else {
+            log("Notifications", "skipping: alerts not allowed")
             return
         }
 

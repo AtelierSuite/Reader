@@ -13,8 +13,14 @@ nonisolated enum NewContentNotificationThumbnail {
         articleID: Int64,
         database: DatabaseManager
     ) async -> UNNotificationAttachment? {
-        guard let imageData = await imageData(for: imageURL, database: database),
-              let fileURL = writeThumbnail(from: imageData, articleID: articleID) else { return nil }
+        guard let imageData = await imageData(for: imageURL, database: database) else {
+            log("Notifications", "thumbnail unavailable articleID=\(articleID)")
+            return nil
+        }
+        guard let fileURL = writeThumbnail(from: imageData, articleID: articleID) else {
+            log("Notifications", "thumbnail not written articleID=\(articleID) bytes=\(imageData.count)")
+            return nil
+        }
         do {
             return try UNNotificationAttachment(
                 identifier: "thumbnail",

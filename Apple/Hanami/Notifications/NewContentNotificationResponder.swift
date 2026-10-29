@@ -35,19 +35,32 @@ public final class NewContentNotificationResponder: NSObject, UNUserNotification
     /// go straight to Notification Center without a banner.
     public nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification
-    ) async -> UNNotificationPresentationOptions {
-        NewContentNotifier.articleID(of: notification) == nil ? [.banner, .list, .sound] : [.list]
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler(
+            NewContentNotifier.articleID(of: notification) == nil ? [.banner, .list, .sound] : [.list]
+        )
     }
 
+    /// The async form of this method completes off the main thread, which
+    /// UIKit asserts against while it snapshots the app for the transition.
     public nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        didReceive response: UNNotificationResponse
-    ) async {
-        guard response.actionIdentifier == UNNotificationDefaultActionIdentifier,
-              let articleID = NewContentNotifier.articleID(of: response) else { return }
-        await MainActor.run {
-            open(articleID: articleID)
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        let articleID = response.actionIdentifier == UNNotificationDefaultActionIdentifier
+            ? NewContentNotifier.articleID(of: response)
+            : nil
+        nonisolated(unsafe) let completion = completionHandler
+        DispatchQueue.main.async {
+            MainActor.assumeIsolated {
+                if let articleID {
+                    self.open(articleID: articleID)
+                }
+                completion()
+            }
         }
     }
 }

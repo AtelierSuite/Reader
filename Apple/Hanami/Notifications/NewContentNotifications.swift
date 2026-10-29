@@ -1,4 +1,5 @@
 import Foundation
+@preconcurrency import UserNotifications
 
 public nonisolated enum NewContentCheckInterval: Int, CaseIterable, Sendable {
     case thirtyMinutes = 30
@@ -43,5 +44,34 @@ public nonisolated enum NewContentNotifications {
 
     public static func postDidChange() {
         NotificationCenter.default.post(name: didChangeNotification, object: nil)
+    }
+}
+
+public nonisolated extension NewContentNotifications {
+
+    /// Granting the unread badge alone also reports `.authorized`, so alerts
+    /// are checked separately.
+    static func canPostAlerts() async -> Bool {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        return isAllowingAlerts(settings)
+    }
+
+    static func isAlertPermissionDenied() async -> Bool {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        return settings.authorizationStatus != .notDetermined && !isAllowingAlerts(settings)
+    }
+
+    /// Asks only the first time; afterwards reports whether alerts are allowed.
+    static func requestAuthorization() async -> Bool {
+        let center = UNUserNotificationCenter.current()
+        let settings = await center.notificationSettings()
+        guard settings.authorizationStatus == .notDetermined else { return isAllowingAlerts(settings) }
+        return (try? await center.requestAuthorization(options: [.alert, .sound, .badge])) ?? false
+    }
+
+    internal static func isAllowingAlerts(_ settings: UNNotificationSettings) -> Bool {
+        let isAuthorized = settings.authorizationStatus == .authorized
+            || settings.authorizationStatus == .provisional
+        return isAuthorized && settings.alertSetting == .enabled
     }
 }
