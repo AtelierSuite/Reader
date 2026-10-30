@@ -21,11 +21,15 @@ struct YouTubeVideoPlayerView: View {
     @State private var isPlayerReady = false
     @State private var chapters: [YouTubeChapter] = []
     @State private var resumePosition: TimeInterval?
+    @State private var visibleHeight: CGFloat = 0
+
+    private let contentPadding: CGFloat = 24
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 videoArea
+                    .frame(maxWidth: .infinity)
                 YouTubeVideoControls(
                     session: session,
                     isPlaying: isPlaying,
@@ -35,9 +39,14 @@ struct YouTubeVideoPlayerView: View {
                 )
                 YouTubeVideoDetails(article: article, feed: feed)
             }
-            .padding(24)
+            .padding(contentPadding)
             .frame(maxWidth: 1100)
             .frame(maxWidth: .infinity)
+        }
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.size.height
+        } action: { height in
+            visibleHeight = height
         }
         .onAppear(perform: prepareSession)
         .onChange(of: isPlaying) { _, playing in
@@ -77,7 +86,7 @@ struct YouTubeVideoPlayerView: View {
             onDurationUpdate: { [session] duration in session.duration = duration }
         )
         .aspectRatio(videoAspectRatio, contentMode: .fit)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: maximumVideoWidth)
         .background(.black)
         .clipShape(.rect(cornerRadius: 12))
         // Takes the mouse instead of the page, as iOS blocks touches to it,
@@ -100,6 +109,14 @@ struct YouTubeVideoPlayerView: View {
                 onReturnFromPiP: { pictureInPicture.exit(session: session, returningToContent: true) }
             )
         }
+    }
+
+    /// Keeps tall videos like Shorts within the window instead of letting
+    /// them grow past it at full width.
+    private var maximumVideoWidth: CGFloat {
+        let maximumHeight = visibleHeight - contentPadding * 2
+        guard maximumHeight > 0 else { return .infinity }
+        return maximumHeight * videoAspectRatio
     }
 
     private func prepareSession() {
