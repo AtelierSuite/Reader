@@ -2,7 +2,7 @@ import Foundation
 @preconcurrency import UserNotifications
 
 /// Posts a notification for each new unread piece of content in feeds that
-/// have notifications on. An actor so overlapping refreshes can't announce
+/// have notifications on, leaving out content hidden by mute rules. An actor so overlapping refreshes can't announce
 /// the same content twice.
 public actor NewContentNotifier {
 
@@ -95,10 +95,15 @@ public actor NewContentNotifier {
         let candidates = (try? database.unreadArticles(
             insertedAfter: lastCheckedArticleID, feedIDs: feedIDs
         )) ?? []
+        let rulesByFeedID = FeedManager.allFilterRules(database: database)
         let oldestAllowedDate = Date().addingTimeInterval(-Self.maximumContentAge)
         var countsByFeedID: [Int64: Int] = [:]
         var selected: [Article] = []
         for article in candidates where (article.publishedDate ?? .now) >= oldestAllowedDate {
+            if let rules = rulesByFeedID[article.feedID],
+               !FeedManager.passesRules(article, rules: rules) {
+                continue
+            }
             let feedCount = countsByFeedID[article.feedID, default: 0]
             guard feedCount < Self.maximumPerFeed else { continue }
             countsByFeedID[article.feedID] = feedCount + 1

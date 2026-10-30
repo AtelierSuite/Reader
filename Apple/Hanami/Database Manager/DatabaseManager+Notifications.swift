@@ -13,9 +13,10 @@ public nonisolated extension DatabaseManager {
         try database.run(target.update(feedNotifiesNewContent <- notifiesNewContent))
     }
 
+    /// Muted feeds are left out, since their content is hidden everywhere else.
     func notifyingFeedIDs() throws -> [Int64] {
         try readDatabase.rows(
-            feeds.filter(feedNotifiesNewContent == true).select(feedID)
+            feeds.filter(feedNotifiesNewContent == true && feedIsMuted == false).select(feedID)
         ).map { $0[feedID] }
     }
 

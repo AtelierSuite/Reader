@@ -63,6 +63,9 @@ public extension FeedManager {
         captureUserFeedEdit(feedID: feed.id)
         Task { await loadFromDatabaseInBackground() }
         reloadWidgetTimelines()
+        if feed.notifiesNewContent {
+            NewContentNotifications.postDidChange()
+        }
     }
 
     /// Installs the fetched title on the first refresh after add, and the

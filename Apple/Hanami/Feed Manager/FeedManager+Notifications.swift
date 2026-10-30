@@ -3,7 +3,7 @@ import Foundation
 public extension FeedManager {
 
     var notifyingFeeds: [Feed] {
-        feeds.filter(\.notifiesNewContent)
+        feeds.filter { $0.notifiesNewContent && !$0.isMuted }
     }
 
     func setNotifiesNewContent(_ notifiesNewContent: Bool, for feed: Feed) {
