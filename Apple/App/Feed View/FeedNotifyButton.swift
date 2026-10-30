@@ -15,7 +15,8 @@ struct FeedNotifyButton: View {
         Button {
             toggleNotifications()
         } label: {
-            Image(systemName: feed.notifiesNewContent ? "bell.fill" : "bell")
+            Image(systemName: "bell")
+                .environment(\.symbolVariants, feed.notifiesNewContent ? .fill : .none)
                 .font(.subheadline.weight(.semibold))
                 .contentTransition(.symbolEffect(.replace))
                 .frame(width: size, height: size)
