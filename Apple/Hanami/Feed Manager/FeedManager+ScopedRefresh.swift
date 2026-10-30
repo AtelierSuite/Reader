@@ -44,6 +44,7 @@ public extension FeedManager {
             self.scopedRefreshes[scope] = nil
             self.scopedRefreshTasks[scope] = nil
         }
+        await postNotificationsForNewContent()
         log("FeedRefresh.Scoped", "end scope=\(scope)")
     }
 

@@ -16,6 +16,7 @@ public nonisolated extension DatabaseManager {
     var feedCategory: SQLite.Expression<String?> { SQLite.Expression<String?>("category") }
     var feedIsPodcast: SQLite.Expression<Bool> { SQLite.Expression<Bool>("is_podcast") }
     var feedIsMuted: SQLite.Expression<Bool> { SQLite.Expression<Bool>("is_muted") }
+    var feedNotifiesNewContent: SQLite.Expression<Bool> { SQLite.Expression<Bool>("notifies_new_content") }
     var feedCustomIconURL: SQLite.Expression<String?> { SQLite.Expression<String?>("custom_icon_url") }
     var feedAcronymIcon: SQLite.Expression<Data?> { SQLite.Expression<Data?>("acronym_icon") }
     var feedIsTitleCustomized: SQLite.Expression<Bool> { SQLite.Expression<Bool>("is_title_customized") }

@@ -127,6 +127,7 @@ public nonisolated extension DatabaseManager {
             category: row[feedCategory],
             isPodcast: (try? row.get(feedIsPodcast)) ?? false,
             isMuted: (try? row.get(feedIsMuted)) ?? false,
+            notifiesNewContent: (try? row.get(feedNotifiesNewContent)) ?? false,
             customIconURL: try? row.get(feedCustomIconURL),
             acronymIcon: try? row.get(feedAcronymIcon),
             isTitleCustomized: (try? row.get(feedIsTitleCustomized)) ?? false,

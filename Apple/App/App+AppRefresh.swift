@@ -32,19 +32,20 @@ extension SakuraRSSApp {
     /// With `continuingSoon`, the next run is requested right away to pick up the
     /// feeds this one ran out of time for; otherwise it waits for the interval.
     /// The system still decides when the task actually runs.
+    /// Notification checks share this task, so it runs at the shorter of the
+    /// two intervals; `handleAppRefresh` decides which kind of run it is.
     nonisolated func scheduleAppRefresh(continuingSoon: Bool = false) {
         for identifier in Self.legacyAppRefreshTaskIDs {
             BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: identifier)
         }
-        let isEnabled = UserDefaults.standard.object(forKey: "BackgroundRefresh.Enabled") as? Bool ?? true
-        guard isEnabled else {
+        let fullRefreshMinutes = Self.fullRefreshIntervalMinutes()
+        let notificationMinutes = NewContentNotifications.activeCheckIntervalMinutes()
+        guard let minutes = [fullRefreshMinutes, notificationMinutes].compactMap(\.self).min() else {
             BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: Self.appRefreshTaskID)
             return
         }
         let request = BGAppRefreshTaskRequest(identifier: Self.appRefreshTaskID)
         if !continuingSoon {
-            let refreshInterval = UserDefaults.standard.integer(forKey: "BackgroundRefresh.Interval")
-            let minutes = refreshInterval > 0 ? refreshInterval : 240
             request.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(minutes * 60))
         }
         do {
@@ -68,11 +69,24 @@ extension SakuraRSSApp {
             return
         }
 
+        let notifyingFeedIDs = Self.isFullRefreshDue() ? nil : NewContentNotifications.notifyingFeedIDs()
+        log("BackgroundRefresh", "run kind=\(notifyingFeedIDs == nil ? "full" : "notifications")")
+
         let refreshTask = Task { () -> Int in
+            if notifyingFeedIDs != nil,
+               await MainActor.run(body: { UIApplication.shared.applicationState == .active }) {
+                log("BackgroundRefresh", "skipping notification check: app is active")
+                return 0
+            }
             let options = await Self.backgroundImageOptions()
             let manager = await MainActor.run { FeedManager.forBackgroundRefresh() }
             let latestArticleIDBefore = DatabaseManager.shared.latestArticleID()
-            let deferredCount = await Self.refreshFeedsWithinHardLimit(manager, options: options)
+            let deferredCount = await Self.refreshFeedsWithinHardLimit(
+                manager, limitedTo: notifyingFeedIDs, options: options
+            )
+            if notifyingFeedIDs == nil, deferredCount == 0, !Task.isCancelled {
+                Self.recordFullRefresh()
+            }
             if Task.isCancelled { return deferredCount }
             await MainActor.run { manager.reloadUnreadCounts() }
             manager.updateBadgeCount()
@@ -104,10 +118,12 @@ extension SakuraRSSApp {
 
     nonisolated private static func refreshFeedsWithinHardLimit(
         _ manager: FeedManager,
+        limitedTo feedIDs: Set<Int64>?,
         options: (skipImageFetch: Bool, skipImagePreload: Bool)
     ) async -> Int {
         let fetching = Task {
             await manager.refreshFeedsInBackground(
+                limitedTo: feedIDs,
                 skipImageFetch: options.skipImageFetch,
                 skipImagePreload: options.skipImagePreload
             )

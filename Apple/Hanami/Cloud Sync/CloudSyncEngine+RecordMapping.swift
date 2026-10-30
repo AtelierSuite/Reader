@@ -18,6 +18,7 @@ nonisolated extension CloudSyncEngine {
         record["isPodcast"] = feed.isPodcast
         record["isMuted"] = feed.isMuted
         record["isTitleCustomized"] = feed.isTitleCustomized
+        record["notifiesNewContent"] = feed.notifiesNewContent
         record["userModifiedAt"] = database.feedUserModifiedAt(syncID: syncID)
         return record
     }
@@ -48,6 +49,7 @@ nonisolated extension CloudSyncEngine {
             isPodcast: record["isPodcast"] as? Bool ?? false,
             isMuted: record["isMuted"] as? Bool ?? false,
             isTitleCustomized: record["isTitleCustomized"] as? Bool ?? false,
+            notifiesNewContent: record["notifiesNewContent"] as? Bool ?? false,
             userModifiedAt: record["userModifiedAt"] as? Date
         )
     }

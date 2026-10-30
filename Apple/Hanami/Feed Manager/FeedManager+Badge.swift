@@ -28,6 +28,7 @@ public extension FeedManager {
     }
 
     private func performBadgeUpdate() {
+        Task { await NewContentNotifier.shared.removeDeliveredNotificationsForReadContent() }
         let mode = UserDefaults.standard.string(forKey: "Display.UnreadBadgeMode") ?? "none"
         let center = UNUserNotificationCenter.current()
         guard mode == "homeScreenOnly" else {

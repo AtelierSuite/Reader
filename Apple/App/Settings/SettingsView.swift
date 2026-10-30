@@ -55,6 +55,15 @@ struct SettingsView: View {
                         )
                     }
                     NavigationLink {
+                        NotificationsSettingsView()
+                    } label: {
+                        SettingsIconLabel(
+                            String(localized: "Section.Notifications", table: "Settings"),
+                            systemImage: "bell.badge.fill",
+                            color: .red
+                        )
+                    }
+                    NavigationLink {
                         IntegrationsSettingsView()
                     } label: {
                         SettingsIconLabel(

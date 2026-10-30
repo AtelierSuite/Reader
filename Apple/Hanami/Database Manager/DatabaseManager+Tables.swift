@@ -12,6 +12,7 @@ nonisolated extension DatabaseManager {
         try migrateListSyncColumns()
         try createTodayQuickAccessTable()
         try createPagePreferencesTable()
+        migrateNotificationColumns()
     }
 
     private func createCoreTables() throws {
@@ -37,6 +38,7 @@ nonisolated extension DatabaseManager {
             table.column(feedCategory)
             table.column(feedIsPodcast, defaultValue: false)
             table.column(feedIsMuted, defaultValue: false)
+            table.column(feedNotifiesNewContent, defaultValue: false)
             table.column(feedCustomIconURL)
             table.column(feedAcronymIcon)
             table.column(feedIsTitleCustomized, defaultValue: false)
