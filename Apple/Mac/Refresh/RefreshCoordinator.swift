@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 import Hanami
 
 /// Fetches new content on launch, on request, and periodically. The periodic
@@ -57,6 +57,7 @@ final class RefreshCoordinator {
     }
 
     /// Fetches only the feeds that notify, more often than the full refresh.
+    /// Skipped while the app is active, since the user is already refreshing.
     func scheduleNotificationChecks() {
         notificationScheduler?.invalidate()
         notificationScheduler = nil
@@ -69,7 +70,8 @@ final class RefreshCoordinator {
         scheduler.qualityOfService = .utility
         scheduler.schedule { [weak self] completion in
             Task { @MainActor in
-                guard let self, !self.feedManager.isLoading, NewContentNotifications.isEnabled else {
+                guard let self, !NSApp.isActive, !self.feedManager.isLoading,
+                      NewContentNotifications.isEnabled else {
                     completion(.finished)
                     return
                 }

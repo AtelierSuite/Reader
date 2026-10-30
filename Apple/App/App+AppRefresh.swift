@@ -73,6 +73,11 @@ extension SakuraRSSApp {
         log("BackgroundRefresh", "run kind=\(notifyingFeedIDs == nil ? "full" : "notifications")")
 
         let refreshTask = Task { () -> Int in
+            if notifyingFeedIDs != nil,
+               await MainActor.run(body: { UIApplication.shared.applicationState == .active }) {
+                log("BackgroundRefresh", "skipping notification check: app is active")
+                return 0
+            }
             let options = await Self.backgroundImageOptions()
             let manager = await MainActor.run { FeedManager.forBackgroundRefresh() }
             let latestArticleIDBefore = DatabaseManager.shared.latestArticleID()
