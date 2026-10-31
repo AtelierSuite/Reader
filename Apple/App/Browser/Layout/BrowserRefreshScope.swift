@@ -23,14 +23,18 @@ private struct BrowserRefreshScopeModifier: ViewModifier {
     @Environment(\.browserPageSlotReporter) private var slotReporter
     @Environment(\.browserPathToken) private var pathToken
     let scope: String
+    let includesAppWideRefresh: Bool
 
     private var progress: BrowserAddressProgress? {
-        guard let state = feedManager.scopedRefreshes[scope], state.hasActiveProgress else {
-            return nil
-        }
-        // A scope that has counted its feeds but finished none of them has
+        // A refresh that has counted its feeds but finished none of them has
         // nothing to draw yet, and a bar pinned at zero reads as stalled.
-        return state.completed == 0 ? .indeterminate : .determinate(state.progress)
+        if let state = feedManager.scopedRefreshes[scope], state.hasActiveProgress {
+            return state.completed == 0 ? .indeterminate : .determinate(state.progress)
+        }
+        if includesAppWideRefresh, feedManager.hasActiveRefreshProgress {
+            return feedManager.refreshCompleted == 0 ? .indeterminate : .determinate(feedManager.refreshProgress)
+        }
+        return nil
     }
 
     func body(content: Content) -> some View {
@@ -44,8 +48,9 @@ private struct BrowserRefreshScopeModifier: ViewModifier {
 
 extension View {
     /// Draws the named refresh scope's progress in the address bar while this
-    /// page is the one the bar is naming.
-    func browserRefreshScope(_ scope: String) -> some View {
-        modifier(BrowserRefreshScopeModifier(scope: scope))
+    /// page is the one the bar is naming. Pass `includesAppWideRefresh` to also
+    /// draw refreshes of every feed, such as the one at launch.
+    func browserRefreshScope(_ scope: String, includesAppWideRefresh: Bool = false) -> some View {
+        modifier(BrowserRefreshScopeModifier(scope: scope, includesAppWideRefresh: includesAppWideRefresh))
     }
 }
