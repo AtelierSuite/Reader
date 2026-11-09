@@ -11,6 +11,13 @@ public extension XProvider {
         guard !queryIDsFetched else { return }
         queryIDsFetched = true
 
+        if restoreStoredQueryIDs() {
+            queryIDsRestoredFromStorage = true
+            log("XProvider:QueryIDs", "Restored stored query IDs")
+            return
+        }
+        queryIDsRestoredFromStorage = false
+
         log("XProvider:QueryIDs", "Starting query ID fetch…")
 
         await warmCookieStore()
@@ -29,6 +36,7 @@ public extension XProvider {
                 + "TweetResultByRestId=\(tweetResultByRestIdQueryID ?? "nil")")
         } else {
             log("XProvider:QueryIDs", "All query IDs extracted successfully")
+            storeQueryIDs()
         }
     }
 

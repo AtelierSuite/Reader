@@ -20,10 +20,7 @@ struct XSettingsView: View {
                     } else if isXSignedIn {
                         Button(String(localized: "XProfileFeeds.RefreshAuth", table: "Integrations")) {
                             Task {
-                                await MainActor.run {
-                                    XProvider.queryIDsFetched = false
-                                }
-                                await XProvider.fetchQueryIDsIfNeeded()
+                                await XProvider.refetchQueryIDs()
                             }
                         }
                         Button(String(localized: "XProfileFeeds.SignOut", table: "Integrations")) {

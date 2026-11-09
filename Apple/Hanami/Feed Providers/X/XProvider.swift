@@ -69,6 +69,9 @@ public final class XProvider: Authenticated {
 
     @MainActor
     public static var queryIDsFetched = false
+    @MainActor
+    static var queryIDsRestoredFromStorage = false
+
     /// Returns true if `host` belongs to x.com / twitter.com (incl. www, mobile).
     /// Stricter than `matchesHost` because X feeds aren't reachable on
     /// arbitrary subdomains.
@@ -104,10 +107,6 @@ public final class XProvider: Authenticated {
 
     @MainActor
     public static func didClearSession() async {
-        userByScreenNameQueryID = nil
-        userTweetsQueryID = nil
-        tweetDetailQueryID = nil
-        tweetResultByRestIdQueryID = nil
-        queryIDsFetched = false
+        forgetQueryIDs()
     }
 }

@@ -220,8 +220,7 @@ public extension XProvider {
             return Self.parseTweetResultByRestIdResponse(data: data)
         }
         log("XProvider", "TweetResultByRestId failed; refreshing query IDs and retrying tweet=\(tweetID)")
-        await MainActor.run { Self.queryIDsFetched = false }
-        await Self.fetchQueryIDsIfNeeded()
+        await Self.refetchQueryIDs()
         guard let data = await performTweetResultByRestIdFetch(tweetID: tweetID) else {
             return nil
         }

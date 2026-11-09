@@ -14,8 +14,7 @@ public extension XProvider {
             return data
         }
         log("XProvider", "TweetDetail failed; refreshing query IDs and retrying tweet=\(tweetID)")
-        await MainActor.run { Self.queryIDsFetched = false }
-        await Self.fetchQueryIDsIfNeeded()
+        await Self.refetchQueryIDs()
         return await performTweetDetailFetch(tweetID: tweetID)
     }
 
