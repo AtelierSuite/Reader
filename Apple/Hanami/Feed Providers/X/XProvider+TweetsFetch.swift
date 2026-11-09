@@ -6,7 +6,7 @@ public extension XProvider {
 
     func fetchTweets(
         userId: String, cookies: XCookies
-    ) async -> [ParsedTweet] {
+    ) async -> [ParsedTweet]? {
         var allTweets: [ParsedTweet] = []
         var seenIDs = Set<String>()
         var cursor: String?
@@ -15,11 +15,11 @@ public extension XProvider {
             guard !Task.isCancelled else { break }
             guard let request = buildUserTweetsRequest(
                 userId: userId, cursor: cursor, cookies: cookies, page: page
-            ) else { break }
+            ) else { return page == 0 ? nil : allTweets }
 
             log("XProvider", "UserTweets request (page \(page))")
             guard let parsed = await fetchAndParseTweetsPage(request: request, page: page) else {
-                break
+                return page == 0 ? nil : allTweets
             }
 
             var newCount = 0

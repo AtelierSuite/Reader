@@ -33,29 +33,15 @@ public extension XProvider {
 
         log("XProvider", "Got cookies - csrf: \(cookies.csrfToken.prefix(5))…")
 
-        guard let userInfo = await fetchUserInfo(
-            screenName: handle, cookies: cookies
-        ) else {
-            log("XProvider", "Failed to fetch user info for \(handle)")
+        if let result = await fetchProfileContent(handle: handle, cookies: cookies) {
+            return result
+        }
+        guard autoRepairQueryIDs,
+              await Self.refetchQueryIDsIfRestoredFromStorage(),
+              let result = await fetchProfileContent(handle: handle, cookies: cookies) else {
             return XProfileFetchResult(tweets: [], profileImageURL: nil, displayName: nil)
         }
-
-        // swiftlint:disable:next line_length
-        log("XProvider", "User info - id: \(userInfo.id), name: \(userInfo.displayName ?? "nil"), avatar: \(userInfo.profileImageURL?.prefix(60) ?? "nil")")
-
-        let tweets = await fetchTweets(
-            userId: userInfo.id, cookies: cookies
-        )
-
-        log("XProvider", "Fetched \(tweets.count) tweets total")
-
-        Self.persistRotatedCookies()
-
-        return XProfileFetchResult(
-            tweets: tweets,
-            profileImageURL: userInfo.profileImageURL,
-            displayName: userInfo.displayName
-        )
+        return result
     }
 
     // MARK: - Cookies
