@@ -17,7 +17,8 @@ public extension XProvider {
 
     func performFetch(
         profileURL: URL,
-        autoRepairQueryIDs: Bool = true
+        autoRepairQueryIDs: Bool = true,
+        knownTweetURLs: Set<String> = []
     ) async -> XProfileFetchResult {
         guard let handle = Self.extractIdentifier(from: profileURL) else {
             log("XProvider", "Failed to extract handle from URL: \(profileURL)")
@@ -33,12 +34,16 @@ public extension XProvider {
 
         log("XProvider", "Got cookies - csrf: \(cookies.csrfToken.prefix(5))…")
 
-        if let result = await fetchProfileContent(handle: handle, cookies: cookies) {
+        if let result = await fetchProfileContent(
+            handle: handle, cookies: cookies, knownTweetURLs: knownTweetURLs
+        ) {
             return result
         }
         guard autoRepairQueryIDs,
               await Self.refetchQueryIDsIfRestoredFromStorage(),
-              let result = await fetchProfileContent(handle: handle, cookies: cookies) else {
+              let result = await fetchProfileContent(
+                  handle: handle, cookies: cookies, knownTweetURLs: knownTweetURLs
+              ) else {
             return XProfileFetchResult(tweets: [], profileImageURL: nil, displayName: nil)
         }
         return result

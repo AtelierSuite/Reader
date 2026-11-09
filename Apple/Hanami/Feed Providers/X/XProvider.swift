@@ -49,7 +49,8 @@ public final class XProvider: Authenticated {
     /// Serialised: only one fetch runs at a time.
     public func fetchProfile(
         profileURL: URL,
-        autoRepairQueryIDs: Bool = true
+        autoRepairQueryIDs: Bool = true,
+        knownTweetURLs: Set<String> = []
     ) async -> XProfileFetchResult {
         if let existing = Self.activeFetch {
             _ = await existing.value
@@ -58,7 +59,8 @@ public final class XProvider: Authenticated {
         let task = Task {
             await self.performFetch(
                 profileURL: profileURL,
-                autoRepairQueryIDs: autoRepairQueryIDs
+                autoRepairQueryIDs: autoRepairQueryIDs,
+                knownTweetURLs: knownTweetURLs
             )
         }
         Self.activeFetch = task

@@ -2,7 +2,9 @@ import Foundation
 
 extension XProvider {
 
-    func fetchProfileContent(handle: String, cookies: XCookies) async -> XProfileFetchResult? {
+    func fetchProfileContent(
+        handle: String, cookies: XCookies, knownTweetURLs: Set<String>
+    ) async -> XProfileFetchResult? {
         let cachedUserInfo = Self.recentlyResolvedUserInfo(handle: handle)
         guard let userInfo = await resolveUserInfo(
             handle: handle, cachedUserInfo: cachedUserInfo, cookies: cookies
@@ -11,7 +13,9 @@ extension XProvider {
         // swiftlint:disable:next line_length
         log("XProvider", "User info - id: \(userInfo.id), name: \(userInfo.displayName ?? "nil"), cached: \(cachedUserInfo != nil)")
 
-        guard let tweets = await fetchTweets(userId: userInfo.id, cookies: cookies) else {
+        guard let tweets = await fetchTweets(
+            userId: userInfo.id, cookies: cookies, knownTweetURLs: knownTweetURLs
+        ) else {
             if cachedUserInfo != nil {
                 LocalDatabaseManager.shared.forgetXUser(handle: handle)
             }
