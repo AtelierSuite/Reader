@@ -301,13 +301,9 @@ public extension FeedManager {
         if !skipImagePreload {
             let imageURLs = insertedArticles.compactMap { $0.imageURL }
             if !imageURLs.isEmpty {
-                log("FeedRefresh.PostInsert", "preloading images feedTitle=\(feedTitle) count=\(imageURLs.count)")
-                await FeedManager.preloadImages(urls: imageURLs)
+                log("FeedRefresh.PostInsert", "queuing image preload feedTitle=\(feedTitle) count=\(imageURLs.count)")
+                ImagePreloadQueue.shared.enqueue(imageURLs)
             }
-        }
-        if Task.isCancelled {
-            log("FeedRefresh.PostInsert", "cancelled before NLP feedTitle=\(feedTitle)")
-            return
         }
 
         if runNLP {
