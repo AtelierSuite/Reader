@@ -17,7 +17,8 @@ public extension XProvider {
 
     func performFetch(
         profileURL: URL,
-        autoRepairQueryIDs: Bool = true
+        autoRepairQueryIDs: Bool = true,
+        knownTweetURLs: Set<String> = []
     ) async -> XProfileFetchResult {
         guard let handle = Self.extractIdentifier(from: profileURL) else {
             log("XProvider", "Failed to extract handle from URL: \(profileURL)")
@@ -33,29 +34,19 @@ public extension XProvider {
 
         log("XProvider", "Got cookies - csrf: \(cookies.csrfToken.prefix(5))…")
 
-        guard let userInfo = await fetchUserInfo(
-            screenName: handle, cookies: cookies
-        ) else {
-            log("XProvider", "Failed to fetch user info for \(handle)")
+        if let result = await fetchProfileContent(
+            handle: handle, cookies: cookies, knownTweetURLs: knownTweetURLs
+        ) {
+            return result
+        }
+        guard autoRepairQueryIDs,
+              await Self.refetchQueryIDsIfRestoredFromStorage(),
+              let result = await fetchProfileContent(
+                  handle: handle, cookies: cookies, knownTweetURLs: knownTweetURLs
+              ) else {
             return XProfileFetchResult(tweets: [], profileImageURL: nil, displayName: nil)
         }
-
-        // swiftlint:disable:next line_length
-        log("XProvider", "User info - id: \(userInfo.id), name: \(userInfo.displayName ?? "nil"), avatar: \(userInfo.profileImageURL?.prefix(60) ?? "nil")")
-
-        let tweets = await fetchTweets(
-            userId: userInfo.id, cookies: cookies
-        )
-
-        log("XProvider", "Fetched \(tweets.count) tweets total")
-
-        Self.persistRotatedCookies()
-
-        return XProfileFetchResult(
-            tweets: tweets,
-            profileImageURL: userInfo.profileImageURL,
-            displayName: userInfo.displayName
-        )
+        return result
     }
 
     // MARK: - Cookies
@@ -220,8 +211,7 @@ public extension XProvider {
             return Self.parseTweetResultByRestIdResponse(data: data)
         }
         log("XProvider", "TweetResultByRestId failed; refreshing query IDs and retrying tweet=\(tweetID)")
-        await MainActor.run { Self.queryIDsFetched = false }
-        await Self.fetchQueryIDsIfNeeded()
+        await Self.refetchQueryIDs()
         guard let data = await performTweetResultByRestIdFetch(tweetID: tweetID) else {
             return nil
         }

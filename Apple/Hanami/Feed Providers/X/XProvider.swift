@@ -49,7 +49,8 @@ public final class XProvider: Authenticated {
     /// Serialised: only one fetch runs at a time.
     public func fetchProfile(
         profileURL: URL,
-        autoRepairQueryIDs: Bool = true
+        autoRepairQueryIDs: Bool = true,
+        knownTweetURLs: Set<String> = []
     ) async -> XProfileFetchResult {
         if let existing = Self.activeFetch {
             _ = await existing.value
@@ -58,7 +59,8 @@ public final class XProvider: Authenticated {
         let task = Task {
             await self.performFetch(
                 profileURL: profileURL,
-                autoRepairQueryIDs: autoRepairQueryIDs
+                autoRepairQueryIDs: autoRepairQueryIDs,
+                knownTweetURLs: knownTweetURLs
             )
         }
         Self.activeFetch = task
@@ -69,6 +71,9 @@ public final class XProvider: Authenticated {
 
     @MainActor
     public static var queryIDsFetched = false
+    @MainActor
+    static var queryIDsRestoredFromStorage = false
+
     /// Returns true if `host` belongs to x.com / twitter.com (incl. www, mobile).
     /// Stricter than `matchesHost` because X feeds aren't reachable on
     /// arbitrary subdomains.
@@ -104,10 +109,6 @@ public final class XProvider: Authenticated {
 
     @MainActor
     public static func didClearSession() async {
-        userByScreenNameQueryID = nil
-        userTweetsQueryID = nil
-        tweetDetailQueryID = nil
-        tweetResultByRestIdQueryID = nil
-        queryIDsFetched = false
+        forgetQueryIDs()
     }
 }

@@ -4,9 +4,11 @@ public extension XProvider {
 
     // MARK: - Tweets
 
+    /// Stops after the first page once it reaches posts that are already
+    /// saved, since later pages would only hold older posts.
     func fetchTweets(
-        userId: String, cookies: XCookies
-    ) async -> [ParsedTweet] {
+        userId: String, cookies: XCookies, knownTweetURLs: Set<String> = []
+    ) async -> [ParsedTweet]? {
         var allTweets: [ParsedTweet] = []
         var seenIDs = Set<String>()
         var cursor: String?
@@ -15,11 +17,11 @@ public extension XProvider {
             guard !Task.isCancelled else { break }
             guard let request = buildUserTweetsRequest(
                 userId: userId, cursor: cursor, cookies: cookies, page: page
-            ) else { break }
+            ) else { return page == 0 ? nil : allTweets }
 
             log("XProvider", "UserTweets request (page \(page))")
             guard let parsed = await fetchAndParseTweetsPage(request: request, page: page) else {
-                break
+                return page == 0 ? nil : allTweets
             }
 
             var newCount = 0
@@ -30,6 +32,10 @@ public extension XProvider {
             }
 
             if newCount == 0 || allTweets.count >= Self.targetTweetCount { break }
+            if parsed.tweets.contains(where: { knownTweetURLs.contains($0.url) }) {
+                log("XProvider", "Page \(page) reached saved posts, skipping later pages")
+                break
+            }
             cursor = parsed.bottomCursor
             if cursor == nil { break }
         }

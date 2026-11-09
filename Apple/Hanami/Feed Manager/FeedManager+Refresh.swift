@@ -380,6 +380,7 @@ public extension FeedManager {
         log("FeedRefresh", "cancelRefresh begin completed=\(refreshCompleted)/\(refreshTotal)")
         isStopping = true
         task.cancel()
+        ImagePreloadQueue.shared.cancelAll()
         Task {
             _ = await task.value
             await self.loadFromDatabaseInBackground(animated: true)

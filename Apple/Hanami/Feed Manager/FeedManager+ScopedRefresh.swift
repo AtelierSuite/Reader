@@ -110,6 +110,7 @@ public extension FeedManager {
         state.isStopping = true
         scopedRefreshes[scope] = state
         task?.cancel()
+        ImagePreloadQueue.shared.cancelAll()
         Task {
             if let task {
                 _ = await task.value

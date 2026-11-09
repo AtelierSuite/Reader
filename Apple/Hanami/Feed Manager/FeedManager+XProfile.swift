@@ -32,10 +32,16 @@ public extension FeedManager {
         }
         log("XProfile", "fetching @\(handle) id=\(feed.id)")
 
+        let database = database
+        let feedID = feed.id
+        let knownTweetURLs = await Task.detached {
+            (try? database.existingArticleURLs(forFeedID: feedID)) ?? []
+        }.value
         let fetcher = XProvider()
         let result = await fetcher.fetchProfile(
             profileURL: profileURL,
-            autoRepairQueryIDs: !contentOnly
+            autoRepairQueryIDs: !contentOnly,
+            knownTweetURLs: knownTweetURLs
         )
         log("XProfile", "fetched @\(handle) tweets=\(result.tweets.count) displayName=\(result.displayName ?? "nil")")
 

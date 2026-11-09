@@ -49,6 +49,7 @@ public extension FeedManager {
             queues.instagram, maxConcurrent: FeedRefreshQueueLimits.throttled, options: options
         )
         let deferredCount = await regular + slow + xRefresh + instagramRefresh
+        await ImagePreloadQueue.shared.waitUntilIdle()
         if feedIDs == nil {
             await MainActor.run {
                 self.lastRefreshedAt = Date()
