@@ -67,7 +67,7 @@ public extension FeedManager {
         if feed.lastFetched != nil, await Iconography.shared.hasProfilePhoto(for: feed) {
             return nil
         }
-        guard let (imageData, _) = try? await Iconography.urlSession.data(from: imageURL) else {
+        guard let (imageData, _) = try? await Iconography.urlSession.data(for: .sakuraImage(url: imageURL)) else {
             return nil
         }
         return PlatformImage(data: imageData)

@@ -49,12 +49,17 @@ public extension URLRequest {
             "image/avif,image/webp,image/*,*/*;q=0.8",
             forHTTPHeaderField: "Accept"
         )
-        if let host = url.host,
-           let scheme = url.scheme,
-           let referer = URL(string: "\(scheme)://\(host)/") {
-            request.setValue(referer.absoluteString,
-                             forHTTPHeaderField: "Referer")
+        if let referer = imageReferer(for: url) {
+            request.setValue(referer, forHTTPHeaderField: "Referer")
         }
         return request
+    }
+
+    private nonisolated static func imageReferer(for url: URL) -> String? {
+        guard let host = url.host, let scheme = url.scheme else { return nil }
+        if host == "pximg.net" || host.hasSuffix(".pximg.net") {
+            return "https://www.pixiv.net/"
+        }
+        return URL(string: "\(scheme)://\(host)/")?.absoluteString
     }
 }

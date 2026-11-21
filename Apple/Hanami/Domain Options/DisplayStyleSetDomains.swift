@@ -24,6 +24,7 @@ public nonisolated enum DisplayStyleSetDomains: DomainDefaults {
         "pixelfed.social": .photos,
         "pixelfed.tokyo": .photos,
         "pixelfed.art": .photos,
+        "pixiv.net": .photos,
         "pinterest.com": .masonry,
         "youtube.com": .video,
         "youtu.be": .video,

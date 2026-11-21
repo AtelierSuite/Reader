@@ -12,6 +12,9 @@ extension AddFeedView {
                 || UserDefaults.standard.bool(forKey: "Labs.InstagramProfileFeeds") else {
             return
         }
+        guard !PixivProvider.isFeedURL(discovered.url) || PixivProvider.isEnabled else {
+            return
+        }
         if XProvider.isFeedURL(discovered.url) && !feedManager.hasXFeeds {
             pendingXFeed = discovered
             Task {

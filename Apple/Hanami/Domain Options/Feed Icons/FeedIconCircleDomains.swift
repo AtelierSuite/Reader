@@ -12,6 +12,7 @@ public nonisolated enum FeedIconCircleDomains: DomainDefaults {
         "pixelfed.social",
         "pixelfed.tokyo",
         "pixelfed.art",
+        "pixiv.net",
         "youtube.com",
         "youtu.be",
         "note.com"

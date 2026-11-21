@@ -15,6 +15,7 @@ public nonisolated enum FeedProviderRegistry {
         PixelfedProvider.self,
         TelegramProvider.self,
         AppStoreProvider.self,
+        PixivProvider.self,
         ArXivProvider.self,
         MastodonCommentsProvider.self
     ]

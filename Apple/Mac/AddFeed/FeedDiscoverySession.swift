@@ -57,6 +57,9 @@ final class FeedDiscoverySession {
         if InstagramProvider.isFeedURL(feed.url) {
             return UserDefaults.standard.bool(forKey: "Labs.InstagramProfileFeeds") && InstagramProvider.hasSession()
         }
+        if PixivProvider.isFeedURL(feed.url) {
+            return PixivProvider.isEnabled
+        }
         return true
     }
 
