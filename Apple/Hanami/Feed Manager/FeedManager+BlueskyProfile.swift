@@ -32,7 +32,10 @@ public extension FeedManager {
         log("BlueskyProfile", "fetching @\(handle) id=\(feed.id)")
 
         let fetcher = BlueskyProvider()
-        let result = await fetcher.fetchAuthorFeed(handle: handle)
+        let result = await fetcher.fetchAuthorFeed(
+            handle: handle,
+            pageCount: feed.lastFetched == nil ? BlueskyProvider.firstFetchPageCount : 1
+        )
         // swiftlint:disable:next line_length
         log("BlueskyProfile", "fetched @\(handle) posts=\(result.posts.count) displayName=\(result.displayName ?? "nil")")
 

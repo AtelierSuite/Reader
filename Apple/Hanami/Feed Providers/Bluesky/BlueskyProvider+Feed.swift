@@ -2,16 +2,12 @@ import Foundation
 
 public extension BlueskyProvider {
 
-    nonisolated static let authorFeedLimit = 50
-
-    /// Fetches the author's recent posts via `app.bsky.feed.getAuthorFeed`,
-    /// skipping replies (via filter) and reposts (skipped in code).
-    func fetchAuthorFeed(handle: String) async -> BlueskyFeedFetchResult {
+    func fetchAuthorFeed(handle: String, pageCount: Int = 1) async -> BlueskyFeedFetchResult {
         let empty = BlueskyFeedFetchResult(posts: [], displayName: nil, profileImageURL: nil)
         guard let did = await Self.resolveDID(forHandle: handle) ?? handle.asDIDIfValid else {
             return empty
         }
-        let posts = await Self.fetchAuthorFeedPosts(actor: did)
+        let posts = await Self.fetchAuthorFeedPosts(actor: did, pageCount: pageCount)
         if let firstAuthor = posts.first {
             return BlueskyFeedFetchResult(
                 posts: posts,
@@ -19,7 +15,6 @@ public extension BlueskyProvider {
                 profileImageURL: nil
             )
         }
-        // Empty feed: fall back to getProfile so the feed row still gets a name/avatar.
         let profile = await Self.fetchActorProfile(actor: did)
         return BlueskyFeedFetchResult(
             posts: [],
@@ -28,28 +23,16 @@ public extension BlueskyProvider {
         )
     }
 
-    // MARK: - getAuthorFeed
-
-    nonisolated static func fetchAuthorFeedPosts(actor: String) async -> [ParsedBlueskyPost] {
-        guard var components = URLComponents(
-            string: "https://\(publicAPIHost)/xrpc/app.bsky.feed.getAuthorFeed"
-        ) else { return [] }
-        components.queryItems = [
-            URLQueryItem(name: "actor", value: actor),
-            URLQueryItem(name: "limit", value: String(authorFeedLimit)),
-            URLQueryItem(name: "filter", value: "posts_no_replies")
-        ]
-        guard let url = components.url else { return [] }
-
-        var request = URLRequest(url: url)
-        request.setValue(sakuraUserAgent, forHTTPHeaderField: "User-Agent")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-
+    nonisolated static func fetchAuthorFeedPosts(actor: String, pageCount: Int = 1) async -> [ParsedBlueskyPost] {
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            guard let root = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                  let feed = root["feed"] as? [[String: Any]] else { return [] }
-            return feed.compactMap { parseFeedViewPost($0) }
+            return try await fetchPostPages(
+                "app.bsky.feed.getAuthorFeed",
+                query: [
+                    URLQueryItem(name: "actor", value: actor),
+                    URLQueryItem(name: "filter", value: "posts_no_replies")
+                ],
+                pageCount: pageCount
+            )
         } catch {
             log("BlueskyFeed", "getAuthorFeed failed - \(error.localizedDescription)")
             return []
