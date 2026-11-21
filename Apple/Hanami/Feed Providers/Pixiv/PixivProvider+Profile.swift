@@ -35,21 +35,28 @@ extension PixivProvider: ProfileFeedProvider {
     }
 
     public nonisolated static func discoveredFeed(forProfileURL url: URL) async -> DiscoveredFeed? {
-        guard let target = await resolveTarget(for: url) else { return nil }
-        let title: String
-        switch target.source {
-        case .user(let userID):
-            guard let user = try? await fetchUser(userID), let name = user.name else { return nil }
-            title = name
-        case .following:
-            guard hasSession() else { return nil }
-            title = String(localized: "Pixiv.Following.FeedTitle", table: "Integrations")
-        case .tag(let tag):
-            title = "#\(tag)"
-        case .ranking(let mode):
-            title = rankingTitle(for: mode)
+        guard let target = await resolveTarget(for: url), let title = await feedTitle(for: target) else {
+            return nil
         }
         return DiscoveredFeed(title: title, url: target.feedURL, siteURL: target.siteURL)
+    }
+
+    private nonisolated static func feedTitle(for target: PixivFeedTarget) async -> String? {
+        switch target.source {
+        case .user(let userID):
+            return try? await fetchUser(userID).name
+        case .following:
+            guard hasSession() else { return nil }
+            return String(localized: "Pixiv.Following.FeedTitle", table: "Integrations")
+        case .tag(let tag):
+            return "#\(tag)"
+        case .ranking(let mode):
+            return rankingTitle(for: mode)
+        case .mangaSeries(let seriesID, _):
+            return try? await fetchMangaSeries(seriesID).title
+        case .novelSeries(let seriesID):
+            return try? await fetchNovelSeries(seriesID).title
+        }
     }
 
     nonisolated static func resolveTarget(for url: URL) async -> PixivFeedTarget? {

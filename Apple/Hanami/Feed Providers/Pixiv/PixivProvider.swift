@@ -7,7 +7,11 @@ public final class PixivProvider: Sendable {
     public nonisolated static let followingScheme = "pixiv-following"
     public nonisolated static let tagScheme = "pixiv-tag"
     public nonisolated static let rankingScheme = "pixiv-ranking"
-    public nonisolated static let schemes = [userScheme, followingScheme, tagScheme, rankingScheme]
+    public nonisolated static let mangaSeriesScheme = "pixiv-series"
+    public nonisolated static let novelSeriesScheme = "pixiv-novel-series"
+    public nonisolated static let schemes = [
+        userScheme, followingScheme, tagScheme, rankingScheme, mangaSeriesScheme, novelSeriesScheme
+    ]
 
     public nonisolated static let origin = "https://www.pixiv.net"
     public nonisolated static let showsRestrictedWorksKey = "Pixiv.ShowRestrictedWorks"

@@ -42,6 +42,21 @@ extension PixivProvider: WebFeedProvider {
         case .ranking(let mode):
             let artworks = try await fetchRankingArtworks(mode)
             return ProviderFeedContent(items: await artworkItems(artworks, excluding: existingURLs))
+        case .mangaSeries(let seriesID, _):
+            let series = try await fetchMangaSeries(seriesID)
+            return ProviderFeedContent(
+                items: await artworkItems(series.artworks, excluding: existingURLs),
+                title: series.title,
+                profileImageURL: series.avatarURL
+            )
+        case .novelSeries(let seriesID):
+            let series = try await fetchNovelSeries(seriesID)
+            let novels = try await fetchNovelSeriesContents(seriesID)
+            return ProviderFeedContent(
+                items: await novelItems(novels, excluding: existingURLs),
+                title: series.title,
+                profileImageURL: series.profileImageUrl
+            )
         }
     }
 
