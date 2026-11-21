@@ -120,7 +120,7 @@ public extension FeedManager {
 
         var image: PlatformImage?
         if let iconURL = metadata.iconURL,
-           let (data, _) = try? await Iconography.urlSession.data(for: .sakuraImage(url: iconURL)),
+           let (data, _) = try? await Iconography.urlSession.data(for: .feedIcon(url: iconURL)),
            let downloaded = PlatformImage(data: data) {
             image = metadata.iconNeedsSquareCrop
                 ? downloaded.centerSquareCropped()
