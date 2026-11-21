@@ -17,7 +17,9 @@ extension BlueskyProvider {
     }
 
     nonisolated static func resolveShortLink(_ url: URL) async -> URL? {
-        var request = URLRequest.sakura(url: url, timeoutInterval: 15)
+        guard let code = url.pathComponents.last,
+              let shortURL = URL(string: "https://\(shortLinkHost)/\(code)") else { return nil }
+        var request = URLRequest.sakura(url: shortURL, timeoutInterval: 15)
         request.httpMethod = "HEAD"
         guard let (_, response) = try? await URLSession.shared.data(for: request),
               let resolvedURL = response.url, !isShortLink(resolvedURL),
