@@ -20,9 +20,9 @@ extension PixivProvider: Authenticated {
         sessionCookies() != nil
     }
 
-    /// R-18 works only come back from Pixiv for a signed-in account that allows them.
+    /// Pixiv only returns R-18 works to a signed-in account that allows them in its viewing settings.
     public nonisolated static var includesRestrictedWorks: Bool {
-        UserDefaults.standard.bool(forKey: showsRestrictedWorksKey) && hasSession()
+        hasSession()
     }
 
     nonisolated static func sessionCookies() -> [HTTPCookie]? {

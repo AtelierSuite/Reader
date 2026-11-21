@@ -14,7 +14,6 @@ public final class PixivProvider: Sendable {
     ]
 
     public nonisolated static let origin = "https://www.pixiv.net"
-    public nonisolated static let showsRestrictedWorksKey = "Pixiv.ShowRestrictedWorks"
 
     nonisolated static let worksPerRefresh = 48
     nonisolated static let novelsPerRefresh = 20

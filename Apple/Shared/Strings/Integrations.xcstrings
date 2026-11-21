@@ -3452,61 +3452,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folgen Sie Pixiv-Künstlern und -Autoren, Tags und Ranglisten als Feeds, indem Sie deren Pixiv-URLs hinzufügen. Eine Anmeldung ist nur für Ihren Gefolgt-Feed und R-18-Werke nötig."
+            "value": "Füge Pixiv-Links hinzu, um ihnen als Feeds zu folgen. Melde dich an, um deinen „Gefolgt“-Feed hinzuzufügen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Follow Pixiv artists and writers, tags and rankings as feeds by adding their Pixiv URLs. Signing in is only needed for your Following feed and R-18 works."
+            "value": "Add Pixiv links to follow them as feeds. Sign in to add your Following feed."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suivez des artistes et auteurs Pixiv, des tags et des classements comme flux en ajoutant leurs URLs Pixiv. La connexion n'est nécessaire que pour votre flux d'abonnements et les œuvres R-18."
+            "value": "Ajoutez des liens Pixiv pour les suivre comme flux. Connectez-vous pour ajouter votre flux Abonnements."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Segui artisti e scrittori di Pixiv, tag e classifiche come feed aggiungendo i loro URL Pixiv. L'accesso serve solo per il feed dei seguiti e per le opere R-18."
+            "value": "Aggiungi link di Pixiv per seguirli come feed. Accedi per aggiungere il feed Seguiti."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "PixivのURLを追加して、イラストレーターや作家、タグ、ランキングをフィードとしてフォローできるようになります。ログインはフォロー新着フィードとR-18作品にのみ必要です。"
+            "value": "Pixivのリンクを追加してフィードとしてフォローできます。フォロー新着を追加するにはサインインしてください。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pixiv URL을 추가하여 Pixiv 작가, 태그, 랭킹을 피드로 팔로우하세요. 로그인은 팔로우 피드와 R-18 작품에만 필요합니다."
+            "value": "Pixiv 링크를 추가해 피드로 팔로우하세요. 팔로우 피드를 추가하려면 로그인하세요."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Volg Pixiv-artiesten en -schrijvers, tags en ranglijsten als feeds door hun Pixiv-URL's toe te voegen. Inloggen is alleen nodig voor je Gevolgd-feed en R-18-werken."
+            "value": "Voeg Pixiv-links toe om ze als feeds te volgen. Log in om je Gevolgd-feed toe te voegen."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Theo dõi họa sĩ và tác giả Pixiv, thẻ và bảng xếp hạng dưới dạng nguồn cấp bằng cách thêm URL Pixiv của họ. Chỉ cần đăng nhập cho nguồn cấp Đang theo dõi và tác phẩm R-18."
+            "value": "Thêm liên kết Pixiv để theo dõi dưới dạng nguồn cấp. Đăng nhập để thêm nguồn cấp Đang theo dõi."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过添加 Pixiv URL，将 Pixiv 画师和作者、标签及排行榜作为订阅源关注。仅关注动态订阅源和 R-18 作品需要登录。"
+            "value": "添加 Pixiv 链接即可作为订阅源关注。登录后可添加关注动态。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "透過新增 Pixiv URL，將 Pixiv 繪師和作者、標籤及排行榜作為訂閱源追蹤。僅關注動態訂閱源和 R-18 作品需要登入。"
+            "value": "加入 Pixiv 連結即可作為訂閱源追蹤。登入後可加入關注動態。"
           }
         }
       }
@@ -3702,136 +3702,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "登入 Pixiv"
-          }
-        }
-      }
-    },
-    "Pixiv.ShowRestrictedWorks": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "R-18-Werke anzeigen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show R-18 Works"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Afficher les œuvres R-18"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mostra opere R-18"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "R-18作品を表示"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "R-18 작품 표시"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "R-18-werken tonen"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hiển thị tác phẩm R-18"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "显示 R-18 作品"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "顯示 R-18 作品"
-          }
-        }
-      }
-    },
-    "Pixiv.ShowRestrictedWorks.Footer": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nimmt R-18- und R-18G-Werke in Pixiv-Feeds auf. Funktioniert nur, wenn Sie mit einem Konto angemeldet sind, bei dem R-18-Inhalte in den Anzeigeeinstellungen von Pixiv aktiviert sind."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Includes R-18 and R-18G works in Pixiv feeds. Only takes effect when you're signed in with an account that has R-18 content turned on in Pixiv's viewing settings."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inclut les œuvres R-18 et R-18G dans les flux Pixiv. Ne fonctionne que si vous êtes connecté avec un compte dont le contenu R-18 est activé dans les paramètres d'affichage de Pixiv."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Include le opere R-18 e R-18G nei feed Pixiv. Funziona solo se hai effettuato l'accesso con un account che ha i contenuti R-18 attivati nelle impostazioni di visualizzazione di Pixiv."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PixivフィードにR-18およびR-18G作品を含めます。Pixivの閲覧設定でR-18作品の表示を有効にしたアカウントでログインしている場合のみ適用されます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pixiv 피드에 R-18 및 R-18G 작품을 포함합니다. Pixiv의 열람 설정에서 R-18 콘텐츠를 켠 계정으로 로그인한 경우에만 적용됩니다."
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neemt R-18- en R-18G-werken op in Pixiv-feeds. Werkt alleen als je bent ingelogd met een account waarbij R-18-inhoud is ingeschakeld in de weergave-instellingen van Pixiv."
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bao gồm tác phẩm R-18 và R-18G trong nguồn cấp Pixiv. Chỉ có hiệu lực khi bạn đăng nhập bằng tài khoản đã bật nội dung R-18 trong cài đặt hiển thị của Pixiv."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "在 Pixiv 订阅源中包含 R-18 和 R-18G 作品。仅在使用已于 Pixiv 浏览设置中开启 R-18 内容的账户登录时生效。"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "在 Pixiv 訂閱源中包含 R-18 和 R-18G 作品。僅在使用已於 Pixiv 瀏覽設定中開啟 R-18 內容的帳號登入時生效。"
           }
         }
       }

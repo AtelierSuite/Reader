@@ -5,7 +5,6 @@ struct PixivIntegrationSettings: View {
 
     @Environment(FeedManager.self) private var feedManager
     @AppStorage("Labs.PixivFeeds") private var pixivFeedsEnabled = false
-    @AppStorage(PixivProvider.showsRestrictedWorksKey) private var showsRestrictedWorks = false
     @State private var isSignedIn = false
     @State private var isAddingFollowingFeed = false
 
@@ -26,9 +25,6 @@ struct PixivIntegrationSettings: View {
                     Button(IntegrationText.string("Pixiv.AddFollowingFeed")) { addFollowingFeed() }
                         .disabled(isAddingFollowingFeed || feedManager.hasPixivFollowingFeed)
                 }
-                Toggle(IntegrationText.string("Pixiv.ShowRestrictedWorks"), isOn: $showsRestrictedWorks)
-                    .padding(.top, 12)
-                SettingsNote(text: IntegrationText.string("Pixiv.ShowRestrictedWorks.Footer"))
             }
         }
         .animation(.smooth.speed(2.0), value: pixivFeedsEnabled)

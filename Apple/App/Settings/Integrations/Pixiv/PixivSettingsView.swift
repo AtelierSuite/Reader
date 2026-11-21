@@ -5,7 +5,6 @@ struct PixivSettingsView: View {
 
     @Environment(FeedManager.self) private var feedManager
     @AppStorage("Labs.PixivFeeds") private var pixivFeedsEnabled: Bool = false
-    @AppStorage(PixivProvider.showsRestrictedWorksKey) private var showsRestrictedWorks: Bool = false
 
     @State private var isCheckingLogin = true
     @State private var isPixivSignedIn = false
@@ -43,15 +42,6 @@ struct PixivSettingsView: View {
                         addFollowingFeed()
                     }
                     .disabled(isAddingFollowingFeed || feedManager.hasPixivFollowingFeed)
-                }
-            }
-
-            if pixivFeedsEnabled {
-                Section {
-                    Toggle(String(localized: "Pixiv.ShowRestrictedWorks", table: "Integrations"),
-                           isOn: $showsRestrictedWorks)
-                } footer: {
-                    Text(String(localized: "Pixiv.ShowRestrictedWorks.Footer", table: "Integrations"))
                 }
             }
         }
