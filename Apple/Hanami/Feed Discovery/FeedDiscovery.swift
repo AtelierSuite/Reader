@@ -25,6 +25,7 @@ public actor FeedDiscovery {
         "/rss.xml",
         "/feed.xml",
         "/feed.rss",
+        "/feed.json",
         "/atom.xml",
         "/atom",
         "/index.xml",

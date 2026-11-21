@@ -203,8 +203,7 @@ extension OnboardingView {
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else { return nil }
 
-            let parser = RSSParser()
-            guard let parsed = parser.parse(data: data) else { return nil }
+            guard let parsed = FeedParser.parse(data: data) else { return nil }
 
             let siteURL = parsed.siteURL.isEmpty ? urlString : parsed.siteURL
             let title = parsed.title.isEmpty ? (url.host ?? urlString) : parsed.title

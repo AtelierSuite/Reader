@@ -77,7 +77,7 @@ final class FeedDiscoverySession {
         let fetchURL = RedirectDomains.redirectedURL(url)
         guard let (data, response) = try? await URLSession.shared.data(for: .sakura(url: fetchURL)),
               (response as? HTTPURLResponse)?.statusCode == 200,
-              let parsed = RSSParser().parse(data: data) else { return nil }
+              let parsed = FeedParser.parse(data: data) else { return nil }
         return DiscoveredFeed(
             title: parsed.title.isEmpty ? (url.host() ?? urlString) : parsed.title,
             url: urlString,

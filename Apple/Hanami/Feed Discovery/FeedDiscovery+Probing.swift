@@ -64,11 +64,11 @@ public extension FeedDiscovery {
                 guard !isXML else { return false }
                 let head = String(bytes: data.prefix(4096), encoding: .isoLatin1) ?? ""
                 return head.contains("<rss") || head.contains("<feed") || head.contains("<rdf:RDF")
+                    || head.contains("jsonfeed.org/version/")
             }()
 
             if isXML || looksLikeFeed {
-                let parser = RSSParser()
-                if let parsed = parser.parse(data: data) {
+                if let parsed = FeedParser.parse(data: data) {
                     return DiscoveredFeed(
                         title: parsed.title.isEmpty ? domain : parsed.title,
                         url: url.absoluteString,
