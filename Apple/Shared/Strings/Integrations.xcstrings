@@ -521,132 +521,67 @@
         }
       }
     },
-    "InstagramProfileFeeds": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram-Profil-Feeds"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram Profile Feeds"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Flux de profils Instagram"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feed profili Instagram"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagramプロフィールフィード"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram 프로필 피드"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram-profielfeeds"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nguồn cấp hồ sơ Instagram"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram个人资料订阅源"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram個人資料訂閱源"
-          }
-        }
-      }
-    },
     "InstagramProfileFeeds.Footer": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folgen Sie Instagram-Profilen als Feeds, indem Sie deren Profil-URLs hinzufügen."
+            "value": "Melde dich an, um Instagram-Profilen als Feeds zu folgen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Follow Instagram profiles as feeds by adding their profile URLs."
+            "value": "Sign in to follow Instagram profiles as feeds."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suivez des profils Instagram comme flux en ajoutant leurs URLs de profil."
+            "value": "Connectez-vous pour suivre des profils Instagram comme flux."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Segui i profili Instagram come feed aggiungendo i loro URL del profilo."
+            "value": "Accedi per seguire i profili Instagram come feed."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "InstagramのプロフィールURLを追加して、プロフィールをフィードとしてフォローできるようになります。"
+            "value": "サインインすると、Instagramのプロフィールをフィードとしてフォローできます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "프로필 URL을 추가하여 Instagram 프로필을 피드로 팔로우하세요."
+            "value": "로그인하면 Instagram 프로필을 피드로 팔로우할 수 있습니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Volg Instagram-profielen als feeds door hun profiel-URL's toe te voegen."
+            "value": "Log in om Instagram-profielen als feeds te volgen."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Theo dõi hồ sơ Instagram dưới dạng nguồn cấp bằng cách thêm URL hồ sơ của họ."
+            "value": "Đăng nhập để theo dõi hồ sơ Instagram dưới dạng nguồn cấp."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过添加个人资料URL，将Instagram个人资料作为订阅源关注。"
+            "value": "登录后可将 Instagram 个人主页作为订阅源关注。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "透過新增個人資料URL，將Instagram個人資料作為訂閱源追蹤。"
+            "value": "登入後可將 Instagram 個人檔案作為訂閱源追蹤。"
           }
         }
       }
@@ -1626,132 +1561,67 @@
         }
       }
     },
-    "XProfileFeeds": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X-Profil-Feeds"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X Profile Feeds"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Flux de profils X"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feed profili X"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Xプロフィールフィード"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X 프로필 피드"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X-profielfeeds"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nguồn cấp hồ sơ X"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X个人资料订阅源"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X個人資料訂閱源"
-          }
-        }
-      }
-    },
     "XProfileFeeds.Footer": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folgen Sie X (Twitter)-Profilen als Feeds, indem Sie deren Profil-URLs hinzufügen."
+            "value": "Melde dich an, um X-Profilen als Feeds zu folgen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Follow X (Twitter) profiles as feeds by adding their profile URLs."
+            "value": "Sign in to follow X profiles as feeds."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suivez des profils X (Twitter) comme flux en ajoutant leurs URLs de profil."
+            "value": "Connectez-vous pour suivre des profils X comme flux."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Segui i profili X (Twitter) come feed aggiungendo i loro URL del profilo."
+            "value": "Accedi per seguire i profili X come feed."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "X（Twitter）のプロフィールURLを追加して、プロフィールをフィードとしてフォローできるようになります。"
+            "value": "サインインすると、Xのプロフィールをフィードとしてフォローできます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "프로필 URL을 추가하여 X(Twitter) 프로필을 피드로 팔로우하세요."
+            "value": "로그인하면 X 프로필을 피드로 팔로우할 수 있습니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Volg X-profielen (Twitter) als feeds door hun profiel-URL's toe te voegen."
+            "value": "Log in om X-profielen als feeds te volgen."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Theo dõi hồ sơ X (Twitter) dưới dạng nguồn cấp bằng cách thêm URL hồ sơ của họ."
+            "value": "Đăng nhập để theo dõi hồ sơ X dưới dạng nguồn cấp."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过添加个人资料URL，将X（Twitter）个人资料作为订阅源关注。"
+            "value": "登录后可将 X 个人主页作为订阅源关注。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "透過新增個人資料URL，將X（Twitter）個人資料作為訂閱源追蹤。"
+            "value": "登入後可將 X 個人檔案作為訂閱源追蹤。"
           }
         }
       }

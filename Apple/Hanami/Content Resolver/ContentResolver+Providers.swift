@@ -83,7 +83,6 @@ public extension ContentResolver {
 
     private func tryXPostExtraction() async -> Bool {
         guard article.isXPostURL,
-              UserDefaults.standard.bool(forKey: "Labs.XProfileFeeds"),
               let url = URL(string: article.url),
               let tweetID = XProvider.extractTweetID(from: url),
               XProvider.hasSession() else { return false }

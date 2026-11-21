@@ -4,12 +4,10 @@ import Hanami
 extension AddFeedView {
 
     func addFeed(_ discovered: DiscoveredFeed) {
-        guard !XProvider.isFeedURL(discovered.url)
-                || UserDefaults.standard.bool(forKey: "Labs.XProfileFeeds") else {
+        guard !XProvider.isFeedURL(discovered.url) || XProvider.isEnabled else {
             return
         }
-        guard !InstagramProvider.isFeedURL(discovered.url)
-                || UserDefaults.standard.bool(forKey: "Labs.InstagramProfileFeeds") else {
+        guard !InstagramProvider.isFeedURL(discovered.url) || InstagramProvider.isEnabled else {
             return
         }
         guard !PixivProvider.isFeedURL(discovered.url) || PixivProvider.isEnabled else {

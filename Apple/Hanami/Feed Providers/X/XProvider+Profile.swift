@@ -4,7 +4,7 @@ extension XProvider: ProfileFeedProvider {
 
     public nonisolated static var providerID: String { "x" }
 
-    public nonisolated static var enabledFlagKey: String? { "Labs.XProfileFeeds" }
+    public nonisolated static var isEnabled: Bool { hasSession() }
 
     public nonisolated static var domains: Set<String> { ["x.com", "twitter.com"] }
 

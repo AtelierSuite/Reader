@@ -131,8 +131,7 @@ struct XEmbedBlockView: View {
 
     private func loadTweet() async {
         guard tweet == nil, !loadFailed, !isLoading,
-              let tweetID,
-              UserDefaults.standard.bool(forKey: "Labs.XProfileFeeds") else {
+              let tweetID else {
             return
         }
         guard XProvider.hasSession() else { return }

@@ -3,8 +3,6 @@ import Hanami
 
 struct XSettingsView: View {
 
-    @AppStorage("Labs.XProfileFeeds") private var xProfileFeedsEnabled: Bool = false
-
     @State private var isCheckingLogin = true
     @State private var isXSignedIn = false
     @State private var showXLogin = false
@@ -12,34 +10,30 @@ struct XSettingsView: View {
     var body: some View {
         List {
             Section {
-                Toggle(String(localized: "XProfileFeeds", table: "Integrations"), isOn: $xProfileFeedsEnabled)
-
-                if xProfileFeedsEnabled {
-                    if isCheckingLogin {
-                        ProgressView()
-                    } else if isXSignedIn {
-                        Button(String(localized: "XProfileFeeds.RefreshAuth", table: "Integrations")) {
-                            Task {
-                                await XProvider.refetchQueryIDs()
-                            }
+                if isCheckingLogin {
+                    ProgressView()
+                } else if isXSignedIn {
+                    Button(String(localized: "XProfileFeeds.RefreshAuth", table: "Integrations")) {
+                        Task {
+                            await XProvider.refetchQueryIDs()
                         }
-                        Button(String(localized: "XProfileFeeds.SignOut", table: "Integrations")) {
-                            Task {
-                                await XProvider.clearSession()
-                                isXSignedIn = false
-                            }
+                    }
+                    Button(String(localized: "XProfileFeeds.SignOut", table: "Integrations")) {
+                        Task {
+                            await XProvider.clearSession()
+                            isXSignedIn = false
                         }
-                    } else {
-                        Button(String(localized: "XProfileFeeds.SignIn", table: "Integrations")) {
-                            showXLogin = true
-                        }
+                    }
+                } else {
+                    Button(String(localized: "XProfileFeeds.SignIn", table: "Integrations")) {
+                        showXLogin = true
                     }
                 }
             } footer: {
                 Text(String(localized: "XProfileFeeds.Footer", table: "Integrations"))
             }
         }
-        .animation(.smooth.speed(2.0), value: xProfileFeedsEnabled)
+        .animation(.smooth.speed(2.0), value: isXSignedIn)
         .navigationTitle(String(localized: "X", table: "Integrations"))
         .toolbarTitleDisplayMode(.inline)
         .sheet(isPresented: $showXLogin) {

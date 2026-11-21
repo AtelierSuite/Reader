@@ -52,10 +52,10 @@ final class FeedDiscoverySession {
     /// create yet.
     func canAdd(_ feed: DiscoveredFeed) -> Bool {
         if XProvider.isFeedURL(feed.url) {
-            return UserDefaults.standard.bool(forKey: "Labs.XProfileFeeds") && XProvider.hasSession()
+            return XProvider.isEnabled
         }
         if InstagramProvider.isFeedURL(feed.url) {
-            return UserDefaults.standard.bool(forKey: "Labs.InstagramProfileFeeds") && InstagramProvider.hasSession()
+            return InstagramProvider.isEnabled
         }
         if PixivProvider.isFeedURL(feed.url) {
             return PixivProvider.isEnabled

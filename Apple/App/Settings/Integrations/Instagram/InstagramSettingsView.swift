@@ -3,7 +3,6 @@ import Hanami
 
 struct InstagramSettingsView: View {
 
-    @AppStorage("Labs.InstagramProfileFeeds") private var instagramProfileFeedsEnabled: Bool = false
     @AppStorage("Instagram.HideReels") private var hideReels: Bool = false
 
     @State private var isCheckingLogin = true
@@ -13,30 +12,25 @@ struct InstagramSettingsView: View {
     var body: some View {
         List {
             Section {
-                Toggle(String(localized: "InstagramProfileFeeds", table: "Integrations"),
-                       isOn: $instagramProfileFeedsEnabled)
-
-                if instagramProfileFeedsEnabled {
-                    if isCheckingLogin {
-                        ProgressView()
-                    } else if isInstagramSignedIn {
-                        Button(String(localized: "InstagramProfileFeeds.SignOut", table: "Integrations")) {
-                            Task {
-                                await InstagramProvider.clearSession()
-                                isInstagramSignedIn = false
-                            }
+                if isCheckingLogin {
+                    ProgressView()
+                } else if isInstagramSignedIn {
+                    Button(String(localized: "InstagramProfileFeeds.SignOut", table: "Integrations")) {
+                        Task {
+                            await InstagramProvider.clearSession()
+                            isInstagramSignedIn = false
                         }
-                    } else {
-                        Button(String(localized: "InstagramProfileFeeds.SignIn", table: "Integrations")) {
-                            showInstagramLogin = true
-                        }
+                    }
+                } else {
+                    Button(String(localized: "InstagramProfileFeeds.SignIn", table: "Integrations")) {
+                        showInstagramLogin = true
                     }
                 }
             } footer: {
                 Text(String(localized: "InstagramProfileFeeds.Footer", table: "Integrations"))
             }
 
-            if instagramProfileFeedsEnabled {
+            if isInstagramSignedIn {
                 Section {
                     Toggle(String(localized: "Instagram.HideReels", table: "Integrations"), isOn: $hideReels)
                 } footer: {
@@ -44,7 +38,7 @@ struct InstagramSettingsView: View {
                 }
             }
         }
-        .animation(.smooth.speed(2.0), value: instagramProfileFeedsEnabled)
+        .animation(.smooth.speed(2.0), value: isInstagramSignedIn)
         .navigationTitle(String(localized: "Instagram", table: "Integrations"))
         .toolbarTitleDisplayMode(.inline)
         .sheet(isPresented: $showInstagramLogin) {

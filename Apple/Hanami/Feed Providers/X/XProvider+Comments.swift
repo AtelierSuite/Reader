@@ -7,8 +7,7 @@ import Foundation
 extension XProvider: CommentsProvider {
 
     public nonisolated static func canProvideComments(for article: Article, in feed: Feed?) -> Bool {
-        guard UserDefaults.standard.bool(forKey: "Labs.XProfileFeeds"),
-              hasSession() else { return false }
+        guard hasSession() else { return false }
         return commentsURL(for: article, in: feed) != nil
     }
 
