@@ -7,6 +7,7 @@ struct PetalBuilderSelectorsSection: View {
     @Binding var recipe: PetalRecipe
     let canAutoDetect: Bool
     let isFetching: Bool
+    let agentStep: PetalAgent.Step?
     let onAutoDetect: () -> Void
     let onFetch: () -> Void
     let onSelectorChanged: () -> Void
@@ -17,8 +18,17 @@ struct PetalBuilderSelectorsSection: View {
             Button {
                 onAutoDetect()
             } label: {
-                Label(String(localized: "Builder.AutoDetect", table: "Petal"),
-                      systemImage: "wand.and.stars")
+                HStack {
+                    Label(String(localized: "Builder.AutoDetect", table: "Petal"),
+                          systemImage: "wand.and.stars")
+                    if let agentStep {
+                        Spacer()
+                        Text(statusText(for: agentStep))
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        ProgressView()
+                    }
+                }
             }
             .disabled(!canAutoDetect)
 
@@ -76,7 +86,12 @@ struct PetalBuilderSelectorsSection: View {
         } header: {
             Text(String(localized: "Builder.Section.Selectors", table: "Petal"))
         } footer: {
-            Text(String(localized: "Builder.Section.SelectorsFooter", table: "Petal"))
+            VStack(alignment: .leading, spacing: 4) {
+                Text(String(localized: "Builder.Section.SelectorsFooter", table: "Petal"))
+                if PetalAgent.isAvailable {
+                    Text(String(localized: "Builder.Agent.Footer", table: "Petal"))
+                }
+            }
         }
         .onChange(of: recipe.itemSelector) { _, _ in onSelectorChanged() }
         .onChange(of: recipe.titleSelector) { _, _ in onSelectorChanged() }
@@ -84,5 +99,13 @@ struct PetalBuilderSelectorsSection: View {
         .onChange(of: recipe.summarySelector) { _, _ in onSelectorChanged() }
         .onChange(of: recipe.imageSelector) { _, _ in onSelectorChanged() }
         .onChange(of: recipe.dateSelector) { _, _ in onSelectorChanged() }
+    }
+
+    private func statusText(for step: PetalAgent.Step) -> String {
+        switch step {
+        case .readingPage: String(localized: "Builder.Agent.ReadingPage", table: "Petal")
+        case .tryingSelectors: String(localized: "Builder.Agent.TryingSelectors", table: "Petal")
+        case .testingFeed: String(localized: "Builder.Agent.TestingFeed", table: "Petal")
+        }
     }
 }

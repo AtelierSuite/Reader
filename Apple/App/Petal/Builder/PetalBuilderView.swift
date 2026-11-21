@@ -24,6 +24,8 @@ struct PetalBuilderView: View {
     @State private var showDeleteConfirm = false
     @State private var selectedPicker: PickerSelection?
     @State var fetchRequestID = UUID()
+    @State var agentStep: PetalAgent.Step?
+    @State var agentTask: Task<Void, Never>?
 
     private struct PickerSelection: Identifiable {
         let id = UUID()
@@ -55,8 +57,9 @@ struct PetalBuilderView: View {
                 )
                 PetalBuilderSelectorsSection(
                     recipe: $recipe,
-                    canAutoDetect: fetchedHTML != nil && !isFetching,
+                    canAutoDetect: fetchedHTML != nil && !isFetching && agentStep == nil,
                     isFetching: isFetching,
+                    agentStep: agentStep,
                     onAutoDetect: runAutoDetect,
                     onFetch: { Task { await fetchAndPreview(force: true) } },
                     onSelectorChanged: schedulePreview,
@@ -107,6 +110,8 @@ struct PetalBuilderView: View {
                 Text(String(localized: "Builder.DeleteConfirm.Message", table: "Petal"))
             }
             .task(id: PreviewSource(siteURL: recipe.siteURL, fetchMode: recipe.fetchMode)) {
+                agentTask?.cancel()
+                agentStep = nil
                 fetchedHTML = nil
                 previewArticles = []
                 errorMessage = nil
@@ -118,6 +123,7 @@ struct PetalBuilderView: View {
                 await fetchAndPreview()
             }
             .onDisappear {
+                agentTask?.cancel()
                 previewTask?.cancel()
             }
         }
