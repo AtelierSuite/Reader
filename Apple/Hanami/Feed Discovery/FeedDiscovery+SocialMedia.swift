@@ -16,6 +16,9 @@ public extension FeedDiscovery {
         if let arXivFeed = detectArXivListFeed(url: url) {
             return arXivFeed
         }
+        if let podcastFeed = await PodcastLinkResolver.discoveredFeed(for: url) {
+            return podcastFeed
+        }
         for provider in FeedProviderRegistry.all where provider.isEnabled {
             if let profile = provider as? any ProfileFeedProvider.Type,
                profile.isProfileURL(url),
