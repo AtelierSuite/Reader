@@ -46,7 +46,13 @@ public nonisolated extension PetalEngine {
             "MMM d, yyyy",
             "d MMMM yyyy",
             "d MMM yyyy",
-            "EEE, d MMM yyyy HH:mm:ss Z"
+            "EEE, d MMM yyyy HH:mm:ss Z",
+            "yyyy/M/d HH:mm",
+            "yyyy/M/d",
+            "yyyy.M.d",
+            "yyyy年M月d日 HH:mm",
+            "yyyy年M月d日",
+            "yyyy년 M월 d일"
         ]
         return formats.map { format in
             let formatter = DateFormatter()
