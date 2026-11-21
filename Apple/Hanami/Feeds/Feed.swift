@@ -62,7 +62,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
     public static func isProviderSchemeURL(_ url: String) -> Bool {
         XProvider.isFeedURL(url) || InstagramProvider.isFeedURL(url)
             || YouTubePlaylistProvider.isFeedURL(url) || AppStoreProvider.isFeedURL(url)
-            || PixivProvider.isFeedURL(url)
+            || PixivProvider.isFeedURL(url) || BlueskyFeedTarget.isFeedURL(url)
     }
 
     public var isFeedViewDomain: Bool {

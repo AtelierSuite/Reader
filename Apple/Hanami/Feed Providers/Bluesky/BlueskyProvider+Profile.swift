@@ -9,7 +9,7 @@ extension BlueskyProvider: ProfileFeedProvider {
     public nonisolated static var feedURLScheme: String? { nil }
 
     public nonisolated static func isProfileURL(_ url: URL) -> Bool {
-        profileHandle(from: url) != nil
+        profileHandle(from: url) != nil || BlueskyFeedTarget(pageURL: url) != nil || isShortLink(url)
     }
 
     public nonisolated static func extractIdentifier(from url: URL) -> String? {
@@ -33,6 +33,10 @@ extension BlueskyProvider: ProfileFeedProvider {
     }
 
     public nonisolated static func isFeedURL(_ url: String) -> Bool {
+        isProfileFeedURL(url) || BlueskyFeedTarget.isFeedURL(url)
+    }
+
+    nonisolated static func isProfileFeedURL(_ url: String) -> Bool {
         guard let parsed = URL(string: url),
               matchesHost(parsed.host) else { return false }
         let components = parsed.pathComponents.filter { $0 != "/" }
@@ -43,23 +47,14 @@ extension BlueskyProvider: ProfileFeedProvider {
     }
 
     public nonisolated static func identifierFromFeedURL(_ url: String) -> String? {
-        guard isFeedURL(url),
+        guard isProfileFeedURL(url),
               let parsed = URL(string: url) else { return nil }
         let components = parsed.pathComponents.filter { $0 != "/" }
         return components.count >= 2 ? components[1] : nil
     }
 
-    public nonisolated static func discoveredFeed(forProfileURL url: URL) async -> DiscoveredFeed? {
-        guard let handle = extractIdentifier(from: url) else { return nil }
-        guard let did = await resolveDID(forHandle: handle) ?? handle.asDIDIfValid,
-              let profile = await fetchActorProfile(actor: did) else {
-            log("BlueskyProfile", "discovery failed for @\(handle)")
-            return nil
-        }
-        return DiscoveredFeed(
-            title: profile.displayName ?? "@\(handle)",
-            url: feedURL(for: handle),
-            siteURL: profileURL(for: handle)?.absoluteString ?? "https://\(host)/profile/\(handle)"
-        )
+    public nonisolated static func inferredSiteURL(fromFeedURL feedURL: String) -> String? {
+        if let target = BlueskyFeedTarget(feedURL: feedURL) { return target.siteURL }
+        return identifierFromFeedURL(feedURL).flatMap { profileURL(for: $0)?.absoluteString }
     }
 }
