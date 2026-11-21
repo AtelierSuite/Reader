@@ -16,8 +16,16 @@ struct PhotosArticleCardMedia: View {
         feedManager.carouselImageURLs(for: article)
     }
 
+    private static let minimumPageAspectRatio: CGFloat = 1.0 / 2.0
+
+    // Manga and illustration pages are tall, and cropping them to 4:5 cuts panels off.
+    private var minimumAspectRatio: CGFloat {
+        let showsWholePages = feedManager.feed(forArticle: article).map { PixivProvider.isFeedURL($0.url) } ?? false
+        return showsWholePages ? Self.minimumPageAspectRatio : Self.minimumAspectRatio
+    }
+
     private var effectiveAspectRatio: CGFloat {
-        max(imageAspectRatio ?? Self.minimumAspectRatio, Self.minimumAspectRatio)
+        max(imageAspectRatio ?? Self.minimumAspectRatio, minimumAspectRatio)
     }
 
     var body: some View {
