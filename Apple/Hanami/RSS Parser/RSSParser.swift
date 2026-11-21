@@ -40,10 +40,23 @@ public nonisolated final class RSSParser: NSObject, XMLParserDelegate, @unchecke
                 feedDescription.trimmingCharacters(in: .whitespacesAndNewlines),
                 baseURL: URL(string: feedLink.trimmingCharacters(in: .whitespacesAndNewlines))
             ) ?? "",
-            articles: parsedArticles,
+            articles: Self.withDistinctEpisodeURLs(parsedArticles),
             hasITunesNamespace: hasITunesNamespace,
             generator: trimmedGenerator.isEmpty ? nil : trimmedGenerator
         )
+    }
+
+    /// Some podcasts give every episode the show's page as its link; their audio URL tells episodes apart.
+    static func withDistinctEpisodeURLs(_ articles: [ParsedArticle]) -> [ParsedArticle] {
+        var linkCounts: [String: Int] = [:]
+        for article in articles { linkCounts[article.url, default: 0] += 1 }
+        guard linkCounts.values.contains(where: { $0 > 1 }) else { return articles }
+        return articles.map { article in
+            guard linkCounts[article.url, default: 0] > 1, let audioURL = article.audioURL else { return article }
+            var episode = article
+            episode.url = audioURL
+            return episode
+        }
     }
 
     private func resetState() {
