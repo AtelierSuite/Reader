@@ -12,6 +12,7 @@ final class FeedIconCache {
     private(set) var revision = 0
 
     @ObservationIgnored private var icons: [Int64: NSImage] = [:]
+    @ObservationIgnored private var authorIcons: [ContentAuthor: NSImage] = [:]
     @ObservationIgnored private var loading: Set<Int64> = []
     @ObservationIgnored private var waiting: [Int64: [(NSImage?) -> Void]] = [:]
     @ObservationIgnored private var iconObserver: ChangeObserver?
@@ -21,6 +22,7 @@ final class FeedIconCache {
             _ = feedManager.iconRevision
         } onChange: { [weak self] in
             self?.icons.removeAll()
+            self?.authorIcons.removeAll()
             self?.revision += 1
         }
     }
@@ -41,6 +43,23 @@ final class FeedIconCache {
             }
             loading.remove(feed.id)
             (waiting.removeValue(forKey: feed.id) ?? []).forEach { $0(icon) }
+        }
+    }
+
+    func icon(for feed: Feed, author: ContentAuthor?, completion: @escaping (NSImage?) -> Void) {
+        guard let author else {
+            icon(for: feed, completion: completion)
+            return
+        }
+        if let icon = authorIcons[author] {
+            completion(icon)
+            return
+        }
+        Task {
+            let icon = await Iconography.shared.icon(for: author)
+                ?? InitialsAvatar.renderToImage(name: author.name, size: 64)
+            authorIcons[author] = icon
+            completion(icon)
         }
     }
 }

@@ -304,6 +304,7 @@
 				Settings/Integrations/ArchivePh/ArchivePhAddress.swift,
 				Settings/Integrations/ClearThisPage/ClearThisPageAddress.swift,
 				Settings/Integrations/Instagram/InstagramLoginView.swift,
+				Settings/Integrations/Pixiv/PixivLoginView.swift,
 				Settings/Integrations/Podcast/PodcastTranscriptionSettingsSection.swift,
 				Settings/Integrations/Podcast/TranscriptionModelSetup.swift,
 				Settings/Integrations/Readability/Readability.js,
@@ -1223,7 +1224,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS.MacDebug;
 				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
@@ -1267,7 +1268,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS;
 				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
@@ -1394,7 +1395,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.SakuraRSS.Bookmark-Article";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1429,7 +1430,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.SakuraRSS.Bookmark-Article";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1463,7 +1464,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.SakuraRSS.Open-Article";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1498,7 +1499,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.SakuraRSS.Open-Article";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1676,7 +1677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS;
 				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
@@ -1727,7 +1728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS;
 				PRODUCT_NAME = Reader;
 				REGISTER_APP_GROUPS = YES;
@@ -1763,7 +1764,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.SakuraRSS.Add-Feed";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1799,7 +1800,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.SakuraRSS.Add-Feed";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1845,7 +1846,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS.Widgets;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.tsubuzaki.SakuraRSS.MacDebug.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1892,7 +1893,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.SakuraRSS.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -521,132 +521,67 @@
         }
       }
     },
-    "InstagramProfileFeeds": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram-Profil-Feeds"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram Profile Feeds"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Flux de profils Instagram"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feed profili Instagram"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagramプロフィールフィード"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram 프로필 피드"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram-profielfeeds"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nguồn cấp hồ sơ Instagram"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram个人资料订阅源"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instagram個人資料訂閱源"
-          }
-        }
-      }
-    },
     "InstagramProfileFeeds.Footer": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folgen Sie Instagram-Profilen als Feeds, indem Sie deren Profil-URLs hinzufügen."
+            "value": "Melde dich an, um Instagram-Profilen als Feeds zu folgen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Follow Instagram profiles as feeds by adding their profile URLs."
+            "value": "Sign in to follow Instagram profiles as feeds."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suivez des profils Instagram comme flux en ajoutant leurs URLs de profil."
+            "value": "Connectez-vous pour suivre des profils Instagram comme flux."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Segui i profili Instagram come feed aggiungendo i loro URL del profilo."
+            "value": "Accedi per seguire i profili Instagram come feed."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "InstagramのプロフィールURLを追加して、プロフィールをフィードとしてフォローできるようになります。"
+            "value": "サインインすると、Instagramのプロフィールをフィードとしてフォローできます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "프로필 URL을 추가하여 Instagram 프로필을 피드로 팔로우하세요."
+            "value": "로그인하면 Instagram 프로필을 피드로 팔로우할 수 있습니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Volg Instagram-profielen als feeds door hun profiel-URL's toe te voegen."
+            "value": "Log in om Instagram-profielen als feeds te volgen."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Theo dõi hồ sơ Instagram dưới dạng nguồn cấp bằng cách thêm URL hồ sơ của họ."
+            "value": "Đăng nhập để theo dõi hồ sơ Instagram dưới dạng nguồn cấp."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过添加个人资料URL，将Instagram个人资料作为订阅源关注。"
+            "value": "登录后可将 Instagram 个人主页作为订阅源关注。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "透過新增個人資料URL，將Instagram個人資料作為訂閱源追蹤。"
+            "value": "登入後可將 Instagram 個人檔案作為訂閱源追蹤。"
           }
         }
       }
@@ -1626,132 +1561,67 @@
         }
       }
     },
-    "XProfileFeeds": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X-Profil-Feeds"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X Profile Feeds"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Flux de profils X"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feed profili X"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Xプロフィールフィード"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X 프로필 피드"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X-profielfeeds"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nguồn cấp hồ sơ X"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X个人资料订阅源"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X個人資料訂閱源"
-          }
-        }
-      }
-    },
     "XProfileFeeds.Footer": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folgen Sie X (Twitter)-Profilen als Feeds, indem Sie deren Profil-URLs hinzufügen."
+            "value": "Melde dich an, um X-Profilen als Feeds zu folgen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Follow X (Twitter) profiles as feeds by adding their profile URLs."
+            "value": "Sign in to follow X profiles as feeds."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suivez des profils X (Twitter) comme flux en ajoutant leurs URLs de profil."
+            "value": "Connectez-vous pour suivre des profils X comme flux."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Segui i profili X (Twitter) come feed aggiungendo i loro URL del profilo."
+            "value": "Accedi per seguire i profili X come feed."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "X（Twitter）のプロフィールURLを追加して、プロフィールをフィードとしてフォローできるようになります。"
+            "value": "サインインすると、Xのプロフィールをフィードとしてフォローできます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "프로필 URL을 추가하여 X(Twitter) 프로필을 피드로 팔로우하세요."
+            "value": "로그인하면 X 프로필을 피드로 팔로우할 수 있습니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Volg X-profielen (Twitter) als feeds door hun profiel-URL's toe te voegen."
+            "value": "Log in om X-profielen als feeds te volgen."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Theo dõi hồ sơ X (Twitter) dưới dạng nguồn cấp bằng cách thêm URL hồ sơ của họ."
+            "value": "Đăng nhập để theo dõi hồ sơ X dưới dạng nguồn cấp."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过添加个人资料URL，将X（Twitter）个人资料作为订阅源关注。"
+            "value": "登录后可将 X 个人主页作为订阅源关注。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "透過新增個人資料URL，將X（Twitter）個人資料作為訂閱源追蹤。"
+            "value": "登入後可將 X 個人檔案作為訂閱源追蹤。"
           }
         }
       }
@@ -3182,6 +3052,526 @@
           "stringUnit": {
             "state": "translated",
             "value": "重試"
+          }
+        }
+      }
+    },
+    "Pixiv.Following.FeedTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv – Gefolgt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv Following"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv – Abonnements"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv – Seguiti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv フォロー新着"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv 팔로우"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv – Gevolgd"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv – Đang theo dõi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv 关注"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv 關注"
+          }
+        }
+      }
+    },
+    "Pixiv.Ranking.FeedTitle %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv-Rangliste (%@)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv Ranking (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classement Pixiv (%@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classifica Pixiv (%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixivランキング（%@）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv 랭킹 (%@)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv-ranglijst (%@)"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bảng xếp hạng Pixiv (%@)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv 排行榜（%@）"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv 排行榜（%@）"
+          }
+        }
+      }
+    },
+    "Pixiv": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv"
+          }
+        }
+      }
+    },
+    "PixivFeeds.Footer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge Pixiv-Links hinzu, um ihnen als Feeds zu folgen. Melde dich an, um deinen „Gefolgt“-Feed hinzuzufügen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Pixiv links to follow them as feeds. Sign in to add your Following feed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoutez des liens Pixiv pour les suivre comme flux. Connectez-vous pour ajouter votre flux Abonnements."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi link di Pixiv per seguirli come feed. Accedi per aggiungere il feed Seguiti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixivのリンクを追加してフィードとしてフォローできます。フォロー新着を追加するにはサインインしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv 링크를 추가해 피드로 팔로우하세요. 팔로우 피드를 추가하려면 로그인하세요."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voeg Pixiv-links toe om ze als feeds te volgen. Log in om je Gevolgd-feed toe te voegen."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm liên kết Pixiv để theo dõi dưới dạng nguồn cấp. Đăng nhập để thêm nguồn cấp Đang theo dõi."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加 Pixiv 链接即可作为订阅源关注。登录后可添加关注动态。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入 Pixiv 連結即可作為訂閱源追蹤。登入後可加入關注動態。"
+          }
+        }
+      }
+    },
+    "PixivFeeds.SignIn": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei Pixiv anmelden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in to Pixiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se connecter à Pixiv"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accedi a Pixiv"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixivにログイン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv에 로그인"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inloggen bij Pixiv"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đăng nhập vào Pixiv"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录 Pixiv"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入 Pixiv"
+          }
+        }
+      }
+    },
+    "PixivFeeds.SignOut": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Von Pixiv abmelden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign out of Pixiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se déconnecter de Pixiv"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disconnetti da Pixiv"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixivからログアウト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv에서 로그아웃"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uitloggen bij Pixiv"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đăng xuất khỏi Pixiv"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出 Pixiv"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登出 Pixiv"
+          }
+        }
+      }
+    },
+    "PixivLogin.Title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei Pixiv anmelden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in to Pixiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se connecter à Pixiv"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accedi a Pixiv"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixivにログイン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixiv에 로그인"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inloggen bij Pixiv"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đăng nhập vào Pixiv"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录 Pixiv"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入 Pixiv"
+          }
+        }
+      }
+    },
+    "Pixiv.AddFollowingFeed": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefolgt-Feed hinzufügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Following Feed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter le flux d'abonnements"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi feed dei seguiti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロー新着フィードを追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "팔로우 피드 추가"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gevolgd-feed toevoegen"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm nguồn cấp Đang theo dõi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加关注动态订阅源"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增關注動態訂閱源"
           }
         }
       }

@@ -49,12 +49,25 @@ public extension URLRequest {
             "image/avif,image/webp,image/*,*/*;q=0.8",
             forHTTPHeaderField: "Accept"
         )
-        if let host = url.host,
-           let scheme = url.scheme,
-           let referer = URL(string: "\(scheme)://\(host)/") {
-            request.setValue(referer.absoluteString,
-                             forHTTPHeaderField: "Referer")
+        if let referer = imageReferer(for: url) {
+            request.setValue(referer, forHTTPHeaderField: "Referer")
         }
         return request
+    }
+
+    /// Feed icons are fetched without extra headers, except from hosts that refuse hotlinked requests.
+    nonisolated static func feedIcon(url: URL) -> URLRequest {
+        requiredImageReferer(for: url) == nil ? URLRequest(url: url) : sakuraImage(url: url)
+    }
+
+    private nonisolated static func imageReferer(for url: URL) -> String? {
+        if let required = requiredImageReferer(for: url) { return required }
+        guard let host = url.host, let scheme = url.scheme else { return nil }
+        return URL(string: "\(scheme)://\(host)/")?.absoluteString
+    }
+
+    private nonisolated static func requiredImageReferer(for url: URL) -> String? {
+        guard let host = url.host?.lowercased() else { return nil }
+        return host == "pximg.net" || host.hasSuffix(".pximg.net") ? "https://www.pixiv.net/" : nil
     }
 }

@@ -23,7 +23,7 @@ struct ContentStyleContext {
         let section: FeedSection? = if case .feedSection(let section) = location { section } else { nil }
         isPodcast = feed?.isPodcast ?? (section == .podcasts)
         isVideo = feed?.isVideoFeed ?? [.youtube, .vimeo, .niconico].contains(section)
-        isInstagram = feed?.isInstagramFeed ?? false
+        isInstagram = feed?.prefersPhotosStyle ?? false
         isTimelineDomain = feed?.isTimelineViewDomain ?? false
         isFeedCompactDomain = feed?.isFeedCompactViewDomain ?? false
         isFeedDomain = feed?.isFeedViewDomain ?? [.x, .fediverse, .bluesky].contains(section)

@@ -13,6 +13,9 @@ public nonisolated enum FeedProviderRegistry {
         RedditProvider.self,
         HackerNewsProvider.self,
         PixelfedProvider.self,
+        TelegramProvider.self,
+        AppStoreProvider.self,
+        PixivProvider.self,
         ArXivProvider.self,
         MastodonCommentsProvider.self
     ]
@@ -71,7 +74,8 @@ public nonisolated enum FeedProviderRegistry {
     @MainActor
     public static func migrateAuthenticatedCookies() async {
         let authenticatedProviders: [any Authenticated.Type] = all.compactMap { provider in
-            guard provider.isEnabled, let auth = provider as? any Authenticated.Type else {
+            guard provider.enabledFlagKey == nil || provider.isEnabled,
+                  let auth = provider as? any Authenticated.Type else {
                 return nil
             }
             return auth

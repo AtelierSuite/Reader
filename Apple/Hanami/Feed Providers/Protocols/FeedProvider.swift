@@ -8,6 +8,9 @@ public protocol FeedProvider {
     /// `UserDefaults` Bool key gating the provider; `nil` if always on.
     nonisolated static var enabledFlagKey: String? { get }
 
+    /// Providers that only work signed in report their session here instead of a flag.
+    nonisolated static var isEnabled: Bool { get }
+
     /// Lowercased canonical hostnames this provider claims responsibility for.
     /// `matchesHost(_:)` accepts these and any subdomain. Providers that need
     /// stricter subdomain rules can narrow further in their own predicates.

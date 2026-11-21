@@ -85,8 +85,7 @@ struct EditFeedMetadataTab: View {
         guard !hasInitialized, let feed else { return }
         hasInitialized = true
         name = feed.title
-        url = (feed.isXFeed || feed.isInstagramFeed || feed.isYouTubePlaylistFeed)
-            ? feed.siteURL : feed.fetchURL
+        url = feed.hasProviderSchemeURL ? feed.siteURL : feed.fetchURL
         feedDescription = feed.feedDescription
         let existingIconURL = feed.customIconURL
         iconURLInput = (existingIconURL == "photo" || existingIconURL == "none")
@@ -141,7 +140,7 @@ struct EditFeedMetadataTab: View {
     }
 
     private func computedURLToSave(for feed: Feed) -> String {
-        if feed.isXFeed || feed.isInstagramFeed || feed.isYouTubePlaylistFeed {
+        if feed.hasProviderSchemeURL {
             return feed.url
         } else if feed.isSubstackFeed {
             return SubstackAuth.wrap(url)

@@ -37,7 +37,7 @@ final class PostHeaderView: NSStackView {
     }
 
     func configure(article: Article, feed: Feed?, isRead: Bool) {
-        nameField.stringValue = feed?.title ?? ""
+        nameField.stringValue = feed?.contentAuthor(of: article)?.name ?? feed?.title ?? ""
         nameField.isHidden = feed == nil
         let time = article.publishedDate.map(PostRelativeTime.text(for:))
         timeField.stringValue = time ?? ""

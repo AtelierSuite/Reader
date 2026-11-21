@@ -19,6 +19,19 @@ public extension ContentResolver {
         return sections.joined(separator: "\n\n")
     }
 
+    /// Telegram posts are stored whole at refresh, so the viewer never needs the t.me page.
+    func renderTelegramPostContent() -> String {
+        let imageURLs = !article.carouselImageURLs.isEmpty
+            ? article.carouselImageURLs
+            : (article.imageURL.map { [$0] } ?? [])
+        var sections: [String] = imageURLs.map { "{{IMG}}\($0){{/IMG}}" }
+        let text = (article.summary ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        if !text.isEmpty {
+            sections.append(ArticleMarker.escape(text))
+        }
+        return sections.joined(separator: "\n\n")
+    }
+
     func renderXTweetContent(_ content: ParsedTweetContent) -> String {
         var sections: [String] = []
         for item in content.threadItems {

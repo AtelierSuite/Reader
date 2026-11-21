@@ -54,15 +54,42 @@ extension PetalBuilderView {
             ? String(localized: "Error.NoMatches", table: "Petal") : nil
     }
 
-    /// Runs the heuristic selector finder against cached HTML and folds suggestions into the recipe.
     func runAutoDetect() {
         guard let html = fetchedHTML else { return }
+        guard PetalAgent.isAvailable else {
+            applyHeuristicSuggestion(html: html)
+            return
+        }
+        let siteURL = recipe.siteURL
+        agentStep = .readingPage
+        errorMessage = nil
+        agentTask = Task {
+            let suggestion = try? await PetalAgent.buildRecipe(html: html, siteURL: siteURL) { step in
+                Task { @MainActor in
+                    if agentStep != nil { agentStep = step }
+                }
+            }
+            guard !Task.isCancelled, recipe.siteURL == siteURL else { return }
+            agentStep = nil
+            if let suggestion {
+                apply(suggestion)
+            } else {
+                applyHeuristicSuggestion(html: html)
+            }
+        }
+    }
+
+    private func applyHeuristicSuggestion(html: String) {
         guard let suggestion = PetalAutoDetect.detect(
             html: html, siteURL: recipe.siteURL
         ) else {
             errorMessage = String(localized: "Builder.AutoDetect.Failed", table: "Petal")
             return
         }
+        apply(suggestion)
+    }
+
+    private func apply(_ suggestion: PetalRecipe) {
         if recipe.name.isEmpty {
             recipe.name = suggestion.name
         }
@@ -73,6 +100,7 @@ extension PetalBuilderView {
         recipe.imageSelector = suggestion.imageSelector
         recipe.dateSelector = suggestion.dateSelector
         recipe.dateAttribute = suggestion.dateAttribute
+        recipe.authorSelector = suggestion.authorSelector
         errorMessage = nil
         runPreviewFromCache()
     }

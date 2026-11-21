@@ -8,6 +8,7 @@ struct AccountSessionRow<LoginView: View>: View {
     let signOutTitle: String
     let checkSession: () async -> Bool
     let signOut: () async -> Void
+    var onSessionChange: ((Bool) -> Void)?
     @ViewBuilder let loginView: () -> LoginView
 
     @State private var isSignedIn: Bool?
@@ -31,6 +32,9 @@ struct AccountSessionRow<LoginView: View>: View {
             }
         }
         .task { isSignedIn = await checkSession() }
+        .onChange(of: isSignedIn) { _, signedIn in
+            onSessionChange?(signedIn == true)
+        }
         .sheet(isPresented: $isShowingLogin) {
             Task { isSignedIn = await checkSession() }
         } content: {

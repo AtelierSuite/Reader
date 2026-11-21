@@ -51,9 +51,11 @@ public extension BlueskyProvider {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            guard let root = try JSONSerialization.jsonObject(with: data)
-                    as? [String: Any] else { return nil }
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard (response as? HTTPURLResponse)?.statusCode == 200,
+                  let root = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                return nil
+            }
 
             let avatar = (root["avatar"] as? String).flatMap { $0.isEmpty ? nil : $0 }
             let displayName = (root["displayName"] as? String).flatMap { $0.isEmpty ? nil : $0 }

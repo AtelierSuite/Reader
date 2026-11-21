@@ -37,7 +37,7 @@ final class FeedDiscoverySession {
         }
         if let url = URL(string: urlString) {
             results += await FeedDiscovery.shared.discoverFeeds(fromPageURL: url)
-            if results.isEmpty, let host = url.host() {
+            if results.isEmpty, !FeedDiscovery.isSingleFeedLink(url), let host = url.host() {
                 results += await FeedDiscovery.shared.discoverFeeds(forDomain: host)
             }
         }
@@ -45,17 +45,17 @@ final class FeedDiscoverySession {
         discoveredFeeds = results
             .filter { seenURLs.insert($0.url).inserted }
             .sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedAscending }
-        errorMessage = discoveredFeeds.isEmpty ? String(localized: "AddFeed.NoFeedsFound", table: "Feeds") : nil
+        errorMessage = discoveredFeeds.isEmpty ? FeedDiscovery.noFeedsMessage(for: URL(string: urlString)) : nil
     }
 
     /// X and Instagram feeds need a signed-in session, which the Mac can't
     /// create yet.
     func canAdd(_ feed: DiscoveredFeed) -> Bool {
         if XProvider.isFeedURL(feed.url) {
-            return UserDefaults.standard.bool(forKey: "Labs.XProfileFeeds") && XProvider.hasSession()
+            return XProvider.isEnabled
         }
         if InstagramProvider.isFeedURL(feed.url) {
-            return UserDefaults.standard.bool(forKey: "Labs.InstagramProfileFeeds") && InstagramProvider.hasSession()
+            return InstagramProvider.isEnabled
         }
         return true
     }
@@ -77,7 +77,7 @@ final class FeedDiscoverySession {
         let fetchURL = RedirectDomains.redirectedURL(url)
         guard let (data, response) = try? await URLSession.shared.data(for: .sakura(url: fetchURL)),
               (response as? HTTPURLResponse)?.statusCode == 200,
-              let parsed = RSSParser().parse(data: data) else { return nil }
+              let parsed = FeedParser.parse(data: data) else { return nil }
         return DiscoveredFeed(
             title: parsed.title.isEmpty ? (url.host() ?? urlString) : parsed.title,
             url: urlString,

@@ -43,7 +43,7 @@ public extension Iconography {
 
     /// Downloads an image at `url` via the icon cache's URL session.
     nonisolated func downloadImage(from url: URL) async -> PlatformImage? {
-        guard let (data, _) = try? await Self.urlSession.data(from: url) else { return nil }
+        guard let (data, _) = try? await Self.urlSession.data(for: .feedIcon(url: url)) else { return nil }
         return PlatformImage(data: data)
     }
 

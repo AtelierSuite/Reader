@@ -15,13 +15,13 @@ extension AddFeedView {
                 results.append(feed)
             }
 
-            let normalizedURL = normalizeURL(session.urlInput)
-            if let url = URL(string: normalizedURL) {
+            let pageURL = URL(string: normalizeURL(session.urlInput))
+            if let url = pageURL {
                 let urlFeeds = await FeedDiscovery.shared.discoverFeeds(fromPageURL: url)
                 results.append(contentsOf: urlFeeds)
             }
 
-            if results.isEmpty {
+            if results.isEmpty, pageURL.map(FeedDiscovery.isSingleFeedLink) != true {
                 let domain = extractDomain(from: session.urlInput)
                 let domainFeeds = await FeedDiscovery.shared.discoverFeeds(forDomain: domain)
                 results.append(contentsOf: domainFeeds)
@@ -36,7 +36,7 @@ extension AddFeedView {
                 withAnimation(.smooth.speed(2.0)) {
                     isSearching = false
                     if results.isEmpty {
-                        errorMessage = String(localized: "AddFeed.NoFeedsFound", table: "Feeds")
+                        errorMessage = FeedDiscovery.noFeedsMessage(for: pageURL)
                     } else {
                         discoveredFeeds = results
                     }
@@ -56,8 +56,7 @@ extension AddFeedView {
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else { return nil }
 
-            let parser = RSSParser()
-            guard let parsed = parser.parse(data: data) else { return nil }
+            guard let parsed = FeedParser.parse(data: data) else { return nil }
 
             let siteURL = parsed.siteURL.isEmpty ? urlString : parsed.siteURL
             let title = parsed.title.isEmpty ? (url.host ?? urlString) : parsed.title

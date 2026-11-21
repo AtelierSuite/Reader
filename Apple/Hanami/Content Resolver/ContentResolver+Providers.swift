@@ -81,9 +81,14 @@ public extension ContentResolver {
         return true
     }
 
+    func tryTelegramExtraction() -> Bool {
+        guard let feed, TelegramProvider.isFeedURL(feed.url) else { return false }
+        result.text = renderTelegramPostContent()
+        return true
+    }
+
     private func tryXPostExtraction() async -> Bool {
         guard article.isXPostURL,
-              UserDefaults.standard.bool(forKey: "Labs.XProfileFeeds"),
               let url = URL(string: article.url),
               let tweetID = XProvider.extractTweetID(from: url),
               XProvider.hasSession() else { return false }

@@ -55,6 +55,7 @@ private struct IntegrationDetail: View {
         case .webFeeds: WebFeedsIntegrationSettings()
         case .podcasts: PodcastIntegrationSettings()
         case .instagram: InstagramIntegrationSettings()
+        case .pixiv: PixivIntegrationSettings()
         case .substack: SubstackIntegrationSettings()
         case .x: XIntegrationSettings()
         case .youtube: YouTubeIntegrationSettings()

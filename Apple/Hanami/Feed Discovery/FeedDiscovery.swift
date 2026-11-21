@@ -25,6 +25,7 @@ public actor FeedDiscovery {
         "/rss.xml",
         "/feed.xml",
         "/feed.rss",
+        "/feed.json",
         "/atom.xml",
         "/atom",
         "/index.xml",
@@ -65,6 +66,7 @@ public actor FeedDiscovery {
         if let socialFeed = await detectSocialMediaFeed(url: pageURL) {
             return [socialFeed]
         }
+        if Self.isSingleFeedLink(pageURL) { return [] }
 
         let feeds = await discoverFromHTML(url: pageURL)
         if !feeds.isEmpty { return feeds }

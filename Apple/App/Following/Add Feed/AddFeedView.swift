@@ -28,6 +28,10 @@ struct AddFeedView: View {
         return trimmed.isEmpty ? "" : normalizeURL(trimmed)
     }
 
+    private var showsGenerateWebFeed: Bool {
+        petalRecipesEnabled && !session.urlInput.isEmpty && (errorMessage != nil || !discoveredFeeds.isEmpty)
+    }
+
     private var subscribedFeedURLs: Set<String> {
         Set(feedManager.feeds.map(\.url))
     }
@@ -55,11 +59,7 @@ struct AddFeedView: View {
                 }
 
                 if let errorMessage {
-                    AddFeedErrorSection(
-                        errorMessage: errorMessage,
-                        showPetalGenerate: petalRecipesEnabled && !session.urlInput.isEmpty,
-                        onGeneratePetal: { showPetalBuilder = true }
-                    )
+                    AddFeedErrorSection(errorMessage: errorMessage)
                 }
 
                 if !discoveredFeeds.isEmpty {
@@ -70,6 +70,16 @@ struct AddFeedView: View {
                         subscribedURLs: subscribedFeedURLs,
                         onAdd: addFeed
                     )
+                }
+
+                if showsGenerateWebFeed {
+                    Section {
+                        Button {
+                            showPetalBuilder = true
+                        } label: {
+                            Label(String(localized: "AddFeed.Generate", table: "Petal"), systemImage: "leaf.fill")
+                        }
+                    }
                 }
 
                 if !addedURLs.isEmpty && !feedManager.lists.isEmpty {

@@ -163,13 +163,13 @@ extension OnboardingView {
                 results.append(feed)
             }
 
-            let normalizedURL = normalizeURL(urlInput)
-            if let url = URL(string: normalizedURL) {
+            let pageURL = URL(string: normalizeURL(urlInput))
+            if let url = pageURL {
                 let urlFeeds = await FeedDiscovery.shared.discoverFeeds(fromPageURL: url)
                 results.append(contentsOf: urlFeeds)
             }
 
-            if results.isEmpty {
+            if results.isEmpty, pageURL.map(FeedDiscovery.isSingleFeedLink) != true {
                 let domain = extractDomain(from: urlInput)
                 let domainFeeds = await FeedDiscovery.shared.discoverFeeds(forDomain: domain)
                 results.append(contentsOf: domainFeeds)
@@ -183,7 +183,7 @@ extension OnboardingView {
                 withAnimation(.smooth.speed(2.0)) {
                     isSearching = false
                     if results.isEmpty {
-                        feedErrorMessage = String(localized: "AddFeed.NoFeedsFound", table: "Feeds")
+                        feedErrorMessage = FeedDiscovery.noFeedsMessage(for: pageURL)
                     } else {
                         discoveredFeeds = results
                     }
@@ -203,8 +203,7 @@ extension OnboardingView {
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else { return nil }
 
-            let parser = RSSParser()
-            guard let parsed = parser.parse(data: data) else { return nil }
+            guard let parsed = FeedParser.parse(data: data) else { return nil }
 
             let siteURL = parsed.siteURL.isEmpty ? urlString : parsed.siteURL
             let title = parsed.title.isEmpty ? (url.host ?? urlString) : parsed.title

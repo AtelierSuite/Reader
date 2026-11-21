@@ -9,19 +9,22 @@ extension BlueskyProvider: ProfileFeedProvider {
     public nonisolated static var feedURLScheme: String? { nil }
 
     public nonisolated static func isProfileURL(_ url: URL) -> Bool {
-        guard matchesHost(url.host) else { return false }
-        let components = url.pathComponents.filter { $0 != "/" }
-        guard components.count >= 2,
-              components[0].lowercased() == "profile" else { return false }
-        return isValidHandle(components[1])
+        profileHandle(from: url) != nil || BlueskyFeedTarget(pageURL: url) != nil || isShortLink(url)
     }
 
     public nonisolated static func extractIdentifier(from url: URL) -> String? {
+        profileHandle(from: url)
+    }
+
+    nonisolated static func profileHandle(from url: URL) -> String? {
         guard matchesHost(url.host) else { return nil }
         let components = url.pathComponents.filter { $0 != "/" }
         guard components.count >= 2,
               components[0].lowercased() == "profile",
               isValidHandle(components[1]) else { return nil }
+        if components.count >= 4, nonProfileSubpaths.contains(components[2].lowercased()) {
+            return nil
+        }
         return components[1]
     }
 
@@ -30,6 +33,10 @@ extension BlueskyProvider: ProfileFeedProvider {
     }
 
     public nonisolated static func isFeedURL(_ url: String) -> Bool {
+        isProfileFeedURL(url) || BlueskyFeedTarget.isFeedURL(url)
+    }
+
+    nonisolated static func isProfileFeedURL(_ url: String) -> Bool {
         guard let parsed = URL(string: url),
               matchesHost(parsed.host) else { return false }
         let components = parsed.pathComponents.filter { $0 != "/" }
@@ -40,16 +47,14 @@ extension BlueskyProvider: ProfileFeedProvider {
     }
 
     public nonisolated static func identifierFromFeedURL(_ url: String) -> String? {
-        guard isFeedURL(url),
+        guard isProfileFeedURL(url),
               let parsed = URL(string: url) else { return nil }
         let components = parsed.pathComponents.filter { $0 != "/" }
         return components.count >= 2 ? components[1] : nil
     }
 
-    /// Probes the constructed RSS URL to verify the user has RSS enabled
-    /// before suggesting it.
-    public nonisolated static func discoveredFeed(forProfileURL url: URL) async -> DiscoveredFeed? {
-        guard let handle = extractIdentifier(from: url) else { return nil }
-        return await FeedDiscovery.probeFeedAt(domain: host, path: "/profile/\(handle)/rss")
+    public nonisolated static func inferredSiteURL(fromFeedURL feedURL: String) -> String? {
+        if let target = BlueskyFeedTarget(feedURL: feedURL) { return target.siteURL }
+        return identifierFromFeedURL(feedURL).flatMap { profileURL(for: $0)?.absoluteString }
     }
 }

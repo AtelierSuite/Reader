@@ -17,7 +17,7 @@ extension EditFeedMetadataTab {
 
     @ViewBuilder
     func urlSection(for feed: Feed) -> some View {
-        if feed.isXFeed || feed.isInstagramFeed || feed.isYouTubePlaylistFeed {
+        if feed.hasProviderSchemeURL {
             Section {
                 Text(feed.siteURL)
                     .foregroundStyle(.secondary)
