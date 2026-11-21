@@ -65,6 +65,11 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
             || PixivProvider.isFeedURL(url) || BlueskyFeedTarget.isFeedURL(url)
     }
 
+    /// Feeds made of images, which open in the Photos style unless the user picks another.
+    public var prefersPhotosStyle: Bool {
+        isInstagramFeed || PixivFeedTarget(feedURL: url)?.works == .illustManga
+    }
+
     public var isFeedViewDomain: Bool {
         isXFeed || isInstagramFeed
             || DisplayStyleSetDomains.style(for: domain) == .feed
