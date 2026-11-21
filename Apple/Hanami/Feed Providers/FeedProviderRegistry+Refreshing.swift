@@ -8,7 +8,8 @@ public extension FeedProviderRegistry {
         YouTubePlaylistProvider.self,
         BlueskyProvider.self,
         RedditProvider.self,
-        TelegramProvider.self
+        TelegramProvider.self,
+        AppStoreProvider.self
     ]
 
     static func refreshableProvider(forFeedURL url: String) -> (any WebFeedProvider.Type)? {

@@ -54,6 +54,16 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
         YouTubePlaylistProvider.isFeedURL(url)
     }
 
+    /// The stored URL is a provider pseudo-scheme, so the site URL is what users see and it can't be edited.
+    public var hasProviderSchemeURL: Bool {
+        Feed.isProviderSchemeURL(url)
+    }
+
+    public static func isProviderSchemeURL(_ url: String) -> Bool {
+        XProvider.isFeedURL(url) || InstagramProvider.isFeedURL(url)
+            || YouTubePlaylistProvider.isFeedURL(url) || AppStoreProvider.isFeedURL(url)
+    }
+
     public var isFeedViewDomain: Bool {
         isXFeed || isInstagramFeed
             || DisplayStyleSetDomains.style(for: domain) == .feed

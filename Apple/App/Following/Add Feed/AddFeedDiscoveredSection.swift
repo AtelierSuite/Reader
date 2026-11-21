@@ -65,9 +65,7 @@ private struct AddFeedDiscoveredRow: View {
     }
 
     private var displayURL: String {
-        if XProvider.isFeedURL(feed.url)
-            || InstagramProvider.isFeedURL(feed.url)
-            || YouTubePlaylistProvider.isFeedURL(feed.url) {
+        if Feed.isProviderSchemeURL(feed.url) {
             return feed.siteURL
         }
         return feed.url

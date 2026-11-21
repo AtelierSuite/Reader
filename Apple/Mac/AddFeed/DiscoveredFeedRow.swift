@@ -14,7 +14,7 @@ struct DiscoveredFeedRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(feed.title)
                     .lineLimit(1)
-                Text(feed.url)
+                Text(Feed.isProviderSchemeURL(feed.url) ? feed.siteURL : feed.url)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)

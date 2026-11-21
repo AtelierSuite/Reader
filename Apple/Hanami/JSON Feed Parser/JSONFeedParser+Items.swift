@@ -14,7 +14,7 @@ nonisolated extension JSONFeedParser {
 
         let helper = RSSParser()
         let contentHTML = string(item["content_html"])
-            ?? string(item["content_text"]).map(paragraphHTML)
+            ?? string(item["content_text"]).map(RSSParser.paragraphHTML(fromPlainText:))
         let summarySource = string(item["summary"]) ?? contentHTML ?? ""
         let plainContent = contentHTML.flatMap { helper.cleanHTML($0) }
         guard let title = string(item["title"]) ?? plainContent.map(titleFromContent),
@@ -56,19 +56,6 @@ nonisolated extension JSONFeedParser {
         let limit = 100
         guard firstLine.count > limit else { return firstLine }
         return firstLine.prefix(limit).trimmingCharacters(in: .whitespaces) + "…"
-    }
-
-    private static func paragraphHTML(_ text: String) -> String {
-        text.replacingOccurrences(of: "\r\n", with: "\n")
-            .components(separatedBy: "\n\n")
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
-            .map { paragraph in
-                let escaped = RSSParser.escapeXMLText(paragraph)
-                    .replacingOccurrences(of: "\n", with: "<br>")
-                return "<p>\(escaped)</p>"
-            }
-            .joined()
     }
 
     private static func audioAttachment(in item: [String: Any]) -> (url: String, duration: Int?)? {
