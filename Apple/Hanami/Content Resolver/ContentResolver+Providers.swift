@@ -81,6 +81,12 @@ public extension ContentResolver {
         return true
     }
 
+    func tryTelegramExtraction() -> Bool {
+        guard let feed, TelegramProvider.isFeedURL(feed.url) else { return false }
+        result.text = renderTelegramPostContent()
+        return true
+    }
+
     private func tryXPostExtraction() async -> Bool {
         guard article.isXPostURL,
               let url = URL(string: article.url),
