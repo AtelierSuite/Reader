@@ -1,7 +1,7 @@
 import Foundation
 
-/// Fetches Bluesky profile metadata by scraping the public profile page.
-public final class BlueskyProvider {
+/// Follows Bluesky profiles through the public AppView API without signing in.
+public final class BlueskyProvider: Sendable {
 
     public nonisolated static let host = "bsky.app"
 
@@ -10,6 +10,9 @@ public final class BlueskyProvider {
         "messages", "starter-pack", "starter-pack-short",
         "hashtag", "support", "intent"
     ]
+
+    nonisolated static let nonProfileSubpaths: Set<String> = ["feed", "lists"]
+
     public nonisolated static func profileURL(for handle: String) -> URL? {
         URL(string: "https://bsky.app/profile/\(handle)")
     }
