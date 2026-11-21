@@ -2,7 +2,7 @@ import SwiftUI
 import WebKit
 import Hanami
 
-/// Web view presenting the pixiv login page; cookies persist for PixivProvider.
+/// Web view presenting the Pixiv login page; cookies persist for PixivProvider.
 struct PixivLoginView: View {
 
     @Environment(\.dismiss) var dismiss

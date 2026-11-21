@@ -28,7 +28,7 @@ nonisolated struct PixivDynamicKey: CodingKey {
     }
 }
 
-/// pixiv sends an empty JSON array instead of an empty object for keyed collections.
+/// Pixiv sends an empty JSON array instead of an empty object for keyed collections.
 nonisolated struct PixivKeyedCollection<Value: Decodable & Sendable>: Decodable, Sendable {
     let values: [String: Value]
 

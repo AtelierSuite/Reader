@@ -1,6 +1,6 @@
 import Foundation
 
-/// Converts pixiv novel markup (`[newpage]`, `[chapter:]`, `[[rb:]]`, `[[jumpuri:]]`, embedded images) to HTML.
+/// Converts Pixiv novel markup (`[newpage]`, `[chapter:]`, `[[rb:]]`, `[[jumpuri:]]`, embedded images) to HTML.
 nonisolated struct PixivNovelMarkup {
 
     let illustImageURLs: [String: String]

@@ -1,6 +1,6 @@
 import Foundation
 
-/// Reads pixiv artists, writers, tags and rankings through pixiv's web `/ajax` API.
+/// Reads Pixiv artists, writers, tags and rankings through Pixiv's web `/ajax` API.
 public final class PixivProvider: Sendable {
 
     public nonisolated static let userScheme = "pixiv-user"
@@ -20,7 +20,7 @@ public final class PixivProvider: Sendable {
     nonisolated static let novelsPerRefresh = 20
     nonisolated static let illustDetailLimit = 12
 
-    // pixiv serves its mobile site, and HTML instead of ranking JSON, to the iPhone user agent.
+    // Pixiv serves its mobile site, and HTML instead of ranking JSON, to the iPhone user agent.
     nonisolated static let desktopUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
         + "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15"
 

@@ -20,7 +20,7 @@ extension PixivProvider: Authenticated {
         sessionCookies() != nil
     }
 
-    /// R-18 works only come back from pixiv for a signed-in account that allows them.
+    /// R-18 works only come back from Pixiv for a signed-in account that allows them.
     public nonisolated static var includesRestrictedWorks: Bool {
         UserDefaults.standard.bool(forKey: showsRestrictedWorksKey) && hasSession()
     }

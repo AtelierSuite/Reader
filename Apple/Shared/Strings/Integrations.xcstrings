@@ -3192,61 +3192,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv – Gefolgt"
+            "value": "Pixiv – Gefolgt"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv Following"
+            "value": "Pixiv Following"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv – Abonnements"
+            "value": "Pixiv – Abonnements"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv – Seguiti"
+            "value": "Pixiv – Seguiti"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv フォロー新着"
+            "value": "Pixiv フォロー新着"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 팔로우"
+            "value": "Pixiv 팔로우"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv – Gevolgd"
+            "value": "Pixiv – Gevolgd"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv – Đang theo dõi"
+            "value": "Pixiv – Đang theo dõi"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 关注"
+            "value": "Pixiv 关注"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 關注"
+            "value": "Pixiv 關注"
           }
         }
       }
@@ -3257,61 +3257,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv-Rangliste (%@)"
+            "value": "Pixiv-Rangliste (%@)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv Ranking (%@)"
+            "value": "Pixiv Ranking (%@)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Classement pixiv (%@)"
+            "value": "Classement Pixiv (%@)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Classifica pixiv (%@)"
+            "value": "Classifica Pixiv (%@)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixivランキング（%@）"
+            "value": "Pixivランキング（%@）"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 랭킹 (%@)"
+            "value": "Pixiv 랭킹 (%@)"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv-ranglijst (%@)"
+            "value": "Pixiv-ranglijst (%@)"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bảng xếp hạng pixiv (%@)"
+            "value": "Bảng xếp hạng Pixiv (%@)"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 排行榜（%@）"
+            "value": "Pixiv 排行榜（%@）"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 排行榜（%@）"
+            "value": "Pixiv 排行榜（%@）"
           }
         }
       }
@@ -3322,61 +3322,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv"
+            "value": "Pixiv"
           }
         }
       }
@@ -3387,61 +3387,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv-Feeds"
+            "value": "Pixiv-Feeds"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv Feeds"
+            "value": "Pixiv Feeds"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Flux pixiv"
+            "value": "Flux Pixiv"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feed pixiv"
+            "value": "Feed Pixiv"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixivフィード"
+            "value": "Pixivフィード"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 피드"
+            "value": "Pixiv 피드"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv-feeds"
+            "value": "Pixiv-feeds"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nguồn cấp pixiv"
+            "value": "Nguồn cấp Pixiv"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 订阅源"
+            "value": "Pixiv 订阅源"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 訂閱源"
+            "value": "Pixiv 訂閱源"
           }
         }
       }
@@ -3452,61 +3452,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folgen Sie pixiv-Künstlern und -Autoren, Tags und Ranglisten als Feeds, indem Sie deren pixiv-URLs hinzufügen. Eine Anmeldung ist nur für Ihren Gefolgt-Feed und R-18-Werke nötig."
+            "value": "Folgen Sie Pixiv-Künstlern und -Autoren, Tags und Ranglisten als Feeds, indem Sie deren Pixiv-URLs hinzufügen. Eine Anmeldung ist nur für Ihren Gefolgt-Feed und R-18-Werke nötig."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Follow pixiv artists and writers, tags and rankings as feeds by adding their pixiv URLs. Signing in is only needed for your Following feed and R-18 works."
+            "value": "Follow Pixiv artists and writers, tags and rankings as feeds by adding their Pixiv URLs. Signing in is only needed for your Following feed and R-18 works."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suivez des artistes et auteurs pixiv, des tags et des classements comme flux en ajoutant leurs URLs pixiv. La connexion n'est nécessaire que pour votre flux d'abonnements et les œuvres R-18."
+            "value": "Suivez des artistes et auteurs Pixiv, des tags et des classements comme flux en ajoutant leurs URLs Pixiv. La connexion n'est nécessaire que pour votre flux d'abonnements et les œuvres R-18."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Segui artisti e scrittori di pixiv, tag e classifiche come feed aggiungendo i loro URL pixiv. L'accesso serve solo per il feed dei seguiti e per le opere R-18."
+            "value": "Segui artisti e scrittori di Pixiv, tag e classifiche come feed aggiungendo i loro URL Pixiv. L'accesso serve solo per il feed dei seguiti e per le opere R-18."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixivのURLを追加して、イラストレーターや作家、タグ、ランキングをフィードとしてフォローできるようになります。ログインはフォロー新着フィードとR-18作品にのみ必要です。"
+            "value": "PixivのURLを追加して、イラストレーターや作家、タグ、ランキングをフィードとしてフォローできるようになります。ログインはフォロー新着フィードとR-18作品にのみ必要です。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv URL을 추가하여 pixiv 작가, 태그, 랭킹을 피드로 팔로우하세요. 로그인은 팔로우 피드와 R-18 작품에만 필요합니다."
+            "value": "Pixiv URL을 추가하여 Pixiv 작가, 태그, 랭킹을 피드로 팔로우하세요. 로그인은 팔로우 피드와 R-18 작품에만 필요합니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Volg pixiv-artiesten en -schrijvers, tags en ranglijsten als feeds door hun pixiv-URL's toe te voegen. Inloggen is alleen nodig voor je Gevolgd-feed en R-18-werken."
+            "value": "Volg Pixiv-artiesten en -schrijvers, tags en ranglijsten als feeds door hun Pixiv-URL's toe te voegen. Inloggen is alleen nodig voor je Gevolgd-feed en R-18-werken."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Theo dõi họa sĩ và tác giả pixiv, thẻ và bảng xếp hạng dưới dạng nguồn cấp bằng cách thêm URL pixiv của họ. Chỉ cần đăng nhập cho nguồn cấp Đang theo dõi và tác phẩm R-18."
+            "value": "Theo dõi họa sĩ và tác giả Pixiv, thẻ và bảng xếp hạng dưới dạng nguồn cấp bằng cách thêm URL Pixiv của họ. Chỉ cần đăng nhập cho nguồn cấp Đang theo dõi và tác phẩm R-18."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过添加 pixiv URL，将 pixiv 画师和作者、标签及排行榜作为订阅源关注。仅关注动态订阅源和 R-18 作品需要登录。"
+            "value": "通过添加 Pixiv URL，将 Pixiv 画师和作者、标签及排行榜作为订阅源关注。仅关注动态订阅源和 R-18 作品需要登录。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "透過新增 pixiv URL，將 pixiv 繪師和作者、標籤及排行榜作為訂閱源追蹤。僅關注動態訂閱源和 R-18 作品需要登入。"
+            "value": "透過新增 Pixiv URL，將 Pixiv 繪師和作者、標籤及排行榜作為訂閱源追蹤。僅關注動態訂閱源和 R-18 作品需要登入。"
           }
         }
       }
@@ -3517,61 +3517,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bei pixiv anmelden"
+            "value": "Bei Pixiv anmelden"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sign in to pixiv"
+            "value": "Sign in to Pixiv"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Se connecter à pixiv"
+            "value": "Se connecter à Pixiv"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Accedi a pixiv"
+            "value": "Accedi a Pixiv"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixivにログイン"
+            "value": "Pixivにログイン"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv에 로그인"
+            "value": "Pixiv에 로그인"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inloggen bij pixiv"
+            "value": "Inloggen bij Pixiv"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Đăng nhập vào pixiv"
+            "value": "Đăng nhập vào Pixiv"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "登录 pixiv"
+            "value": "登录 Pixiv"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "登入 pixiv"
+            "value": "登入 Pixiv"
           }
         }
       }
@@ -3582,61 +3582,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Von pixiv abmelden"
+            "value": "Von Pixiv abmelden"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sign out of pixiv"
+            "value": "Sign out of Pixiv"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Se déconnecter de pixiv"
+            "value": "Se déconnecter de Pixiv"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Disconnetti da pixiv"
+            "value": "Disconnetti da Pixiv"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixivからログアウト"
+            "value": "Pixivからログアウト"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv에서 로그아웃"
+            "value": "Pixiv에서 로그아웃"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Uitloggen bij pixiv"
+            "value": "Uitloggen bij Pixiv"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Đăng xuất khỏi pixiv"
+            "value": "Đăng xuất khỏi Pixiv"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "退出 pixiv"
+            "value": "退出 Pixiv"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "登出 pixiv"
+            "value": "登出 Pixiv"
           }
         }
       }
@@ -3647,61 +3647,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bei pixiv anmelden"
+            "value": "Bei Pixiv anmelden"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sign in to pixiv"
+            "value": "Sign in to Pixiv"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Se connecter à pixiv"
+            "value": "Se connecter à Pixiv"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Accedi a pixiv"
+            "value": "Accedi a Pixiv"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixivにログイン"
+            "value": "Pixivにログイン"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv에 로그인"
+            "value": "Pixiv에 로그인"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inloggen bij pixiv"
+            "value": "Inloggen bij Pixiv"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Đăng nhập vào pixiv"
+            "value": "Đăng nhập vào Pixiv"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "登录 pixiv"
+            "value": "登录 Pixiv"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "登入 pixiv"
+            "value": "登入 Pixiv"
           }
         }
       }
@@ -3777,61 +3777,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nimmt R-18- und R-18G-Werke in pixiv-Feeds auf. Funktioniert nur, wenn Sie mit einem Konto angemeldet sind, bei dem R-18-Inhalte in den Anzeigeeinstellungen von pixiv aktiviert sind."
+            "value": "Nimmt R-18- und R-18G-Werke in Pixiv-Feeds auf. Funktioniert nur, wenn Sie mit einem Konto angemeldet sind, bei dem R-18-Inhalte in den Anzeigeeinstellungen von Pixiv aktiviert sind."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Includes R-18 and R-18G works in pixiv feeds. Only takes effect when you're signed in with an account that has R-18 content turned on in pixiv's viewing settings."
+            "value": "Includes R-18 and R-18G works in Pixiv feeds. Only takes effect when you're signed in with an account that has R-18 content turned on in Pixiv's viewing settings."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inclut les œuvres R-18 et R-18G dans les flux pixiv. Ne fonctionne que si vous êtes connecté avec un compte dont le contenu R-18 est activé dans les paramètres d'affichage de pixiv."
+            "value": "Inclut les œuvres R-18 et R-18G dans les flux Pixiv. Ne fonctionne que si vous êtes connecté avec un compte dont le contenu R-18 est activé dans les paramètres d'affichage de Pixiv."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Include le opere R-18 e R-18G nei feed pixiv. Funziona solo se hai effettuato l'accesso con un account che ha i contenuti R-18 attivati nelle impostazioni di visualizzazione di pixiv."
+            "value": "Include le opere R-18 e R-18G nei feed Pixiv. Funziona solo se hai effettuato l'accesso con un account che ha i contenuti R-18 attivati nelle impostazioni di visualizzazione di Pixiv."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixivフィードにR-18およびR-18G作品を含めます。pixivの閲覧設定でR-18作品の表示を有効にしたアカウントでログインしている場合のみ適用されます。"
+            "value": "PixivフィードにR-18およびR-18G作品を含めます。Pixivの閲覧設定でR-18作品の表示を有効にしたアカウントでログインしている場合のみ適用されます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "pixiv 피드에 R-18 및 R-18G 작품을 포함합니다. pixiv의 열람 설정에서 R-18 콘텐츠를 켠 계정으로 로그인한 경우에만 적용됩니다."
+            "value": "Pixiv 피드에 R-18 및 R-18G 작품을 포함합니다. Pixiv의 열람 설정에서 R-18 콘텐츠를 켠 계정으로 로그인한 경우에만 적용됩니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Neemt R-18- en R-18G-werken op in pixiv-feeds. Werkt alleen als je bent ingelogd met een account waarbij R-18-inhoud is ingeschakeld in de weergave-instellingen van pixiv."
+            "value": "Neemt R-18- en R-18G-werken op in Pixiv-feeds. Werkt alleen als je bent ingelogd met een account waarbij R-18-inhoud is ingeschakeld in de weergave-instellingen van Pixiv."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bao gồm tác phẩm R-18 và R-18G trong nguồn cấp pixiv. Chỉ có hiệu lực khi bạn đăng nhập bằng tài khoản đã bật nội dung R-18 trong cài đặt hiển thị của pixiv."
+            "value": "Bao gồm tác phẩm R-18 và R-18G trong nguồn cấp Pixiv. Chỉ có hiệu lực khi bạn đăng nhập bằng tài khoản đã bật nội dung R-18 trong cài đặt hiển thị của Pixiv."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在 pixiv 订阅源中包含 R-18 和 R-18G 作品。仅在使用已于 pixiv 浏览设置中开启 R-18 内容的账户登录时生效。"
+            "value": "在 Pixiv 订阅源中包含 R-18 和 R-18G 作品。仅在使用已于 Pixiv 浏览设置中开启 R-18 内容的账户登录时生效。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "在 pixiv 訂閱源中包含 R-18 和 R-18G 作品。僅在使用已於 pixiv 瀏覽設定中開啟 R-18 內容的帳號登入時生效。"
+            "value": "在 Pixiv 訂閱源中包含 R-18 和 R-18G 作品。僅在使用已於 Pixiv 瀏覽設定中開啟 R-18 內容的帳號登入時生效。"
           }
         }
       }
