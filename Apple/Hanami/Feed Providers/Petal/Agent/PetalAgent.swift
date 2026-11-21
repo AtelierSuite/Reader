@@ -41,17 +41,25 @@ public nonisolated enum PetalAgent {
             ],
             instructions: instructions
         )
-        let response = try await session.respond(
-            to: "Build a feed recipe for \(siteURL).",
-            generating: PetalAgentRecipe.self
-        )
-        let candidates = [response.content, workspace.bestTestedRecipe].compactMap { $0 }
+        log("WebFeedAgent", "start \(siteURL) html=\(html.count)")
+        var answer: PetalAgentRecipe?
+        do {
+            answer = try await session.respond(
+                to: "Build a feed recipe for \(siteURL).",
+                generating: PetalAgentRecipe.self
+            ).content
+        } catch {
+            log("WebFeedAgent", "model failed: \(error)")
+        }
+        let candidates = [answer, workspace.bestTestedRecipe].compactMap { $0 }
         for candidate in candidates {
             let recipe = candidate.recipe(name: workspace.pageTitle, siteURL: siteURL)
             if PetalAgentWorkspace.isUsable(PetalEngine.parse(html: html, recipe: recipe)) {
+                log("WebFeedAgent", "recipe item=\(recipe.itemSelector) title=\(recipe.titleSelector ?? "-")")
                 return recipe
             }
         }
+        log("WebFeedAgent", "no working recipe from \(candidates.count) candidates")
         throw Failure.noWorkingRecipe
     }
 

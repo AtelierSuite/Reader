@@ -34,11 +34,13 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
     /// Runs `work` against the page unless the run has used up its tool calls.
     func perform(_ step: PetalAgent.Step, _ work: (Document) -> String) -> String {
         onStep(step)
-        return lock.withLock {
+        let (callNumber, output) = lock.withLock {
             toolCallCount += 1
-            guard toolCallCount <= PetalAgent.toolCallLimit else { return Self.limitMessage }
-            return work(document)
+            let output = toolCallCount <= PetalAgent.toolCallLimit ? work(document) : Self.limitMessage
+            return (toolCallCount, output)
         }
+        log("WebFeedAgent", "tool call \(callNumber) \(step): \(output.prefix(300))")
+        return output
     }
 
     func recordTest(of recipe: PetalAgentRecipe, articles: [ParsedArticle]) {
