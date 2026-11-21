@@ -36,7 +36,7 @@ public extension FeedManager {
         // swiftlint:disable:next line_length
         log("BlueskyProfile", "fetched @\(handle) posts=\(result.posts.count) displayName=\(result.displayName ?? "nil")")
 
-        let postTuples = Self.makeBlueskyArticleItems(from: result.posts)
+        let postTuples = BlueskyProvider.articleItems(from: result.posts)
         let feedTitle = result.displayName ?? feed.title
         let profileImage = await loadBlueskyProfileImage(
             result: result, feed: feed, contentOnly: contentOnly
@@ -68,57 +68,6 @@ public extension FeedManager {
             await loadFromDatabaseInBackground(animated: true)
         }
         log("BlueskyProfile", "refresh end id=\(feed.id)")
-    }
-
-    private static func makeBlueskyArticleItems(
-        from posts: [ParsedBlueskyPost]
-    ) -> [ArticleInsertItem] {
-        posts.map { post in
-            let title = post.text.isEmpty
-                ? "Post by @\(post.authorHandle)"
-                : String(post.text.prefix(200))
-            let rowThumbnail = post.images.first?.thumbURL ?? post.videoThumbnailURL
-            let contentHTML = makeBlueskyContentHTML(text: post.text, images: post.images)
-            return ArticleInsertItem(
-                title: title,
-                url: post.url,
-                data: ArticleInsertData(
-                    author: post.author.isEmpty ? "@\(post.authorHandle)" : post.author,
-                    summary: post.text.isEmpty ? nil : post.text,
-                    content: contentHTML,
-                    imageURL: rowThumbnail,
-                    carouselImageURLs: post.images.count > 1 ? post.images.map(\.thumbURL) : [],
-                    publishedDate: post.publishedDate
-                )
-            )
-        }
-    }
-
-    private static func makeBlueskyContentHTML(
-        text: String, images: [ParsedBlueskyImage]
-    ) -> String? {
-        if text.isEmpty && images.isEmpty { return nil }
-        var html = ""
-        if !text.isEmpty {
-            let escaped = htmlEscape(text).replacingOccurrences(of: "\n", with: "<br>")
-            html += "<p>\(escaped)</p>"
-        }
-        for image in images {
-            let src = htmlEscape(image.fullsizeURL)
-            let alt = htmlEscape(image.alt)
-            html += "<figure><img src=\"\(src)\" alt=\"\(alt)\"></figure>"
-        }
-        return html
-    }
-
-    private static func htmlEscape(_ value: String) -> String {
-        var escaped = value
-        escaped = escaped.replacingOccurrences(of: "&", with: "&amp;")
-        escaped = escaped.replacingOccurrences(of: "<", with: "&lt;")
-        escaped = escaped.replacingOccurrences(of: ">", with: "&gt;")
-        escaped = escaped.replacingOccurrences(of: "\"", with: "&quot;")
-        escaped = escaped.replacingOccurrences(of: "'", with: "&#39;")
-        return escaped
     }
 
     private func loadBlueskyProfileImage(
