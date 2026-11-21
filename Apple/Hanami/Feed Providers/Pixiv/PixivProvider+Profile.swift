@@ -4,8 +4,6 @@ extension PixivProvider: ProfileFeedProvider {
 
     public nonisolated static var providerID: String { "pixiv" }
 
-    public nonisolated static var enabledFlagKey: String? { "Labs.PixivFeeds" }
-
     public nonisolated static var domains: Set<String> { ["pixiv.net", "pixiv.me"] }
 
     public nonisolated static var feedURLScheme: String? { userScheme }

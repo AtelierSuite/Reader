@@ -57,9 +57,6 @@ final class FeedDiscoverySession {
         if InstagramProvider.isFeedURL(feed.url) {
             return InstagramProvider.isEnabled
         }
-        if PixivProvider.isFeedURL(feed.url) {
-            return PixivProvider.isEnabled
-        }
         return true
     }
 

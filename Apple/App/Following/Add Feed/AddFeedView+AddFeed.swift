@@ -10,9 +10,6 @@ extension AddFeedView {
         guard !InstagramProvider.isFeedURL(discovered.url) || InstagramProvider.isEnabled else {
             return
         }
-        guard !PixivProvider.isFeedURL(discovered.url) || PixivProvider.isEnabled else {
-            return
-        }
         if XProvider.isFeedURL(discovered.url) && !feedManager.hasXFeeds {
             pendingXFeed = discovered
             Task {
