@@ -155,7 +155,14 @@ struct CompactFeedArticleRow: View {
                 } else {
                     opensInExternalApp = false
                 }
-                icon = await Iconography.shared.icon(for: loadedFeed)
+                if let author = loadedFeed.contentAuthor(of: article) {
+                    feedName = author.name
+                    acronymIcon = nil
+                    icon = await Iconography.shared.icon(for: author)
+                }
+                if icon == nil {
+                    icon = await Iconography.shared.icon(for: loadedFeed)
+                }
             } else if article.isExternalBookmark {
                 feedName = BookmarkSite.name(of: article)
                 icon = await BookmarkSite.icon(for: article)

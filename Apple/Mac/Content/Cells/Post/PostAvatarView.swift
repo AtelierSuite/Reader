@@ -7,6 +7,7 @@ final class PostAvatarView: NSImageView {
     private let size: CGFloat
     private let cornerRadius: CGFloat
     private var representedFeed: Feed?
+    private var representedAuthor: ContentAuthor?
     private var iconObserver: ChangeObserver?
 
     init(size: CGFloat, cornerRadius: CGFloat) {
@@ -33,8 +34,9 @@ final class PostAvatarView: NSImageView {
         fatalError("init(coder:) is not supported")
     }
 
-    func configure(feed: Feed?) {
+    func configure(feed: Feed?, article: Article) {
         representedFeed = feed
+        representedAuthor = feed?.contentAuthor(of: article)
         image = nil
         layer?.cornerRadius = feed?.isCircleIcon == true ? size / 2 : cornerRadius
         loadIcon()
@@ -42,8 +44,9 @@ final class PostAvatarView: NSImageView {
 
     private func loadIcon() {
         guard let feed = representedFeed else { return }
-        FeedIconCache.shared.icon(for: feed) { [weak self] icon in
-            guard self?.representedFeed?.id == feed.id else { return }
+        let author = representedAuthor
+        FeedIconCache.shared.icon(for: feed, author: author) { [weak self] icon in
+            guard self?.representedFeed?.id == feed.id, self?.representedAuthor == author else { return }
             self?.image = icon
         }
     }

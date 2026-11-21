@@ -61,7 +61,7 @@ final class ContentPostCellView: NSTableCellView {
     }
 
     func configure(article: Article, feed: Feed?, isRead: Bool, isBookmarked: Bool, actions: PostCellActions) {
-        avatarView.configure(feed: feed)
+        avatarView.configure(feed: feed, article: article)
         headerView.configure(article: article, feed: feed, isRead: isRead)
         let summary = article.hasMeaningfulSummary ? article.summary.map(SummaryPreview.text(for:)) ?? "" : ""
         bodyField.stringValue = (summary.isEmpty ? article.displayTitle : summary)

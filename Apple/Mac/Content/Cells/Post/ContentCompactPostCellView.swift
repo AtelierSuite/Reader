@@ -64,7 +64,7 @@ final class ContentCompactPostCellView: NSTableCellView {
     }
 
     func configure(article: Article, feed: Feed?, isRead: Bool, actions: PostCellActions) {
-        avatarView.configure(feed: feed)
+        avatarView.configure(feed: feed, article: article)
         headerView.configure(article: article, feed: feed, isRead: isRead)
         titleField.stringValue = article.displayTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         textMatchesThumbnailHeight.isActive = article.imageURL != nil

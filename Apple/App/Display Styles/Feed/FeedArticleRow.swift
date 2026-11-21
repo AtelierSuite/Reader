@@ -228,7 +228,14 @@ struct FeedArticleRow: View {
                 isLinkFeed = !loadedFeed.isSocialFeed && !loadedFeed.isFediverseFeed
                     && !loadedFeed.isBlueskyFeed
                 shouldCenterImage = CenteredImageDomains.shouldCenterImage(feedDomain: loadedFeed.domain)
-                icon = await Iconography.shared.icon(for: loadedFeed)
+                if let author = loadedFeed.contentAuthor(of: article) {
+                    feedName = author.name
+                    acronymIcon = nil
+                    icon = await Iconography.shared.icon(for: author)
+                }
+                if icon == nil {
+                    icon = await Iconography.shared.icon(for: loadedFeed)
+                }
             } else if article.isExternalBookmark {
                 isLinkFeed = true
                 feedName = BookmarkSite.name(of: article)
