@@ -37,7 +37,7 @@ final class FeedDiscoverySession {
         }
         if let url = URL(string: urlString) {
             results += await FeedDiscovery.shared.discoverFeeds(fromPageURL: url)
-            if results.isEmpty, let host = url.host() {
+            if results.isEmpty, !FeedDiscovery.isSingleFeedLink(url), let host = url.host() {
                 results += await FeedDiscovery.shared.discoverFeeds(forDomain: host)
             }
         }
@@ -45,7 +45,7 @@ final class FeedDiscoverySession {
         discoveredFeeds = results
             .filter { seenURLs.insert($0.url).inserted }
             .sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedAscending }
-        errorMessage = discoveredFeeds.isEmpty ? String(localized: "AddFeed.NoFeedsFound", table: "Feeds") : nil
+        errorMessage = discoveredFeeds.isEmpty ? FeedDiscovery.noFeedsMessage(for: URL(string: urlString)) : nil
     }
 
     /// X and Instagram feeds need a signed-in session, which the Mac can't

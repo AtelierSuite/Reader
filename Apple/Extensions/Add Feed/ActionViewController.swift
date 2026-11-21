@@ -131,7 +131,7 @@ struct ActionExtensionView: View {
             }
         case .noFeeds:
             ContentUnavailableView(
-                String(localized: "AddFeed.NoFeedsFound", table: "Feeds"),
+                FeedDiscovery.noFeedsMessage(for: model.sharedPageURL),
                 systemImage: "rectangle.on.rectangle.slash"
             )
         case .noURL:
@@ -187,7 +187,8 @@ struct ActionExtensionView: View {
             return
         }
 
-        let feeds = await FeedDiscovery.shared.discoverFeeds(forDomain: host)
+        let feeds = FeedDiscovery.isSingleFeedLink(url)
+            ? [] : await FeedDiscovery.shared.discoverFeeds(forDomain: host)
 
         if feeds.isEmpty {
             model.status = .noFeeds

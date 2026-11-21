@@ -66,6 +66,7 @@ public actor FeedDiscovery {
         if let socialFeed = await detectSocialMediaFeed(url: pageURL) {
             return [socialFeed]
         }
+        if Self.isSingleFeedLink(pageURL) { return [] }
 
         let feeds = await discoverFromHTML(url: pageURL)
         if !feeds.isEmpty { return feeds }
