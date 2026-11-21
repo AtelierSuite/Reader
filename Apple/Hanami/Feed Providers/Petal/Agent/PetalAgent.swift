@@ -49,7 +49,7 @@ public nonisolated enum PetalAgent {
                 generating: PetalAgentRecipe.self
             ).content
         } catch {
-            log("WebFeedAgent", "model failed: \(error)")
+            log("WebFeedAgent", "model failed: \(error) quota=\(PrivateCloudComputeLanguageModel().quotaUsage)")
         }
         let candidates = [answer, workspace.bestTestedRecipe].compactMap { $0 }
         for candidate in candidates {
