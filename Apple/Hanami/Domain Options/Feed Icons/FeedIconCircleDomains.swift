@@ -7,6 +7,7 @@ public nonisolated enum FeedIconCircleDomains: DomainDefaults {
         "x.com",
         "twitter.com",
         "bsky.app",
+        "t.me",
         "instagram.com",
         "pixelfed.social",
         "pixelfed.tokyo",
