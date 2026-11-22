@@ -6,6 +6,7 @@ struct FollowingListIcon: View {
     @Environment(FeedManager.self) var feedManager
     let list: FeedList
     var size: CGFloat = 56
+    var isFlat = false
 
     private var cornerRadius: CGFloat {
         size * 12 / 56
@@ -39,15 +40,24 @@ struct FollowingListIcon: View {
     }
 
     var body: some View {
+        if isFlat {
+            grid
+                .quickAccessFlatTile(cornerRadius: cornerRadius, tint: listTint?.opacity(0.2))
+        } else {
+            grid
+                .wiggleRotation()
+                .wiggleGlassEffect(
+                    in: RoundedRectangle(cornerRadius: cornerRadius),
+                    tint: listTint?.opacity(0.3)
+                )
+        }
+    }
+
+    private var grid: some View {
         feedGrid
             .padding(innerPadding)
             .frame(width: size, height: size)
             .drawingGroup()
-            .wiggleRotation()
-            .wiggleGlassEffect(
-                in: RoundedRectangle(cornerRadius: cornerRadius),
-                tint: listTint?.opacity(0.3)
-            )
     }
 
     @ViewBuilder
