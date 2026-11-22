@@ -67,9 +67,11 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
             || DLsiteProvider.isFeedURL(url) || NetflixProvider.isFeedURL(url)
     }
 
-    /// Feeds made of images, which open in the Photos style unless the user picks another.
-    public var prefersPhotosStyle: Bool {
-        isInstagramFeed || PixivFeedTarget(feedURL: url)?.works == .illustManga
+    /// The style a provider feed opens in unless the user picks another.
+    public var preferredDisplayStyle: FeedDisplayStyle? {
+        if isInstagramFeed || PixivFeedTarget(feedURL: url)?.works == .illustManga { return .photos }
+        if DMMProvider.isFeedURL(url) || DLsiteProvider.isFeedURL(url) { return .masonry }
+        return nil
     }
 
     public var isFeedViewDomain: Bool {

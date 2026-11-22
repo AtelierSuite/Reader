@@ -140,7 +140,7 @@ struct FeedArticlesView: View {
             feedKey: String(feed.id),
             isVideoFeed: feed.isVideoFeed,
             isPodcastFeed: feed.isPodcast,
-            isInstagramFeed: feed.prefersPhotosStyle,
+            preferredStyle: feed.preferredDisplayStyle,
             isFeedViewDomain: feed.isFeedViewDomain,
             isFeedCompactViewDomain: feed.isFeedCompactViewDomain,
             isTimelineViewDomain: feed.isTimelineViewDomain,

@@ -49,8 +49,8 @@ struct DisplayStylePreviewView: View {
             fallback = .podcast
         } else if feed.isVideoFeed {
             fallback = .video
-        } else if feed.prefersPhotosStyle {
-            fallback = .photos
+        } else if let preferredStyle = feed.preferredDisplayStyle {
+            fallback = preferredStyle
         } else if let domainStyle = DisplayStyleSetDomains.style(for: feed.domain) {
             fallback = domainStyle
         } else {

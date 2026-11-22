@@ -12,7 +12,7 @@ struct ArticlesView: View {
     let feedKey: String
     let isVideoFeed: Bool
     let isPodcastFeed: Bool
-    let isInstagramFeed: Bool
+    let preferredStyle: FeedDisplayStyle?
     let isFeedViewDomain: Bool
     let isFeedCompactViewDomain: Bool
     let isTimelineViewDomain: Bool
@@ -35,7 +35,7 @@ struct ArticlesView: View {
 
     init(articles: [Article], title: String, subtitle: String? = nil, feedKey: String,
          isVideoFeed: Bool = false, isPodcastFeed: Bool = false,
-         isInstagramFeed: Bool = false,
+         preferredStyle: FeedDisplayStyle? = nil,
          isFeedViewDomain: Bool = false, isFeedCompactViewDomain: Bool = false,
          isTimelineViewDomain: Bool = false,
          titleDisplayMode: ToolbarTitleDisplayMode = .inline,
@@ -62,7 +62,7 @@ struct ArticlesView: View {
         self.feedKey = feedKey
         self.isVideoFeed = isVideoFeed
         self.isPodcastFeed = isPodcastFeed
-        self.isInstagramFeed = isInstagramFeed
+        self.preferredStyle = preferredStyle
         self.isFeedViewDomain = isFeedViewDomain
         self.isFeedCompactViewDomain = isFeedCompactViewDomain
         self.isTimelineViewDomain = isTimelineViewDomain
@@ -78,7 +78,7 @@ struct ArticlesView: View {
         let traits = FeedKindTraits(
             isPodcastFeed: isPodcastFeed,
             isVideoFeed: isVideoFeed,
-            isInstagramFeed: isInstagramFeed,
+            preferredStyle: preferredStyle,
             isTimelineViewDomain: isTimelineViewDomain,
             isFeedCompactViewDomain: isFeedCompactViewDomain,
             isFeedViewDomain: isFeedViewDomain
@@ -213,7 +213,7 @@ struct ArticlesView: View {
 struct FeedKindTraits {
     let isPodcastFeed: Bool
     let isVideoFeed: Bool
-    let isInstagramFeed: Bool
+    let preferredStyle: FeedDisplayStyle?
     let isTimelineViewDomain: Bool
     let isFeedCompactViewDomain: Bool
     let isFeedViewDomain: Bool
@@ -225,7 +225,7 @@ extension ArticlesView {
         FeedKindTraits(
             isPodcastFeed: isPodcastFeed,
             isVideoFeed: isVideoFeed,
-            isInstagramFeed: isInstagramFeed,
+            preferredStyle: preferredStyle,
             isTimelineViewDomain: isTimelineViewDomain,
             isFeedCompactViewDomain: isFeedCompactViewDomain,
             isFeedViewDomain: isFeedViewDomain
@@ -237,7 +237,6 @@ extension ArticlesView {
     static func storedStyle(feedKey: String, traits: FeedKindTraits) -> FeedDisplayStyle {
         let isPodcastFeed = traits.isPodcastFeed
         let isVideoFeed = traits.isVideoFeed
-        let isInstagramFeed = traits.isInstagramFeed
         let isTimelineViewDomain = traits.isTimelineViewDomain
         let isFeedCompactViewDomain = traits.isFeedCompactViewDomain
         let isFeedViewDomain = traits.isFeedViewDomain
@@ -250,8 +249,8 @@ extension ArticlesView {
             fallback = .podcast
         } else if isVideoFeed {
             fallback = .video
-        } else if isInstagramFeed {
-            fallback = .photos
+        } else if let preferredStyle = traits.preferredStyle {
+            fallback = preferredStyle
         } else if isTimelineViewDomain {
             fallback = .timeline
         } else if isFeedCompactViewDomain {

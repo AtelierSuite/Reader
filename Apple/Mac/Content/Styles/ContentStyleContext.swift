@@ -9,7 +9,7 @@ struct ContentStyleContext {
     let key: String
     let isPodcast: Bool
     let isVideo: Bool
-    let isInstagram: Bool
+    let preferredStyle: FeedDisplayStyle?
     let isTimelineDomain: Bool
     let isFeedCompactDomain: Bool
     let isFeedDomain: Bool
@@ -23,7 +23,7 @@ struct ContentStyleContext {
         let section: FeedSection? = if case .feedSection(let section) = location { section } else { nil }
         isPodcast = feed?.isPodcast ?? (section == .podcasts)
         isVideo = feed?.isVideoFeed ?? [.youtube, .vimeo, .niconico].contains(section)
-        isInstagram = feed?.prefersPhotosStyle ?? false
+        preferredStyle = feed?.preferredDisplayStyle
         isTimelineDomain = feed?.isTimelineViewDomain ?? false
         isFeedCompactDomain = feed?.isFeedCompactViewDomain ?? false
         isFeedDomain = feed?.isFeedViewDomain ?? [.x, .fediverse, .bluesky].contains(section)
@@ -38,7 +38,7 @@ struct ContentStyleContext {
         }
         if isPodcast { return .podcast }
         if isVideo { return .video }
-        if isInstagram { return .photos }
+        if let preferredStyle { return preferredStyle }
         if isTimelineDomain { return .timeline }
         if isFeedCompactDomain { return .feedCompact }
         if isFeedDomain { return .feed }
