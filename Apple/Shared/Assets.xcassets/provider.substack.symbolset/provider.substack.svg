@@ -90,13 +90,13 @@ PUBLIC "-//W3C//DTD SVG 1.1//EN"
  </g>
  <g id="Symbols">
   <g id="Ultralight-S" transform="matrix(1 0 0 1 522.047 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 71.7387 -46.1903 H 10.2583 V -54.462 h 61.4833 v 8.2717 zM 10.2583 -38.6945 V -0.2295 L 41 -17.4087 71.7417 -0.2295 V -38.6945 H 10.2583 zM 71.7417 -70.2295 H 10.2583 v 8.2717 h 61.4833 V -70.2295 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 70.8165 -45.8615 H 11.1806 V -53.885 h 59.6388 v 8.0235 z M 11.1806 -38.5906 V -1.2795 L 41 -17.9433 70.8194 -1.2795 V -38.5906 H 11.1806 z M 70.8194 -69.1795 H 11.1806 v 8.0235 h 59.6388 V -69.1795 z"/>
   </g>
   <g id="Regular-S" transform="matrix(1 0 0 1 1410.98 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 71.7387 -46.1903 H 10.2583 V -54.462 h 61.4833 v 8.2717 zM 10.2583 -38.6945 V -0.2295 L 41 -17.4087 71.7417 -0.2295 V -38.6945 H 10.2583 zM 71.7417 -70.2295 H 10.2583 v 8.2717 h 61.4833 V -70.2295 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 70.8165 -45.8615 H 11.1806 V -53.885 h 59.6388 v 8.0235 z M 11.1806 -38.5906 V -1.2795 L 41 -17.9433 70.8194 -1.2795 V -38.5906 H 11.1806 z M 70.8194 -69.1795 H 11.1806 v 8.0235 h 59.6388 V -69.1795 z"/>
   </g>
   <g id="Black-S" transform="matrix(1 0 0 1 2889.63 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 71.7387 -46.1903 H 10.2583 V -54.462 h 61.4833 v 8.2717 zM 10.2583 -38.6945 V -0.2295 L 41 -17.4087 71.7417 -0.2295 V -38.6945 H 10.2583 zM 71.7417 -70.2295 H 10.2583 v 8.2717 h 61.4833 V -70.2295 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 70.8165 -45.8615 H 11.1806 V -53.885 h 59.6388 v 8.0235 z M 11.1806 -38.5906 V -1.2795 L 41 -17.9433 70.8194 -1.2795 V -38.5906 H 11.1806 z M 70.8194 -69.1795 H 11.1806 v 8.0235 h 59.6388 V -69.1795 z"/>
   </g>
  </g>
 </svg>

@@ -90,13 +90,13 @@ PUBLIC "-//W3C//DTD SVG 1.1//EN"
  </g>
  <g id="Symbols">
   <g id="Ultralight-S" transform="matrix(1 0 0 1 522.047 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 6 -0.2295 V -70.2295 h 70 v 70 H 6 zM 26.2737 -53.0328 l 11.9933 22.4817 v 14.77 h 4.6171 v -14.5017 l 12.0983 -22.7471 h -5.1013 l -7.1662 14.2188 c -1.085 2.1729 -2.0067 4.1825 -2.0067 4.1825 s -0.8662 -2.065 -1.8987 -4.1825 L 31.7571 -53.0328 h -5.4833 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 11.25 -5.4795 V -64.9795 h 59.5 v 59.5 H 11.25 z M 28.4826 -50.3623 l 10.1943 19.1094 v 12.5545 h 3.9245 v -12.3264 l 10.2836 -19.335 h -4.3361 l -6.0913 12.086 c -0.9222 1.847 -1.7057 3.5551 -1.7057 3.5551 s -0.7363 -1.7552 -1.6139 -3.5551 L 33.1435 -50.3623 h -4.6608 z"/>
   </g>
   <g id="Regular-S" transform="matrix(1 0 0 1 1410.98 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 6 -0.2295 V -70.2295 h 70 v 70 H 6 zM 26.2737 -53.0328 l 11.9933 22.4817 v 14.77 h 4.6171 v -14.5017 l 12.0983 -22.7471 h -5.1013 l -7.1662 14.2188 c -1.085 2.1729 -2.0067 4.1825 -2.0067 4.1825 s -0.8662 -2.065 -1.8987 -4.1825 L 31.7571 -53.0328 h -5.4833 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 11.25 -5.4795 V -64.9795 h 59.5 v 59.5 H 11.25 z M 28.4826 -50.3623 l 10.1943 19.1094 v 12.5545 h 3.9245 v -12.3264 l 10.2836 -19.335 h -4.3361 l -6.0913 12.086 c -0.9222 1.847 -1.7057 3.5551 -1.7057 3.5551 s -0.7363 -1.7552 -1.6139 -3.5551 L 33.1435 -50.3623 h -4.6608 z"/>
   </g>
   <g id="Black-S" transform="matrix(1 0 0 1 2889.63 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 6 -0.2295 V -70.2295 h 70 v 70 H 6 zM 26.2737 -53.0328 l 11.9933 22.4817 v 14.77 h 4.6171 v -14.5017 l 12.0983 -22.7471 h -5.1013 l -7.1662 14.2188 c -1.085 2.1729 -2.0067 4.1825 -2.0067 4.1825 s -0.8662 -2.065 -1.8987 -4.1825 L 31.7571 -53.0328 h -5.4833 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 11.25 -5.4795 V -64.9795 h 59.5 v 59.5 H 11.25 z M 28.4826 -50.3623 l 10.1943 19.1094 v 12.5545 h 3.9245 v -12.3264 l 10.2836 -19.335 h -4.3361 l -6.0913 12.086 c -0.9222 1.847 -1.7057 3.5551 -1.7057 3.5551 s -0.7363 -1.7552 -1.6139 -3.5551 L 33.1435 -50.3623 h -4.6608 z"/>
   </g>
  </g>
 </svg>
