@@ -265,7 +265,6 @@ extension FeedArticlesView {
     }
 
     func performRefresh() async {
-        // swiftlint:disable:next line_length
         log("FeedArticlesView", "performRefresh id=\(feed.id) title=\(feed.title) scopeActive=\(scopedRefreshState.hasActiveProgress)")
         guard !scopedRefreshState.hasActiveProgress,
               !feedManager.hasActiveRefreshProgress else { return }

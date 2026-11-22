@@ -7,7 +7,6 @@ import Foundation
 enum RejectPatterns {
 
     static let regexes: [NSRegularExpression] = {
-        // swiftlint:disable line_length
         let sources: [String] = [
             #"(?i)\b((kill|slay|shoot|bomb|slaughter|maim|murder)(ed|ers?|ing|s)?|execut(e[ds]|er?s?|ing|ion(ers?)?)|(carnag|massacr|genocid)(ed|er?s?|ing)|(exterminat|annihilat)(e[ds]?|ors?|ing|ion)|genocid(al|ed|er?s?|ing)|perish(ed|ing|es)?|croak(ed|ing|s)?)\b"#,
             #"(?i)\b((pass(e[ds]|ing)?)\s+(away|on)|condolences|rest\s+in\s+peace|shot)\b"#,
@@ -18,7 +17,6 @@ enum RejectPatterns {
             #"(?i)\bsuicid(al|e[ds]?|ing)\b"#,
             #"(?i)\bmilitar(y|ies)\b"#
         ]
-        // swiftlint:enable line_length
         return sources.compactMap { try? NSRegularExpression(pattern: $0) }
     }()
 

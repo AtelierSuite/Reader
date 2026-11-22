@@ -50,7 +50,6 @@ extension SakuraRSSApp {
         }
         do {
             try BGTaskScheduler.shared.submit(request)
-            // swiftlint:disable:next line_length
             log("BackgroundRefresh", "submit success continuingSoon=\(continuingSoon) scheduledAt=\(request.earliestBeginDate?.description ?? "now")")
         } catch {
             log("BackgroundRefresh", "submit failed error=\(Self.describe(error))")

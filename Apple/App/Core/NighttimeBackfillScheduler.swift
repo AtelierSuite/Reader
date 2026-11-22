@@ -30,7 +30,6 @@ nonisolated enum NighttimeBackfillScheduler {
         request.earliestBeginDate = nextDate(atHour: hour)
         do {
             try BGTaskScheduler.shared.submit(request)
-            // swiftlint:disable:next line_length
             log("NighttimeBackfill", "submit success id=\(identifier) at=\(request.earliestBeginDate?.description ?? "?")")
         } catch {
             log("NighttimeBackfill", "submit failed id=\(identifier) error=\(describe(error))")

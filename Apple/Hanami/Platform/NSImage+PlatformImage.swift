@@ -7,7 +7,6 @@ import Foundation
 /// way `UIImage.Orientation` does. The case exists only so call sites that
 /// round-trip an orientation keep compiling.
 public enum PlatformImageBakedOrientation: Sendable {
-    // swiftlint:disable:next identifier_name
     case up
 }
 

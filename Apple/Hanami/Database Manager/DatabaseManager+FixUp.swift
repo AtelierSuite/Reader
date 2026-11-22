@@ -3,7 +3,6 @@ import Foundation
 
 public nonisolated extension DatabaseManager {
 
-    // swiftlint:disable:next function_body_length
     func fixup() {
         // feeds table
         _ = try? database.run(feeds.addColumn(feedTitle, defaultValue: ""))

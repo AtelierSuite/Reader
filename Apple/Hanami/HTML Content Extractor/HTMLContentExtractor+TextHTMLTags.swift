@@ -20,7 +20,6 @@ public nonisolated extension HTMLContentExtractor {
             if isLikelyContentImage(imgURL),
                let resolvedImg = resolveURL(imgURL, against: baseURL) {
                 let resolvedLink = resolveURL(linkURL, against: baseURL) ?? linkURL
-                // swiftlint:disable:next line_length
                 let replacement = "\(imgOpenPlaceholder)\(resolvedImg)\(imgLinkOpenPlaceholder)\(resolvedLink)\(imgLinkClosePlaceholder)\(imgClosePlaceholder)"
                 result = (result as NSString).replacingCharacters(in: match.range, with: replacement)
             }

@@ -24,7 +24,6 @@ extension HeadlineSummarizer {
                     }
                     log(
                         logModule,
-                        // swiftlint:disable:next line_length
                         "translating headline (detected=\(detected.minimalIdentifier) -> \(target.minimalIdentifier)): \(event.headline)"
                     )
                     if let translated = await translate(headline: event.headline, into: target),

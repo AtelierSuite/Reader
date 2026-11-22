@@ -10,7 +10,6 @@ extension XProvider {
             handle: handle, cachedUserInfo: cachedUserInfo, cookies: cookies
         ) else { return nil }
 
-        // swiftlint:disable:next line_length
         log("XProvider", "User info - id: \(userInfo.id), name: \(userInfo.displayName ?? "nil"), cached: \(cachedUserInfo != nil)")
 
         guard let tweets = await fetchTweets(

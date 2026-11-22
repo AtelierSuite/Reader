@@ -285,7 +285,6 @@ enum StreamingAudioPipeline {
         return results.reduce(0) { $0 + $1.sourceFrames }
     }
 
-    // swiftlint:disable:next function_parameter_count
     private static func decodeChunk(
         fileURL: URL,
         sourceFormat: AVAudioFormat,

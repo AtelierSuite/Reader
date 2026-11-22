@@ -132,7 +132,6 @@ extension CloudSyncEngine: CKSyncEngineDelegate {
             database.setSyncEngineStateData(nil, forKey: Self.archivedRecordKeyPrefix + recordID.recordName)
             syncEngine.state.add(pendingRecordZoneChanges: [.saveRecord(recordID)])
         default:
-            // swiftlint:disable:next line_length
             log("CloudSyncEngine", "Failed to save record \(recordID.recordName): \(failedSave.error.localizedDescription)")
         }
     }

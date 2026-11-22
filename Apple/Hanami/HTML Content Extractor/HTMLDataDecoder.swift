@@ -91,7 +91,6 @@ public nonisolated enum HTMLDataDecoder {
     /// Repairs a stream that is UTF-8 apart from a few malformed sequences, so a
     /// single truncated character does not send a whole document to CP1252.
     private static func repairedUTF8Text(in data: Data) -> String? {
-        // swiftlint:disable:next optional_data_string_conversion
         let text = String(decoding: data, as: UTF8.self)
         guard !text.isEmpty else { return nil }
         var replacementCount = 0
@@ -130,7 +129,6 @@ public nonisolated enum HTMLDataDecoder {
             guard let regex = try? NSRegularExpression(
                 pattern: pattern, options: .caseInsensitive
             ) else { continue }
-            // swiftlint:disable:next identifier_name
             let ns = asciiHead as NSString
             if let match = regex.firstMatch(
                 in: asciiHead, range: NSRange(location: 0, length: ns.length)

@@ -1,7 +1,6 @@
 import SwiftUI
 import Hanami
 
-// swiftlint:disable:next type_name
 struct iCloudBackupView: View {
 
     @AppStorage("iCloudBackup.Interval")

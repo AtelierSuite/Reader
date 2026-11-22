@@ -167,7 +167,6 @@ public nonisolated final class HTMLContentExtractor {
             of: "<[^>]+>", with: "", options: .regularExpression
         ).trimmingCharacters(in: .whitespacesAndNewlines)
         guard !stripped.isEmpty else { return nil }
-        // swiftlint:disable:next line_length
         log("Extract", "extractText: wrapped plain text/Markdown (\(tagCount) tags, \(stripped.count) chars), using directly")
         var cleaned = stripRemainingHTMLTags(html)
         cleaned = resolveMarkdownLinks(in: cleaned, baseURL: baseURL)

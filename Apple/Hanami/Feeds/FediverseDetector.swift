@@ -25,7 +25,6 @@ public nonisolated enum FediverseDetector {
     /// leave the cached flag untouched on `nil` so the next refresh re-probes.
     public static func detect(for feed: Feed) async -> Bool? {
         guard let host = probeHost(for: feed) else {
-            // swiftlint:disable:next line_length
             log("FediverseDetector", "skip id=\(feed.id) reason=no-host siteURL=\(feed.siteURL) fetchURL=\(feed.fetchURL)")
             return nil
         }
@@ -39,7 +38,6 @@ public nonisolated enum FediverseDetector {
         let elapsedMs = Int(Date().timeIntervalSince(started) * 1000)
         switch outcome {
         case .found(let software):
-            // swiftlint:disable:next line_length
             log("FediverseDetector", "probe end id=\(feed.id) host=\(host) result=true software=\(software) elapsedMs=\(elapsedMs)")
             await cache.set(true, for: host)
             return true
@@ -86,11 +84,9 @@ public nonisolated enum FediverseDetector {
             }
             switch await fetchJSON(NodeInfoDocument.self, from: nodeInfoURL) {
             case .inconclusive(let reason):
-                // swiftlint:disable:next line_length
                 log("FediverseDetector", "document inconclusive id=\(feedID) host=\(host) url=\(nodeInfoURL.absoluteString) reason=\(reason)")
                 return .inconclusive
             case .miss(let reason):
-                // swiftlint:disable:next line_length
                 log("FediverseDetector", "document miss id=\(feedID) host=\(host) url=\(nodeInfoURL.absoluteString) reason=\(reason)")
                 return .missing
             case .decoded(let document):

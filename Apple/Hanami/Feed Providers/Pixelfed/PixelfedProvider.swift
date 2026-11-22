@@ -28,7 +28,6 @@ public final class PixelfedProvider {
         let started = Date()
         let imageURL = await HTMLMetadataImage.fetchImageURL(for: url)
         let elapsedMs = Int(Date().timeIntervalSince(started) * 1000)
-        // swiftlint:disable:next line_length
         log("PixelfedProfile", "fetch end url=\(url.absoluteString) elapsedMs=\(elapsedMs) imageURL=\(imageURL ?? "nil")")
         return PixelfedProfileFetchResult(profileImageURL: imageURL)
     }

@@ -10,7 +10,7 @@ public nonisolated enum FeedSection: String, CaseIterable, Codable, Sendable {
     case reddit
     case substack
     case vimeo
-    case x // swiftlint:disable:this identifier_name
+    case x
     case youtube
     case niconico
 

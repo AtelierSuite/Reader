@@ -34,7 +34,6 @@ public extension FeedManager {
 
         let fetcher = InstagramProvider()
         let result = try await fetcher.fetchProfile(profileURL: profileURL)
-        // swiftlint:disable:next line_length
         log("InstagramProfile", "fetched @\(handle) posts=\(result.posts.count) displayName=\(result.displayName ?? "nil")")
 
         let postTuples = Self.makeInstagramArticleItems(from: result.posts)

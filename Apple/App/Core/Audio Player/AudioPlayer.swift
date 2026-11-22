@@ -70,7 +70,6 @@ final class AudioPlayer {
 
     // MARK: - Playback
 
-    // swiftlint:disable:next function_parameter_count
     func play(
         url: URL,
         articleID: Int64,
