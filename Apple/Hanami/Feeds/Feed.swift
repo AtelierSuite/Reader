@@ -63,6 +63,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
         XProvider.isFeedURL(url) || InstagramProvider.isFeedURL(url)
             || YouTubePlaylistProvider.isFeedURL(url) || AppStoreProvider.isFeedURL(url)
             || PixivProvider.isFeedURL(url) || BlueskyFeedTarget.isFeedURL(url)
+            || DMMProvider.isFeedURL(url)
     }
 
     /// Feeds made of images, which open in the Photos style unless the user picks another.

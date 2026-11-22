@@ -63,6 +63,8 @@ public actor FeedDiscovery {
     }
 
     public func discoverFeeds(fromPageURL pageURL: URL) async -> [DiscoveredFeed] {
+        let dmmWorkFeeds = await DMMProvider.discoveredFeeds(forWorkPageURL: pageURL)
+        if !dmmWorkFeeds.isEmpty { return dmmWorkFeeds }
         if let socialFeed = await detectSocialMediaFeed(url: pageURL) {
             return [socialFeed]
         }
