@@ -6,10 +6,17 @@ struct BrowserTodayQuickAccessGrid: View {
 
     @Environment(FeedManager.self) private var feedManager
     @Environment(BrowserTabStore.self) private var store
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var isEditing: Bool
     var onBeginEditing: () -> Void
 
-    static let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
+    static func columns(for sizeClass: UserInterfaceSizeClass?) -> [GridItem] {
+        if sizeClass == .regular {
+            [GridItem(.adaptive(minimum: 84, maximum: 104), spacing: 16)]
+        } else {
+            Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
+        }
+    }
 
     private let preferences = TodayQuickAccessPreferences.shared
 
@@ -26,7 +33,7 @@ struct BrowserTodayQuickAccessGrid: View {
     }
 
     private var quickAccessGrid: some View {
-        LazyVGrid(columns: Self.columns, spacing: 12) {
+        LazyVGrid(columns: Self.columns(for: horizontalSizeClass), spacing: 12) {
             ForEach(visibleItems) { item in
                 Button {
                     open(item)
