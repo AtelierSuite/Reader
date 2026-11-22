@@ -11,6 +11,8 @@ struct BrowserTodayQuickAccessIcon: View {
         size * 12 / 56
     }
 
+    private let rimWidth: CGFloat = 0.75
+
     var body: some View {
         iconImage
             .task(id: section) {
@@ -25,9 +27,11 @@ struct BrowserTodayQuickAccessIcon: View {
             Image(uiImage: icon)
                 .resizable()
                 .scaledToFill()
-                .frame(width: size, height: size)
-                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                .frame(width: size - rimWidth * 2, height: size - rimWidth * 2)
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius - rimWidth))
                 .wiggleRotation()
+                .frame(width: size, height: size)
+                .wiggleGlassEffect(in: RoundedRectangle(cornerRadius: cornerRadius))
         } else {
             Image(systemName: symbolName)
                 .font(.system(size: size * 24 / 56))
