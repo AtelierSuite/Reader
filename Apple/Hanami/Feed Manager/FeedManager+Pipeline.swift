@@ -318,7 +318,7 @@ public extension FeedManager {
         skippingURLs existingURLs: Set<String>
     ) async -> [String: String] {
         let candidates: [(articleURL: String, requestURL: URL)] = articles.compactMap { article in
-            guard article.imageURL == nil,
+            guard article.imageURL == nil, article.usesPageImage,
                   !existingURLs.contains(article.url),
                   let url = URL(string: article.url),
                   let scheme = url.scheme?.lowercased(),

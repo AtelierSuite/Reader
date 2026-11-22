@@ -15,6 +15,7 @@ nonisolated enum TumblrDialect: FeedDialect {
     static func refine(_ article: ParsedArticle, feedURL _: URL) -> ParsedArticle {
         guard let description = article.descriptionHTML, !description.isEmpty else { return article }
         var refined = article
+        refined.usesPageImage = false
         let body = TumblrReblogTrail.flattened(description)
         refined.content = body
         let ownWords = TumblrReblogTrail.withoutAttribution(body)

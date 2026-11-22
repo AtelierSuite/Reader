@@ -16,6 +16,7 @@ nonisolated enum MisskeyDialect: FeedDialect {
     /// Misskey titles every note "New note by …" and puts a content warning in the description.
     static func refine(_ article: ParsedArticle, feedURL _: URL) -> ParsedArticle {
         var refined = article
+        refined.usesPageImage = false
         let note = withoutCustomEmoji(article.content ?? article.descriptionHTML ?? "")
         let noteText = FeedDialectText.plainText(fromHTML: note)
         let warning = article.content == nil ? nil : article.descriptionHTML

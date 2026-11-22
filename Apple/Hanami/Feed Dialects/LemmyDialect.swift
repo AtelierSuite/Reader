@@ -7,8 +7,11 @@ nonisolated enum LemmyDialect: FeedDialect {
     nonisolated(unsafe) private static let boilerplateRegex =
         /^submitted by <a [^>]*>[^<]*<\/a> to <a [^>]*>[^<]*<\/a><br\s*\/?>-?\d+ points \| <a [^>]*>\d+ comments<\/a>(?:<br\s*\/?><a href="([^"]*)">[^<]*<\/a>)?/
 
+    /// `/feeds/c/<community>.xml`, `/feeds/u/<user>.xml` and `/feeds/front.xml`.
     static func isFeedURL(_ url: URL) -> Bool {
-        url.path.hasPrefix("/feeds/") && url.path.hasSuffix(".xml")
+        let components = url.pathComponents
+        guard components.count >= 3, components[1] == "feeds", url.path.hasSuffix(".xml") else { return false }
+        return components.count == 3 ? components[2] == "front.xml" : ["c", "u"].contains(components[2])
     }
 
     static func matches(feedURL: URL, feed: ParsedFeed) -> Bool {
@@ -17,6 +20,7 @@ nonisolated enum LemmyDialect: FeedDialect {
 
     static func refine(_ article: ParsedArticle, feedURL _: URL) -> ParsedArticle {
         var refined = article
+        refined.usesPageImage = false
         refined.author = article.author.map(handle(fromActorURL:))
         refined.carouselImageURLs = []
         guard let description = article.descriptionHTML,
