@@ -129,17 +129,6 @@ struct FollowingFeedGridCell: View {
             }
     }
 
-    private var mutedBadge: some View {
-        Image(systemName: "bell.slash.fill")
-            .font(.system(size: 8, weight: .semibold))
-            .foregroundStyle(.background)
-            .frame(width: 16, height: 16)
-            .background(.primary, in: .circle)
-            .overlay {
-                Circle().strokeBorder(.separator, lineWidth: 0.5)
-            }
-    }
-
     private var deleteBadge: some View {
         Button {
             onDelete?()

@@ -21,21 +21,6 @@ struct TodayGreeting {
         return TodayGreeting(text: body, terminator: terminator)
     }
 
-    /// Top→bottom gradient evoking the sky at the current hour. Five anchor
-    /// points (one per greeting bucket centroid) are linearly interpolated and
-    /// wrapped around midnight so the color shifts continuously rather than
-    /// snapping when a bucket boundary is crossed.
-    static func periodGradient(at date: Date) -> LinearGradient {
-        let comps = Calendar.current.dateComponents([.hour, .minute], from: date)
-        let hours = Double(comps.hour ?? 0) + Double(comps.minute ?? 0) / 60.0
-        let stops = interpolatedStops(hours: hours)
-        return LinearGradient(
-            colors: [stops.top, stops.bottom],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-    }
-
     private struct GradientStops {
         var top: SIMD3<Double>
         var bottom: SIMD3<Double>

@@ -87,10 +87,6 @@ public nonisolated final class iCloudBackupManager: @unchecked Sendable {
 
     // MARK: - Restore
 
-    public func hasBackup() async -> Bool {
-        await backupMetadata() != nil
-    }
-
     @concurrent
     public func backupMetadata() async -> BackupMetadata? {
         guard let containerURL = iCloudContainerURL() else { return nil }

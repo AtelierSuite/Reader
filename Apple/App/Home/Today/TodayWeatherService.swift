@@ -68,10 +68,6 @@ final class TodayWeatherService {
         UserDefaults.standard.object(forKey: enabledKey) as? Bool ?? true
     }
 
-    var remainingLocationChanges: Int {
-        max(0, Self.dailyLocationChangeLimit - locationChangesToday)
-    }
-
     var canChangeLocation: Bool {
         locationChangesToday < Self.dailyLocationChangeLimit
     }

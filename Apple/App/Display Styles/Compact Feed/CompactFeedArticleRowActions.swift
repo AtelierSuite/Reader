@@ -27,12 +27,6 @@ struct CompactFeedArticleRowActions: View {
         return opensInExternalApp ? "arrow.up.forward.app" : "arrow.up.forward.square"
     }
 
-    private var openButtonTitle: String {
-        opensInExternalApp
-            ? String(localized: "OpenInApp", table: "Articles")
-            : String(localized: "OpenInBrowser", table: "Articles")
-    }
-
     @ViewBuilder
     private var openButton: some View {
         Button {

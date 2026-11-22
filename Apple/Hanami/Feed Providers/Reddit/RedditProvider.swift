@@ -139,11 +139,4 @@ public final class RedditProvider: @unchecked Sendable {
             }
         }
     }
-
-    public func clearPostCache() {
-        postCacheQueue.sync {
-            postCache.removeAll()
-            postCacheOrder.removeAll()
-        }
-    }
 }

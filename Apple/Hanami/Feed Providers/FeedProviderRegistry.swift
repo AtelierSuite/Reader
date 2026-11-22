@@ -54,16 +54,6 @@ public nonisolated enum FeedProviderRegistry {
         return FeedDiscovery.youTubeSiteURL(fromFeedURL: feedURL)
     }
 
-    public static func profileProvider(forURL url: URL) -> (any ProfileFeedProvider.Type)? {
-        for provider in all {
-            if let profile = provider as? any ProfileFeedProvider.Type,
-               profile.isProfileURL(url) {
-                return profile
-            }
-        }
-        return nil
-    }
-
     public static func commentsProvider(
         for article: Article, in feed: Feed?
     ) -> (any CommentsProvider.Type)? {

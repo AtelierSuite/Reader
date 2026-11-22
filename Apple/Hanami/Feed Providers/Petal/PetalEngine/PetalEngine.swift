@@ -11,19 +11,6 @@ public nonisolated enum PetalEngine {
 
     // MARK: - Public API
 
-    /// Runs the recipe and returns matching items as `ParsedArticle`s.
-    /// `pageURL` overrides `recipe.siteURL` for live builder previews.
-    public static func fetchArticles(
-        for recipe: PetalRecipe,
-        pageURL overrideURL: String? = nil
-    ) async -> [ParsedArticle] {
-        guard let html = await fetchHTML(for: recipe, pageURL: overrideURL),
-              !html.isEmpty else {
-            return []
-        }
-        return parse(html: html, recipe: recipe)
-    }
-
     /// Runs the recipe and returns a preview with an HTML sample for selector debugging.
     public static func preview(
         for recipe: PetalRecipe,

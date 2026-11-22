@@ -94,14 +94,6 @@ public actor Iconography {
         try? FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
     }
 
-    /// Removes specific entries from the failed-lookups set to be retried.
-    public func clearFailedLookups(for entries: [(domain: String, siteURL: String?)]) {
-        for entry in entries {
-            let cacheKey = Self.cacheKey(domain: entry.domain, siteURL: entry.siteURL)
-            forgetFailedLookup(cacheKey)
-        }
-    }
-
     public nonisolated static func cacheKey(domain: String, siteURL: String?) -> String {
         guard isProfileBased(domain: domain, siteURL: siteURL),
               let siteURL = siteURL, let url = URL(string: siteURL) else {

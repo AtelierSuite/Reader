@@ -3,15 +3,6 @@ import Hanami
 
 extension PodcastEpisodeView {
 
-    func reloadCachedTranscript() {
-        if let cached = try? DatabaseManager.shared.cachedTranscript(for: article.id),
-           !cached.isEmpty {
-            transcript = cached
-        } else {
-            transcript = nil
-        }
-    }
-
     /// Overlay button that re-enables transcript auto-scroll and jumps to the active segment.
     @ViewBuilder
     func followAlongOverlay(scrollProxy: ScrollViewProxy) -> some View {

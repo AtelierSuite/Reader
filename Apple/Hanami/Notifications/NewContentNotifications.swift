@@ -49,13 +49,6 @@ public nonisolated enum NewContentNotifications {
 
 public nonisolated extension NewContentNotifications {
 
-    /// Granting the unread badge alone also reports `.authorized`, so alerts
-    /// are checked separately.
-    static func canPostAlerts() async -> Bool {
-        let settings = await UNUserNotificationCenter.current().notificationSettings()
-        return isAllowingAlerts(settings)
-    }
-
     static func isAlertPermissionDenied() async -> Bool {
         let settings = await UNUserNotificationCenter.current().notificationSettings()
         return settings.authorizationStatus != .notDetermined && !isAllowingAlerts(settings)
