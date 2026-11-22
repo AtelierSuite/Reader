@@ -14,7 +14,7 @@ struct BrowserGenerateWebFeedCell: View {
                         height: BrowserDiscoveredFeedCell.iconSize
                     )
                     .overlay {
-                        Image(systemName: "leaf.fill")
+                        Image(systemName: "plus")
                             .font(.title2)
                             .foregroundStyle(.tint)
                     }
