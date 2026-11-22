@@ -4,11 +4,18 @@ import Hanami
 
 struct BrowserSearchResultsView: View {
 
-    @Environment(FeedManager.self) private var feedManager
+    @Environment(FeedManager.self) var feedManager
     @AppStorage("Search.DisplayStyle") private var searchDisplayStyle: FeedDisplayStyle = .inbox
     let query: String
     var recordsSearchTerm = true
     @State private var results: [Article] = []
+    @State var discovery: FeedDiscoverySession?
+    @State var showXLogin = false
+    @State var pendingXFeed: DiscoveredFeed?
+    @State var showInstagramLogin = false
+    @State var pendingInstagramFeed: DiscoveredFeed?
+    @State var showPetalBuilder = false
+    @AppStorage("Labs.PetalRecipes") var petalRecipesEnabled: Bool = false
 
     /// Ranked, then cut to one row: the grid is a fixed four columns.
     private var matchingFeeds: [Feed] {
@@ -31,13 +38,14 @@ struct BrowserSearchResultsView: View {
 
     var body: some View {
         let feeds = matchingFeeds
+        let shownDiscovery = visibleDiscovery
         return DisplayStyleContentView(
             style: effectiveStyle,
             articles: results,
-            headerView: feeds.isEmpty ? nil : AnyView(BrowserSearchFeedsSection(feeds: feeds))
+            headerView: headerView(discovery: shownDiscovery, feeds: feeds)
         )
             .overlay {
-                if results.isEmpty && feeds.isEmpty {
+                if results.isEmpty && feeds.isEmpty && shownDiscovery == nil {
                     ContentUnavailableView {
                         Label(String(localized: "NoResults.Title", table: "Search"),
                               systemImage: "magnifyingglass")
@@ -64,6 +72,44 @@ struct BrowserSearchResultsView: View {
                     feedManager.recordSearchTerm(query)
                 }
             }
+            .task(id: query) {
+                await discoverFeeds()
+            }
+            .sheet(isPresented: $showXLogin) {
+                addPendingFeed(pendingXFeed, hasSession: XProvider.hasSession())
+                pendingXFeed = nil
+            } content: {
+                XLoginView()
+            }
+            .sheet(isPresented: $showInstagramLogin) {
+                addPendingFeed(pendingInstagramFeed, hasSession: InstagramProvider.hasSession())
+                pendingInstagramFeed = nil
+            } content: {
+                InstagramLoginView()
+            }
+            .sheet(isPresented: $showPetalBuilder) {
+                PetalBuilderView(mode: .create(initialURL: discovery?.urlString ?? query))
+                    .environment(feedManager)
+            }
+    }
+
+    private func headerView(discovery: FeedDiscoverySession?, feeds: [Feed]) -> AnyView? {
+        guard discovery != nil || !feeds.isEmpty else { return nil }
+        return AnyView(
+            VStack(alignment: .leading, spacing: 0) {
+                if let discovery {
+                    BrowserSearchDiscoveredSection(
+                        session: discovery,
+                        showsGenerateWebFeed: showsGenerateWebFeed,
+                        onAdd: addDiscoveredFeed,
+                        onGenerateWebFeed: { showPetalBuilder = true }
+                    )
+                }
+                if !feeds.isEmpty {
+                    BrowserSearchFeedsSection(feeds: feeds)
+                }
+            }
+        )
     }
 
     /// The browser hides the top bar, so the display style goes in the

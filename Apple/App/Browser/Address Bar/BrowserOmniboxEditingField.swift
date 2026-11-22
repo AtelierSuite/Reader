@@ -9,12 +9,11 @@ struct BrowserOmniboxEditingField: View {
     @Environment(FeedManager.self) private var feedManager
     @Environment(BrowserTabStore.self) private var store
     @Environment(BrowserOmniboxModel.self) private var omnibox
-    @Environment(\.browserAddFeedAction) private var addFeed
     @Environment(\.browserOmniboxSubmit) private var submitOmnibox
     @FocusState private var isFieldFocused: Bool
 
     private var actions: BrowserOmniboxActions {
-        BrowserOmniboxActions(store: store, omnibox: omnibox, addFeed: addFeed)
+        BrowserOmniboxActions(store: store, omnibox: omnibox)
     }
 
     private var suggestions: [BrowserSuggestion] {

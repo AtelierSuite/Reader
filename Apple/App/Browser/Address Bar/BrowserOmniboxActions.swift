@@ -8,7 +8,6 @@ struct BrowserOmniboxActions {
 
     let store: BrowserTabStore
     let omnibox: BrowserOmniboxModel
-    let addFeed: ((String) -> Void)?
 
     func dismiss() {
         withAnimation(BrowserOmniboxModel.transition) { omnibox.deactivate() }
@@ -25,8 +24,7 @@ struct BrowserOmniboxActions {
         case .feed(let feed): store.navigate(to: .feed(feed.id))
         case .list(let list): store.navigate(to: .list(list.id))
         case .article(let article): store.push(article)
-        case .searchContent(let query): store.navigate(to: .search(query))
-        case .discoverFeeds(let host): addFeed?("https://\(host)")
+        case .searchContent(let query), .discoverFeeds(let query): store.navigate(to: .search(query))
         }
         dismiss()
     }

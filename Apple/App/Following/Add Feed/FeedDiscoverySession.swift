@@ -2,9 +2,8 @@ import Foundation
 import Hanami
 import Observation
 
-/// Finds the feeds behind an address and subscribes to them, the way iOS's
-/// add feed screen does: the address as a feed first, then the page's links,
-/// then the whole domain.
+/// Finds the feeds behind an address and subscribes to them: the address as
+/// a feed first, then the page's links, then the whole domain.
 @Observable
 final class FeedDiscoverySession {
 
@@ -48,8 +47,6 @@ final class FeedDiscoverySession {
         errorMessage = discoveredFeeds.isEmpty ? FeedDiscovery.noFeedsMessage(for: URL(string: urlString)) : nil
     }
 
-    /// X and Instagram feeds need a signed-in session, which the Mac can't
-    /// create yet.
     func canAdd(_ feed: DiscoveredFeed) -> Bool {
         if XProvider.isFeedURL(feed.url) {
             return XProvider.isEnabled

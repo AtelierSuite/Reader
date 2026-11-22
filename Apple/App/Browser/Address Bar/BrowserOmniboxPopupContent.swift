@@ -9,10 +9,9 @@ struct BrowserOmniboxPopupContent: View {
     @Environment(FeedManager.self) private var feedManager
     @Environment(BrowserTabStore.self) private var store
     @Environment(BrowserOmniboxModel.self) private var omnibox
-    @Environment(\.browserAddFeedAction) private var addFeed
 
     private var actions: BrowserOmniboxActions {
-        BrowserOmniboxActions(store: store, omnibox: omnibox, addFeed: addFeed)
+        BrowserOmniboxActions(store: store, omnibox: omnibox)
     }
 
     var body: some View {

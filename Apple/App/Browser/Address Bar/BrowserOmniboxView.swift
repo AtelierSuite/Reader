@@ -23,7 +23,6 @@ struct BrowserOmniboxView: View {
     @Environment(FeedManager.self) private var feedManager
     @Environment(BrowserTabStore.self) private var store
     @Environment(BrowserOmniboxModel.self) private var omnibox
-    @Environment(\.browserAddFeedAction) private var addFeed
     @Environment(\.browserOmniboxSubmit) private var submitOmnibox
 
     private var suggestions: [BrowserSuggestion] {
@@ -185,10 +184,8 @@ struct BrowserOmniboxView: View {
             store.navigate(to: .list(list.id))
         case .article(let article):
             store.push(article)
-        case .searchContent(let query):
+        case .searchContent(let query), .discoverFeeds(let query):
             store.navigate(to: .search(query))
-        case .discoverFeeds(let urlString):
-            addFeed?(urlString)
         }
         dismiss()
     }

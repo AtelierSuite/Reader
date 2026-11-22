@@ -15,20 +15,14 @@ struct BrowserSuggestionResolver {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return emptyQuerySuggestions() }
 
+        let isAddress = BrowserAddressInput.siteHost(from: trimmed) != nil
         var results: [BrowserSuggestion] = [
             BrowserSuggestion(
                 id: "search:\(trimmed)",
-                kind: .searchContent(trimmed),
+                kind: isAddress ? .discoverFeeds(trimmed) : .searchContent(trimmed),
                 section: .actions
             )
         ]
-        if let urlString = BrowserAddressInput.normalizedURLString(from: trimmed) {
-            results.append(BrowserSuggestion(
-                id: "discover:\(urlString)",
-                kind: .discoverFeeds(urlString),
-                section: .actions
-            ))
-        }
         results += matchingFeeds(trimmed).map {
             BrowserSuggestion(id: "feed:\($0.id)", kind: .feed($0), section: .feeds)
         }

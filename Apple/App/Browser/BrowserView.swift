@@ -32,9 +32,6 @@ struct BrowserView: View {
             store.push(BrowserBookmarksDestination())
         }
         .environment(omnibox)
-        .environment(\.browserAddFeedAction) { url in
-            pendingAddFeedURL = url
-        }
         .environment(\.browserOmniboxAction) {
             withAnimation(BrowserOmniboxModel.transition) {
                 omnibox.activate(with: store.displayedTab.pageIdentity?.searchQuery ?? "")
@@ -97,11 +94,7 @@ struct BrowserView: View {
     private func submitOmnibox() {
         let trimmed = omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
-        if let urlString = BrowserAddressInput.normalizedURLString(from: trimmed) {
-            pendingAddFeedURL = urlString
-        } else {
-            store.navigate(to: .search(trimmed))
-        }
+        store.navigate(to: .search(trimmed))
         withAnimation(BrowserOmniboxModel.transition) {
             omnibox.deactivate()
         }
