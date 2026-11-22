@@ -11,6 +11,7 @@ public extension FeedProviderRegistry {
         TelegramProvider.self,
         AppStoreProvider.self,
         PixivProvider.self,
+        DMMProvider.self,
         DLsiteProvider.self
     ]
 

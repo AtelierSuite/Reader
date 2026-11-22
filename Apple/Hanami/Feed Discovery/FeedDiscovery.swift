@@ -66,6 +66,8 @@ public actor FeedDiscovery {
         if DLsiteProvider.isWorkPageURL(pageURL) {
             return await DLsiteProvider.discoveredFeeds(forWorkPageURL: pageURL)
         }
+        let dmmWorkFeeds = await DMMProvider.discoveredFeeds(forWorkPageURL: pageURL)
+        if !dmmWorkFeeds.isEmpty { return dmmWorkFeeds }
         if let socialFeed = await detectSocialMediaFeed(url: pageURL) {
             return [socialFeed]
         }
