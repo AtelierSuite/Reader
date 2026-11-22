@@ -4689,13 +4689,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds, die innerhalb dieses Zeitraums automatisch aktualisiert wurden, werden übersprungen. Eine manuelle Aktualisierung lädt immer alles neu. Neu hinzugefügte Feeds werden sofort geladen."
+            "value" : "Feeds, die innerhalb dieses Zeitraums automatisch aktualisiert wurden, werden übersprungen. Eine manuelle Aktualisierung lädt immer alles neu. Neu gefolgte Feeds werden sofort geladen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds refreshed automatically within this window are skipped. A manual refresh always refreshes everything. Newly added feeds always refresh."
+            "value" : "Feeds refreshed automatically within this window are skipped. A manual refresh always refreshes everything. Newly followed feeds always refresh."
           }
         },
         "fr" : {
@@ -4707,43 +4707,43 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I feed aggiornati automaticamente entro questa finestra vengono saltati. Un aggiornamento manuale aggiorna sempre tutto. I feed appena aggiunti si aggiornano sempre."
+            "value" : "I feed aggiornati automaticamente entro questa finestra vengono saltati. Un aggiornamento manuale aggiorna sempre tutto. I feed appena seguiti si aggiornano sempre."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "この期間内に自動更新されたフィードはスキップされます。手動での更新では常にすべてが更新されます。新しく追加されたフィードは必ず更新されます。"
+            "value" : "この期間内に自動更新されたフィードはスキップされます。手動での更新では常にすべてが更新されます。新しくフォローしたフィードは必ず更新されます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 기간 동안 자동으로 새로고친 피드는 건너뜁니다. 수동 새로고침은 항상 전체를 새로고칩니다. 새로 추가된 피드는 항상 새로고칩니다."
+            "value" : "이 기간 동안 자동으로 새로고친 피드는 건너뜁니다. 수동 새로고침은 항상 전체를 새로고칩니다. 새로 팔로우한 피드는 항상 새로고칩니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds die binnen dit venster automatisch zijn ververst, worden overgeslagen. Een handmatige verversing ververst altijd alles. Nieuw toegevoegde feeds worden altijd ververst."
+            "value" : "Feeds die binnen dit venster automatisch zijn ververst, worden overgeslagen. Een handmatige verversing ververst altijd alles. Nieuw gevolgde feeds worden altijd ververst."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Các nguồn được làm mới tự động trong khoảng thời gian này sẽ bị bỏ qua. Làm mới thủ công luôn làm mới tất cả. Nguồn mới thêm luôn được làm mới."
+            "value" : "Các nguồn được làm mới tự động trong khoảng thời gian này sẽ bị bỏ qua. Làm mới thủ công luôn làm mới tất cả. Nguồn mới theo dõi luôn được làm mới."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在此时间窗口内自动刷新过的订阅源会被跳过。手动刷新始终会刷新所有订阅源。新添加的订阅源始终会刷新。"
+            "value" : "在此时间窗口内自动刷新过的订阅源会被跳过。手动刷新始终会刷新所有订阅源。新关注的订阅源始终会刷新。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在此時間範圍內已自動重新整理的訂閱源會被略過。手動重新整理一律重新整理全部。新加入的訂閱源一律重新整理。"
+            "value" : "在此時間範圍內已自動重新整理的訂閱源會被略過。手動重新整理一律重新整理全部。新追蹤的訂閱源一律重新整理。"
           }
         }
       }
