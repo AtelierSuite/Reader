@@ -68,16 +68,6 @@ public enum NLPProcessingCoordinator {
         }.value
     }
 
-    /// Processes a single article on-demand.
-    public static func processArticle(_ article: Article) async {
-        let defaults = UserDefaults.standard
-        guard defaults.bool(forKey: "Intelligence.ContentInsights.Enabled") else { return }
-
-        await Task.detached(priority: .userInitiated) {
-            processArticleSync(article)
-        }.value
-    }
-
     /// Processes the given article IDs inline as part of a per-feed refresh pipeline.
     /// Skipped when content insights are disabled or in Low Power Mode.
     @concurrent public nonisolated static func processArticles(ids: [Int64]) async {

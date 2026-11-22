@@ -11,8 +11,4 @@ public nonisolated struct FeedRefreshMetric: Sendable, Hashable {
 
     /// Threshold in milliseconds above which a feed is considered slow.
     public static let slowDurationThresholdMs: Int = 3_000
-
-    public var isSlow: Bool {
-        lastDurationMs >= Self.slowDurationThresholdMs
-    }
 }

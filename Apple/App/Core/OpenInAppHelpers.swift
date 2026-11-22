@@ -8,13 +8,6 @@ enum RedditHelper {
     }
 }
 
-enum XHelper {
-
-    static var isAppInstalled: Bool {
-        InstalledAppProbe.isInstalled(scheme: "twitter://")
-    }
-}
-
 enum InstagramHelper {
 
     static var isAppInstalled: Bool {

@@ -90,21 +90,6 @@ public nonisolated final class LogManager: @unchecked Sendable {
         return size
     }
 
-    public func totalSize() -> Int64 {
-        flush()
-        guard let directory = directoryURL else { return 0 }
-        let contents = (try? FileManager.default.contentsOfDirectory(
-            at: directory,
-            includingPropertiesForKeys: [.fileSizeKey]
-        )) ?? []
-        return contents.reduce(into: Int64(0)) { total, url in
-            if let values = try? url.resourceValues(forKeys: [.fileSizeKey]),
-               let size = values.fileSize {
-                total += Int64(size)
-            }
-        }
-    }
-
     public func clearAll() {
         guard let directory = directoryURL else { return }
         let contents = (try? FileManager.default.contentsOfDirectory(

@@ -7,7 +7,6 @@ public nonisolated extension HTMLContentExtractor {
     static let imgClosePlaceholder = "{{SAKURA_IMG_CLOSE}}"
     static let imgLinkOpenPlaceholder = "{{SAKURA_IMGLINK_OPEN}}"
     static let imgLinkClosePlaceholder = "{{SAKURA_IMGLINK_CLOSE}}"
-    static let brPlaceholder = "{{SAKURA_BR}}"
     static let linkOpenPlaceholder = "{{SAKURA_LINK_OPEN}}"
     static let linkMidPlaceholder = "{{SAKURA_LINK_MID}}"
     static let linkClosePlaceholder = "{{SAKURA_LINK_CLOSE}}"

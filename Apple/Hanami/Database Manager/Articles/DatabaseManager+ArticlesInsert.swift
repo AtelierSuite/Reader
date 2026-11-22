@@ -46,36 +46,6 @@ public nonisolated struct ArticleInsertItem: Sendable {
 
 public nonisolated extension DatabaseManager {
 
-    @discardableResult
-    func insertArticle(
-        feedID fid: Int64,
-        title: String,
-        url: String,
-        data: ArticleInsertData = ArticleInsertData()
-    ) throws -> Int64 {
-        let carouselValue = data.carouselImageURLs.isEmpty
-            ? nil : data.carouselImageURLs.joined(separator: "\n")
-        let rowid = try database.run(articles.insert(or: .ignore,
-            articleFeedID <- fid,
-            articleTitle <- title,
-            articleURL <- url,
-            articleAuthor <- data.author,
-            articleSummary <- data.summary,
-            articleContent <- data.content,
-            articleImageURL <- data.imageURL,
-            articleCarouselURLs <- carouselValue,
-            articlePublishedDate <- data.publishedDate?.timeIntervalSince1970,
-            articleIsRead <- false,
-            articleIsBookmarked <- false,
-            articleAudioURL <- data.audioURL,
-            articleDuration <- data.duration
-        ))
-        if database.changes > 0, hasPendingItemStatuses() {
-            try applyPendingItemStatus(toInsertedArticleWithURL: url)
-        }
-        return rowid
-    }
-
     /// `undatedFallbackDate` dates undated items by feed order so date sorting preserves it;
     /// `nil` keeps them undated, e.g. for scraped Web Feeds.
     @discardableResult

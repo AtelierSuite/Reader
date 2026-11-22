@@ -64,10 +64,6 @@ public nonisolated struct Article: Identifiable, Hashable, Sendable {
         return customTitle
     }
 
-    public var hasCustomTitle: Bool {
-        customTitle?.isEmpty == false
-    }
-
     public var hasLink: Bool {
         !url.isEmpty && URL(string: url) != nil
     }

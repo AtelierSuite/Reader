@@ -11,23 +11,6 @@ public nonisolated extension DatabaseManager {
         return try database.rows(query).map(rowToListArticle)
     }
 
-    func unreadBookmarkedCount() throws -> Int {
-        try database.scalar(
-            articles.filter(articleIsBookmarked == true && articleIsRead == false).count
-        )
-    }
-
-    func unorganizedBookmarkedCount() throws -> Int {
-        let organizedIDs = try database.rows(
-            bookmarkFolderItems.select(bookmarkFolderItemArticleID)
-        ).map { $0[bookmarkFolderItemArticleID] }
-        var query = articles.filter(articleIsBookmarked == true)
-        if !organizedIDs.isEmpty {
-            query = query.filter(!organizedIDs.contains(articleID))
-        }
-        return try database.scalar(query.count)
-    }
-
     /// Tag names for every bookmark, so searching a list already in memory
     /// doesn't need a query per row.
     func bookmarkTagNamesByArticleID() throws -> [Int64: [String]] {

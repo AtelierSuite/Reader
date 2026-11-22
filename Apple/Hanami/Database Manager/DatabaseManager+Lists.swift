@@ -36,13 +36,6 @@ public nonisolated extension DatabaseManager {
         ))
     }
 
-    func updateListSortOrders(_ orders: [(id: Int64, sortOrder: Int)]) throws {
-        for entry in orders {
-            let target = lists.filter(listID == entry.id)
-            try database.run(target.update(listSortOrder <- entry.sortOrder))
-        }
-    }
-
     func deleteList(id: Int64) throws {
         if let syncID = listSyncID(forListID: id) {
             try removePendingListMembers(listSyncID: syncID)
@@ -118,10 +111,6 @@ public nonisolated extension DatabaseManager {
                 listRuleValue <- value
             ))
         }
-    }
-
-    func deleteAllListRules(forListID lid: Int64) throws {
-        try database.run(listRules.filter(listRuleListID == lid).delete())
     }
 
     // MARK: - Cleanup on feed deletion

@@ -4,7 +4,6 @@ public enum TranscriptionEngineError: Error {
     case notAvailable
     case audioFileUnreadable
     case modelNotDownloaded
-    case transcriptionFailed(String)
 }
 
 public protocol TranscriptionEngine: Sendable {

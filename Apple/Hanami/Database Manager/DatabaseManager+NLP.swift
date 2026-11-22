@@ -276,21 +276,6 @@ public nonisolated extension DatabaseManager {
         }
     }
 
-    func deleteSimilarCacheForArticles(olderThan date: Date) throws {
-        let sql = """
-            DELETE FROM similar_articles
-            WHERE source_id IN (
-                SELECT id FROM articles
-                WHERE published_date < ? OR published_date IS NULL
-            )
-            OR similar_id IN (
-                SELECT id FROM articles
-                WHERE published_date < ? OR published_date IS NULL
-            )
-            """
-        try database.run(sql, date.timeIntervalSince1970, date.timeIntervalSince1970)
-    }
-
     // MARK: - Analytics
 
     func totalArticlesRead() throws -> Int {
@@ -347,26 +332,5 @@ public nonisolated extension DatabaseManager {
 
     func totalFeedCount() throws -> Int {
         try database.scalar(feeds.count)
-    }
-
-    func deadFeedCount(threshold: Date) throws -> Int {
-        let query = feeds.filter(
-            feedLastFetched < threshold.timeIntervalSince1970
-                || feedLastFetched == nil
-        )
-        return try database.scalar(query.count)
-    }
-
-    // MARK: - NLP Cleanup
-
-    func deleteEntitiesForArticles(olderThan date: Date) throws {
-        let sql = """
-            DELETE FROM nlp_entities
-            WHERE article_id IN (
-                SELECT id FROM articles
-                WHERE published_date < ? OR published_date IS NULL
-            )
-            """
-        try database.run(sql, date.timeIntervalSince1970)
     }
 }

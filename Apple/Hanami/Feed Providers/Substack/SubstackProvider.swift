@@ -2,10 +2,6 @@ import Foundation
 
 /// Fetches Substack publication metadata via the public `/api/v1/publication` endpoint.
 public final class SubstackProvider {
-    public nonisolated static func isSubstackHost(_ host: String?) -> Bool {
-        matchesHost(host)
-    }
-
     public nonisolated static func isSubstackPublicationHost(_ host: String?) -> Bool {
         guard let host = host?.lowercased(),
               host.hasSuffix(".substack.com"),

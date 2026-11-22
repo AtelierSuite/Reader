@@ -57,13 +57,6 @@ public nonisolated enum SpotlightIndexer {
 
     // MARK: - Removal
 
-    public static func removeArticle(id: Int64) {
-        let identifiers = [uniqueIdentifier(for: id)]
-        Task.detached(priority: .utility) {
-            try? await CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: identifiers)
-        }
-    }
-
     public static func removeArticles(feedID: Int64, articleIDs: [Int64]) {
         guard !articleIDs.isEmpty else { return }
         let identifiers = articleIDs.map { uniqueIdentifier(for: $0) }

@@ -20,21 +20,6 @@ public nonisolated extension DatabaseManager {
         return row[summaryCacheContent]
     }
 
-    func clearCachedSummary(ofType type: SummaryCacheType, for date: Date) throws {
-        let key = summaryDateKey(for: date)
-        let query = summaryCache.filter(summaryCacheType == type.rawValue && summaryCacheDate == key)
-        try database.run(query.delete())
-    }
-
-    func cacheSummary(_ content: String, ofType type: SummaryCacheType, for date: Date) throws {
-        let key = summaryDateKey(for: date)
-        try database.run(summaryCache.insert(or: .replace,
-            summaryCacheType <- type.rawValue,
-            summaryCacheDate <- key,
-            summaryCacheContent <- content
-        ))
-    }
-
     private func summaryDateKey(for date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

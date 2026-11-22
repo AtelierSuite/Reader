@@ -18,7 +18,6 @@ struct YouTubeEmbedBlockView: View {
     @State private var isPiP = false
     @State private var isPlayerReady = false
     @State private var hasStartedPlaying = false
-    @State private var showFullPlayer = false
 
     private var embedURL: String {
         "https://www.youtube.com/watch?v=\(videoID)"

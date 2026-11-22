@@ -35,10 +35,6 @@ public final class RedditProvider: @unchecked Sendable {
         URL(string: "https://www.reddit.com/r/\(subreddit)/new.json?raw_json=1&limit=\(limit)")
     }
 
-    public nonisolated static func atomFeedURL(for subreddit: String) -> URL? {
-        URL(string: "https://www.reddit.com/r/\(subreddit).rss")
-    }
-
     /// Reddit's image URLs are HTML-encoded inside JSON; only `&amp;` matters
     /// in practice.
     public nonisolated static func unescapeAmpersand(_ input: String) -> String {
@@ -137,13 +133,6 @@ public final class RedditProvider: @unchecked Sendable {
                 let evicted = postCacheOrder.removeFirst()
                 postCache.removeValue(forKey: evicted)
             }
-        }
-    }
-
-    public func clearPostCache() {
-        postCacheQueue.sync {
-            postCache.removeAll()
-            postCacheOrder.removeAll()
         }
     }
 }
