@@ -28,12 +28,15 @@ extension DLsiteProvider: WebFeedProvider {
         let infos = try await fetchWorkInfo(
             newWorks.map(\.productID), shop: target.shop, includesAdultContent: includesAdultContent
         )
-        let items = newWorks.compactMap { listed -> ArticleInsertItem? in
-            let info = infos[listed.productID]
-            if info?.isAdult ?? target.shop.requiresAdultContentGate, !includesAdultContent {
-                return nil
-            }
-            return articleItem(for: listed, info: info, shop: target.shop)
+        let visibleWorks = newWorks.filter { listed in
+            includesAdultContent || !(infos[listed.productID]?.isAdult ?? target.shop.requiresAdultContentGate)
+        }
+        let extras = await fetchExtras(
+            for: visibleWorks.map { ($0, infos[$0.productID]?.shop ?? target.shop) },
+            includesAdultContent: includesAdultContent
+        )
+        let items = visibleWorks.enumerated().map { index, listed in
+            articleItem(for: listed, info: infos[listed.productID], extras: extras[index], shop: target.shop)
         }
         return ProviderFeedContent(items: items, title: feedTitle(for: target, listedWorks: listedWorks, infos: infos))
     }
@@ -57,26 +60,56 @@ extension DLsiteProvider: WebFeedProvider {
     }
 
     nonisolated static func articleItem(
-        for listed: DLsiteListedWork, info: DLsiteWorkInfo?, shop: DLsiteShop
+        for listed: DLsiteListedWork, info: DLsiteWorkInfo?, extras: DLsiteWorkExtras, shop: DLsiteShop
     ) -> ArticleInsertItem {
-        let coverURL = absoluteImageURL(info?.workImage) ?? listed.coverURL
-        var imageURLs: [String] = []
-        for imageURL in [coverURL].compactMap(\.self) + listed.sampleImageURLs where !imageURLs.contains(imageURL) {
-            imageURLs.append(imageURL)
-        }
-        let authors = [listed.circleName].compactMap(\.self) + listed.creatorNames
+        let content = DLsiteArticleContent(
+            coverURL: absoluteImageURL(info?.workImage) ?? listed.coverURL,
+            listedSampleURLs: listed.sampleImageURLs,
+            detail: extras.detail,
+            description: extras.description,
+            circleName: listed.circleName,
+            listedCreatorNames: listed.creatorNames
+        )
+        let imageURLs = content.imageURLs
         return ArticleInsertItem(
             title: info?.workName ?? listed.title ?? listed.productID,
             url: workPageURL(shop: info?.shop ?? shop, productID: listed.productID),
             data: ArticleInsertData(
-                author: authors.isEmpty ? nil : authors.joined(separator: " / "),
-                content: imageURLs
-                    .map { "<figure><img src=\"\(RSSParser.escapeXMLAttribute($0))\"></figure>" }
-                    .joined(),
-                imageURL: coverURL,
+                author: content.authorLine,
+                summary: content.summary,
+                content: content.html,
+                imageURL: imageURLs.first,
                 carouselImageURLs: imageURLs.count > 1 ? imageURLs : [],
                 publishedDate: info?.publishedDate
             )
         )
     }
+
+    private nonisolated static func fetchExtras(
+        for works: [(work: DLsiteListedWork, shop: DLsiteShop)], includesAdultContent: Bool
+    ) async -> [DLsiteWorkExtras] {
+        await withTaskGroup(of: (Int, DLsiteWorkExtras).self) { group in
+            for (index, (work, shop)) in works.enumerated() {
+                group.addTask {
+                    async let detail = fetchProductDetail(
+                        work.productID, shop: shop, includesAdultContent: includesAdultContent
+                    )
+                    let description = index < descriptionsPerRefresh
+                        ? await fetchDescription(work.productID, shop: shop, includesAdultContent: includesAdultContent)
+                        : []
+                    return (index, DLsiteWorkExtras(detail: await detail, description: description))
+                }
+            }
+            var extras = Array(repeating: DLsiteWorkExtras(detail: nil, description: []), count: works.count)
+            for await (index, workExtras) in group {
+                extras[index] = workExtras
+            }
+            return extras
+        }
+    }
+}
+
+nonisolated struct DLsiteWorkExtras: Sendable {
+    let detail: DLsiteProductDetail?
+    let description: [DLsiteDescriptionSection]
 }

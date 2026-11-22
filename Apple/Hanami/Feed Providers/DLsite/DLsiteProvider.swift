@@ -12,6 +12,7 @@ public final class DLsiteProvider: Sendable {
     public nonisolated static let origin = "https://www.dlsite.com"
 
     nonisolated static let worksPerRefresh = 30
+    nonisolated static let descriptionsPerRefresh = 8
 
     public nonisolated static func isWebHost(_ host: String?) -> Bool {
         guard let host = host?.lowercased() else { return false }

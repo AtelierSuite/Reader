@@ -25,6 +25,27 @@ nonisolated extension DLsiteProvider {
         return entries.compactMapValues(\.info)
     }
 
+    static func fetchProductDetail(
+        _ productID: String, shop: DLsiteShop, includesAdultContent: Bool
+    ) async -> DLsiteProductDetail? {
+        guard let data = try? await fetchData(
+            percentEncodedPath: "/\(shop.rawValue)/api/=/product.json",
+            queryItems: [URLQueryItem(name: "workno", value: productID)],
+            includesAdultContent: includesAdultContent
+        ) else { return nil }
+        return (try? JSONDecoder().decode([DLsiteProductDetail].self, from: data))?.first
+    }
+
+    static func fetchDescription(
+        _ productID: String, shop: DLsiteShop, includesAdultContent: Bool
+    ) async -> [DLsiteDescriptionSection] {
+        guard let data = try? await fetchData(
+            percentEncodedPath: "/\(shop.rawValue)/work/=/product_id/\(productID).html",
+            includesAdultContent: includesAdultContent
+        ), let html = String(data: data, encoding: .utf8) else { return [] }
+        return DLsiteDescription.sections(fromWorkPageHTML: html)
+    }
+
     static func fetchCircleName(_ makerID: String, shop: DLsiteShop) async -> String? {
         guard let data = try? await fetchData(
             percentEncodedPath: "/\(shop.rawValue)/circle/profile/=/maker_id/\(makerID).html",
