@@ -12,7 +12,7 @@ extension DLsiteProvider: WebFeedProvider {
         let existingURLs = await Task.detached {
             (try? DatabaseManager.shared.existingArticleURLs(forFeedID: feedID)) ?? []
         }.value
-        let includesAdultContent = await hasAdultContentCookie()
+        let includesAdultContent = hasAdultContentCookie()
         let content = try await fetchContent(
             for: target, excluding: existingProductIDs(in: existingURLs), includesAdultContent: includesAdultContent
         )

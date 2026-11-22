@@ -1,5 +1,4 @@
 import Foundation
-import WebKit
 
 /// Follows DLsite circles, series and creators through the store's search and product info endpoints.
 public final class DLsiteProvider: Sendable {
@@ -43,13 +42,11 @@ public final class DLsiteProvider: Sendable {
         "\(origin)/\(shop.rawValue)/work/=/product_id/\(productID).html"
     }
 
-    @MainActor
-    static func hasAdultContentCookie() async -> Bool {
+    nonisolated static func hasAdultContentCookie() -> Bool {
         let expected = AdultContentGate.cookie(for: .dlsite)
-        let cookies = await WKWebsiteDataStore.default().httpCookieStore.allCookies()
-        return cookies.contains { cookie in
+        guard let url = URL(string: origin) else { return false }
+        return (HTTPCookieStorage.shared.cookies(for: url) ?? []).contains { cookie in
             cookie.name == expected.name && cookie.value == expected.value
-                && cookie.domain.lowercased().hasSuffix("dlsite.com")
         }
     }
 

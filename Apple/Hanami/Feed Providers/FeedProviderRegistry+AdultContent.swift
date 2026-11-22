@@ -19,7 +19,11 @@ public extension AdultContentGate {
     ) async -> Result<Void, AdultContentGateError> {
         guard let site = FeedProviderRegistry.adultSite(forFeedURL: feedURL) else { return .success(()) }
         guard let presenter else { return .failure(.unavailable) }
-        return await authorize(site, in: .default(), presenter: presenter)
+        let result = await authorize(site, in: .default(), presenter: presenter)
+        if case .success = result {
+            HTTPCookieStorage.shared.setCookie(cookie(for: site))
+        }
+        return result
     }
 }
 
