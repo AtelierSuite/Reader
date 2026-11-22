@@ -1,7 +1,6 @@
 import Hanami
 import SwiftUI
 
-// swiftlint:disable:next type_name
 struct iCloudBackupSettingsRows: View {
 
     private typealias Interval = iCloudBackupManager.BackupInterval

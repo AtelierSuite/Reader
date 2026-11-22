@@ -13,7 +13,6 @@ public extension FeedManager {
         runNLP: Bool = true,
         contentOnly: Bool = false
     ) async throws {
-        // swiftlint:disable:next line_length
         log("FeedRefresh", "refreshFeed begin id=\(feed.id) title=\(feed.title) url=\(feed.url) reloadData=\(reloadData) skipImageFetch=\(skipImageFetch) skipImagePreload=\(skipImagePreload) runNLP=\(runNLP) contentOnly=\(contentOnly)")
         let started = Date()
         var didPerformWork = false
@@ -138,7 +137,6 @@ public extension FeedManager {
         skipImagePreload: Bool = false,
         runNLPAfter: Bool = false
     ) async {
-        // swiftlint:disable:next line_length
         log("FeedRefresh.All", "begin total=\(feeds.count) skipAuthenticatedFetchers=\(skipAuthenticatedFetchers) respectCooldown=\(respectCooldown) skipImageFetch=\(skipImageFetch) skipImagePreload=\(skipImagePreload) runNLPAfter=\(runNLPAfter)")
         let cooldownSeconds = computeRefreshCooldownSeconds(respectCooldown: respectCooldown)
         let feedsToRefresh = filterFeedsForRefresh(
@@ -147,13 +145,11 @@ public extension FeedManager {
             cooldownSeconds: cooldownSeconds
         )
         guard !feedsToRefresh.isEmpty else {
-            // swiftlint:disable:next line_length
             log("FeedRefresh.All", "no feeds eligible after filter (cooldown=\(cooldownSeconds.map { String(Int($0)) } ?? "off")s)")
             return
         }
 
         let queues = partitionRefreshQueues(feedsToRefresh)
-        // swiftlint:disable:next line_length
         log("FeedRefresh.All", "eligible=\(feedsToRefresh.count) regular=\(queues.regular.count) slow=\(queues.slow.count) x=\(queues.x.count) instagram=\(queues.instagram.count)")
 
         await MainActor.run {

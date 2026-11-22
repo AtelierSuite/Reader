@@ -119,7 +119,6 @@ public nonisolated enum NLPProcessor {
         let embeddingWeight = hasSourceEntities ? hybridEmbeddingWeight : 1.0
         let entityWeight = hasSourceEntities ? hybridEntityWeight : 0.0
 
-        // swiftlint:disable:next line_length
         log("NLP", "findSimilarArticlesHybrid: comparing article \(article.id) against \(candidates.count) candidates (lang=\(language.rawValue), sourceEntities=\(sourceEntities.count))")
 
         // NLEmbedding is not thread-safe - process serially.
@@ -150,7 +149,6 @@ public nonisolated enum NLPProcessor {
 
         let sorted = scored.sorted { $0.score > $1.score }
         let results = Array(sorted.prefix(maxResults))
-        // swiftlint:disable:next line_length
         log("NLP", "findSimilarArticlesHybrid: returning \(results.count) matches (best score: \(String(format: "%.3f", results.first?.score ?? -1)))")
         return results
     }

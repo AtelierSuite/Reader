@@ -22,7 +22,6 @@ public nonisolated extension Data {
         }
     }
 
-    // swiftlint:disable identifier_name
     /// Reads a 16-bit little-endian value at the given byte offset.
     /// Loads byte-by-byte to sidestep alignment concerns.
     func readLE(_: UInt16.Type, at offset: Int) -> UInt16 {
@@ -45,5 +44,4 @@ public nonisolated extension Data {
             return low | high
         }
     }
-    // swiftlint:enable identifier_name
 }

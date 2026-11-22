@@ -25,7 +25,6 @@ public extension FeedManager {
             }
             return url
         }
-        // swiftlint:disable:next line_length
         log("FeedRefresh.ImagePreload", "begin urls=\(urls.count) deduped=\(deduped.count) candidates=\(candidates.count)")
         guard !candidates.isEmpty else { return }
 

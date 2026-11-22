@@ -92,7 +92,6 @@ public extension XProvider {
             log("XProvider", "Failed to parse UserTweets response (page \(page))")
             return nil
         }
-        // swiftlint:disable:next line_length
         log("XProvider", "Parsed \(parsed.tweets.count) tweets from page \(page), cursor: \(parsed.bottomCursor?.prefix(30) ?? "nil")")
         return parsed
     }

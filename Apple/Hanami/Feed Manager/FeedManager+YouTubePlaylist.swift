@@ -45,7 +45,6 @@ public extension FeedManager {
 
         let result = await YouTubePlaylistProvider()
             .fetchPlaylist(playlistID: playlistID, knownVideoIDs: knownVideoIDs(forFeedID: feed.id))
-        // swiftlint:disable:next line_length
         log("YouTubePlaylist", "fetched playlistID=\(playlistID) videos=\(result.videos.count) playlistTitle=\(result.playlistTitle ?? "nil")")
 
         let articleTuples = Self.makeYouTubePlaylistArticleItems(from: result.videos)

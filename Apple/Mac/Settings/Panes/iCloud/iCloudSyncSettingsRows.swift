@@ -2,7 +2,6 @@ import CloudKit
 import Hanami
 import SwiftUI
 
-// swiftlint:disable:next type_name
 struct iCloudSyncSettingsRows: View {
 
     @AppStorage(CloudSyncEngine.enabledDefaultsKey) private var isSyncEnabled = false

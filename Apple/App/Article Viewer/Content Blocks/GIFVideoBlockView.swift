@@ -44,7 +44,6 @@ final class LoopingVideoPlayerUIView: UIView {
     override static var layerClass: AnyClass { AVPlayerLayer.self }
 
     private var playerLayer: AVPlayerLayer {
-        // swiftlint:disable:next force_cast
         layer as! AVPlayerLayer
     }
 

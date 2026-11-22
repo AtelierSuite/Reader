@@ -7,12 +7,10 @@ struct HeadlineEvent: Sendable {
     @Guide(description: "A short, specific headline of 12 words or fewer summarizing this important event.")
     var headline: String
     @Guide(
-        // swiftlint:disable:next line_length
         description: "The exact ID numbers of the source articles describing this event. Copy each ID verbatim from the `ID:` line of the matching articles. Only include IDs that appear in the input. Do not invent IDs."
     )
     var articleIDs: [Int]
     @Guide(
-        // swiftlint:disable:next line_length
         description: "true when this is major world or national news every reader should know about (politics, international affairs, conflicts, disasters, public safety, or economy-wide developments). false when the event mainly matters to readers who follow the topic."
     )
     var isMajorWorldEvent: Bool
@@ -125,7 +123,6 @@ public enum HeadlineSummarizer {
         let merged = mergeSameStoryEvents(batchedEvents, entityMap: entityMap)
         let interestEvents = Array(merged.filter { !$0.isMajorWorldEvent }.prefix(cap))
         let keyEvents = Array(merged.filter(\.isMajorWorldEvent).prefix(cap))
-        // swiftlint:disable:next line_length
         log(logModule, "raw events=\(batchedEvents.count) merged=\(merged.count) interest=\(interestEvents.count) keyEvents=\(keyEvents.count) (cap \(cap) each)")
         let translated = await translateHeadlinesIfNeeded(interestEvents + keyEvents)
         return (translated, lastNonGuardrailError)

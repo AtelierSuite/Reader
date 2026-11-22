@@ -2,7 +2,7 @@ import Hanami
 import SwiftUI
 
 enum Integration: String, CaseIterable, Identifiable {
-    case webFeeds, podcasts, instagram, pixiv, substack, x, youtube // swiftlint:disable:this identifier_name
+    case webFeeds, podcasts, instagram, pixiv, substack, x, youtube
 
     var id: String { rawValue }
 
