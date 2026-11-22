@@ -225,10 +225,6 @@ public nonisolated extension DatabaseManager {
         return try readDatabase.rows(query).map(rowToListArticle)
     }
 
-    func bookmarkedCount() throws -> Int {
-        try readDatabase.scalar(articles.filter(articleIsBookmarked == true).count)
-    }
-
     func articlesForEntity(name: String, types: [String], limit: Int = 10) throws -> [Article] {
         guard !types.isEmpty else { return [] }
         let placeholders = types.map { _ in "?" }.joined(separator: ", ")

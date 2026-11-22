@@ -94,10 +94,6 @@ public nonisolated extension DatabaseManager {
         }
     }
 
-    func purgeAllSummaryHeadlines() throws {
-        try database.run(summaryHeadlines.delete())
-    }
-
     /// Wipes the summary_headlines cache when the running app's prompt
     /// version differs from the version that produced the cached rows.
     /// Runs every launch; cheap when versions match.

@@ -30,13 +30,6 @@ public nonisolated extension DatabaseManager {
         }
     }
 
-    func feedRefreshMetric(feedID: Int64) throws -> FeedRefreshMetric? {
-        guard let row = try database.pluck(
-            feedRefreshMetrics.filter(metricFeedID == feedID)
-        ) else { return nil }
-        return rowToFeedRefreshMetric(row)
-    }
-
     /// Returns every recorded refresh metric, keyed by feed id.
     func allFeedRefreshMetrics() throws -> [Int64: FeedRefreshMetric] {
         var results: [Int64: FeedRefreshMetric] = [:]
@@ -45,10 +38,6 @@ public nonisolated extension DatabaseManager {
             results[metric.feedID] = metric
         }
         return results
-    }
-
-    func deleteFeedRefreshMetric(feedID: Int64) throws {
-        try database.run(feedRefreshMetrics.filter(metricFeedID == feedID).delete())
     }
 
     private func rowToFeedRefreshMetric(_ row: Row) -> FeedRefreshMetric {

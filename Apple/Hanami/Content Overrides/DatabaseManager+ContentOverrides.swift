@@ -25,10 +25,6 @@ public nonisolated extension DatabaseManager {
         try database.run(contentOverrides.filter(coFeedID == fid).delete())
     }
 
-    func allContentOverrides() throws -> [ContentOverride] {
-        try database.rows(contentOverrides).map(rowToContentOverride)
-    }
-
     private func rowToContentOverride(_ row: Row) -> ContentOverride {
         ContentOverride(
             feedID: row[coFeedID],

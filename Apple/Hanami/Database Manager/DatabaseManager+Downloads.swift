@@ -29,11 +29,6 @@ public nonisolated extension DatabaseManager {
         }
     }
 
-    func clearDownloadPath(for articleId: Int64) throws {
-        let target = articles.filter(articleID == articleId)
-        try database.run(target.update(articleDownloadPath <- nil))
-    }
-
     // MARK: - Transcript Cache
 
     func cachedTranscript(for articleId: Int64) throws -> [TranscriptSegment]? {

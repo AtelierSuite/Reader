@@ -120,10 +120,6 @@ public nonisolated extension DatabaseManager {
         }
     }
 
-    func deleteAllListRules(forListID lid: Int64) throws {
-        try database.run(listRules.filter(listRuleListID == lid).delete())
-    }
-
     // MARK: - Cleanup on feed deletion
 
     func removeDeletedFeedFromLists(feedID fid: Int64) throws {

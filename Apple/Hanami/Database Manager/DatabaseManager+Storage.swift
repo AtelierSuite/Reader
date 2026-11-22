@@ -132,24 +132,6 @@ public nonisolated extension DatabaseManager {
         return total
     }
 
-    /// Total byte size of the `Sakura.feeds` SQLite database file plus its WAL
-    /// and shared-memory companions when present.
-    func totalDatabaseSizeOnDisk() -> Int64 {
-        let path = Self.databasePath
-        let companions = [path, path + "-wal", path + "-shm"]
-        var total: Int64 = 0
-        for companion in companions {
-            if let attributes = try? FileManager.default.attributesOfItem(atPath: companion),
-               let size = attributes[.size] as? Int64 {
-                total += size
-            } else if let attributes = try? FileManager.default.attributesOfItem(atPath: companion),
-                      let size = attributes[.size] as? NSNumber {
-                total += size.int64Value
-            }
-        }
-        return total
-    }
-
     /// Sum of bytes stored in the `image_cache` table.
     func imageCacheTableSize() -> Int64 {
         let sql = "SELECT COALESCE(SUM(LENGTH(data)), 0) FROM image_cache"
