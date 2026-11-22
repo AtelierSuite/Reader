@@ -5,6 +5,7 @@ public extension FeedSection {
         switch self {
         case .feeds, .podcasts: nil
         case .hackerNews: "provider.hackernews"
+        case .appStore: "provider.appstore"
         default: "provider.\(rawValue)"
         }
     }

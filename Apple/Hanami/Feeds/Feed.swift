@@ -214,6 +214,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
         if isRedditFeed { return .reddit }
         if isNoteFeed { return .note }
         if isSubstackFeed { return .substack }
+        if AppStoreProvider.isFeedURL(url) { return .appStore }
         if DMMProvider.isFeedURL(url) { return .dmm }
         if DLsiteProvider.isFeedURL(url) { return .dlsite }
         if NetflixProvider.isFeedURL(url) { return .netflix }

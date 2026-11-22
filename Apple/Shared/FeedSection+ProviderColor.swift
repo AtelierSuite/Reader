@@ -21,6 +21,7 @@ extension FeedSection {
         case .telegram: Color(red: 0.15, green: 0.65, blue: 0.89)
         case .tumblr: .adaptive(light: (0.21, 0.27, 0.36), dark: (0.49, 0.58, 0.72))
         case .zenn: Color(red: 0.24, green: 0.66, blue: 1.0)
+        case .appStore: Color(red: 0.07, green: 0.56, blue: 0.98)
         case .note, .x, .niconico, .dmm, .github: .primary
         }
     }
@@ -30,6 +31,15 @@ extension FeedSection {
         case .fediverse:
             AnyShapeStyle(LinearGradient(
                 colors: [.purple, .blue, .green, .yellow, .red],
+                startPoint: .bottom,
+                endPoint: .top
+            ))
+        case .appStore:
+            AnyShapeStyle(LinearGradient(
+                colors: [
+                    Color(red: 0.07, green: 0.42, blue: 0.95),
+                    Color(red: 0.11, green: 0.76, blue: 0.99)
+                ],
                 startPoint: .bottom,
                 endPoint: .top
             ))

@@ -3,6 +3,7 @@ import Foundation
 public nonisolated enum FeedSection: String, CaseIterable, Codable, Sendable {
     case feeds
     case podcasts
+    case appStore
     case bluesky
     case fediverse
     case instagram
@@ -28,6 +29,7 @@ public nonisolated enum FeedSection: String, CaseIterable, Codable, Sendable {
         switch self {
         case .feeds: String(localized: "FeedSection.Feeds", table: "Feeds")
         case .podcasts: String(localized: "FeedSection.Podcasts", table: "Feeds")
+        case .appStore: String(localized: "FeedSection.AppStore", table: "Feeds")
         case .bluesky: String(localized: "FeedSection.Bluesky", table: "Feeds")
         case .fediverse: String(localized: "FeedSection.Fediverse", table: "Feeds")
         case .instagram: String(localized: "FeedSection.Instagram", table: "Feeds")
