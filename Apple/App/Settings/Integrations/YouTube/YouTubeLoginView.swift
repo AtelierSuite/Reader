@@ -45,7 +45,6 @@ private struct YouTubeLoginWebView: WebViewRepresentable {
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
         webView.customUserAgent = sakuraUserAgent
-        // swiftlint:disable:next line_length
         if let loginURL = URL(string: "https://accounts.google.com/ServiceLogin?service=youtube&continue=https://m.youtube.com/") {
             webView.load(URLRequest(url: loginURL))
         }

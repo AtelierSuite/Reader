@@ -81,7 +81,6 @@ extension OnboardingView {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(String(localized: "Restore.Title", table: "Onboarding"))
                         .font(.body.weight(.semibold))
-                    // swiftlint:disable:next line_length
                     Text(String(localized: "Restore.Description \(metadata.deviceName) \(metadata.date.formatted(date: .abbreviated, time: .shortened))", table: "Onboarding"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)

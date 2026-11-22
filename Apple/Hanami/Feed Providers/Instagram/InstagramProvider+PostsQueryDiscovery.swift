@@ -25,7 +25,6 @@ extension InstagramProvider {
             log("InstagramProvider", "Posts query discovery failed, using fallback")
             return .fallback
         }
-        // swiftlint:disable:next line_length
         log("InstagramProvider", "Discovered posts query doc_id=\(discovered.docID) providers=\(discovered.relayProviders.joined(separator: ","))")
         Self.cachedPostsQuery = discovered
         return discovered

@@ -69,7 +69,6 @@ public nonisolated enum BookmarkExporter {
             for item in group.items {
                 let seconds = Int(item.savedDate?.timeIntervalSince1970 ?? 0)
                 let tags = item.tags.joined(separator: ",")
-                // swiftlint:disable:next line_length
                 lines.append("        <DT><A HREF=\"\(escaped(item.url))\" ADD_DATE=\"\(seconds)\" TAGS=\"\(escaped(tags))\">\(escaped(item.title))</A>")
             }
             lines.append("    </DL><p>")

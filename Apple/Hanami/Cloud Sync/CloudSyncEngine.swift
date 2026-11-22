@@ -151,7 +151,6 @@ public nonisolated final class CloudSyncEngine: @unchecked Sendable {
         engine.state.add(pendingRecordZoneChanges: pagePreferenceSyncIDs.map { .saveRecord(Self.recordID(for: $0)) })
         let tombstoneIDs = (try? database.allSyncTombstoneIDs()) ?? []
         engine.state.add(pendingRecordZoneChanges: tombstoneIDs.map { .deleteRecord(Self.recordID(for: $0)) })
-        // swiftlint:disable:next line_length
         log("CloudSyncEngine", "Queued initial sync: \(feedSyncIDs.count) feeds, \(listSyncIDs.count) lists, \(tombstoneIDs.count) tombstones")
     }
 

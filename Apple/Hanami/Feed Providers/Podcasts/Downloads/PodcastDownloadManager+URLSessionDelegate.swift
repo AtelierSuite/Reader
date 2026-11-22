@@ -19,7 +19,6 @@ public extension PodcastDownloadManager {
             } else {
                 fraction = 0
             }
-            // swiftlint:disable:next line_length
             log("PodcastDownload", "Progress for article \(articleID): \(totalBytesWritten)/\(totalBytesExpectedToWrite) bytes (\(String(format: "%.1f", fraction * 100))%)")
             activeDownloads[articleID] = DownloadProgress(
                 state: .downloading,

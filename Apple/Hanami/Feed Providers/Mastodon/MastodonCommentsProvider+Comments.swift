@@ -47,7 +47,6 @@ extension MastodonCommentsProvider: CommentsProvider {
                 sourceURL: reply.url ?? reply.uri
             )
         }
-        // swiftlint:disable:next line_length
         log("Comments", "Mastodon comments fetched status=\(statusID) usable=\(comments.count)/\(context.descendants.count)")
         return Array(comments)
     }

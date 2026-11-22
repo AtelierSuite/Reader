@@ -12,7 +12,7 @@ public nonisolated enum MisskeyCommentsProvider {
     struct Note: Decodable {
         let id: String
         let text: String?
-        let cw: String? // swiftlint:disable:this identifier_name
+        let cw: String?
         let createdAt: String?
         let user: User?
     }

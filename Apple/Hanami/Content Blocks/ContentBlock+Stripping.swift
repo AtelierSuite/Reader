@@ -1,7 +1,6 @@
 import Foundation
-import Hanami
 
-extension ContentBlock {
+public extension ContentBlock {
 
     /// Strips block markers, returning plain text suitable for translation/summarization.
     nonisolated static func plainText(from text: String) -> String {
@@ -80,6 +79,7 @@ extension ContentBlock {
         (#"\{\{MATH\}\}(.+?)\{\{/MATH\}\}"#, "$1"),
         (#"\{\{SUP\}\}(.+?)\{\{/SUP\}\}"#, "$1"),
         (#"\{\{SUB\}\}(.+?)\{\{/SUB\}\}"#, "$1"),
+        (#"!\[[^\]]*\]\([^)]+\)"#, ""),
         (#"\[((?:[^\]\\]|\\.)+)\]\([^)]+\)"#, "$1"),
         (#"(?<!\\)\*\*(.+?)(?<!\\)\*\*"#, "$1"),
         (#"(?<!\\)\*(.+?)(?<!\\)\*"#, "$1"),

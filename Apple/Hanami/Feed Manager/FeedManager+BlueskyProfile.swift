@@ -36,7 +36,6 @@ public extension FeedManager {
             handle: handle,
             pageCount: feed.lastFetched == nil ? BlueskyProvider.firstFetchPageCount : 1
         )
-        // swiftlint:disable:next line_length
         log("BlueskyProfile", "fetched @\(handle) posts=\(result.posts.count) displayName=\(result.displayName ?? "nil")")
 
         let postTuples = BlueskyProvider.articleItems(from: result.posts)

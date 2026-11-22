@@ -71,11 +71,14 @@ extension ArticleDetailView {
                 }
             }
 
-            if includesOpenLinkAction, includesOpenInAppAction {
+            if includesOpenLinkAction {
                 Divider()
-                Button(String(localized: "OpenInApp", table: "Articles"), systemImage: "play.rectangle") {
-                    performOpenInApp()
+                if includesOpenInAppAction {
+                    Button(String(localized: "OpenInApp", table: "Articles"), systemImage: "play.rectangle") {
+                        performOpenInApp()
+                    }
                 }
+                openInBrowserMenuItem
             }
 
             if let shareURL = URL(string: article.url) {

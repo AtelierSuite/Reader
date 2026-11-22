@@ -10,7 +10,6 @@ public final class XProvider: Authenticated {
 
     public nonisolated(unsafe) var requestTimeoutInterval: TimeInterval = 15
 
-    // swiftlint:disable line_length
     public static let bearerToken = "AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
 
     public static var userByScreenNameQueryID: String?
@@ -34,7 +33,6 @@ public final class XProvider: Authenticated {
         "responsive_web_graphql_timeline_navigation_enabled": true
     ]
 
-    // swiftlint:enable line_length
 
     public static let targetTweetCount = 50
 

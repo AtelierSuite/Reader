@@ -209,7 +209,6 @@
 				"App Intents/SakuraShortcuts.swift",
 				AppIcon.icon,
 				"Article Feed/DisplayStylePicker.swift",
-				"Article Viewer/Content Blocks/ContentBlock+Stripping.swift",
 				"Article Viewer/Content Blocks/ContentBlock+Translation.swift",
 				"Bookmarks/Bookmark Details/BookmarkDetailSheet.swift",
 				Bookmarks/BookmarkFolderEditSheet.swift,
@@ -286,6 +285,7 @@
 				Petal/PetalSelectorField.swift,
 				"Podcast Player/TranscriptView.swift",
 				Settings/Browsing/BrowsingSettingsView.swift,
+				Settings/Browsing/ExcludedSitesView.swift,
 				Settings/Data/CleanupSettingsSection.swift,
 				Settings/Data/DeviceStorageStats.swift,
 				Settings/Data/FeedStorageSection.swift,
@@ -854,7 +854,6 @@
 				E47D10182F549605006081EF /* Frameworks */,
 				E47D10192F549605006081EF /* Resources */,
 				E47D10482F54980E006081EF /* Embed Foundation Extensions */,
-				E47D13152F549EA3006081EF /* ShellScript */,
 				E444841C2FB09B0E003FDAD4 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1058,27 +1057,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E47D13152F549EA3006081EF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4D41430A0000000000000008 /* Sources */ = {

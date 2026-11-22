@@ -2997,61 +2997,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noch keine Web-Feeds. Erstelle einen im Bildschirm „Feed hinzufügen“ oder importiere ein .srss-Paket."
+            "value" : "Noch keine Web-Feeds. Erstelle einen im Bildschirm „Neuem Feed folgen“ oder importiere ein .srss-Paket."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Web Feeds yet. Create one from the Add Feed screen, or import a .srss package."
+            "value" : "No Web Feeds yet. Create one from the Follow New Feed screen, or import a .srss package."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aucun flux web pour le moment. Créez-en un depuis l’écran Ajouter un flux, ou importez un paquet .srss."
+            "value" : "Aucun flux web pour le moment. Créez-en un depuis l’écran Suivre un nouveau flux, ou importez un paquet .srss."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ancora nessun feed web. Creane uno dalla schermata Aggiungi feed oppure importa un pacchetto .srss."
+            "value" : "Ancora nessun feed web. Creane uno dalla schermata Segui nuovo feed oppure importa un pacchetto .srss."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "まだWebフィードがありません。「フィードを追加」画面で作成するか、.srssパッケージを読み込んでください。"
+            "value" : "まだWebフィードがありません。「新しいフィードをフォロー」画面で作成するか、.srssパッケージを読み込んでください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "아직 웹 피드가 없습니다. '피드 추가' 화면에서 만들거나 .srss 패키지를 가져오세요."
+            "value" : "아직 웹 피드가 없습니다. '새 피드 팔로우' 화면에서 만들거나 .srss 패키지를 가져오세요."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nog geen webfeeds. Maak er een via het scherm Feed toevoegen, of importeer een .srss-pakket."
+            "value" : "Nog geen webfeeds. Maak er een via het scherm Nieuwe feed volgen, of importeer een .srss-pakket."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chưa có nguồn cấp web nào. Hãy tạo một nguồn từ màn hình Thêm nguồn cấp, hoặc nhập một gói .srss."
+            "value" : "Chưa có nguồn cấp web nào. Hãy tạo một nguồn từ màn hình Theo dõi nguồn cấp mới, hoặc nhập một gói .srss."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "还没有网页订阅源。可在“添加订阅源”界面创建，或导入 .srss 包。"
+            "value" : "还没有网页订阅源。可在“关注新订阅源”界面创建，或导入 .srss 包。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "還沒有網頁訂閱源。可在「加入訂閱源」畫面建立，或匯入 .srss 套件。"
+            "value" : "還沒有網頁訂閱源。可在「追蹤新訂閱源」畫面建立，或匯入 .srss 套件。"
           }
         }
       }

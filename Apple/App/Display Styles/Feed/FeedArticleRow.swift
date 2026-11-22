@@ -8,7 +8,6 @@ struct FeedArticleRow: View {
     @Environment(\.navigateToFeed) var navigateToFeed
     let article: Article
     let imageLayout: FeedImageLayout
-    @AppStorage("YouTube.OpenMode") private var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
     @State private var icon: UIImage?
     @State private var feedName: String?
     @State private var acronymIcon: UIImage?
@@ -19,7 +18,6 @@ struct FeedArticleRow: View {
     @State private var isLinkFeed = false
     @State private var shouldCenterImage = false
     @State private var feed: Feed?
-    @State private var showSafari = false
     @State private var imageAspectRatio: CGFloat?
     @State private var loadedImage: UIImage?
 
@@ -151,18 +149,15 @@ struct FeedArticleRow: View {
 
                 HStack {
                     Button {
-                        if article.isYouTubeURL && youTubeOpenMode == .inAppPlayer {
+                        if article.isYouTubeURL && ContentOpenMode.opensInReader(article.url) {
                             feedManager.markRead(article)
                             MediaPresenter.shared.presentYouTube(article)
-                        } else if article.isYouTubeURL && youTubeOpenMode == .youTubeApp {
+                        } else if article.isYouTubeURL {
                             YouTubeHelper.openInApp(url: article.url)
-                        } else if article.isYouTubeURL && youTubeOpenMode == .browser {
-                            showSafari = true
                         } else if let url = URL(string: article.url) {
                             openURL(url)
                         }
                     } label: {
-                        // swiftlint:disable:next line_length
                         Image(systemName: article.isYouTubeURL && YouTubeHelper.isAppInstalled ? "play.rectangle" : "arrow.up.forward.square")
                     }
                     .buttonStyle(.plain)
@@ -258,12 +253,6 @@ struct FeedArticleRow: View {
             }
             if loadedImage !== image {
                 loadedImage = image
-            }
-        }
-        .sheet(isPresented: $showSafari) {
-            if let url = URL(string: article.url) {
-                SafariView(url: url)
-                    .ignoresSafeArea()
             }
         }
     }

@@ -40,7 +40,7 @@ nonisolated enum ListIcon: String, CaseIterable, Identifiable, Sendable {
 
     // Entertainment & video
     case film
-    case tv // swiftlint:disable:this identifier_name
+    case tv
     case playRectangle = "play.rectangle"
     case theatermasks = "theatermasks.fill"
     case popcorn

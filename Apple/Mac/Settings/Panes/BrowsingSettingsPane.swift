@@ -5,7 +5,8 @@ struct BrowsingSettingsPane: View {
 
     @AppStorage("Articles.BatchingMode") private var batchingMode: BatchingMode = .items25
     @AppStorage("Display.ScrollMarkAsRead") private var scrollMarkAsRead = false
-    @AppStorage(LinkOpenMode.storageKey) private var linkOpenMode: LinkOpenMode = .inAppViewer
+    @AppStorage(ContentOpenMode.storageKey) private var contentOpenMode: ContentOpenMode = .inAppViewer
+    @State private var isEditingExcludedSites = false
     @AppStorage(DoomscrollingMode.storageKey) private var doomscrollingMode = false
     @AppStorage(UnreadBadgeMode.storageKey) private var unreadBadgeMode: UnreadBadgeMode = .none
 
@@ -56,16 +57,25 @@ struct BrowsingSettingsPane: View {
             }
             SettingsGroupSpacer()
             Group {
-                SettingsPicker(SettingsText.settings("LinkOpenMode"), selection: $linkOpenMode) {
-                    Text(SettingsText.settings("LinkOpenMode.Browser")).tag(LinkOpenMode.browser)
-                    Text(SettingsText.settings("LinkOpenMode.InAppViewer")).tag(LinkOpenMode.inAppViewer)
+                SettingsPicker(SettingsText.settings("ContentOpenMode"), selection: $contentOpenMode) {
+                    Text(SettingsText.settings("LinkOpenMode.InAppViewer")).tag(ContentOpenMode.inAppViewer)
+                    Text(SettingsText.settings("LinkOpenMode.Browser")).tag(ContentOpenMode.browser)
                 }
+                LabeledContent(SettingsText.settings("ExcludedSites")) {
+                    Button(SettingsText.settings("ExcludedSites.Edit") + "…") {
+                        isEditingExcludedSites = true
+                    }
+                }
+                .disabled(contentOpenMode == .browser)
                 LabeledContent {
                     SettingsNote(text: SettingsText.settings("LinkOpenMode.Footer"))
                 } label: {
                     Text(verbatim: "")
                 }
             }
+        }
+        .sheet(isPresented: $isEditingExcludedSites) {
+            ExcludedSitesSheet()
         }
     }
 }

@@ -51,7 +51,6 @@ public extension FeedManager {
             articles: articleTuples,
             undatedFallbackDate: Date()
         )) ?? []
-        // swiftlint:disable:next line_length
         log("FeedRefresh.RSS", "inserted id=\(feed.id) new=\(insertedIDs.count)/\(articleTuples.count) metadataImages.from=parsed")
 
         let isPodcastFeed = feed.isPodcast || parsedFeed.isPodcast
@@ -116,17 +115,14 @@ public extension FeedManager {
             return .unchanged
         }
         let contentType = httpResponse?.value(forHTTPHeaderField: "Content-Type") ?? "unknown"
-        // swiftlint:disable:next line_length
         log("FeedRefresh.RSS", "fetch ok id=\(feed.id) bytes=\(data.count) status=\(statusCode) contentType=\(contentType)")
         guard let refined = FeedParser.parse(data: utf8FeedData(data, response: response))
             .map({ FeedDialects.refine($0, feedURL: fetchURL.absoluteString) }) else {
             let bodyHint = bodyContentHint(data: data)
-            // swiftlint:disable:next line_length
             log("FeedRefresh.RSS", "parse failed id=\(feed.id) status=\(statusCode) contentType=\(contentType) bytes=\(data.count) hint=\(bodyHint)")
             return .failed
         }
         let parsed = await FeedDialects.enrich(refined, feedURL: fetchURL.absoluteString, feedID: feed.id)
-        // swiftlint:disable:next line_length
         log("FeedRefresh.RSS", "parsed id=\(feed.id) articles=\(parsed.articles.count) title=\(parsed.title) isPodcast=\(parsed.isPodcast)")
         let validators = FeedHTTPValidators(
             fetchURL: feed.fetchURL,
@@ -287,7 +283,6 @@ public extension FeedManager {
         let database = DatabaseManager.shared
         let insertedArticles = (try? database.articles(withIDs: insertedIDs)) ?? []
         if insertedArticles.isEmpty { return }
-        // swiftlint:disable:next line_length
         log("FeedRefresh.PostInsert", "begin feedTitle=\(feedTitle) count=\(insertedArticles.count) skipImagePreload=\(skipImagePreload) runNLP=\(runNLP)")
 
         if !ProcessInfo.processInfo.isLowPowerModeEnabled {

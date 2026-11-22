@@ -14,7 +14,7 @@ enum HomeSection: String, CaseIterable, Identifiable {
     case reddit
     case substack
     case vimeo
-    case x // swiftlint:disable:this identifier_name
+    case x
     case youtube
     case niconico
 

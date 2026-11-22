@@ -7,7 +7,6 @@ import Foundation
 public enum ProviderSessionEvents {
 
     public enum Service: String, Sendable {
-        // swiftlint:disable:next identifier_name
         case x
         case instagram
         case substack

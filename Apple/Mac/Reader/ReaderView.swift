@@ -70,12 +70,9 @@ struct ReaderView: View {
         .environment(\.openURL, OpenURLAction(handler: openLink))
     }
 
-    /// Links in the text follow the Open Links In setting: in the app's
-    /// reader, as a page of this tab, or in the default browser.
+    /// Links in the text follow Open Content In: as a page of this tab, or in the default browser.
     private func openLink(_ url: URL) -> OpenURLAction.Result {
-        let mode = UserDefaults.standard.string(forKey: LinkOpenMode.storageKey)
-            .flatMap(LinkOpenMode.init(rawValue:)) ?? .inAppViewer
-        let opensInApp = mode == .inAppViewer && !url.isFileLink
+        let opensInApp = ContentOpenMode.opensInReader(url) && !url.isFileLink
         guard opensInApp, let actions, ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
             return .systemAction
         }

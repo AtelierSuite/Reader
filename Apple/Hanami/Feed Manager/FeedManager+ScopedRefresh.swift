@@ -105,7 +105,6 @@ public extension FeedManager {
     func cancelScopedRefresh(scope: String) {
         guard var state = scopedRefreshes[scope], !state.isStopping else { return }
         let task = scopedRefreshTasks[scope]
-        // swiftlint:disable:next line_length
         log("FeedRefresh.Scoped", "cancel scope=\(scope) hadTask=\(task != nil) completed=\(state.completed)/\(state.total)")
         state.isStopping = true
         scopedRefreshes[scope] = state

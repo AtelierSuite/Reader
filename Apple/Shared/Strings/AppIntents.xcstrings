@@ -7,61 +7,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abonniert den Feed an der angegebenen URL. Gibt „true“ zurück, wenn der Feed hinzugefügt wurde."
+            "value": "Folgt dem Feed an der angegebenen URL. Gibt „true“ zurück, wenn dem Feed gefolgt wurde."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Subscribes to the feed at the given URL. Returns true if the feed was added."
+            "value": "Follows the feed at the given URL. Returns true if the feed was followed."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "S'abonne au flux à l'URL donnée. Renvoie vrai si le flux a été ajouté."
+            "value": "Suit le flux à l'URL donnée. Renvoie vrai si le flux a été suivi."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Si iscrive al feed all'URL fornito. Restituisce vero se il feed è stato aggiunto."
+            "value": "Segue il feed all'URL fornito. Restituisce vero se il feed è stato seguito."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "指定されたURLのフィードを購読します。追加された場合は true を返します。"
+            "value": "指定されたURLのフィードをフォローします。フォローした場合は true を返します。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "지정된 URL의 피드를 구독합니다. 추가된 경우 true를 반환합니다."
+            "value": "지정된 URL의 피드를 팔로우합니다. 팔로우한 경우 true를 반환합니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abonneert op de feed op de opgegeven URL. Geeft true terug als de feed is toegevoegd."
+            "value": "Volgt de feed op de opgegeven URL. Geeft true terug als de feed is gevolgd."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Đăng ký nguồn cấp tại URL được cung cấp. Trả về true nếu đã thêm."
+            "value": "Theo dõi nguồn cấp tại URL được cung cấp. Trả về true nếu đã theo dõi."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "订阅给定 URL 的订阅源。添加成功时返回 true。"
+            "value": "关注给定 URL 的订阅源。关注成功时返回 true。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "訂閱指定 URL 的訂閱源。加入成功時回傳 true。"
+            "value": "追蹤指定 URL 的訂閱源。追蹤成功時回傳 true。"
           }
         }
       }
@@ -137,61 +137,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feed hinzufügen"
+            "value": "Feed folgen"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add Feed"
+            "value": "Follow Feed"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajouter un flux"
+            "value": "Suivre un flux"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aggiungi feed"
+            "value": "Segui feed"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "フィードを追加"
+            "value": "フィードをフォロー"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "피드 추가"
+            "value": "피드 팔로우"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feed toevoegen"
+            "value": "Feed volgen"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Thêm nguồn cấp"
+            "value": "Theo dõi nguồn cấp"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "添加订阅源"
+            "value": "关注订阅源"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "加入訂閱源"
+            "value": "追蹤訂閱源"
           }
         }
       }
@@ -202,61 +202,61 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feed von URL hinzufügen"
+            "value": "Feed von URL folgen"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add Feed from URL"
+            "value": "Follow Feed from URL"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajouter un flux depuis une URL"
+            "value": "Suivre un flux depuis une URL"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aggiungi feed da URL"
+            "value": "Segui feed da URL"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "URLからフィードを追加"
+            "value": "URLからフィードをフォロー"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "URL에서 피드 추가"
+            "value": "URL에서 피드 팔로우"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feed toevoegen vanaf URL"
+            "value": "Feed volgen vanaf URL"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Thêm nguồn cấp từ URL"
+            "value": "Theo dõi nguồn cấp từ URL"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "从 URL 添加订阅源"
+            "value": "从 URL 关注订阅源"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "從 URL 加入訂閱源"
+            "value": "從 URL 追蹤訂閱源"
           }
         }
       }

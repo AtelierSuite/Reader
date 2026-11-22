@@ -6,7 +6,6 @@ import Hanami
 struct ClassicTabView: View {
 
     @Environment(FeedManager.self) var feedManager
-    @AppStorage("YouTube.OpenMode") var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
     @AppStorage("App.ClassicTabs.SelectedTab") var selectedTab: ClassicTab = .home
     @State var paths: [ClassicTab: NavigationPath] = [:]
     @State private var addFeedURL = ""
