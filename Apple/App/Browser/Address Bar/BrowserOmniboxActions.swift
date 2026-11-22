@@ -30,13 +30,11 @@ struct BrowserOmniboxActions {
     }
 
     func refreshContentMatches() async {
-        let query = omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let query = omnibox.query
         guard omnibox.isActive, query.count >= 2 else {
             omnibox.contentMatches = []
             return
         }
-        try? await Task.sleep(for: .milliseconds(250))
-        guard !Task.isCancelled else { return }
         let found = await Task.detached(priority: .userInitiated) {
             (try? DatabaseManager.shared.searchArticles(query: query, limit: 4)) ?? []
         }.value

@@ -10,15 +10,13 @@ struct BrowserOmniboxDiscovery {
     let feedManager: FeedManager
 
     func refresh() async {
-        let query = omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard omnibox.isActive,
-              let urlString = BrowserAddressInput.normalizedURLString(from: query) else {
+              let urlString = BrowserAddressInput.normalizedURLString(from: omnibox.query) else {
             omnibox.discovery = nil
             return
         }
         guard omnibox.discovery?.urlString != urlString else { return }
-        omnibox.discovery = nil
-        try? await Task.sleep(for: .milliseconds(500))
+        try? await Task.sleep(for: .milliseconds(350))
         guard !Task.isCancelled else { return }
         let session = FeedDiscoverySession(urlString: urlString)
         omnibox.discovery = session

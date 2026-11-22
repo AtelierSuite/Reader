@@ -13,7 +13,12 @@ final class BrowserOmniboxModel {
     /// so the overlay vanished instead of fading.
     static let transition: Animation = .smooth(duration: 0.25)
 
+    static let queryDebounce: Duration = .milliseconds(150)
+
     var text: String = ""
+    /// The trimmed text once typing pauses. Results follow this rather than
+    /// `text`, so a keystroke only redraws the field.
+    var query: String = ""
     var contentMatches: [Article] = []
     /// The suggestion the arrow keys have moved to, on hardware keyboards.
     var selectedSuggestionID: String?
@@ -23,14 +28,26 @@ final class BrowserOmniboxModel {
 
     func activate(with query: String = "") {
         text = query
+        self.query = query.trimmingCharacters(in: .whitespacesAndNewlines)
         contentMatches = []
         selectedSuggestionID = nil
         isActive = true
     }
 
+    func updateQuery() async {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed != query else { return }
+        if !trimmed.isEmpty {
+            try? await Task.sleep(for: BrowserOmniboxModel.queryDebounce)
+            guard !Task.isCancelled else { return }
+        }
+        query = trimmed
+    }
+
     func deactivate() {
         isActive = false
         text = ""
+        query = ""
         contentMatches = []
         discovery = nil
         selectedSuggestionID = nil

@@ -23,11 +23,11 @@ struct BrowserOmniboxView: View {
 
     private var suggestions: [BrowserSuggestion] {
         BrowserSuggestionResolver(feedManager: feedManager)
-            .suggestions(for: omnibox.text, contentMatches: omnibox.contentMatches)
+            .suggestions(for: omnibox.query, contentMatches: omnibox.contentMatches)
     }
 
     private var isQueryEmpty: Bool {
-        omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        omnibox.query.isEmpty
     }
 
     var body: some View {
@@ -57,10 +57,10 @@ struct BrowserOmniboxView: View {
                 fieldBar
             }
         }
-        .task(id: omnibox.text) {
-            await refreshContentMatches()
+        .task(id: omnibox.query) {
+            await BrowserOmniboxActions(store: store, omnibox: omnibox).refreshContentMatches()
         }
-        .task(id: omnibox.text) {
+        .task(id: omnibox.query) {
             await BrowserOmniboxDiscovery(omnibox: omnibox, feedManager: feedManager).refresh()
         }
     }
@@ -129,21 +129,6 @@ struct BrowserOmniboxView: View {
             horizontalPadding: 20,
             apply: apply
         )
-    }
-
-    private func refreshContentMatches() async {
-        let query = omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard query.count >= 2 else {
-            omnibox.contentMatches = []
-            return
-        }
-        try? await Task.sleep(for: .milliseconds(250))
-        guard !Task.isCancelled else { return }
-        let found = await Task.detached(priority: .userInitiated) {
-            (try? DatabaseManager.shared.searchArticles(query: query, limit: 4)) ?? []
-        }.value
-        guard !Task.isCancelled else { return }
-        omnibox.contentMatches = found
     }
 
     private func open(_ location: BrowserLocation) {

@@ -16,7 +16,7 @@ struct BrowserOmniboxPopupContent: View {
 
     var body: some View {
         Group {
-            if omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if omnibox.query.isEmpty {
                 BrowserOmniboxFollowingGrid(
                     openFeed: { feed in actions.open(.feed(feed.id)) },
                     openSection: { section in actions.open(.feedSection(section)) },
@@ -25,14 +25,14 @@ struct BrowserOmniboxPopupContent: View {
             } else {
                 BrowserOmniboxSuggestionList(
                     suggestions: BrowserSuggestionResolver(feedManager: feedManager)
-                        .suggestions(for: omnibox.text, contentMatches: omnibox.contentMatches),
+                        .suggestions(for: omnibox.query, contentMatches: omnibox.contentMatches),
                     selectedSuggestionID: omnibox.selectedSuggestionID,
                     apply: actions.apply
                 )
             }
         }
-        .task(id: omnibox.text) { await actions.refreshContentMatches() }
-        .task(id: omnibox.text) {
+        .task(id: omnibox.query) { await actions.refreshContentMatches() }
+        .task(id: omnibox.query) {
             await BrowserOmniboxDiscovery(omnibox: omnibox, feedManager: feedManager).refresh()
         }
     }

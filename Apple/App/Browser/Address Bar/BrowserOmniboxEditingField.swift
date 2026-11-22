@@ -18,14 +18,14 @@ struct BrowserOmniboxEditingField: View {
 
     private var suggestions: [BrowserSuggestion] {
         BrowserSuggestionResolver(feedManager: feedManager)
-            .suggestions(for: omnibox.text, contentMatches: omnibox.contentMatches)
+            .suggestions(for: omnibox.query, contentMatches: omnibox.contentMatches)
     }
 
     var body: some View {
         BrowserOmniboxField(model: omnibox, onSubmit: submit, isFocused: $isFieldFocused)
             .onKeyPress(.downArrow) { moveSelection(forward: true) }
             .onKeyPress(.upArrow) { moveSelection(forward: false) }
-            .onChange(of: omnibox.text) { omnibox.selectedSuggestionID = nil }
+            .onChange(of: omnibox.query) { omnibox.selectedSuggestionID = nil }
     }
 
     private func submit() {
@@ -38,7 +38,7 @@ struct BrowserOmniboxEditingField: View {
     }
 
     private func moveSelection(forward: Bool) -> KeyPress.Result {
-        guard !omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+        guard !omnibox.query.isEmpty else {
             return .ignored
         }
         let suggestions = suggestions
