@@ -34,15 +34,6 @@ extension FeedSection {
                 startPoint: .bottom,
                 endPoint: .top
             ))
-        case .appStore:
-            AnyShapeStyle(LinearGradient(
-                colors: [
-                    Color(red: 0.07, green: 0.42, blue: 0.95),
-                    Color(red: 0.11, green: 0.76, blue: 0.99)
-                ],
-                startPoint: .bottom,
-                endPoint: .top
-            ))
         case .instagram:
             AnyShapeStyle(LinearGradient(
                 colors: [
