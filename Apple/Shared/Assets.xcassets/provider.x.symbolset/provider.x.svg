@@ -82,21 +82,21 @@ PUBLIC "-//W3C//DTD SVG 1.1//EN"
   <line id="Baseline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1556" y2="1556"/>
   <line id="Capline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1485.54" y2="1485.54"/>
   <line id="left-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="522.047" x2="522.047" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="608.385" x2="608.385" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="622.047" x2="622.047" y1="600.785" y2="720.121"/>
   <line id="left-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1410.980" x2="1410.980" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1497.318" x2="1497.318" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1510.980" x2="1510.980" y1="600.785" y2="720.121"/>
   <line id="left-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2889.630" x2="2889.630" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2975.968" x2="2975.968" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2989.630" x2="2989.630" y1="600.785" y2="720.121"/>
  </g>
  <g id="Symbols">
   <g id="Ultralight-S" transform="matrix(1 0 0 1 522.047 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M64.545 -68.826L75.942 -68.826L51.039 -40.361L80.338 -1.633L57.399 -1.633L39.434 -25.124L18.872 -1.633L7.468 -1.633L34.106 -32.08L6 -68.822L29.522 -68.822L45.761 -47.351L64.545 -68.826ZM60.545 -8.454L66.861 -8.454L26.089 -62.361L19.312 -62.361L60.545 -8.454Z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M75.305 -75L88.796 -75L59.317 -41.304L94 4.541L66.845 4.541L45.578 -23.267L21.238 4.541L7.738 4.541L39.271 -31.501L6 -74.996L33.845 -74.996L53.068 -49.579L75.305 -75ZM70.57 -3.533L78.047 -3.533L29.781 -67.347L21.758 -67.347L70.57 -3.533Z"/>
   </g>
   <g id="Regular-S" transform="matrix(1 0 0 1 1410.98 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M64.545 -68.826L75.942 -68.826L51.039 -40.361L80.338 -1.633L57.399 -1.633L39.434 -25.124L18.872 -1.633L7.468 -1.633L34.106 -32.08L6 -68.822L29.522 -68.822L45.761 -47.351L64.545 -68.826ZM60.545 -8.454L66.861 -8.454L26.089 -62.361L19.312 -62.361L60.545 -8.454Z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M75.305 -75L88.796 -75L59.317 -41.304L94 4.541L66.845 4.541L45.578 -23.267L21.238 4.541L7.738 4.541L39.271 -31.501L6 -74.996L33.845 -74.996L53.068 -49.579L75.305 -75ZM70.57 -3.533L78.047 -3.533L29.781 -67.347L21.758 -67.347L70.57 -3.533Z"/>
   </g>
   <g id="Black-S" transform="matrix(1 0 0 1 2889.63 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M64.545 -68.826L75.942 -68.826L51.039 -40.361L80.338 -1.633L57.399 -1.633L39.434 -25.124L18.872 -1.633L7.468 -1.633L34.106 -32.08L6 -68.822L29.522 -68.822L45.761 -47.351L64.545 -68.826ZM60.545 -8.454L66.861 -8.454L26.089 -62.361L19.312 -62.361L60.545 -8.454Z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M75.305 -75L88.796 -75L59.317 -41.304L94 4.541L66.845 4.541L45.578 -23.267L21.238 4.541L7.738 4.541L39.271 -31.501L6 -74.996L33.845 -74.996L53.068 -49.579L75.305 -75ZM70.57 -3.533L78.047 -3.533L29.781 -67.347L21.758 -67.347L70.57 -3.533Z"/>
   </g>
  </g>
 </svg>
