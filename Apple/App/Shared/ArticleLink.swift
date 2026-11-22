@@ -15,21 +15,25 @@ struct ArticleLink<Label: View>: View {
     var marksRead: Bool = true
     @ViewBuilder let label: () -> Label
 
-    @AppStorage("YouTube.OpenMode") private var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
+    @AppStorage(ContentOpenMode.storageKey) private var contentOpenMode: ContentOpenMode = .inAppViewer
     @State private var showSafari = false
     @State private var showSafariReader = false
     private let mediaPresenter = MediaPresenter.shared
 
-    private var feedOpenMode: FeedOpenMode {
+    private var preferredOpenMode: FeedOpenMode? {
         if let folderMode = bookmarkReadingOptions[article.id]?.openMode {
             return folderMode
         }
         guard let feed = feedManager.feed(forArticle: article),
-              let raw = UserDefaults.standard.string(forKey: "openMode-\(feed.id)"),
-              let mode = FeedOpenMode(rawValue: raw) else {
-            return .inAppViewer
+              let raw = UserDefaults.standard.string(forKey: "openMode-\(feed.id)") else {
+            return nil
         }
-        return mode
+        return FeedOpenMode(rawValue: raw)
+    }
+
+    private var openMode: FeedOpenMode {
+        _ = contentOpenMode
+        return ContentOpenMode.resolvedMode(for: article.url, preferredMode: preferredOpenMode)
     }
 
     private var usesiPadDetailColumn: Bool {
@@ -52,7 +56,7 @@ struct ArticleLink<Label: View>: View {
     }
 
     var body: some View {
-        let openMode = feedOpenMode
+        let openMode = openMode
         let isYouTube = article.isYouTubeURL
         Group {
             if article.isPodcastEpisode {
@@ -66,7 +70,16 @@ struct ArticleLink<Label: View>: View {
                         label()
                     }
                 }
-            } else if isYouTube && youTubeOpenMode == .inAppPlayer {
+            } else if openMode == .browser {
+                Button {
+                    markReadIfEnabled()
+                    if let url = URL(string: article.url) {
+                        openURL(url)
+                    }
+                } label: {
+                    label()
+                }
+            } else if isYouTube {
                 if usesiPadDetailColumn {
                     Button { selectForiPadDetail() } label: { label() }
                 } else {
@@ -76,29 +89,6 @@ struct ArticleLink<Label: View>: View {
                     } label: {
                         label()
                     }
-                }
-            } else if isYouTube && youTubeOpenMode == .youTubeApp {
-                Button {
-                    markReadIfEnabled()
-                    YouTubeHelper.openInApp(url: article.url)
-                } label: {
-                    label()
-                }
-            } else if isYouTube && youTubeOpenMode == .browser {
-                Button {
-                    markReadIfEnabled()
-                    showSafari = true
-                } label: {
-                    label()
-                }
-            } else if openMode == .browser {
-                Button {
-                    markReadIfEnabled()
-                    if let url = URL(string: article.url) {
-                        openURL(url)
-                    }
-                } label: {
-                    label()
                 }
             } else if openMode == .inAppBrowser {
                 Button {

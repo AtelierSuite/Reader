@@ -171,12 +171,9 @@ extension ArticleDetailView: ArticleActions {
 
     func performOpenInApp() {
         if article.isYouTubeURL {
-            switch youTubeOpenMode {
-            case .inAppPlayer:
+            if ContentOpenMode.opensInReader(article.url) {
                 MediaPresenter.shared.presentYouTube(article)
-            case .youTubeApp:
-                YouTubeHelper.openInApp(url: article.url)
-            case .browser:
+            } else {
                 YouTubeHelper.openInApp(url: article.url)
             }
         }
@@ -198,22 +195,17 @@ extension ArticleDetailView: ArticleActions {
     }
 
     func handleLinkTap(_ url: URL) {
-        guard !url.isFileLink else {
+        guard !url.isFileLink, ContentOpenMode.opensInReader(url) else {
             openURL(url)
             return
         }
-        switch linkOpenMode {
-        case .browser:
-            openURL(url)
-        case .inAppViewer:
-            if let navigateToEphemeralArticle {
-                let ephemeral = Article.ephemeral(url: url.absoluteString, title: url.absoluteString)
-                navigateToEphemeralArticle(EphemeralArticleDestination(
-                    article: ephemeral, mode: .viewer, textMode: .auto
-                ))
-            } else {
-                inAppLinkURL = url
-            }
+        if let navigateToEphemeralArticle {
+            let ephemeral = Article.ephemeral(url: url.absoluteString, title: url.absoluteString)
+            navigateToEphemeralArticle(EphemeralArticleDestination(
+                article: ephemeral, mode: .viewer, textMode: .auto
+            ))
+        } else {
+            inAppLinkURL = url
         }
     }
 

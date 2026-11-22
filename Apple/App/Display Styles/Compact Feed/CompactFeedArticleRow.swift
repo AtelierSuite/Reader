@@ -14,7 +14,6 @@ struct CompactFeedArticleRow: View {
     @State private var showsPlayBadge = false
     @State private var opensInExternalApp = false
     @State private var feed: Feed?
-    @State private var showSafari = false
 
     @ViewBuilder
     private var feedAvatarView: some View {
@@ -128,8 +127,7 @@ struct CompactFeedArticleRow: View {
 
                     CompactFeedArticleRowActions(
                         article: article,
-                        opensInExternalApp: opensInExternalApp,
-                        onShowSafari: { showSafari = true }
+                        opensInExternalApp: opensInExternalApp
                     )
                 }
                 .frame(maxHeight: .infinity)
@@ -166,12 +164,6 @@ struct CompactFeedArticleRow: View {
             } else if article.isExternalBookmark {
                 feedName = BookmarkSite.name(of: article)
                 icon = await BookmarkSite.icon(for: article)
-            }
-        }
-        .sheet(isPresented: $showSafari) {
-            if let url = URL(string: article.url) {
-                SafariView(url: url)
-                    .ignoresSafeArea()
             }
         }
     }
