@@ -65,15 +65,6 @@ enum SummaryCardKind: CaseIterable {
             && isInTimeWindow(Date())
     }
 
-    /// Whether this card could plausibly appear right now. Computed without
-    /// the card's own view state so the host can decide to mount the section,
-    /// rather than the section needing to be mounted to report its visibility.
-    func couldDisplay(in feedManager: FeedManager) -> Bool {
-        if isForcedVisible { return true }
-        guard passesDisplayGates else { return false }
-        return !articles(in: feedManager).isEmpty
-    }
-
     var title: LocalizedStringResource {
         switch self {
         case .todaysSummary: LocalizedStringResource("TodaysSummary.Title", table: "Home")
@@ -103,30 +94,6 @@ enum SummaryCardKind: CaseIterable {
         case .todaysSummary: LocalizedStringResource("TodaysSummary.Failed", table: "Home")
         case .whileYouSlept: LocalizedStringResource("WhileYouSlept.Failed", table: "Home")
         case .afternoonBrief: LocalizedStringResource("AfternoonBrief.Failed", table: "Home")
-        }
-    }
-
-    var showMore: LocalizedStringResource {
-        switch self {
-        case .todaysSummary: LocalizedStringResource("TodaysSummary.ShowMore", table: "Home")
-        case .whileYouSlept: LocalizedStringResource("WhileYouSlept.ShowMore", table: "Home")
-        case .afternoonBrief: LocalizedStringResource("AfternoonBrief.ShowMore", table: "Home")
-        }
-    }
-
-    var showLess: LocalizedStringResource {
-        switch self {
-        case .todaysSummary: LocalizedStringResource("TodaysSummary.ShowLess", table: "Home")
-        case .whileYouSlept: LocalizedStringResource("WhileYouSlept.ShowLess", table: "Home")
-        case .afternoonBrief: LocalizedStringResource("AfternoonBrief.ShowLess", table: "Home")
-        }
-    }
-
-    var tooFew: LocalizedStringResource {
-        switch self {
-        case .todaysSummary: LocalizedStringResource("TodaysSummary.TooFew", table: "Home")
-        case .whileYouSlept: LocalizedStringResource("WhileYouSlept.TooFew", table: "Home")
-        case .afternoonBrief: LocalizedStringResource("AfternoonBrief.TooFew", table: "Home")
         }
     }
 
