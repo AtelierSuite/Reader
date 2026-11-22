@@ -11114,6 +11114,201 @@
           }
         }
       }
+    },
+    "AgeGate.Declined" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Feed ist für Erwachsene. Teile deine Altersgruppe, um ihm zu folgen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This feed is for adults. Share your age range to follow it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce flux est réservé aux adultes. Partagez votre tranche d’âge pour le suivre."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo feed è per adulti. Condividi la tua fascia d’età per seguirlo."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このフィードは成人向けです。フォローするには年齢層を共有してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 피드는 성인용입니다. 팔로우하려면 연령대를 공유하세요."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze feed is voor volwassenen. Deel je leeftijdsgroep om hem te volgen."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nguồn cấp này dành cho người lớn. Hãy chia sẻ độ tuổi của bạn để theo dõi."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此订阅源面向成年人。请共享你的年龄段以关注。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此訂閱源適合成年人。請分享你的年齡層以追蹤。"
+          }
+        }
+      }
+    },
+    "AgeGate.Unavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Alter konnte nicht bestätigt werden, daher wurde dieser Feed nicht hinzugefügt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your age couldn’t be confirmed, so this feed wasn’t added."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre âge n’a pas pu être confirmé, ce flux n’a donc pas été ajouté."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non è stato possibile confermare la tua età, quindi questo feed non è stato aggiunto."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "年齢を確認できなかったため、このフィードは追加されませんでした。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나이를 확인할 수 없어 이 피드를 추가하지 않았습니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je leeftijd kon niet worden bevestigd, dus deze feed is niet toegevoegd."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Không thể xác nhận tuổi của bạn nên nguồn cấp này chưa được thêm."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法确认你的年龄，因此未添加此订阅源。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法確認你的年齡，因此未加入此訂閱源。"
+          }
+        }
+      }
+    },
+    "AgeGate.Underage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du musst mindestens 18 Jahre alt sein, um diesem Feed zu folgen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need to be 18 or older to follow this feed."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous devez avoir 18 ans ou plus pour suivre ce flux."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devi avere almeno 18 anni per seguire questo feed."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このフィードをフォローするには18歳以上である必要があります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 피드를 팔로우하려면 만 18세 이상이어야 합니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je moet 18 jaar of ouder zijn om deze feed te volgen."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn cần từ 18 tuổi trở lên để theo dõi nguồn cấp này."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你需要年满 18 岁才能关注此订阅源。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你需要年滿 18 歲才能追蹤此訂閱源。"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"

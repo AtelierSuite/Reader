@@ -218,6 +218,20 @@ extension OnboardingView {
     }
 
     func addFeed(_ discovered: DiscoveredFeed) {
+        guard AdultFeedSites.site(forFeedURL: discovered.url) != nil else {
+            insertFeed(discovered)
+            return
+        }
+        Task {
+            if let denialMessage = await AdultFeedAuthorization.denialMessage(forFeedURL: discovered.url) {
+                feedErrorMessage = denialMessage
+            } else {
+                insertFeed(discovered)
+            }
+        }
+    }
+
+    private func insertFeed(_ discovered: DiscoveredFeed) {
         do {
             try feedManager.addFeed(
                 url: discovered.url,

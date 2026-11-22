@@ -1,6 +1,8 @@
+import AppKit
 import Foundation
 import Hanami
 import Observation
+import WebKit
 
 /// Finds the feeds behind an address and subscribes to them, the way iOS's
 /// add feed screen does: the address as a feed first, then the page's links,
@@ -64,6 +66,17 @@ final class FeedDiscoverySession {
         guard canAdd(feed), !addingURLs.contains(feed.url), !addedURLs.contains(feed.url) else { return }
         addingURLs.insert(feed.url)
         defer { addingURLs.remove(feed.url) }
+        errorMessage = nil
+        if let site = AdultFeedSites.site(forFeedURL: feed.url) {
+            guard let window = NSApp.keyWindow else {
+                errorMessage = AdultContentGateError.unavailable.message
+                return
+            }
+            if case .failure(let error) = await AdultContentGate.authorize(site, in: .default(), presenter: window) {
+                errorMessage = error.message
+                return
+            }
+        }
         do {
             _ = try await feedManager.addFeedFetchingMetadata(url: feed.url, title: feed.title, siteURL: feed.siteURL)
             addedURLs.insert(feed.url)

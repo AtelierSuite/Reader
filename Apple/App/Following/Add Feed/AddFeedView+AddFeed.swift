@@ -43,6 +43,10 @@ extension AddFeedView {
               !addedURLs.contains(discovered.url) else { return }
         addingURLs.insert(discovered.url)
         defer { addingURLs.remove(discovered.url) }
+        if let denialMessage = await AdultFeedAuthorization.denialMessage(forFeedURL: discovered.url) {
+            errorMessage = denialMessage
+            return
+        }
         do {
             _ = try await feedManager.addFeedFetchingMetadata(
                 url: discovered.url,

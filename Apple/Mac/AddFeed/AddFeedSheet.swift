@@ -28,6 +28,10 @@ struct AddFeedSheet: View {
             }
             content
                 .frame(maxWidth: .infinity, minHeight: 180, maxHeight: 360)
+            if !session.discoveredFeeds.isEmpty, let errorMessage = session.errorMessage {
+                Text(errorMessage)
+                    .foregroundStyle(.secondary)
+            }
             HStack {
                 if webFeedsEnabled {
                     Button(String(localized: "AddFeed.Generate", table: "Petal")) { isGeneratingWebFeed = true }

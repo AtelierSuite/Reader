@@ -215,6 +215,7 @@ struct ActionExtensionView: View {
     /// added from the extension; the user is sent to the app to sign in.
     private func requiresAppToAdd(_ url: String) -> Bool {
         XProvider.isFeedURL(url) || InstagramProvider.isFeedURL(url)
+            || AdultFeedSites.site(forFeedURL: url) != nil
     }
 
     private func openAppToAdd(_ feed: DiscoveredFeed) {
