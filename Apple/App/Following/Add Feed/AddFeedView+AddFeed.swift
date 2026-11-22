@@ -60,7 +60,13 @@ extension AddFeedView {
     }
 
     func addAdultContentFeed(_ discovered: DiscoveredFeed) async {
-        switch await AdultContentGate.authorizeInForeground(feedURL: discovered.url) {
+        guard !addingURLs.contains(discovered.url),
+              !addedURLs.contains(discovered.url) else { return }
+        errorMessage = nil
+        addingURLs.insert(discovered.url)
+        let result = await AdultContentGate.authorizeInForeground(feedURL: discovered.url)
+        addingURLs.remove(discovered.url)
+        switch result {
         case .success: await addFeedDirectly(discovered)
         case .failure(let error): errorMessage = error.localizedMessage
         }
