@@ -70,6 +70,11 @@ struct PetalBuilderSelectorsSection: View {
                 optional: $recipe.dateSelector,
                 placeholder: "time, .published"
             )
+            PetalSelectorField(
+                label: String(localized: "Builder.AuthorSelector", table: "Petal"),
+                optional: $recipe.authorSelector,
+                placeholder: ".author, .byline"
+            )
 
             Button {
                 onFetch()
@@ -99,6 +104,7 @@ struct PetalBuilderSelectorsSection: View {
         .onChange(of: recipe.summarySelector) { _, _ in onSelectorChanged() }
         .onChange(of: recipe.imageSelector) { _, _ in onSelectorChanged() }
         .onChange(of: recipe.dateSelector) { _, _ in onSelectorChanged() }
+        .onChange(of: recipe.authorSelector) { _, _ in onSelectorChanged() }
     }
 
     private func statusText(for step: PetalAgent.Step) -> String {

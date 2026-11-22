@@ -56,37 +56,43 @@ extension PetalBuilderView {
 
     func runAutoDetect() {
         guard let html = fetchedHTML else { return }
-        guard PetalAgent.isAvailable else {
-            applyHeuristicSuggestion(html: html)
-            return
-        }
         let siteURL = recipe.siteURL
+        let requestedRecipe = recipe
         agentStep = .readingPage
         errorMessage = nil
         agentTask = Task {
-            let suggestion = try? await PetalAgent.buildRecipe(html: html, siteURL: siteURL) { step in
-                Task { @MainActor in
-                    if agentStep != nil { agentStep = step }
-                }
+            let needsRendering = requestedRecipe.fetchMode == .staticHTML
+                && PetalAgent.pageNeedsRendering(html: html, siteURL: siteURL)
+            var page = html
+            if needsRendering {
+                var renderedRecipe = requestedRecipe
+                renderedRecipe.fetchMode = .rendered
+                page = await PetalEngine.fetchHTML(for: renderedRecipe, pageURL: nil) ?? html
             }
+            let suggestion = await suggestedRecipe(html: page, siteURL: siteURL)
             guard !Task.isCancelled, recipe.siteURL == siteURL else { return }
             agentStep = nil
-            if let suggestion {
-                apply(suggestion)
-            } else {
-                applyHeuristicSuggestion(html: html)
+            guard let suggestion else {
+                errorMessage = String(localized: "Builder.AutoDetect.Failed", table: "Petal")
+                return
+            }
+            apply(suggestion)
+            if needsRendering, page != html {
+                recipe.fetchMode = .rendered
             }
         }
     }
 
-    private func applyHeuristicSuggestion(html: String) {
-        guard let suggestion = PetalAutoDetect.detect(
-            html: html, siteURL: recipe.siteURL
-        ) else {
-            errorMessage = String(localized: "Builder.AutoDetect.Failed", table: "Petal")
-            return
+    private func suggestedRecipe(html: String, siteURL: String) async -> PetalRecipe? {
+        if PetalAgent.isAvailable,
+           let recipe = try? await PetalAgent.buildRecipe(html: html, siteURL: siteURL, onStep: { step in
+               Task { @MainActor in
+                   if agentStep != nil { agentStep = step }
+               }
+           }) {
+            return recipe
         }
-        apply(suggestion)
+        return PetalAutoDetect.detect(html: html, siteURL: siteURL)
     }
 
     private func apply(_ suggestion: PetalRecipe) {

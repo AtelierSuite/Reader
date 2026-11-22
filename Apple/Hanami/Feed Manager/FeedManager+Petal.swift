@@ -94,6 +94,9 @@ public extension FeedManager {
 
         let result = await PetalEngine.preview(for: recipe)
         try Task.checkCancellation()
+        if result.fetchedHTMLSample != nil {
+            PetalStore.shared.setNeedsRepair(result.articles.isEmpty, for: recipe.id)
+        }
         if let errorMessage = result.errorMessage {
             throw NSError(
                 domain: "Petal", code: 2,

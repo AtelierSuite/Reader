@@ -80,7 +80,12 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
     }
 
     public var isFeedCompactViewDomain: Bool {
-        DisplayStyleSetDomains.style(for: domain) == .feedCompact
+        DisplayStyleSetDomains.style(for: domain) == .feedCompact || isLemmyFeed
+    }
+
+    /// Lemmy posts are headlines with a link, like Reddit's, so they read better compact than as fediverse posts.
+    public var isLemmyFeed: Bool {
+        URL(string: fetchURL).map(LemmyDialect.isFeedURL) ?? false
     }
 
     public var isTimelineViewDomain: Bool {

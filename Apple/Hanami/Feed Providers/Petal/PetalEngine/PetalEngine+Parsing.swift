@@ -67,7 +67,7 @@ public nonisolated extension PetalEngine {
 
     // MARK: - Field extractors
 
-    private static func extractLink(
+    static func extractLink(
         item: Element,
         recipe: PetalRecipe
     ) -> String? {
@@ -84,7 +84,7 @@ public nonisolated extension PetalEngine {
         return nil
     }
 
-    private static func extractText(
+    static func extractText(
         item: Element,
         selector: String?,
         fallbackOwnText: Bool
@@ -106,43 +106,71 @@ public nonisolated extension PetalEngine {
         recipe: PetalRecipe,
         baseURL: URL?
     ) -> String? {
-        if let selector = recipe.imageSelector, !selector.isEmpty,
-           let element = try? item.select(selector).first() {
-            if let value = try? element.attr(recipe.imageAttribute),
-               !value.isEmpty {
+        if let selector = recipe.imageSelector, !selector.isEmpty {
+            guard let element = try? item.select(selector).first(),
+                  let value = imageSource(of: element, preferring: recipe.imageAttribute) else { return nil }
+            return resolveURL(value, base: baseURL)
+        }
+        for image in (try? item.select("img").array()) ?? [] {
+            if let value = imageSource(of: image, preferring: "src") {
                 return resolveURL(value, base: baseURL)
             }
         }
-        if let img = try? item.select("img[src]").first(),
-           let value = try? img.attr("src"), !value.isEmpty {
-            return resolveURL(value, base: baseURL)
+        return nil
+    }
+
+    static let lazyImageAttributes = ["data-src", "data-original", "data-lazy-src", "data-srcset", "srcset"]
+
+    /// Lazy-loading pages keep a placeholder in `src` and the real address in another attribute.
+    private static func imageSource(of element: Element, preferring attribute: String) -> String? {
+        for name in [attribute] + lazyImageAttributes {
+            guard let raw = try? element.attr(name) else { continue }
+            let candidate = name.hasSuffix("srcset") ? largestSourceSetURL(raw) : raw
+            let value = candidate.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !value.isEmpty, !value.lowercased().hasPrefix("data:") {
+                return value
+            }
         }
         return nil
+    }
+
+    private static func largestSourceSetURL(_ sourceSet: String) -> String {
+        let candidates = sourceSet.split(separator: ",").compactMap { entry -> (url: String, size: Double)? in
+            let parts = entry.split(whereSeparator: \.isWhitespace)
+            guard let url = parts.first else { return nil }
+            let size = parts.dropFirst().first.flatMap { Double($0.dropLast()) } ?? 0
+            return (String(url), size)
+        }
+        return candidates.max { $0.size < $1.size }?.url ?? ""
     }
 
     private static func extractDate(
         item: Element,
         recipe: PetalRecipe
     ) -> Date? {
+        guard let raw = rawDateText(item: item, recipe: recipe) else { return nil }
+        return parseFlexibleDate(raw)
+    }
+
+    static func rawDateText(item: Element, recipe: PetalRecipe) -> String? {
         guard let selector = recipe.dateSelector, !selector.isEmpty,
               let element = try? item.select(selector).first() else {
             return nil
         }
         let raw: String
-        if let attr = recipe.dateAttribute, !attr.isEmpty {
-            raw = (try? element.attr(attr)) ?? ""
+        if let attribute = recipe.dateAttribute, !attribute.isEmpty {
+            raw = (try? element.attr(attribute)) ?? ""
         } else {
             raw = (try? element.text()) ?? ""
         }
         let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return nil }
-        return parseFlexibleDate(trimmed)
+        return trimmed.isEmpty ? nil : trimmed
     }
 
     // MARK: - URL resolution
 
     /// Resolves a potentially relative URL against a base.
-    private static func resolveURL(_ href: String, base: URL?) -> String? {
+    static func resolveURL(_ href: String, base: URL?) -> String? {
         let trimmed = href.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return nil }
         if trimmed.hasPrefix("http://") || trimmed.hasPrefix("https://") {

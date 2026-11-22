@@ -19,6 +19,11 @@ public nonisolated enum FeedProviderRegistry {
         DMMProvider.self,
         DLsiteProvider.self,
         ArXivProvider.self,
+        HatenaBookmarkCommentsProvider.self,
+        LemmyCommentsProvider.self,
+        ZennCommentsProvider.self,
+        QiitaCommentsProvider.self,
+        MisskeyCommentsProvider.self,
         MastodonCommentsProvider.self
     ]
 
