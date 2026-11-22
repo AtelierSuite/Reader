@@ -138,8 +138,21 @@ public extension FeedDiscovery {
             guard lowercasedText == "rss feed" || lowercasedText == "rss" else { return nil }
             guard let feedURL = resolveURL(
                 nsHTML.substring(with: match.range(at: 1)), base: base
-            ) else { return nil }
+            ), Self.looksLikeFeedAddress(feedURL) else { return nil }
             return DiscoveredFeed(title: text, url: feedURL, siteURL: siteURL.absoluteString)
         }
+    }
+
+    /// A link labelled "RSS" can also be a tag or search page about RSS, such as Hatena Bookmark's `/q/RSS`.
+    nonisolated static func looksLikeFeedAddress(_ address: String) -> Bool {
+        guard let components = URLComponents(string: address) else { return false }
+        let pathSuffixes = [
+            ".rss", ".xml", ".atom", ".rdf", ".json", "/rss", "/rss/", "/feed", "/feed/", "/atom", "/atom/", "/feeds"
+        ]
+        if pathSuffixes.contains(where: components.path.hasSuffix) { return true }
+        let hints = ["rss", "feed", "atom"]
+        let query = (components.query ?? "").lowercased()
+        let host = (components.host ?? "").lowercased()
+        return hints.contains { query.contains($0) || host.contains($0) }
     }
 }
