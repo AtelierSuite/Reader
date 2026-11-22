@@ -4,37 +4,6 @@ public extension XProvider {
 
     // MARK: - TweetDetail Response Parsing
 
-    static func parseTweetDetailResponse(data: Data, tweetID: String) -> ParsedTweet? {
-        guard let entries = tweetDetailEntries(from: data) else { return nil }
-        let dateFormatter = makeXDateFormatter()
-
-        for entry in entries {
-            guard let content = entry["content"] as? [String: Any] else { continue }
-            let entryType = content["entryType"] as? String
-
-            if entryType == "TimelineTimelineItem" {
-                if let tweet = parseTweetEntry(content: content,
-                                               dateFormatter: dateFormatter),
-                   tweet.id == tweetID {
-                    return tweet
-                }
-            } else if entryType == "TimelineTimelineModule" {
-                guard let items = content["items"] as? [[String: Any]] else { continue }
-                for item in items {
-                    guard let itemObj = item["item"] as? [String: Any] else { continue }
-                    if let tweet = parseTweetEntry(content: itemObj,
-                                                   dateFormatter: dateFormatter),
-                       tweet.id == tweetID {
-                        return tweet
-                    }
-                }
-            }
-        }
-
-        log("XProvider", "TweetDetail: focal tweet \(tweetID) not found in entries")
-        return nil
-    }
-
     /// Parses the focal tweet plus any consecutive same-author tweets that
     /// share its TimelineTimelineModule (self-thread). Single standalone
     /// tweets return one thread item; full self-threads return all of them
