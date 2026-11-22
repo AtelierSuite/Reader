@@ -15,10 +15,6 @@ public extension FeedManager {
         Calendar.current.date(byAdding: .hour, value: 24, to: chunkStart) ?? chunkStart
     }
 
-    static func currentChunkStart() -> Date {
-        chunkStart(for: Date())
-    }
-
     // MARK: - Article Queries
 
     func todayArticles() -> [Article] {
@@ -316,11 +312,6 @@ public extension FeedManager {
         return sectionFeedIDs.reduce(0) { partial, feedID in
             partial + effectiveUnreadCount(forFeedID: feedID)
         }
-    }
-
-    func hasFeeds(for section: FeedSection) -> Bool {
-        _ = dataRevision
-        return feeds.contains { $0.feedSection == section }
     }
 
     // MARK: - Filtering Helpers

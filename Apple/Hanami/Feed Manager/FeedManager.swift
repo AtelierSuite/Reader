@@ -289,12 +289,6 @@ public final class FeedManager {
 
 extension FeedManager {
 
-    public func decrementUnreadCount(feedID: Int64) {
-        if let count = unreadCounts[feedID], count > 0 {
-            unreadCounts[feedID] = count - 1
-        }
-    }
-
     /// Adjusts `unreadCounts` (and `unreadReelsCounts` for Instagram reels) by `delta`,
     /// clamping at zero. Lets `markRead`/`toggleRead` skip a full reload.
     public func adjustUnreadCount(for article: Article, delta: Int) {

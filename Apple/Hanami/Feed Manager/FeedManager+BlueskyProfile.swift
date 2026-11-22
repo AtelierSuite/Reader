@@ -83,8 +83,4 @@ public extension FeedManager {
         }
         return PlatformImage(data: imageData)
     }
-
-    var hasBlueskyFeeds: Bool {
-        feeds.contains { BlueskyProvider.isFeedURL($0.url) }
-    }
 }

@@ -26,16 +26,6 @@ public extension FeedManager {
         loadFromDatabase()
     }
 
-    func reorderLists(_ reordered: [FeedList]) {
-        let orders = reordered.enumerated().map { (id: $0.element.id, sortOrder: $0.offset) }
-        try? database.updateListSortOrders(orders)
-        let previousSortOrders = Dictionary(uniqueKeysWithValues: lists.map { ($0.id, $0.sortOrder) })
-        for order in orders where previousSortOrders[order.id] != order.sortOrder {
-            captureUserListEdit(listID: order.id)
-        }
-        loadFromDatabase()
-    }
-
     // MARK: - List-Feed Membership
 
     func addFeedToList(_ list: FeedList, feed: Feed) {
@@ -61,10 +51,6 @@ public extension FeedManager {
 
     func feedCount(for list: FeedList) -> Int {
         listFeedIDs[list.id]?.count ?? 0
-    }
-
-    func listsContainingFeed(_ feed: Feed) -> [FeedList] {
-        lists.filter { listFeedIDs[$0.id]?.contains(feed.id) ?? false }
     }
 
     func listIDsForFeed(_ feed: Feed) -> Set<Int64> {

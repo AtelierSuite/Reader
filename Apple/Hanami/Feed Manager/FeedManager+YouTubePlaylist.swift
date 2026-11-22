@@ -112,8 +112,4 @@ public extension FeedManager {
         }
         return PlatformImage(data: imageData)
     }
-
-    var hasYouTubePlaylistFeeds: Bool {
-        feeds.contains { YouTubePlaylistProvider.isFeedURL($0.url) }
-    }
 }

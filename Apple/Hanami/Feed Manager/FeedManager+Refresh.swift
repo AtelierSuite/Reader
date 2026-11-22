@@ -314,59 +314,6 @@ public extension FeedManager {
         log("FeedRefresh.Unfetched", "end count=\(unfetched.count)")
     }
 
-    func refreshAllFeedsAndIcons() async {
-        let currentFeeds = feeds
-        log("FeedRefresh.AllAndIcons", "begin count=\(currentFeeds.count)")
-        await MainActor.run {
-            isLoading = true
-            refreshCompleted = 0
-            refreshTotal = currentFeeds.count
-            pendingRefreshFeedIDs = currentFeeds.map { $0.id }
-            refreshingFeedIDs = []
-        }
-
-        let queues = partitionRefreshQueues(currentFeeds)
-        let maxConcurrent = FeedRefreshQueueLimits.default
-        let work = Task { [weak self] in
-            guard let self else { return }
-            async let regular: Void = self.runTitleSafeBoundedRefresh(
-                queues.regular, maxConcurrent: maxConcurrent
-            )
-            async let slow: Void = self.runTitleSafeBoundedRefresh(
-                queues.slow, maxConcurrent: maxConcurrent
-            )
-            async let xRefresh: Void = self.runTitleSafeBoundedRefresh(
-                queues.x, maxConcurrent: maxConcurrent
-            )
-            async let instagramRefresh: Void = self.runTitleSafeBoundedRefresh(
-                queues.instagram, maxConcurrent: maxConcurrent
-            )
-            async let iconRefresh: Void = Iconography.shared.refreshIcons(
-                for: currentFeeds.map { ($0.domain, $0.siteURL as String?) }
-            )
-            _ = await (regular, slow, xRefresh, instagramRefresh, iconRefresh)
-        }
-        await MainActor.run { self.refreshTask = work }
-        _ = await work.value
-        await loadFromDatabaseInBackground(animated: true)
-        regenerateAllAcronymIcons()
-        notifyIconChange()
-        let finalCompleted = await MainActor.run { () -> Int in
-            let completed = self.refreshCompleted
-            self.lastRefreshedAt = Date()
-            self.scopedLastRefreshedAt = [:]
-            self.isLoading = false
-            self.isStopping = false
-            self.refreshCompleted = 0
-            self.refreshTotal = 0
-            self.pendingRefreshFeedIDs = []
-            self.refreshingFeedIDs = []
-            self.refreshTask = nil
-            return completed
-        }
-        log("FeedRefresh.AllAndIcons", "end completed=\(finalCompleted)/\(currentFeeds.count)")
-    }
-
     @MainActor
     func cancelRefresh() {
         guard let task = refreshTask, !isStopping else {
