@@ -35,6 +35,7 @@ public extension Iconography {
     }
 
     func recordFailedLookup(_ cacheKey: String) {
+        guard !Task.isCancelled else { return }
         failedLookups[cacheKey] = Date()
         persistFailedLookups()
     }
