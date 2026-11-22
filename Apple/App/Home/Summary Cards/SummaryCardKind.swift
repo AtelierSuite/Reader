@@ -51,20 +51,6 @@ enum SummaryCardKind: CaseIterable {
         }
     }
 
-    var isForcedVisible: Bool {
-        UserDefaults.standard.bool(forKey: forceVisibleStorageKey)
-    }
-
-    /// Cheap gates that decide whether the (expensive) article query is worth
-    /// running at all: model availability, the user's toggle, and time window.
-    var passesDisplayGates: Bool {
-        let defaults = UserDefaults.standard
-        if defaults.bool(forKey: forceVisibleStorageKey) { return true }
-        return AppleIntelligenceAvailability.isAvailable
-            && defaults.bool(forKey: enabledStorageKey)
-            && isInTimeWindow(Date())
-    }
-
     var title: LocalizedStringResource {
         switch self {
         case .todaysSummary: LocalizedStringResource("TodaysSummary.Title", table: "Home")

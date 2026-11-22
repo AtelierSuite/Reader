@@ -31,15 +31,4 @@ public extension RedditProvider {
             return empty
         }
     }
-
-    nonisolated static func extractAtomLogoURL(from feedXML: String) -> String? {
-        guard let openRange = feedXML.range(of: "<logo>"),
-              let closeRange = feedXML.range(
-                of: "</logo>",
-                range: openRange.upperBound..<feedXML.endIndex
-              ) else { return nil }
-        let logoURL = unescapeAmpersand(String(feedXML[openRange.upperBound..<closeRange.lowerBound]))
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        return logoURL.isEmpty ? nil : logoURL
-    }
 }
