@@ -13,10 +13,6 @@
    - Do not generate localization strings as part of Python scripts.
    - Remember to clean up these working files after you're done.
 5. Ensure that you properly mark out MainActor or nonisolated functions to comply with Swift 6 concurrency checking.
-6. Ensure that you fix all SwiftLint errors, except when:
-  - log(:_, :_) patterns are concerned - use // swiftlint:disable:next line_length to disable warnings/errors for these lines.
-  - Identifier names are deliberately short - e.g. for 2 letter HTML element names or X - use // swiftlint:disable:this identifier_name to disable warnings/errors.
-  - iCloud, iPhone, or iPad is the first name in the type - use // swiftlint:disable:next type_name to disable warnings/errors.
 
 # Copywriting
 
