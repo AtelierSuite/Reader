@@ -5,27 +5,38 @@ nonisolated extension PetalAgentWorkspace {
 
     static let outlineLineLimit = 220
     static let outlineDepthLimit = 14
+    static let mainElementMinimum = 30
     static let markupCharacterLimit = 2400
     static let collapsedTags: Set<String> = ["nav", "footer", "form", "select", "dialog"]
 
     static func outline(of document: Document) -> String {
         guard let body = document.body() else { return "The page has no body." }
+        let root = outlineRoot(in: body)
         var lines: [String] = []
-        appendOutline(of: body, depth: 0, repeatCount: 1, to: &lines)
+        if root !== body {
+            lines.append("Only \(fingerprint(of: root)) is shown; the rest of the page is navigation and chrome.")
+        }
+        appendOutline(of: root, depth: 0, repeatCount: 1, to: &lines)
         if lines.count >= outlineLineLimit {
             lines.append("… outline truncated; use select and inspect to look closer.")
         }
         return lines.joined(separator: "\n")
     }
 
+    private static func outlineRoot(in body: Element) -> Element {
+        guard let main = try? body.select("main, [role=main]").first(),
+              ((try? main.getAllElements().count) ?? 0) >= mainElementMinimum else { return body }
+        return main
+    }
+
     private static func appendOutline(
         of element: Element, depth: Int, repeatCount: Int, to lines: inout [String]
     ) {
         guard lines.count < outlineLineLimit, depth <= outlineDepthLimit else { return }
-        var line = String(repeating: "  ", count: depth) + fingerprint(of: element)
+        var line = String(repeating: "  ", count: depth) + fingerprint(of: element) + attributeHint(for: element)
         if repeatCount > 1 { line += " ×\(repeatCount)" }
         let tagName = element.tagName().lowercased()
-        if collapsedTags.contains(tagName) || (tagName == "header" && depth == 1) {
+        if collapsedTags.contains(tagName) || (tagName == "header" && depth <= 1) {
             lines.append(line + " (collapsed)")
             return
         }
@@ -35,29 +46,50 @@ nonisolated extension PetalAgentWorkspace {
         }
         lines.append(line)
 
-        var index = 0
-        while index < children.count {
-            let child = children[index]
-            let childFingerprint = fingerprint(of: child)
-            var runLength = 1
-            while index + runLength < children.count,
-                  fingerprint(of: children[index + runLength]) == childFingerprint {
-                runLength += 1
-            }
-            appendOutline(of: child, depth: depth + 1, repeatCount: runLength, to: &lines)
-            index += runLength
+        let shapes = children.map(shape(of:))
+        var shapeCounts: [String: Int] = [:]
+        for shape in shapes { shapeCounts[shape, default: 0] += 1 }
+        var shownShapes = Set<String>()
+        for (child, shape) in zip(children, shapes) where shownShapes.insert(shape).inserted {
+            appendOutline(of: child, depth: depth + 1, repeatCount: shapeCounts[shape] ?? 1, to: &lines)
         }
+    }
+
+    /// Siblings with the same tag, classes and direct children are one repeating block, even when other rows sit between them.
+    private static func shape(of element: Element) -> String {
+        fingerprint(of: element) + ">" + element.children().array().map(fingerprint(of:)).joined(separator: ",")
     }
 
     static func fingerprint(of element: Element) -> String {
         var result = element.tagName().lowercased()
         let identifier = element.id()
-        if !identifier.isEmpty, identifier.count <= 24, !identifier.contains(where: \.isNumber) {
+        if isSelectorSafe(identifier), identifier.count <= 24, !identifier.contains(where: \.isNumber) {
             result += "#\(identifier)"
         }
-        let classNames = ((try? element.classNames()) ?? []).filter { !$0.isEmpty }.prefix(4)
+        let classNames = ((try? element.classNames()) ?? []).filter(isSelectorSafe).prefix(3)
         for className in classNames { result += ".\(className)" }
         return result
+    }
+
+    /// Utility classes such as `md:hidden` or `w-[480px]` need escaping in a selector and say nothing about content.
+    private static func isSelectorSafe(_ name: String) -> Bool {
+        guard let first = name.unicodeScalars.first, CharacterSet.letters.contains(first) || first == "_" else {
+            return false
+        }
+        return name.unicodeScalars.allSatisfy { CharacterSet.alphanumerics.contains($0) || $0 == "-" || $0 == "_" }
+    }
+
+    private static func attributeHint(for element: Element) -> String {
+        switch element.tagName().lowercased() {
+        case "time":
+            return element.hasAttr("datetime") ? "[datetime]" : ""
+        case "img":
+            let source = (try? element.attr("src")) ?? ""
+            guard source.isEmpty || source.hasPrefix("data:") else { return "" }
+            return PetalEngine.lazyImageAttributes.first(where: element.hasAttr).map { "[\($0)]" } ?? ""
+        default:
+            return ""
+        }
     }
 
     static func textSample(of element: Element, limit: Int) -> String? {

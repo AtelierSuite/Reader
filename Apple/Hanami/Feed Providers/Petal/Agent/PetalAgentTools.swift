@@ -4,14 +4,14 @@ import FoundationModels
 nonisolated struct PetalOutlineTool: Tool {
     let name = "outline"
     let description = "Shows the page structure as an indented tree of tags, ids and classes. "
-        + "×N marks N identical siblings in a row, of which only the first is expanded."
+        + "×N marks N siblings with the same structure, of which only the first is expanded."
     let workspace: PetalAgentWorkspace
 
     @Generable
     struct Arguments {}
 
     func call(arguments: Arguments) async throws -> String {
-        workspace.perform(.readingPage) { PetalAgentWorkspace.outline(of: $0) }
+        try workspace.perform(.readingPage) { PetalAgentWorkspace.outline(of: $0) }
     }
 }
 
@@ -27,7 +27,7 @@ nonisolated struct PetalSelectTool: Tool {
     }
 
     func call(arguments: Arguments) async throws -> String {
-        workspace.perform(.tryingSelectors) {
+        try workspace.perform(.tryingSelectors) {
             PetalAgentWorkspace.describeMatches(for: arguments.selector, in: $0)
         }
     }
@@ -47,7 +47,7 @@ nonisolated struct PetalInspectTool: Tool {
     }
 
     func call(arguments: Arguments) async throws -> String {
-        workspace.perform(.tryingSelectors) {
+        try workspace.perform(.tryingSelectors) {
             PetalAgentWorkspace.markup(for: arguments.selector, index: arguments.index, in: $0)
         }
     }

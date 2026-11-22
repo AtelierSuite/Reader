@@ -13,13 +13,22 @@ public nonisolated enum PetalAgent {
     public enum Failure: Error {
         case unavailable
         case noWorkingRecipe
+        case toolCallLimitExceeded
+        case timedOut
     }
 
     static let toolCallLimit = 24
+    static let toolCallGrace = 3
+    static let timeLimit: Duration = .seconds(120)
 
     public static var isAvailable: Bool {
         guard #available(iOS 27.0, macOS 27.0, *) else { return false }
         return PrivateCloudComputeLanguageModel().isAvailable
+    }
+
+    /// The HTML the server sends holds no list to work from, so the page has to be rendered first.
+    public static func pageNeedsRendering(html: String, siteURL: String) -> Bool {
+        PetalAgentWorkspace.looksUnrendered(html: html, siteURL: siteURL)
     }
 
     public static func buildRecipe(
@@ -44,23 +53,44 @@ public nonisolated enum PetalAgent {
         log("WebFeedAgent", "start \(siteURL) html=\(html.count)")
         var answer: PetalAgentRecipe?
         do {
-            answer = try await session.respond(
-                to: "Build a feed recipe for \(siteURL).",
-                generating: PetalAgentRecipe.self
-            ).content
+            answer = try await withTimeLimit {
+                try await session.respond(
+                    to: "Build a feed recipe for \(siteURL).",
+                    generating: PetalAgentRecipe.self
+                ).content
+            }
+        } catch is CancellationError {
+            throw CancellationError()
         } catch {
             log("WebFeedAgent", "model failed: \(error) quota=\(PrivateCloudComputeLanguageModel().quotaUsage)")
         }
         let candidates = [answer, workspace.bestTestedRecipe].compactMap { $0 }
-        for candidate in candidates {
-            let recipe = candidate.recipe(name: workspace.pageTitle, siteURL: siteURL)
-            if PetalAgentWorkspace.isUsable(PetalEngine.parse(html: html, recipe: recipe)) {
-                log("WebFeedAgent", "recipe item=\(recipe.itemSelector) title=\(recipe.titleSelector ?? "-")")
-                return recipe
+            .map { candidate -> (recipe: PetalRecipe, score: Int) in
+                let recipe = candidate.recipe(name: workspace.pageTitle, siteURL: siteURL)
+                let articles = PetalEngine.parse(html: html, recipe: recipe)
+                return (recipe, PetalAgentWorkspace.isUsable(articles) ? PetalAgentWorkspace.score(articles) : 0)
             }
+        guard let best = candidates.max(by: { $0.score < $1.score }), best.score > 0 else {
+            log("WebFeedAgent", "no working recipe from \(candidates.count) candidates")
+            throw Failure.noWorkingRecipe
         }
-        log("WebFeedAgent", "no working recipe from \(candidates.count) candidates")
-        throw Failure.noWorkingRecipe
+        log("WebFeedAgent", "recipe item=\(best.recipe.itemSelector) title=\(best.recipe.titleSelector ?? "-")")
+        return best.recipe
+    }
+
+    private static func withTimeLimit<Value: Sendable>(
+        _ operation: @escaping @Sendable () async throws -> Value
+    ) async throws -> Value {
+        try await withThrowingTaskGroup(of: Value.self) { group in
+            group.addTask { try await operation() }
+            group.addTask {
+                try await Task.sleep(for: timeLimit)
+                throw Failure.timedOut
+            }
+            defer { group.cancelAll() }
+            guard let value = try await group.next() else { throw Failure.timedOut }
+            return value
+        }
     }
 
     private static let instructions = """
@@ -85,7 +115,12 @@ public nonisolated enum PetalAgent {
         - titleSelector must match the entry's headline text. linkSelector must match the <a> \
         that leads to the entry; leave it empty when the item element itself is the link.
         - dateSelector should match a <time> element or the element holding the date; set \
-        dateAttribute (for example "datetime") when the date is in an attribute.
+        dateAttribute (for example "datetime") when the date is in an attribute. The outline \
+        marks these as time[datetime].
+        - imageSelector should match the entry's own picture, not an author avatar or icon. \
+        Lazy-loaded images are read from data-src or srcset automatically.
+        - Class names with characters other than letters, digits, - and _ are left out of the \
+        outline; do not use them.
         - Leave a field empty when the page has nothing suitable. Never invent selectors you \
         have not seen in tool output.
         - You have a limited number of tool calls, so do not repeat a call with the same arguments.

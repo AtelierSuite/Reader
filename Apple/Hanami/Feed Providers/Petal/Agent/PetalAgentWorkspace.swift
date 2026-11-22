@@ -31,8 +31,8 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
         lock.withLock { bestTest?.recipe }
     }
 
-    /// Runs `work` against the page unless the run has used up its tool calls.
-    func perform(_ step: PetalAgent.Step, _ work: (Document) -> String) -> String {
+    /// Runs `work` against the page. Past the limit the model is told to answer, and stopped if it keeps calling.
+    func perform(_ step: PetalAgent.Step, _ work: (Document) -> String) throws -> String {
         onStep(step)
         let (callNumber, output) = lock.withLock {
             toolCallCount += 1
@@ -40,15 +40,15 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
             return (toolCallCount, output)
         }
         log("WebFeedAgent", "tool call \(callNumber) \(step): \(output.prefix(300))")
+        guard callNumber <= PetalAgent.toolCallLimit + PetalAgent.toolCallGrace else {
+            throw PetalAgent.Failure.toolCallLimitExceeded
+        }
         return output
     }
 
     func recordTest(of recipe: PetalAgentRecipe, articles: [ParsedArticle]) {
         guard Self.isUsable(articles) else { return }
-        let score = articles.reduce(0) { total, article in
-            total + 2 + (article.publishedDate == nil ? 0 : 1) + (article.imageURL == nil ? 0 : 1)
-                + (article.summary == nil ? 0 : 1)
-        }
+        let score = Self.score(articles)
         lock.withLock {
             if score > (bestTest?.score ?? 0) {
                 bestTest = (recipe, score)
@@ -56,7 +56,23 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
         }
     }
 
+    static func score(_ articles: [ParsedArticle]) -> Int {
+        articles.reduce(0) { total, article in
+            total + 2 + (article.publishedDate == nil ? 0 : 1) + (article.imageURL == nil ? 0 : 1)
+                + (article.summary == nil ? 0 : 1)
+        }
+    }
+
     static func isUsable(_ articles: [ParsedArticle]) -> Bool {
         articles.count >= 2 && articles.allSatisfy { !$0.title.isEmpty && !$0.url.isEmpty }
     }
+
+    /// A page whose list is drawn by scripts has almost no links in the HTML the server sends.
+    static func looksUnrendered(html: String, siteURL: String) -> Bool {
+        guard let document = try? SwiftSoup.parse(html, siteURL), let body = document.body() else { return true }
+        _ = try? body.select("nav, header, footer, script, style, noscript").remove()
+        return ((try? body.select("a[href]").count) ?? 0) < unrenderedLinkMinimum
+    }
+
+    static let unrenderedLinkMinimum = 8
 }
