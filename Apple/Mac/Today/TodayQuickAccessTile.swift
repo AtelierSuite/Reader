@@ -33,6 +33,10 @@ struct TodayQuickAccessTile: View {
         .brightness(isHoveringIcon || isHoveringTitle ? 0.08 : 0)
     }
 
+    private var primaryStyle: AnyShapeStyle {
+        section?.providerStyle ?? AnyShapeStyle(.tint)
+    }
+
     private var symbol: Image {
         if let providerSymbolName = section?.providerSymbolName {
             Image(providerSymbolName)
@@ -44,7 +48,7 @@ struct TodayQuickAccessTile: View {
     private var iconView: some View {
         symbol
             .font(.system(size: 26))
-            .foregroundStyle(section?.providerStyle ?? AnyShapeStyle(.tint))
+            .foregroundStyle(primaryStyle, section?.providerStyle == nil ? primaryStyle : AnyShapeStyle(.white))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(section?.providerTileTint.map(AnyShapeStyle.init) ?? AnyShapeStyle(.quinary))
     }
