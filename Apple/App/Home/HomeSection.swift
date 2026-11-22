@@ -7,6 +7,7 @@ enum HomeSection: String, CaseIterable, Identifiable {
     case all
     case feeds
     case podcasts
+    case appStore
     case bluesky
     case fediverse
     case instagram
@@ -36,6 +37,7 @@ enum HomeSection: String, CaseIterable, Identifiable {
         case .all: String(localized: "Shared.AllArticles")
         case .feeds: String(localized: "FeedSection.Feeds", table: "Feeds")
         case .podcasts: String(localized: "FeedSection.Podcasts", table: "Feeds")
+        case .appStore: String(localized: "FeedSection.AppStore", table: "Feeds")
         case .bluesky: String(localized: "FeedSection.Bluesky", table: "Feeds")
         case .fediverse: String(localized: "FeedSection.Fediverse", table: "Feeds")
         case .instagram: String(localized: "FeedSection.Instagram", table: "Feeds")
@@ -104,6 +106,7 @@ enum HomeSection: String, CaseIterable, Identifiable {
         case .today, .all: nil
         case .feeds: .feeds
         case .podcasts: .podcasts
+        case .appStore: .appStore
         case .bluesky: .bluesky
         case .fediverse: .fediverse
         case .instagram: .instagram

@@ -17,7 +17,7 @@ extension TodayQuickAccessItem {
             ? feedManager.feeds.filter { feedManager.focusedFeedIDs.contains($0.id) }
             : feedManager.feeds
         let followedSections = Set(feeds.map(\.feedSection))
-        let sections = FeedSection.allCases.filter { showsAllSections || followedSections.contains($0) }
+        let sections = FeedSection.displayOrder.filter { showsAllSections || followedSections.contains($0) }
         let lists = (feedManager.isFocusEffective
             ? feedManager.lists.filter { feedManager.isListInFocus($0) }
             : feedManager.lists)

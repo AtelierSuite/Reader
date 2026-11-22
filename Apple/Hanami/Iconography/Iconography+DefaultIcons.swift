@@ -48,6 +48,7 @@ public extension Iconography {
         case .telegram: domain = "telegram.org"
         case .tumblr: domain = "tumblr.com"
         case .zenn: domain = "zenn.dev"
+        case .appStore: domain = "apps.apple.com"
         case .fediverse: return fediverseIcon()
         case .feeds, .podcasts, .vimeo, .niconico: return nil
         }

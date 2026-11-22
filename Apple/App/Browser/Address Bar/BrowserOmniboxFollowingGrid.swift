@@ -47,7 +47,7 @@ struct BrowserOmniboxFollowingGrid: View {
     private var gridContent: some View {
         VStack(alignment: .leading, spacing: 24) {
             let groupedFeeds = feeds.groupedByFeedSection()
-            ForEach(FeedSection.allCases, id: \.self) { section in
+            ForEach(FeedSection.displayOrder, id: \.self) { section in
                 if let sectionFeeds = groupedFeeds[section], !sectionFeeds.isEmpty {
                     sectionGrid(section, feeds: sectionFeeds)
                 }

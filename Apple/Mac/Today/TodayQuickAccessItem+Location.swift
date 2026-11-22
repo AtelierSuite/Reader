@@ -6,7 +6,7 @@ extension TodayQuickAccessItem {
     /// Every Quick Access item Today can offer right now, in the default order.
     static func macItems(in feedManager: FeedManager) -> [TodayQuickAccessItem] {
         let followedSections = Set(feedManager.feeds.map(\.feedSection))
-        let sections = FeedSection.allCases.filter { followedSections.contains($0) }
+        let sections = FeedSection.displayOrder.filter { followedSections.contains($0) }
         let lists = feedManager.lists
             .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
         return sections.map { .feedSection($0) }

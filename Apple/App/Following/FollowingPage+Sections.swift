@@ -25,7 +25,7 @@ extension FollowingPage {
         LazyVStack(alignment: .leading, spacing: 24) {
             focusBanner
             let groupedFeeds = filteredFeeds.groupedByFeedSection()
-            ForEach(FeedSection.allCases, id: \.self) { section in
+            ForEach(FeedSection.displayOrder, id: \.self) { section in
                 feedSection(section, feeds: groupedFeeds[section] ?? [])
             }
         }
