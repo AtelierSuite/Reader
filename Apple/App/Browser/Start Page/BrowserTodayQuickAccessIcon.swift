@@ -20,9 +20,9 @@ struct BrowserTodayQuickAccessIcon: View {
 
     var body: some View {
         symbol
-            .font(.system(size: size * 24 / 56))
-            .foregroundStyle(.tint)
+            .font(.system(size: size * 28 / 56))
+            .foregroundStyle(section?.providerStyle ?? AnyShapeStyle(.tint))
             .frame(width: size, height: size)
-            .quickAccessFlatTile(cornerRadius: cornerRadius)
+            .quickAccessFlatTile(cornerRadius: cornerRadius, tint: section?.providerTileTint)
     }
 }

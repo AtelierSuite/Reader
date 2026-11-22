@@ -43,9 +43,9 @@ struct TodayQuickAccessTile: View {
 
     private var iconView: some View {
         symbol
-            .font(.system(size: 22))
-            .foregroundStyle(.tint)
+            .font(.system(size: 26))
+            .foregroundStyle(section?.providerStyle ?? AnyShapeStyle(.tint))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.quinary)
+            .background(section?.providerTileTint.map(AnyShapeStyle.init) ?? AnyShapeStyle(.quinary))
     }
 }
