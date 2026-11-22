@@ -122,6 +122,7 @@ struct ActionExtensionView: View {
                                         .font(.title2)
                                 }
                                 .buttonStyle(.borderless)
+                                .accessibilityLabel(String(localized: "AddFeed.Follow", table: "Feeds"))
                             }
                         }
                     }

@@ -17,7 +17,7 @@ struct AddFeedFromURLIntent: AppIntent {
     var url: URL
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Add feed from \(\.$url)")
+        Summary("Follow feed from \(\.$url)")
     }
 
     func perform() async throws -> some IntentResult & ReturnsValue<Bool> {

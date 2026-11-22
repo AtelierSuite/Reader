@@ -2737,61 +2737,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Durchsuche deine Inhalte, springe zu jedem Feed oder jeder Liste oder gib eine Website-Adresse ein, um ihre Feeds hinzuzufügen."
+            "value" : "Durchsuche deine Inhalte, springe zu jedem Feed oder jeder Liste oder gib eine Website-Adresse ein, um ihren Feeds zu folgen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search your content, jump to any feed or list, or type a site address to add its feeds."
+            "value" : "Search your content, jump to any feed or list, or type a site address to follow its feeds."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recherchez dans vos contenus, accédez à n’importe quel flux ou liste, ou saisissez l’adresse d’un site pour ajouter ses flux."
+            "value" : "Recherchez dans vos contenus, accédez à n’importe quel flux ou liste, ou saisissez l’adresse d’un site pour suivre ses flux."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cerca tra i tuoi contenuti, vai a qualsiasi feed o elenco, oppure inserisci l’indirizzo di un sito per aggiungerne i feed."
+            "value" : "Cerca tra i tuoi contenuti, vai a qualsiasi feed o elenco, oppure inserisci l’indirizzo di un sito per seguirne i feed."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "コンテンツを検索したり、フィードやリストに移動したり、サイトのアドレスを入力してそのフィードを追加したりできます。"
+            "value" : "コンテンツを検索したり、フィードやリストに移動したり、サイトのアドレスを入力してそのフィードをフォローしたりできます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "콘텐츠를 검색하거나, 원하는 피드나 목록으로 이동하거나, 사이트 주소를 입력해 해당 피드를 추가할 수 있습니다."
+            "value" : "콘텐츠를 검색하거나, 원하는 피드나 목록으로 이동하거나, 사이트 주소를 입력해 해당 피드를 팔로우할 수 있습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Doorzoek je inhoud, ga naar elke feed of lijst, of voer een siteadres in om de feeds ervan toe te voegen."
+            "value" : "Doorzoek je inhoud, ga naar elke feed of lijst, of voer een siteadres in om de feeds ervan te volgen."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tìm kiếm nội dung, chuyển đến bất kỳ nguồn cấp hay danh sách nào, hoặc nhập địa chỉ trang web để thêm nguồn cấp của trang đó."
+            "value" : "Tìm kiếm nội dung, chuyển đến bất kỳ nguồn cấp hay danh sách nào, hoặc nhập địa chỉ trang web để theo dõi nguồn cấp của trang đó."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "搜索你的内容，跳转到任意订阅源或列表，或输入网站地址以添加其订阅源。"
+            "value" : "搜索你的内容，跳转到任意订阅源或列表，或输入网站地址以关注其订阅源。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "搜尋你的內容，跳至任何訂閱源或列表，或輸入網站位址以加入其訂閱源。"
+            "value" : "搜尋你的內容，跳至任何訂閱源或列表，或輸入網站位址以追蹤其訂閱源。"
           }
         }
       }

@@ -4686,61 +4686,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed löschen"
+            "value" : "Feed nicht mehr folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete Feed"
+            "value" : "Unfollow Feed"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supprimer le flux"
+            "value" : "Ne plus suivre le flux"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina feed"
+            "value" : "Non seguire più il feed"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フィードを削除"
+            "value" : "フォローを解除"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "피드 삭제"
+            "value" : "피드 팔로우 취소"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed verwijderen"
+            "value" : "Feed ontvolgen"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Xóa nguồn cấp"
+            "value" : "Bỏ theo dõi nguồn cấp"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "删除订阅源"
+            "value" : "取消订阅"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除訂閱源"
+            "value" : "取消訂閱"
           }
         }
       }
@@ -5336,25 +5336,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alle Inhalte von %lld Feeds werden ebenfalls gelöscht."
+            "value" : "Alle Inhalte von %lld Feeds werden ebenfalls entfernt."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All content from %lld feeds will also be deleted."
+            "value" : "All content from %lld feeds will also be removed."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tout le contenu de %lld flux sera également supprimé."
+            "value" : "Tout le contenu de %lld flux sera également retiré."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Anche tutti i contenuti di %lld feed verranno eliminati."
+            "value" : "Anche tutti i contenuti di %lld feed verranno rimossi."
           }
         },
         "ja" : {
@@ -5366,7 +5366,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld개 피드의 모든 콘텐츠도 삭제됩니다."
+            "value" : "%lld개 피드의 모든 콘텐츠도 제거됩니다."
           }
         },
         "nl" : {
@@ -5384,13 +5384,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 个订阅源的所有内容也将被删除。"
+            "value" : "%lld 个订阅源的所有内容也将被移除。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 個訂閱源的所有內容也將被刪除。"
+            "value" : "%lld 個訂閱源的所有內容也將被移除。"
           }
         }
       }
@@ -5401,61 +5401,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds löschen?"
+            "value" : "Feeds nicht mehr folgen?"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete Feeds?"
+            "value" : "Unfollow Feeds?"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supprimer les flux ?"
+            "value" : "Ne plus suivre les flux ?"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminare i feed?"
+            "value" : "Non seguire più i feed?"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フィードを削除しますか？"
+            "value" : "フィードのフォローを解除しますか？"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "피드를 삭제할까요?"
+            "value" : "피드 팔로우를 취소하시겠습니까?"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds verwijderen?"
+            "value" : "Feeds ontvolgen?"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Xóa nguồn cấp?"
+            "value" : "Bỏ theo dõi các nguồn cấp?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "删除订阅源？"
+            "value" : "取消订阅这些订阅源？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除訂閱源？"
+            "value" : "取消訂閱這些訂閱源？"
           }
         }
       }
@@ -6571,61 +6571,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ausgewählte Feeds löschen"
+            "value" : "Ausgewählten Feeds nicht mehr folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete Selected Feeds"
+            "value" : "Unfollow Selected Feeds"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supprimer les flux sélectionnés"
+            "value" : "Ne plus suivre les flux sélectionnés"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina feed selezionati"
+            "value" : "Non seguire più i feed selezionati"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選択したフィードを削除"
+            "value" : "選択したフィードのフォローを解除"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "선택한 피드 삭제"
+            "value" : "선택한 피드 팔로우 취소"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geselecteerde feeds verwijderen"
+            "value" : "Geselecteerde feeds ontvolgen"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Xóa nguồn cấp đã chọn"
+            "value" : "Bỏ theo dõi nguồn cấp đã chọn"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "删除选中的订阅源"
+            "value" : "取消订阅选中的订阅源"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除選擇的訂閱源"
+            "value" : "取消訂閱選擇的訂閱源"
           }
         }
       }
@@ -10471,61 +10471,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In App hinzufügen"
+            "value" : "In App folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add in App"
+            "value" : "Follow in App"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouter dans l’app"
+            "value" : "Suivre dans l’app"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi nell’app"
+            "value" : "Segui nell’app"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アプリで追加"
+            "value" : "アプリでフォロー"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱에서 추가"
+            "value" : "앱에서 팔로우"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toevoegen in app"
+            "value" : "Volgen in app"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm trong ứng dụng"
+            "value" : "Theo dõi trong ứng dụng"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在应用中添加"
+            "value" : "在应用中关注"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 App 中加入"
+            "value" : "在 App 中追蹤"
           }
         }
       }
@@ -10536,61 +10536,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zum Hinzufügen in Reader anmelden"
+            "value" : "Zum Folgen in Reader anmelden"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sign in with Reader to add"
+            "value" : "Sign in with Reader to follow"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connectez-vous dans Reader pour ajouter"
+            "value" : "Connectez-vous dans Reader pour suivre"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Accedi in Reader per aggiungere"
+            "value" : "Accedi in Reader per seguire"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "追加するにはReaderでサインイン"
+            "value" : "フォローするにはReaderでサインイン"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "추가하려면 Reader에서 로그인"
+            "value" : "팔로우하려면 Reader에서 로그인"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Log in bij Reader om toe te voegen"
+            "value" : "Log in bij Reader om te volgen"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đăng nhập bằng Reader để thêm"
+            "value" : "Đăng nhập bằng Reader để theo dõi"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登录 Reader 后添加"
+            "value" : "登录 Reader 后关注"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登入 Reader 後加入"
+            "value" : "登入 Reader 後追蹤"
           }
         }
       }
@@ -11056,61 +11056,126 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieser Feed konnte nicht hinzugefügt werden."
+            "value" : "Diesem Feed kann nicht gefolgt werden."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This feed couldn’t be added."
+            "value" : "This feed couldn’t be followed."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impossible d’ajouter ce flux."
+            "value" : "Impossible de suivre ce flux."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impossibile aggiungere questo feed."
+            "value" : "Impossibile seguire questo feed."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このフィードを追加できませんでした。"
+            "value" : "このフィードをフォローできませんでした。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 피드를 추가할 수 없습니다."
+            "value" : "이 피드를 팔로우할 수 없습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze feed kan niet worden toegevoegd."
+            "value" : "Deze feed kan niet worden gevolgd."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không thể thêm nguồn cấp này."
+            "value" : "Không thể theo dõi nguồn cấp này."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "无法添加此订阅源。"
+            "value" : "无法关注此订阅源。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無法加入此訂閱源。"
+            "value" : "無法追蹤此訂閱源。"
+          }
+        }
+      }
+    },
+    "AddFeed.Follow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folgen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivre"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segui"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フォロー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팔로우"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volgen"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theo dõi"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关注"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追蹤"
           }
         }
       }
