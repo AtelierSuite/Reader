@@ -9,6 +9,7 @@ struct PodcastEpisodeView: View {
 
     @Environment(FeedManager.self) var feedManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) var openURL
     let article: Article
     var showsDismissButton: Bool = false
     let audioPlayer: AudioPlayer
