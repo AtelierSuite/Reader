@@ -21,9 +21,18 @@ struct BrowserDiscoveredFeedCell: View {
             VStack(spacing: 6) {
                 iconView
                     .frame(width: Self.iconSize, height: Self.iconSize)
+                    .overlay {
+                        if isAdding {
+                            RoundedRectangle(cornerRadius: Self.iconCornerRadius)
+                                .fill(.background.opacity(0.6))
+                            ProgressView()
+                        }
+                    }
                     .overlay(alignment: .bottomTrailing) {
-                        statusBadge
-                            .offset(x: 6, y: 6)
+                        if !isAdding {
+                            addBadge
+                                .offset(x: 6, y: 6)
+                        }
                     }
                 Text(feed.title)
                     .font(.caption)
@@ -50,18 +59,10 @@ struct BrowserDiscoveredFeedCell: View {
         }
     }
 
-    @ViewBuilder
-    private var statusBadge: some View {
-        Group {
-            if isAdding {
-                ProgressView()
-                    .controlSize(.small)
-            } else {
-                Image(systemName: "plus.circle.fill")
-                    .foregroundStyle(.white, Color.accentColor)
-            }
-        }
-        .font(.title3)
+    private var addBadge: some View {
+        Image(systemName: "plus.circle.fill")
+            .foregroundStyle(.white, Color.accentColor)
+            .font(.title3)
         .frame(width: 24, height: 24)
         .background(.background, in: .circle)
     }
