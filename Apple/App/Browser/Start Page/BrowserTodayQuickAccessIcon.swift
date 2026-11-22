@@ -25,6 +25,7 @@ struct BrowserTodayQuickAccessIcon: View {
     var body: some View {
         symbol
             .font(.system(size: size * 28 / 56))
+            .imageScale(.medium)
             .foregroundStyle(primaryStyle, section?.providerStyle == nil ? primaryStyle : AnyShapeStyle(.white))
             .frame(width: size, height: size)
             .quickAccessFlatTile(cornerRadius: cornerRadius, tint: section?.providerTileTint)
