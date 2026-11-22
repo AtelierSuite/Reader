@@ -125,67 +125,67 @@
         }
       }
     },
-    "Add feed from ${url}" : {
+    "Follow feed from ${url}" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed von ${url} hinzufügen"
+            "value" : "Feed von ${url} folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add feed from ${url}"
+            "value" : "Follow feed from ${url}"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouter un flux depuis ${url}"
+            "value" : "Suivre un flux depuis ${url}"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi feed da ${url}"
+            "value" : "Segui feed da ${url}"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "${url}からフィードを追加"
+            "value" : "${url}のフィードをフォロー"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "${url}에서 피드 추가"
+            "value" : "${url}에서 피드 팔로우"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed toevoegen van ${url}"
+            "value" : "Feed volgen van ${url}"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm nguồn cấp từ ${url}"
+            "value" : "Theo dõi nguồn cấp từ ${url}"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "从${url}添加订阅源"
+            "value" : "从${url}关注订阅源"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從${url}加入訂閱源"
+            "value" : "從${url}追蹤訂閱源"
           }
         }
       }

@@ -32,6 +32,18 @@ extension PodcastEpisodeView {
                 }
             }
 
+            if article.hasLink, let articleURL = URL(string: article.url) {
+                Divider()
+                Button {
+                    openURL(articleURL)
+                } label: {
+                    Label(
+                        String(localized: "Article.OpenInBrowser", table: "Articles"),
+                        systemImage: "arrow.up.forward.square"
+                    )
+                }
+            }
+
             if let shareURL = URL(string: article.url) {
                 Divider()
                 ShareLink(item: shareURL) {

@@ -122,6 +122,7 @@ struct ActionExtensionView: View {
                                         .font(.title2)
                                 }
                                 .buttonStyle(.borderless)
+                                .accessibilityLabel(String(localized: "AddFeed.Follow", table: "Feeds"))
                             }
                         }
                     }
@@ -211,11 +212,11 @@ struct ActionExtensionView: View {
         }
     }
 
-    /// X and Instagram feeds need an in-app login session, so they can't be
-    /// added from the extension; the user is sent to the app to sign in.
+    /// X and Instagram feeds need an in-app login session, and adult store feeds
+    /// an in-app age check, so the user is sent to the app to add them.
     private func requiresAppToAdd(_ url: String) -> Bool {
         XProvider.isFeedURL(url) || InstagramProvider.isFeedURL(url)
-            || AdultFeedSites.site(forFeedURL: url) != nil
+            || FeedProviderRegistry.adultSite(forFeedURL: url) != nil
     }
 
     private func openAppToAdd(_ feed: DiscoveredFeed) {

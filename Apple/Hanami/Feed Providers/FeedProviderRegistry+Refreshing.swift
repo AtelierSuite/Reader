@@ -11,7 +11,8 @@ public extension FeedProviderRegistry {
         TelegramProvider.self,
         AppStoreProvider.self,
         PixivProvider.self,
-        DMMProvider.self
+        DMMProvider.self,
+        DLsiteProvider.self
     ]
 
     static func refreshableProvider(forFeedURL url: String) -> (any WebFeedProvider.Type)? {

@@ -5,9 +5,7 @@ import Hanami
 struct XEmbedBlockView: View {
 
     let url: URL
-    /// Routes the tap so the parent can honour the user's
-    /// `Reading.LinkOpenMode` (browser vs in-app viewer). Falls back to the
-    /// system browser when no handler is supplied.
+    /// Routes the tap so the parent can honour Open Content In. Falls back to the system browser when nil.
     var onTap: ((URL) -> Void)?
 
     @State private var tweet: ParsedTweet?

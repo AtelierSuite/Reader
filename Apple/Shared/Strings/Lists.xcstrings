@@ -1610,61 +1610,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Möchtest du \"%@\" wirklich löschen? Die Feeds in dieser Liste werden nicht gelöscht."
+            "value" : "Möchtest du \"%@\" wirklich löschen? Du folgst den Feeds in dieser Liste weiterhin."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Are you sure you want to delete \"%@\"? Feeds in this list will not be deleted."
+            "value" : "Are you sure you want to delete \"%@\"? You will still follow the feeds in this list."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voulez-vous vraiment supprimer « %@ » ? Les flux de cette liste ne seront pas supprimés."
+            "value" : "Voulez-vous vraiment supprimer « %@ » ? Vous suivrez toujours les flux de cette liste."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vuoi davvero eliminare \"%@\"? I feed in questa lista non saranno eliminati."
+            "value" : "Vuoi davvero eliminare \"%@\"? Continuerai a seguire i feed in questa lista."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「%@」を削除しますか？このリスト内のフィードは削除されません。"
+            "value" : "「%@」を削除しますか？このリスト内のフィードのフォローは解除されません。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\"%@\"을(를) 삭제하시겠습니까? 이 리스트의 피드는 삭제되지 않습니다."
+            "value" : "\"%@\"을(를) 삭제하시겠습니까? 이 리스트의 피드는 계속 팔로우됩니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Weet je zeker dat je \"%@\" wilt verwijderen? Feeds in deze lijst worden niet verwijderd."
+            "value" : "Weet je zeker dat je \"%@\" wilt verwijderen? Je blijft de feeds in deze lijst volgen."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bạn có chắc muốn xóa \"%@\"? Các nguồn cấp trong danh sách sẽ không bị xóa."
+            "value" : "Bạn có chắc muốn xóa \"%@\"? Bạn vẫn sẽ theo dõi các nguồn cấp trong danh sách."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "确定要删除“%@”吗？此列表中的订阅源不会被删除。"
+            "value" : "确定要删除“%@”吗？你仍会订阅此列表中的订阅源。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "確定要刪除「%@」嗎？此列表中的訂閱源不會被刪除。"
+            "value" : "確定要刪除「%@」嗎？你仍會訂閱此列表中的訂閱源。"
           }
         }
       }

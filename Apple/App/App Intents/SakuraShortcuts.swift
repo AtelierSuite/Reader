@@ -40,7 +40,7 @@ struct SakuraShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: AddFeedFromURLIntent(),
             phrases: [
-                "Add feed to \(.applicationName)"
+                "Follow feed in \(.applicationName)"
             ],
             shortTitle: LocalizedStringResource("AddFeedFromURL.ShortTitle", table: "AppIntents"),
             systemImageName: "plus.rectangle.on.folder"

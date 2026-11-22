@@ -218,20 +218,19 @@ extension OnboardingView {
     }
 
     func addFeed(_ discovered: DiscoveredFeed) {
-        guard AdultFeedSites.site(forFeedURL: discovered.url) != nil else {
-            insertFeed(discovered)
+        guard FeedProviderRegistry.adultSite(forFeedURL: discovered.url) == nil else {
+            Task {
+                switch await AdultContentGate.authorizeInForeground(feedURL: discovered.url) {
+                case .success: addFeedWithoutAgeCheck(discovered)
+                case .failure(let error): feedErrorMessage = error.localizedMessage
+                }
+            }
             return
         }
-        Task {
-            if let denialMessage = await AdultFeedAuthorization.denialMessage(forFeedURL: discovered.url) {
-                feedErrorMessage = denialMessage
-            } else {
-                insertFeed(discovered)
-            }
-        }
+        addFeedWithoutAgeCheck(discovered)
     }
 
-    private func insertFeed(_ discovered: DiscoveredFeed) {
+    private func addFeedWithoutAgeCheck(_ discovered: DiscoveredFeed) {
         do {
             try feedManager.addFeed(
                 url: discovered.url,

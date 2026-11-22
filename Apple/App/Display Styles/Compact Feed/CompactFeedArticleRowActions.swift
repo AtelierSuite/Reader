@@ -7,11 +7,9 @@ struct CompactFeedArticleRowActions: View {
 
     @Environment(FeedManager.self) private var feedManager
     @Environment(\.openURL) private var openURL
-    @AppStorage("YouTube.OpenMode") private var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
 
     let article: Article
     let opensInExternalApp: Bool
-    var onShowSafari: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -38,13 +36,11 @@ struct CompactFeedArticleRowActions: View {
     @ViewBuilder
     private var openButton: some View {
         Button {
-            if article.isYouTubeURL && youTubeOpenMode == .inAppPlayer {
+            if article.isYouTubeURL && ContentOpenMode.opensInReader(article.url) {
                 feedManager.markRead(article)
                 MediaPresenter.shared.presentYouTube(article)
-            } else if article.isYouTubeURL && youTubeOpenMode == .youTubeApp {
+            } else if article.isYouTubeURL {
                 YouTubeHelper.openInApp(url: article.url)
-            } else if article.isYouTubeURL && youTubeOpenMode == .browser {
-                onShowSafari()
             } else if let url = URL(string: article.url) {
                 openURL(url)
             }

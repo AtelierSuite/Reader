@@ -8,61 +8,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed hinzufügen"
+            "value" : "Feed folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Add Feed"
+            "value" : "Follow Feed"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouter un flux"
+            "value" : "Suivre un flux"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi feed"
+            "value" : "Segui feed"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フィードを追加"
+            "value" : "フィードをフォロー"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "피드 추가"
+            "value" : "피드 팔로우"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed toevoegen"
+            "value" : "Feed volgen"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm nguồn cấp"
+            "value" : "Theo dõi nguồn cấp"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "添加订阅源"
+            "value" : "关注订阅源"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入訂閱源"
+            "value" : "追蹤訂閱源"
           }
         }
       }
@@ -74,61 +74,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed hinzufügen"
+            "value" : "Feed folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Add Feed"
+            "value" : "Follow Feed"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouter un flux"
+            "value" : "Suivre un flux"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi feed"
+            "value" : "Segui feed"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フィードを追加"
+            "value" : "フィードをフォロー"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "피드 추가"
+            "value" : "피드 팔로우"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feed toevoegen"
+            "value" : "Feed volgen"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm nguồn cấp"
+            "value" : "Theo dõi nguồn cấp"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "添加订阅源"
+            "value" : "关注订阅源"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入訂閱源"
+            "value" : "追蹤訂閱源"
           }
         }
       }

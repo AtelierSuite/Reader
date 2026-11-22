@@ -18,7 +18,7 @@ struct AddFeedFromURLIntent: AppIntent {
     var url: URL
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Add feed from \(\.$url)")
+        Summary("Follow feed from \(\.$url)")
     }
 
     func perform() async throws -> some IntentResult & ReturnsValue<Bool> {
@@ -36,7 +36,7 @@ struct AddFeedFromURLIntent: AppIntent {
             if database.feedExists(url: candidate.url) {
                 return .result(value: false)
             }
-            if let site = AdultFeedSites.site(forFeedURL: candidate.url), await !hasAgeCookie(for: site) {
+            if await !hasAgeCookieIfAdult(feedURL: candidate.url) {
                 return .result(value: false)
             }
             do {
@@ -69,7 +69,8 @@ struct AddFeedFromURLIntent: AppIntent {
     }
 
     @MainActor
-    private func hasAgeCookie(for site: AdultSite) async -> Bool {
+    private func hasAgeCookieIfAdult(feedURL: String) async -> Bool {
+        guard let site = FeedProviderRegistry.adultSite(forFeedURL: feedURL) else { return true }
         let name = AdultContentGate.cookie(for: site).name
         let cookies = await WKWebsiteDataStore.default().httpCookieStore.allCookies()
         return cookies.contains { $0.name == name && ($0.expiresDate ?? .distantFuture) > .now }
