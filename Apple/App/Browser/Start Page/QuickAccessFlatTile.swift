@@ -15,9 +15,6 @@ private struct QuickAccessFlatTileModifier: ViewModifier {
                 }
             }
             .clipShape(shape)
-            .overlay {
-                shape.strokeBorder(.regularMaterial, lineWidth: 1.5)
-            }
             .wiggleRotation()
     }
 }
