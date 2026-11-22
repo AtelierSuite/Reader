@@ -28,17 +28,15 @@ struct BrowserOmniboxDiscoveredSection: View {
     var body: some View {
         if isVisible {
             VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 8) {
-                    BrowserOmniboxSectionHeader(
-                        title: String(localized: "AddFeed.Section.Discovered", table: "Feeds")
-                    )
-                    if session.isSearching {
-                        ProgressView()
-                            .controlSize(.small)
-                    }
-                }
+                BrowserOmniboxSectionHeader(
+                    title: String(localized: "AddFeed.Section.Discovered", table: "Feeds")
+                )
                 .padding(.horizontal, horizontalPadding)
-                if !session.isSearching {
+                if session.isSearching {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, minHeight: 96)
+                        .padding(.vertical, 8)
+                } else {
                     LazyVGrid(columns: BrowserOmniboxFeedGrid.columns, alignment: .leading, spacing: 16) {
                         ForEach(unfollowedFeeds) { feed in
                             BrowserDiscoveredFeedCell(
