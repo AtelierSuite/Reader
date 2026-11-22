@@ -2,8 +2,8 @@ import Foundation
 import Hanami
 
 /// How a piece of content opens and whether opening it marks it read, worked
-/// out as iOS does: a mode the link asked for, then the bookmark folder's
-/// choice on Bookmarks pages, then the feed's own setting.
+/// out as iOS does: a mode the link asked for, then excluded sites, then the
+/// bookmark folder's or feed's own choice, then Open Content In.
 struct ContentOpening {
 
     let mode: FeedOpenMode
@@ -18,10 +18,13 @@ struct ContentOpening {
         let folderOptions = Self.folderOptions(for: article, feedManager: feedManager, context: context)
         if let requestedMode {
             mode = requestedMode.feedOpenMode
-        } else if let folderMode = folderOptions?.openMode {
-            mode = folderMode
+        } else if article.isPodcastEpisode {
+            mode = folderOptions?.openMode ?? Self.feedOpenMode(for: article) ?? .inAppViewer
         } else {
-            mode = Self.feedOpenMode(for: article)
+            mode = ContentOpenMode.resolvedMode(
+                for: article.url,
+                preferredMode: folderOptions?.openMode ?? Self.feedOpenMode(for: article)
+            )
         }
         marksRead = !article.isEphemeral && (folderOptions?.marksReadOnOpen ?? true)
     }
@@ -31,12 +34,12 @@ struct ContentOpening {
         mode == .browser
     }
 
-    private static func feedOpenMode(for article: Article) -> FeedOpenMode {
+    private static func feedOpenMode(for article: Article) -> FeedOpenMode? {
         guard !article.isEphemeral,
               let raw = UserDefaults.standard.string(forKey: "openMode-\(article.feedID)") else {
-            return .inAppViewer
+            return nil
         }
-        return FeedOpenMode(rawValue: raw) ?? .inAppViewer
+        return FeedOpenMode(rawValue: raw)
     }
 
     /// Folder choices only apply to content opened from Bookmarks.

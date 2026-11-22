@@ -5,8 +5,7 @@ struct EmbedBlockView: View {
 
     let provider: EmbedProvider
     let url: URL
-    /// Routes the tap so the parent can honour the user's
-    /// `Reading.LinkOpenMode`. Falls back to the system browser when nil.
+    /// Routes the tap so the parent can honour Open Content In. Falls back to the system browser when nil.
     var onTap: ((URL) -> Void)?
     @Environment(\.openURL) private var openURL
 

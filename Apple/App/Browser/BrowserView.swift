@@ -8,7 +8,6 @@ struct BrowserView: View {
 
     @Environment(FeedManager.self) var feedManager
 
-    @AppStorage("YouTube.OpenMode") var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
     @State var store = BrowserTabStore.restored()
     @State private var slots = BrowserPageSlots()
     @State private var favourites = BrowserFavourites()

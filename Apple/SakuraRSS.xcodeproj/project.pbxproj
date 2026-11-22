@@ -286,6 +286,7 @@
 				Petal/PetalSelectorField.swift,
 				"Podcast Player/TranscriptView.swift",
 				Settings/Browsing/BrowsingSettingsView.swift,
+				Settings/Browsing/ExcludedSitesView.swift,
 				Settings/Data/CleanupSettingsSection.swift,
 				Settings/Data/DeviceStorageStats.swift,
 				Settings/Data/FeedStorageSection.swift,

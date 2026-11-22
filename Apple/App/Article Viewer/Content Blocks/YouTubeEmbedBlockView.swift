@@ -7,7 +7,6 @@ struct YouTubeEmbedBlockView: View {
 
     let videoID: String
 
-    @AppStorage("YouTube.OpenMode") private var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
     @State private var isPlaying = false
     @State private var currentTime: TimeInterval = 0
     @State private var duration: TimeInterval = 0
@@ -20,7 +19,6 @@ struct YouTubeEmbedBlockView: View {
     @State private var isPlayerReady = false
     @State private var hasStartedPlaying = false
     @State private var showFullPlayer = false
-    @State private var showSafari = false
 
     private var embedURL: String {
         "https://www.youtube.com/watch?v=\(videoID)"
@@ -68,12 +66,6 @@ struct YouTubeEmbedBlockView: View {
                 withAnimation(.smooth.speed(2.0)) {
                     hasStartedPlaying = true
                 }
-            }
-        }
-        .sheet(isPresented: $showSafari) {
-            if let url = URL(string: embedURL) {
-                SafariView(url: url)
-                    .ignoresSafeArea()
             }
         }
     }
@@ -132,17 +124,10 @@ struct YouTubeEmbedBlockView: View {
 
     private func openInPlayer() {
         pauseEmbed()
-        switch youTubeOpenMode {
-        case .inAppPlayer:
-            let article = Article.ephemeral(
-                url: embedURL,
-                title: ""
-            )
-            MediaPresenter.shared.presentYouTube(article)
-        case .youTubeApp:
+        if ContentOpenMode.opensInReader(embedURL) {
+            MediaPresenter.shared.presentYouTube(Article.ephemeral(url: embedURL, title: ""))
+        } else {
             YouTubeHelper.openInApp(url: embedURL)
-        case .browser:
-            showSafari = true
         }
     }
 
