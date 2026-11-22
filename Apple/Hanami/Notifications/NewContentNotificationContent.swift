@@ -11,7 +11,7 @@ nonisolated enum NewContentNotificationContent {
         database: DatabaseManager
     ) async -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        let title = article.displayTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        let title = ContentBlock.stripMarkdown(article.displayTitle)
         if title.isEmpty || isSocialPost(article) {
             content.title = feed.title
             content.body = truncated(postText(for: article, title: title))
@@ -39,7 +39,7 @@ nonisolated enum NewContentNotificationContent {
     /// Posts without a title put their text in the summary, so the title
     /// is repeated there; skip it when it is.
     private static func body(for article: Article, title: String) -> String {
-        guard let summary = article.summary.flatMap(SpotlightIndexer.stripMarkup) else { return "" }
+        guard let summary = plainSummary(of: article) else { return "" }
         let trimmedSummary = summary.hasPrefix(title) && !title.isEmpty
             ? String(summary.dropFirst(title.count)).trimmingCharacters(in: .whitespacesAndNewlines)
             : summary
@@ -52,11 +52,15 @@ nonisolated enum NewContentNotificationContent {
     }
 
     private static func postText(for article: Article, title: String) -> String {
-        if let summary = article.summary.flatMap(SpotlightIndexer.stripMarkup),
+        if let summary = plainSummary(of: article),
            !summary.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return summary
         }
         return title
+    }
+
+    private static func plainSummary(of article: Article) -> String? {
+        article.summary.flatMap { SpotlightIndexer.stripMarkup(ContentBlock.stripMarkdown($0)) }
     }
 
     private static func truncated(_ text: String) -> String {
