@@ -33,9 +33,15 @@ struct BrowserOmniboxDiscoveredSection: View {
                 )
                 .padding(.horizontal, horizontalPadding)
                 if session.isSearching {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, minHeight: 96)
-                        .padding(.vertical, 8)
+                    LazyVGrid(columns: BrowserOmniboxFeedGrid.columns, alignment: .leading, spacing: 16) {
+                        BrowserGenerateWebFeedCell(action: {})
+                            .hidden()
+                    }
+                    .padding(.horizontal, horizontalPadding)
+                    .padding(.vertical, 8)
+                    .overlay {
+                        ProgressView()
+                    }
                 } else {
                     LazyVGrid(columns: BrowserOmniboxFeedGrid.columns, alignment: .leading, spacing: 16) {
                         ForEach(unfollowedFeeds) { feed in
