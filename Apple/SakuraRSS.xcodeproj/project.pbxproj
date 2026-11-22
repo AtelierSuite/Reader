@@ -235,6 +235,7 @@
 				Core/OpenContent.swift,
 				"Core/YouTube Player Session/YouTubePlaybackPositionStore.swift",
 				"Core/YouTube Player Session/YouTubePlayerSession.swift",
+				"Following/Add Feed/FeedDiscoverySession.swift",
 				"Following/Edit Feed/Content Tab/EditFeedContentTab.swift",
 				"Following/Edit Feed/Content Tab/EditFeedContentTab+OverridesSection.swift",
 				"Following/Edit Feed/Content Tab/EditFeedContentTab+Persistence.swift",

@@ -9,7 +9,6 @@ struct BrowserSuggestion: Identifiable {
         case list(FeedList)
         case article(Article)
         case searchContent(String)
-        case discoverFeeds(String)
     }
 
     enum Section: Int, CaseIterable {

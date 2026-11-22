@@ -28,6 +28,7 @@ struct BrowserOmniboxField: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 11)
+        .task(id: model.text) { await model.updateQuery() }
         .task {
             // The field is created as the bar morphs; focusing on the same
             // tick is dropped.

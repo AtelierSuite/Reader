@@ -9,24 +9,27 @@ struct BrowserOmniboxEditingField: View {
     @Environment(FeedManager.self) private var feedManager
     @Environment(BrowserTabStore.self) private var store
     @Environment(BrowserOmniboxModel.self) private var omnibox
-    @Environment(\.browserAddFeedAction) private var addFeed
     @Environment(\.browserOmniboxSubmit) private var submitOmnibox
     @FocusState private var isFieldFocused: Bool
 
     private var actions: BrowserOmniboxActions {
-        BrowserOmniboxActions(store: store, omnibox: omnibox, addFeed: addFeed)
+        BrowserOmniboxActions(store: store, omnibox: omnibox)
     }
 
     private var suggestions: [BrowserSuggestion] {
         BrowserSuggestionResolver(feedManager: feedManager)
-            .suggestions(for: omnibox.text, contentMatches: omnibox.contentMatches)
+            .suggestions(
+                for: omnibox.query,
+                contentMatches: omnibox.contentMatches,
+                discoveredFeedURLs: omnibox.discoveredFeedURLs
+            )
     }
 
     var body: some View {
         BrowserOmniboxField(model: omnibox, onSubmit: submit, isFocused: $isFieldFocused)
             .onKeyPress(.downArrow) { moveSelection(forward: true) }
             .onKeyPress(.upArrow) { moveSelection(forward: false) }
-            .onChange(of: omnibox.text) { omnibox.selectedSuggestionID = nil }
+            .onChange(of: omnibox.query) { omnibox.selectedSuggestionID = nil }
     }
 
     private func submit() {
@@ -39,7 +42,7 @@ struct BrowserOmniboxEditingField: View {
     }
 
     private func moveSelection(forward: Bool) -> KeyPress.Result {
-        guard !omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+        guard !omnibox.query.isEmpty else {
             return .ignored
         }
         let suggestions = suggestions
