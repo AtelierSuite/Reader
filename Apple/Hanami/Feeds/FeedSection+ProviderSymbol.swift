@@ -1,0 +1,11 @@
+import Foundation
+
+public extension FeedSection {
+    var providerSymbolName: String? {
+        switch self {
+        case .feeds, .podcasts: nil
+        case .hackerNews: "provider.hackernews"
+        default: "provider.\(rawValue)"
+        }
+    }
+}

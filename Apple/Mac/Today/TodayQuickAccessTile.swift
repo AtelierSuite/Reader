@@ -6,7 +6,6 @@ struct TodayQuickAccessTile: View {
     let title: String
     let symbolName: String
     var section: FeedSection?
-    @State private var icon: NSImage?
     @State private var isHoveringIcon = false
     @State private var isHoveringTitle = false
 
@@ -32,24 +31,21 @@ struct TodayQuickAccessTile: View {
                 .onHover { isHoveringTitle = $0 }
         }
         .brightness(isHoveringIcon || isHoveringTitle ? 0.08 : 0)
-        .task(id: section) {
-            guard let section else { return }
-            icon = await Iconography.shared.icon(for: section)
+    }
+
+    private var symbol: Image {
+        if let providerSymbolName = section?.providerSymbolName {
+            Image(providerSymbolName)
+        } else {
+            Image(systemName: symbolName)
         }
     }
 
-    @ViewBuilder
     private var iconView: some View {
-        if let icon {
-            Image(nsImage: icon)
-                .resizable()
-                .scaledToFill()
-        } else {
-            Image(systemName: symbolName)
-                .font(.system(size: 22))
-                .foregroundStyle(.tint)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.quinary)
-        }
+        symbol
+            .font(.system(size: 26))
+            .foregroundStyle(section?.providerStyle ?? AnyShapeStyle(.tint))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(section?.providerTileTint.map(AnyShapeStyle.init) ?? AnyShapeStyle(.quinary))
     }
 }

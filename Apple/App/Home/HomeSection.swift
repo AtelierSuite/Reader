@@ -17,6 +17,16 @@ enum HomeSection: String, CaseIterable, Identifiable {
     case x
     case youtube
     case niconico
+    case dlsite
+    case dmm
+    case github
+    case hackerNews
+    case netflix
+    case pixiv
+    case qiita
+    case telegram
+    case tumblr
+    case zenn
 
     var id: String { rawValue }
 
@@ -36,6 +46,16 @@ enum HomeSection: String, CaseIterable, Identifiable {
         case .x: String(localized: "FeedSection.X", table: "Feeds")
         case .youtube: String(localized: "FeedSection.YouTube", table: "Feeds")
         case .niconico: String(localized: "FeedSection.Niconico", table: "Feeds")
+        case .dlsite: String(localized: "FeedSection.DLsite", table: "Feeds")
+        case .dmm: String(localized: "FeedSection.DMM", table: "Feeds")
+        case .github: String(localized: "FeedSection.GitHub", table: "Feeds")
+        case .hackerNews: String(localized: "FeedSection.HackerNews", table: "Feeds")
+        case .netflix: String(localized: "FeedSection.Netflix", table: "Feeds")
+        case .pixiv: String(localized: "FeedSection.Pixiv", table: "Feeds")
+        case .qiita: String(localized: "FeedSection.Qiita", table: "Feeds")
+        case .telegram: String(localized: "FeedSection.Telegram", table: "Feeds")
+        case .tumblr: String(localized: "FeedSection.Tumblr", table: "Feeds")
+        case .zenn: String(localized: "FeedSection.Zenn", table: "Feeds")
         }
     }
 
@@ -94,6 +114,16 @@ enum HomeSection: String, CaseIterable, Identifiable {
         case .x: .x
         case .youtube: .youtube
         case .niconico: .niconico
+        case .dlsite: .dlsite
+        case .dmm: .dmm
+        case .github: .github
+        case .hackerNews: .hackerNews
+        case .netflix: .netflix
+        case .pixiv: .pixiv
+        case .qiita: .qiita
+        case .telegram: .telegram
+        case .tumblr: .tumblr
+        case .zenn: .zenn
         }
     }
 }
