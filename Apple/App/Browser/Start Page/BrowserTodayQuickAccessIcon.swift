@@ -26,15 +26,13 @@ struct BrowserTodayQuickAccessIcon: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: size, height: size)
-                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                .wiggleRotation()
+                .quickAccessFlatTile(cornerRadius: cornerRadius)
         } else {
             Image(systemName: symbolName)
                 .font(.system(size: size * 24 / 56))
                 .foregroundStyle(.tint)
-                .wiggleRotation()
                 .frame(width: size, height: size)
-                .wiggleGlassEffect(in: RoundedRectangle(cornerRadius: cornerRadius))
+                .quickAccessFlatTile(cornerRadius: cornerRadius)
         }
     }
 }

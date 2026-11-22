@@ -11,7 +11,7 @@ struct TodayQuickAccessItemIcon: View {
         switch item {
         case .list(let listID):
             if let list = feedManager.lists.first(where: { $0.id == listID }) {
-                FollowingListIcon(list: list, size: size)
+                FollowingListIcon(list: list, size: size, isFlat: true)
             }
         case .feedSection(let section):
             BrowserTodayQuickAccessIcon(

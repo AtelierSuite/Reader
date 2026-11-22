@@ -4,12 +4,20 @@ import Hanami
 extension TodayQuickAccessItem {
 
     /// Every Quick Access item Today can offer right now, in the default order.
+    private static var showsAllSections: Bool {
+        #if DEBUG
+        UserDefaults.standard.bool(forKey: "Debug.ShowAllQuickAccessSections")
+        #else
+        false
+        #endif
+    }
+
     static func browserItems(in feedManager: FeedManager) -> [TodayQuickAccessItem] {
         let feeds = feedManager.isFocusEffective
             ? feedManager.feeds.filter { feedManager.focusedFeedIDs.contains($0.id) }
             : feedManager.feeds
         let followedSections = Set(feeds.map(\.feedSection))
-        let sections = FeedSection.allCases.filter { followedSections.contains($0) }
+        let sections = FeedSection.allCases.filter { showsAllSections || followedSections.contains($0) }
         let lists = (feedManager.isFocusEffective
             ? feedManager.lists.filter { feedManager.isListInFocus($0) }
             : feedManager.lists)
