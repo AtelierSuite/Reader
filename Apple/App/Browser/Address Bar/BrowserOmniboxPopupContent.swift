@@ -32,5 +32,8 @@ struct BrowserOmniboxPopupContent: View {
             }
         }
         .task(id: omnibox.text) { await actions.refreshContentMatches() }
+        .task(id: omnibox.text) {
+            await BrowserOmniboxDiscovery(omnibox: omnibox, feedManager: feedManager).refresh()
+        }
     }
 }

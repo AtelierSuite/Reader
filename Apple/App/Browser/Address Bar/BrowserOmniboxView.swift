@@ -9,7 +9,7 @@ struct BrowserOmniboxView: View {
 
     /// Raised alongside the body-size rows: at the old height the first
     /// section header was already scrolled out of view.
-    private static let suggestionListMaxHeight: CGFloat = 420
+    private static let suggestionListMaxHeight: CGFloat = 560
 
     /// The glass a `.bottomBar` item draws, read off the rendered view
     /// hierarchy: 48pt on every device and at every content size, since the
@@ -71,6 +71,9 @@ struct BrowserOmniboxView: View {
         .task(id: omnibox.text) {
             await refreshContentMatches()
         }
+        .task(id: omnibox.text) {
+            await BrowserOmniboxDiscovery(omnibox: omnibox, feedManager: feedManager).refresh()
+        }
     }
 
     private var fieldBar: some View {
@@ -131,27 +134,12 @@ struct BrowserOmniboxView: View {
     }
 
     private func suggestionRows(_ suggestions: [BrowserSuggestion]) -> some View {
-        LazyVStack(alignment: .leading, spacing: 0) {
-            ForEach(BrowserSuggestion.Section.allCases, id: \.rawValue) { section in
-                let sectionSuggestions = suggestions.filter { $0.section == section }
-                if !sectionSuggestions.isEmpty {
-                    Text(section.title)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 16)
-                        .padding(.bottom, 6)
-                    ForEach(sectionSuggestions) { suggestion in
-                        BrowserSuggestionRow(suggestion: suggestion) {
-                            apply(suggestion)
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 11)
-                    }
-                }
-            }
-        }
-        .padding(.bottom, 12)
+        BrowserOmniboxResults(
+            suggestions: suggestions,
+            selectedSuggestionID: nil,
+            horizontalPadding: 20,
+            apply: apply
+        )
     }
 
     private func refreshContentMatches() async {
@@ -184,7 +172,7 @@ struct BrowserOmniboxView: View {
             store.navigate(to: .list(list.id))
         case .article(let article):
             store.push(article)
-        case .searchContent(let query), .discoverFeeds(let query):
+        case .searchContent(let query):
             store.navigate(to: .search(query))
         }
         dismiss()

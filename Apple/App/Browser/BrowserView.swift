@@ -48,9 +48,24 @@ struct BrowserView: View {
                 case .addFeed(let url):
                     AddFeedView(initialURL: url, session: addFeedSession)
                         .environment(feedManager)
+                case .discoveryLogin(let login):
+                    discoveryLoginView(login)
+                        .onDisappear {
+                            BrowserOmniboxDiscovery(omnibox: omnibox, feedManager: feedManager)
+                                .completeLogin(login)
+                        }
+                case .generateWebFeed(let url):
+                    PetalBuilderView(mode: .create(initialURL: url))
+                        .environment(feedManager)
                 }
             }
         )
+        .onChange(of: omnibox.requestedSheet?.id) {
+            if let sheet = omnibox.requestedSheet {
+                presentedSheet = sheet
+                omnibox.requestedSheet = nil
+            }
+        }
         .onChange(of: pendingAddFeedURL) {
             if let url = pendingAddFeedURL {
                 presentedSheet = .addFeed(url: url)
@@ -91,9 +106,19 @@ struct BrowserView: View {
         }
     }
 
+    @ViewBuilder
+    private func discoveryLoginView(_ login: BrowserDiscoveryLogin) -> some View {
+        switch login {
+        case .x: XLoginView()
+        case .instagram: InstagramLoginView()
+        }
+    }
+
     private func submitOmnibox() {
         let trimmed = omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
+        // Site addresses stay in the omnibox, where their feeds are found.
+        guard BrowserAddressInput.siteHost(from: trimmed) == nil else { return }
         store.navigate(to: .search(trimmed))
         withAnimation(BrowserOmniboxModel.transition) {
             omnibox.deactivate()

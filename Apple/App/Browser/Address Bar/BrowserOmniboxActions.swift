@@ -24,7 +24,7 @@ struct BrowserOmniboxActions {
         case .feed(let feed): store.navigate(to: .feed(feed.id))
         case .list(let list): store.navigate(to: .list(list.id))
         case .article(let article): store.push(article)
-        case .searchContent(let query), .discoverFeeds(let query): store.navigate(to: .search(query))
+        case .searchContent(let query): store.navigate(to: .search(query))
         }
         dismiss()
     }

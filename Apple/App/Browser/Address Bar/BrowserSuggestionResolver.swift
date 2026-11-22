@@ -6,7 +6,7 @@ import Hanami
 @MainActor
 struct BrowserSuggestionResolver {
 
-    private static let feedLimit = 5
+    private static let feedLimit = BrowserOmniboxFeedGrid.columnCount * 2
     private static let listLimit = 3
 
     let feedManager: FeedManager
@@ -15,14 +15,14 @@ struct BrowserSuggestionResolver {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return emptyQuerySuggestions() }
 
-        let isAddress = BrowserAddressInput.siteHost(from: trimmed) != nil
-        var results: [BrowserSuggestion] = [
-            BrowserSuggestion(
+        var results: [BrowserSuggestion] = []
+        if BrowserAddressInput.siteHost(from: trimmed) == nil {
+            results.append(BrowserSuggestion(
                 id: "search:\(trimmed)",
-                kind: isAddress ? .discoverFeeds(trimmed) : .searchContent(trimmed),
+                kind: .searchContent(trimmed),
                 section: .actions
-            )
-        ]
+            ))
+        }
         results += matchingFeeds(trimmed).map {
             BrowserSuggestion(id: "feed:\($0.id)", kind: .feed($0), section: .feeds)
         }

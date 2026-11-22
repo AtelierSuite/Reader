@@ -17,6 +17,8 @@ final class BrowserOmniboxModel {
     var contentMatches: [Article] = []
     /// The suggestion the arrow keys have moved to, on hardware keyboards.
     var selectedSuggestionID: String?
+    var discovery: FeedDiscoverySession?
+    var requestedSheet: BrowserSheetKind?
     private(set) var isActive: Bool = false
 
     func activate(with query: String = "") {
@@ -30,6 +32,7 @@ final class BrowserOmniboxModel {
         isActive = false
         text = ""
         contentMatches = []
+        discovery = nil
         selectedSuggestionID = nil
     }
 }
