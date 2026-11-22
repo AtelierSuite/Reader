@@ -55,6 +55,7 @@ struct BrowserOmniboxResults: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.bottom, 12)
         .animation(.smooth.speed(2.0), value: omnibox.discovery?.isSearching)
         .animation(.smooth.speed(2.0), value: feedManager.feeds.count)
