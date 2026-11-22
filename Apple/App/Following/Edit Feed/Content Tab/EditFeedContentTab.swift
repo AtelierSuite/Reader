@@ -9,6 +9,7 @@ struct EditFeedContentTab: View {
 
     @State var openMode: FeedOpenMode = .inAppViewer
     @State var articleSource: ArticleSource = .automatic
+    @State var hidesPrereleases = false
 
     @State var overridesEnabled: Bool = false
     @State var titleField: ContentOverrideField = .default
@@ -36,6 +37,9 @@ struct EditFeedContentTab: View {
                 UserDefaults.standard.set(newValue.rawValue, forKey: "articleSource-\(feedID)")
             }
         }
+        .onChange(of: hidesPrereleases) { _, newValue in
+            UserDefaults.standard.set(newValue, forKey: GitHubReleases.hidesPrereleasesKey(forFeedID: feedID))
+        }
         .onChange(of: overridesEnabled) { _, _ in commitOverrideIfNeeded() }
         .onChange(of: titleField) { _, _ in commitOverrideIfNeeded() }
         .onChange(of: bodyField) { _, _ in commitOverrideIfNeeded() }
@@ -49,6 +53,12 @@ struct EditFeedContentTab: View {
                 viewerSection(for: feed)
             } else if !feed.isInstagramFeed && !feed.isYouTubePlaylistFeed {
                 viewerSection(for: feed)
+                if GitHubReleases.isReleasesFeedURL(feed.fetchURL) {
+                    Section {
+                        Toggle(String(localized: "FeedEditSheet.Content.HidePrereleases", table: "Feeds"),
+                               isOn: $hidesPrereleases)
+                    }
+                }
                 overridesSection(for: feed)
             } else {
                 Section {

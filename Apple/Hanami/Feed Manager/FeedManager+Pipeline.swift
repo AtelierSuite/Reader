@@ -118,13 +118,14 @@ public extension FeedManager {
         let contentType = httpResponse?.value(forHTTPHeaderField: "Content-Type") ?? "unknown"
         // swiftlint:disable:next line_length
         log("FeedRefresh.RSS", "fetch ok id=\(feed.id) bytes=\(data.count) status=\(statusCode) contentType=\(contentType)")
-        guard let parsed = FeedParser.parse(data: utf8FeedData(data, response: response))
+        guard let refined = FeedParser.parse(data: utf8FeedData(data, response: response))
             .map({ FeedDialects.refine($0, feedURL: fetchURL.absoluteString) }) else {
             let bodyHint = bodyContentHint(data: data)
             // swiftlint:disable:next line_length
             log("FeedRefresh.RSS", "parse failed id=\(feed.id) status=\(statusCode) contentType=\(contentType) bytes=\(data.count) hint=\(bodyHint)")
             return .failed
         }
+        let parsed = await FeedDialects.enrich(refined, feedURL: fetchURL.absoluteString, feedID: feed.id)
         // swiftlint:disable:next line_length
         log("FeedRefresh.RSS", "parsed id=\(feed.id) articles=\(parsed.articles.count) title=\(parsed.title) isPodcast=\(parsed.isPodcast)")
         let validators = FeedHTTPValidators(

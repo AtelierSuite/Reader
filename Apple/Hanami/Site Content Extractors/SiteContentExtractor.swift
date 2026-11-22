@@ -10,6 +10,9 @@ public nonisolated protocol SiteContentExtractor: Sendable {
     /// the WebView-rendered HTML is fed to the standard text extractor.
     var requiresWebView: Bool { get }
 
+    /// True when a feed's own content for this page is complete, so it is shown instead of fetching the page.
+    func prefersFeedContent(for url: URL) -> Bool
+
     /// Returns extracted content, or nil to fall back to the generic pipeline.
     func extract(
         document: Document,
@@ -20,6 +23,8 @@ public nonisolated protocol SiteContentExtractor: Sendable {
 
 public nonisolated extension SiteContentExtractor {
     var requiresWebView: Bool { false }
+
+    func prefersFeedContent(for _: URL) -> Bool { false }
 
     func matchesHost(_ url: URL, _ domains: [String]) -> Bool {
         guard let host = url.host?.lowercased() else { return false }

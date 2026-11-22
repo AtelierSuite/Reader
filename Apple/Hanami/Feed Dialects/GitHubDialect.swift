@@ -14,6 +14,9 @@ nonisolated enum GitHubDialect: FeedDialect {
 
     static func refine(_ article: ParsedArticle, feedURL _: URL) -> ParsedArticle {
         var refined = article
+        if article.imageURL?.contains("githubassets.com/images/icons") == true {
+            refined.imageURL = nil
+        }
         guard var content = article.content else { return refined }
         if content == "<p>No content.</p>" {
             refined.content = nil
@@ -25,6 +28,28 @@ nonisolated enum GitHubDialect: FeedDialect {
             applyCommitMessage(RSSParser.decodeHTMLEntities(String(match.1)), to: &refined)
         }
         return refined
+    }
+
+    static func enrich(_ feed: ParsedFeed, feedURL: URL, feedID: Int64) async -> ParsedFeed {
+        guard let repositoryPath = GitHubReleases.repositoryPath(fromFeedURL: feedURL) else { return feed }
+        let releases = await GitHubReleases.fetch(repositoryPath: repositoryPath)
+        guard !releases.isEmpty else { return feed }
+        let hidesPrereleases = UserDefaults.standard.bool(forKey: GitHubReleases.hidesPrereleasesKey(forFeedID: feedID))
+        var enriched = feed
+        enriched.articles = feed.articles.compactMap { article in
+            guard let release = GitHubReleases.tagName(fromReleaseURL: article.url).flatMap({ releases[$0] }) else {
+                return article
+            }
+            if release.prerelease, hidesPrereleases { return nil }
+            var detailed = article
+            if release.prerelease {
+                detailed.title += " (\(String(localized: "GitHub.Prerelease", table: "Feeds")))"
+            }
+            let assets = GitHubReleases.assetsHTML(for: release.assets)
+            if !assets.isEmpty { detailed.content = (article.content ?? "") + assets }
+            return detailed
+        }
+        return enriched
     }
 
     /// Attachment links in the feed carry a token that expires in five minutes; this address redirects to a fresh one.
