@@ -34,6 +34,10 @@ final class BrowserOmniboxModel {
         isActive = true
     }
 
+    var discoveredFeedURLs: Set<String> {
+        Set(discovery?.discoveredFeeds.map(\.url) ?? [])
+    }
+
     func updateQuery() async {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed != query else { return }

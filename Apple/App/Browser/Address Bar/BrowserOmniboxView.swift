@@ -23,7 +23,11 @@ struct BrowserOmniboxView: View {
 
     private var suggestions: [BrowserSuggestion] {
         BrowserSuggestionResolver(feedManager: feedManager)
-            .suggestions(for: omnibox.query, contentMatches: omnibox.contentMatches)
+            .suggestions(
+                for: omnibox.query,
+                contentMatches: omnibox.contentMatches,
+                discoveredFeedURLs: omnibox.discoveredFeedURLs
+            )
     }
 
     private var isQueryEmpty: Bool {

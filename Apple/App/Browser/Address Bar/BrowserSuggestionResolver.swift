@@ -11,7 +11,13 @@ struct BrowserSuggestionResolver {
 
     let feedManager: FeedManager
 
-    func suggestions(for query: String, contentMatches: [Article]) -> [BrowserSuggestion] {
+    /// `discoveredFeedURLs` keeps feeds followed from Discovered Feeds under
+    /// Feeds even when they live on another host than the one typed.
+    func suggestions(
+        for query: String,
+        contentMatches: [Article],
+        discoveredFeedURLs: Set<String> = []
+    ) -> [BrowserSuggestion] {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return emptyQuerySuggestions() }
 
@@ -23,7 +29,7 @@ struct BrowserSuggestionResolver {
                 section: .actions
             ))
         }
-        results += matchingFeeds(trimmed).map {
+        results += matchingFeeds(trimmed, discoveredFeedURLs: discoveredFeedURLs).map {
             BrowserSuggestion(id: "feed:\($0.id)", kind: .feed($0), section: .feeds)
         }
         results += matchingLists(trimmed).map {
@@ -41,11 +47,13 @@ struct BrowserSuggestionResolver {
         }
     }
 
-    private func matchingFeeds(_ query: String) -> [Feed] {
+    private func matchingFeeds(_ query: String, discoveredFeedURLs: Set<String>) -> [Feed] {
         let needle = query.lowercased()
         return feedManager.feeds
             .filter {
-                $0.title.lowercased().contains(needle) || $0.domain.lowercased().contains(needle)
+                discoveredFeedURLs.contains($0.url)
+                    || $0.title.lowercased().contains(needle)
+                    || $0.domain.lowercased().contains(needle)
             }
             .prefix(BrowserSuggestionResolver.feedLimit)
             .map { $0 }

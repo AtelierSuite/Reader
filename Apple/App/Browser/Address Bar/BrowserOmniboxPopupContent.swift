@@ -25,7 +25,11 @@ struct BrowserOmniboxPopupContent: View {
             } else {
                 BrowserOmniboxSuggestionList(
                     suggestions: BrowserSuggestionResolver(feedManager: feedManager)
-                        .suggestions(for: omnibox.query, contentMatches: omnibox.contentMatches),
+                        .suggestions(
+                for: omnibox.query,
+                contentMatches: omnibox.contentMatches,
+                discoveredFeedURLs: omnibox.discoveredFeedURLs
+            ),
                     selectedSuggestionID: omnibox.selectedSuggestionID,
                     apply: actions.apply
                 )

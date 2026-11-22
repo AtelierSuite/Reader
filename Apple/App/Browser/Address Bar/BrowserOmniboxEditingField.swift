@@ -18,7 +18,11 @@ struct BrowserOmniboxEditingField: View {
 
     private var suggestions: [BrowserSuggestion] {
         BrowserSuggestionResolver(feedManager: feedManager)
-            .suggestions(for: omnibox.query, contentMatches: omnibox.contentMatches)
+            .suggestions(
+                for: omnibox.query,
+                contentMatches: omnibox.contentMatches,
+                discoveredFeedURLs: omnibox.discoveredFeedURLs
+            )
     }
 
     var body: some View {
