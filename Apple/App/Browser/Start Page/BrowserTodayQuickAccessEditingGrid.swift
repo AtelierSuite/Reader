@@ -5,6 +5,7 @@ import Hanami
 struct BrowserTodayQuickAccessEditingGrid: View {
 
     @Environment(FeedManager.self) private var feedManager
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var items: [TodayQuickAccessItem] = []
     @State private var draggedItem: TodayQuickAccessItem?
 
@@ -14,7 +15,7 @@ struct BrowserTodayQuickAccessEditingGrid: View {
     private static let badgeRotationAnchor = UnitPoint(x: 0.5 + 26.0 / 24.0, y: 0.5 + 26.0 / 24.0)
 
     var body: some View {
-        LazyVGrid(columns: BrowserTodayQuickAccessGrid.columns, spacing: 12) {
+        LazyVGrid(columns: BrowserTodayQuickAccessGrid.columns(for: horizontalSizeClass), spacing: 12) {
             ForEach(Array(items.enumerated()), id: \.element) { index, item in
                 cell(for: item, at: index)
             }
