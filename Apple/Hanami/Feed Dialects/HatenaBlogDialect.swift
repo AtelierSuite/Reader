@@ -14,10 +14,13 @@ nonisolated enum HatenaBlogDialect: FeedDialect {
         guard let content = article.content, let document = try? SwiftSoup.parseBodyFragment(content) else {
             return article
         }
-        _ = try? document.select("iframe, cite.hatena-citation, .hatena-asin-detail, script, style").remove()
+        _ = try? document.select(
+            "iframe, cite.hatena-citation, .hatena-asin-detail, div.footnote, a[href^=#f-], script, style"
+        ).remove()
         let text = ((try? document.text()) ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty else { return article }
         var refined = article
+        refined.content = HatenaBlogMarkup.refined(content)
+        guard !text.isEmpty else { return refined }
         refined.summary = text.count > summaryLength ? String(text.prefix(summaryLength)) + "…" : text
         return refined
     }
