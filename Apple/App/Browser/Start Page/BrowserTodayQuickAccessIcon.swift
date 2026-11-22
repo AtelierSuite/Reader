@@ -10,6 +10,10 @@ struct BrowserTodayQuickAccessIcon: View {
         size * 12 / 56
     }
 
+    private var primaryStyle: AnyShapeStyle {
+        section?.providerStyle ?? AnyShapeStyle(.tint)
+    }
+
     private var symbol: Image {
         if let providerSymbolName = section?.providerSymbolName {
             Image(providerSymbolName)
@@ -21,7 +25,7 @@ struct BrowserTodayQuickAccessIcon: View {
     var body: some View {
         symbol
             .font(.system(size: size * 28 / 56))
-            .foregroundStyle(section?.providerStyle ?? AnyShapeStyle(.tint))
+            .foregroundStyle(primaryStyle, section?.providerStyle == nil ? primaryStyle : AnyShapeStyle(.white))
             .frame(width: size, height: size)
             .quickAccessFlatTile(cornerRadius: cornerRadius, tint: section?.providerTileTint)
     }
