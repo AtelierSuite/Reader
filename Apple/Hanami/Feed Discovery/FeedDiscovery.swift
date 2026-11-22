@@ -63,6 +63,9 @@ public actor FeedDiscovery {
     }
 
     public func discoverFeeds(fromPageURL pageURL: URL) async -> [DiscoveredFeed] {
+        if DLsiteProvider.isWorkPageURL(pageURL) {
+            return await DLsiteProvider.discoveredFeeds(forWorkPageURL: pageURL)
+        }
         if let socialFeed = await detectSocialMediaFeed(url: pageURL) {
             return [socialFeed]
         }
