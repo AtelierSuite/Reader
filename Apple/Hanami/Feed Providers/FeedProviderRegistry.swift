@@ -17,6 +17,11 @@ public nonisolated enum FeedProviderRegistry {
         AppStoreProvider.self,
         PixivProvider.self,
         ArXivProvider.self,
+        HatenaBookmarkCommentsProvider.self,
+        LemmyCommentsProvider.self,
+        ZennCommentsProvider.self,
+        QiitaCommentsProvider.self,
+        MisskeyCommentsProvider.self,
         MastodonCommentsProvider.self
     ]
 
