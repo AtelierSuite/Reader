@@ -8,7 +8,9 @@ public nonisolated enum FeedIconAlternateDomains: DomainDefaults {
         "news.ycombinator.com": "hnrss.org",
         "rssfeed.azure.status.microsoft": "microsoft.com",
         "status.azure.com": "microsoft.com",
-        "githubstatus.com": "github.com"
+        "githubstatus.com": "github.com",
+        "dmm.com": "www.dmm.com",
+        "dmm.co.jp": "www.dmm.com"
     ]
 
     public static var exceptionDomains: Set<String> { Set(mappings.keys) }
