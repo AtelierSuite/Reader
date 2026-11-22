@@ -57,6 +57,8 @@ struct EditFeedContentTab: View {
                     Section {
                         Toggle(String(localized: "FeedEditSheet.Content.HidePrereleases", table: "Feeds"),
                                isOn: $hidesPrereleases)
+                    } header: {
+                        Text(verbatim: "GitHub")
                     }
                 }
                 overridesSection(for: feed)
