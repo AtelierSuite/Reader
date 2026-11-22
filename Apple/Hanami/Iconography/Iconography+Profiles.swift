@@ -17,6 +17,7 @@ public extension Iconography {
         if host == "twitter.com" || host.hasSuffix(".twitter.com") { return true }
         if host == "reddit.com" || host.hasSuffix(".reddit.com") { return true }
         if host == "note.com" || host.hasSuffix(".note.com") { return true }
+        if host == "netflix.com" || host == "www.netflix.com" { return true }
         if SubstackProvider.isSubstackPublicationHost(host) { return true }
         if PixelfedProvider.isPixelfedHost(host) { return true }
         if DisplayStyleSetDomains.style(for: host) == .feed { return true }
