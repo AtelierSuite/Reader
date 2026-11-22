@@ -15,11 +15,20 @@ nonisolated extension RSSParser {
     ]
 
     static let ignoredNestedElements: Set<String> = [
-        "email", "uri", "id", "guid", "category", "comments", "source"
+        "email", "uri", "id", "category", "comments", "source"
     ]
+
+    static let sourceFieldElements: Set<String> = [
+        "guid", "hatena:imageurl", "hatena:bookmarkcount", "hatena:bookmarkCommentListPageUrl",
+        "letterboxd:watchedDate", "letterboxd:rewatch", "letterboxd:filmTitle", "letterboxd:filmYear",
+        "letterboxd:memberRating", "letterboxd:memberLike"
+    ]
+
+    static let linkedPageSourceField = "enclosure:html"
 
     static func isCaptureBoundary(_ elementName: String) -> Bool {
         capturedTextElements.contains(elementName) || ignoredNestedElements.contains(elementName)
+            || sourceFieldElements.contains(elementName)
     }
 
     static func isXHTMLContainer(_ elementName: String, attributes: [String: String]) -> Bool {

@@ -12,6 +12,7 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
     private let lock = NSLock()
     private var toolCallCount = 0
     private var bestTest: (recipe: PetalAgentRecipe, score: Int)?
+    private var testedRecipes: [PetalAgentRecipe] = []
 
     static let limitMessage = "Tool call limit reached. Answer with your best recipe now."
 
@@ -31,24 +32,31 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
         lock.withLock { bestTest?.recipe }
     }
 
-    /// Runs `work` against the page unless the run has used up its tool calls.
-    func perform(_ step: PetalAgent.Step, _ work: (Document) -> String) -> String {
+    /// Runs `work` against the page. Past the limit the model is told to answer, and stopped if it keeps calling.
+    func perform(_ step: PetalAgent.Step, detail: String, _ work: (Document) -> String) throws -> String {
         onStep(step)
         let (callNumber, output) = lock.withLock {
             toolCallCount += 1
             let output = toolCallCount <= PetalAgent.toolCallLimit ? work(document) : Self.limitMessage
             return (toolCallCount, output)
         }
-        log("WebFeedAgent", "tool call \(callNumber) \(step): \(output.prefix(300))")
+        log("WebFeedAgent", "tool call \(callNumber) \(step)(\(detail.prefix(120))): \(output.prefix(300))")
+        guard callNumber <= PetalAgent.toolCallLimit + PetalAgent.toolCallGrace else {
+            throw PetalAgent.Failure.toolCallLimitExceeded
+        }
         return output
     }
 
-    func recordTest(of recipe: PetalAgentRecipe, articles: [ParsedArticle]) {
-        guard Self.isUsable(articles) else { return }
-        let score = articles.reduce(0) { total, article in
-            total + 2 + (article.publishedDate == nil ? 0 : 1) + (article.imageURL == nil ? 0 : 1)
-                + (article.summary == nil ? 0 : 1)
+    func hasTested(_ recipe: PetalAgentRecipe) -> Bool {
+        lock.withLock { testedRecipes.contains(recipe) }
+    }
+
+    func recordTest(of recipe: PetalAgentRecipe, diagnosis: PetalRecipeDiagnosis) {
+        lock.withLock {
+            if !testedRecipes.contains(recipe) { testedRecipes.append(recipe) }
         }
+        let score = Self.score(diagnosis)
+        guard score > 0 else { return }
         lock.withLock {
             if score > (bestTest?.score ?? 0) {
                 bestTest = (recipe, score)
@@ -56,7 +64,28 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
         }
     }
 
+    /// Ranks how complete the entries are before how many there are, so a selector that sweeps in navigation links does not win.
+    static func score(_ diagnosis: PetalRecipeDiagnosis) -> Int {
+        let articles = diagnosis.articles
+        guard isUsable(articles), !diagnosis.hasBrokenEssentials else { return 0 }
+        let filledFields = articles.reduce(0) { total, article in
+            total + (article.publishedDate == nil ? 0 : 1) + (article.imageURL == nil ? 0 : 1)
+                + (article.summary == nil ? 0 : 1)
+        }
+        let completeness = Double(filledFields) / Double(articles.count * 3)
+        return 1 + Int(completeness * 100) + min(articles.count, 30)
+    }
+
     static func isUsable(_ articles: [ParsedArticle]) -> Bool {
         articles.count >= 2 && articles.allSatisfy { !$0.title.isEmpty && !$0.url.isEmpty }
     }
+
+    /// A page whose list is drawn by scripts has almost no links in the HTML the server sends.
+    static func looksUnrendered(html: String, siteURL: String) -> Bool {
+        guard let document = try? SwiftSoup.parse(html, siteURL), let body = document.body() else { return true }
+        _ = try? body.select("nav, header, footer, script, style, noscript").remove()
+        return ((try? body.select("a[href]").count) ?? 0) < unrenderedLinkMinimum
+    }
+
+    static let unrenderedLinkMinimum = 8
 }

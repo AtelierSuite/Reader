@@ -21,14 +21,46 @@ public nonisolated extension HTMLContentExtractor {
         guard let iframes = try? doc.select("iframe[src]") else { return }
         for iframe in iframes {
             guard let src = try? iframe.attr("src"),
-                  let resolved = absoluteEmbedURL(src),
-                  let provider = providerForEmbedURL(resolved) else {
+                  let resolved = absoluteEmbedURL(src) else {
+                continue
+            }
+            if let linkedPage = linkCardTarget(forEmbedURL: resolved) {
+                replaceWithLink(iframe, to: linkedPage)
+                continue
+            }
+            guard let provider = providerForEmbedURL(resolved) else {
                 continue
             }
             insertEmbedMarker(replacing: iframe,
                               provider: provider,
                               url: resolved)
         }
+    }
+
+    /// Hatena blog cards and Speaker Deck players are iframes with nothing to show here, so they become plain links.
+    static func linkCardTarget(forEmbedURL source: String) -> String? {
+        guard let components = URLComponents(string: source), let host = components.host?.lowercased() else {
+            return nil
+        }
+        if host == "hatenablog-parts.com", components.path == "/embed" {
+            return components.queryItems?.first { $0.name == "url" }?.value
+        }
+        if host == "speakerdeck.com" || host == "www.speakerdeck.com", components.path.hasPrefix("/player/") {
+            return source
+        }
+        return nil
+    }
+
+    private static func replaceWithLink(_ iframe: Element, to linkedPage: String) {
+        let title = ((try? iframe.attr("title")) ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        let label = title.isEmpty ? linkedPage : title
+        if let citation = try? iframe.nextElementSibling(), citation.hasClass("hatena-citation") {
+            _ = try? citation.remove()
+        }
+        let link = "<p><a href=\"\(RSSParser.escapeXMLAttribute(linkedPage))\">"
+            + "\(RSSParser.escapeXMLText(label))</a></p>"
+        _ = try? iframe.before(link)
+        _ = try? iframe.remove()
     }
 
     // MARK: - Blockquote-based

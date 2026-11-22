@@ -22,7 +22,7 @@ nonisolated private let rssImageAttributeRegexes: [String: NSRegularExpression] 
 nonisolated private let rssBlockedImageTokens: Set<String> = [
     "gravatar", "feedburner", "doubleclick", "googlesyndication",
     "pixel", "spacer", "blank", "1x1", "transparent", "tracking", "beacon",
-    "badge", "icon", "icons", "emoji", "smiley", "avatar", "ad", "ads"
+    "badge", "icon", "icons", "favicon", "emoji", "smiley", "avatar", "ad", "ads"
 ]
 
 public nonisolated extension RSSParser {
@@ -63,6 +63,9 @@ public nonisolated extension RSSParser {
 
     private func imageSource(inTag tag: String) -> String? {
         let source = imageAttributeValue("src", inTag: tag)
+        if let largest = imageAttributeValue("srcset", inTag: tag).flatMap(largestSourceSetURL) {
+            return largest
+        }
         if let source, !source.lowercased().hasPrefix("data:") {
             return source
         }
@@ -85,6 +88,18 @@ public nonisolated extension RSSParser {
         let value = RSSParser.decodeHTMLEntities(nsTag.substring(with: match.range(at: 1)))
             .trimmingCharacters(in: .whitespacesAndNewlines)
         return value.isEmpty ? nil : value
+    }
+
+    /// Only width descriptors rank candidates; a set without them keeps the `src` the feed chose.
+    private func largestSourceSetURL(_ value: String) -> String? {
+        let candidates = value.split(separator: ",").compactMap { entry -> (url: String, width: Int)? in
+            let parts = entry.split(whereSeparator: { $0.isWhitespace })
+            guard parts.count == 2, parts[1].hasSuffix("w"), let width = Int(parts[1].dropLast()) else {
+                return nil
+            }
+            return (String(parts[0]), width)
+        }
+        return candidates.max { $0.width < $1.width }?.url
     }
 
     private func firstSourceSetURL(_ value: String) -> String? {

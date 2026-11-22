@@ -68,7 +68,8 @@ public extension FeedDiscovery {
             }()
 
             if isXML || looksLikeFeed {
-                if let parsed = FeedParser.parse(data: data) {
+                if let parsed = FeedParser.parse(data: data)
+                    .map({ FeedDialects.refine($0, feedURL: url.absoluteString) }) {
                     return DiscoveredFeed(
                         title: parsed.title.isEmpty ? domain : parsed.title,
                         url: url.absoluteString,

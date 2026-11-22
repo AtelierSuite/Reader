@@ -8,6 +8,7 @@ public nonisolated enum DisplayStyleSetDomains: DomainDefaults {
         "twitter.com": .feed,
         "bsky.app": .feed,
         "t.me": .feed,
+        "tumblr.com": .feed,
         "mastodon.social": .feed,
         "mastodon.online": .feed,
         "mastodon.world": .feed,

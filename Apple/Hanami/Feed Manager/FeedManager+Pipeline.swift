@@ -116,11 +116,13 @@ public extension FeedManager {
         }
         let contentType = httpResponse?.value(forHTTPHeaderField: "Content-Type") ?? "unknown"
         log("FeedRefresh.RSS", "fetch ok id=\(feed.id) bytes=\(data.count) status=\(statusCode) contentType=\(contentType)")
-        guard let parsed = FeedParser.parse(data: utf8FeedData(data, response: response)) else {
+        guard let refined = FeedParser.parse(data: utf8FeedData(data, response: response))
+            .map({ FeedDialects.refine($0, feedURL: fetchURL.absoluteString) }) else {
             let bodyHint = bodyContentHint(data: data)
             log("FeedRefresh.RSS", "parse failed id=\(feed.id) status=\(statusCode) contentType=\(contentType) bytes=\(data.count) hint=\(bodyHint)")
             return .failed
         }
+        let parsed = await FeedDialects.enrich(refined, feedURL: fetchURL.absoluteString, feedID: feed.id)
         log("FeedRefresh.RSS", "parsed id=\(feed.id) articles=\(parsed.articles.count) title=\(parsed.title) isPodcast=\(parsed.isPodcast)")
         let validators = FeedHTTPValidators(
             fetchURL: feed.fetchURL,
@@ -312,7 +314,7 @@ public extension FeedManager {
         skippingURLs existingURLs: Set<String>
     ) async -> [String: String] {
         let candidates: [(articleURL: String, requestURL: URL)] = articles.compactMap { article in
-            guard article.imageURL == nil,
+            guard article.imageURL == nil, article.usesPageImage,
                   !existingURLs.contains(article.url),
                   let url = URL(string: article.url),
                   let scheme = url.scheme?.lowercased(),

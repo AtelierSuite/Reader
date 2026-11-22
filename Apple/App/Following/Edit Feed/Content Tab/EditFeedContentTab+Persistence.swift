@@ -12,6 +12,8 @@ extension EditFeedContentTab {
         let articleSourceRaw = UserDefaults.standard.string(forKey: "articleSource-\(feedID)")
         articleSource = articleSourceRaw.flatMap(ArticleSource.init(rawValue:)) ?? .automatic
 
+        hidesPrereleases = UserDefaults.standard.bool(forKey: GitHubReleases.hidesPrereleasesKey(forFeedID: feedID))
+
         if let stored = feedManager.contentOverride(forFeedID: feedID) {
             overridesEnabled = stored.enabled
             titleField = stored.titleField

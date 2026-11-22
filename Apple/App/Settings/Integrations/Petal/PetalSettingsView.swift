@@ -122,6 +122,12 @@ struct PetalSettingsView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
+                if needsRepair(feed) {
+                    Label(String(localized: "Manage.NeedsRepair", table: "Petal"),
+                          systemImage: "exclamationmark.triangle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(.rect)
@@ -134,6 +140,11 @@ struct PetalSettingsView: View {
                 Label(String(localized: "Manage.Export", table: "Petal"), systemImage: "square.and.arrow.up")
             }
         }
+    }
+
+    private func needsRepair(_ feed: Feed) -> Bool {
+        guard let recipe = PetalStore.shared.recipe(forFeedURL: feed.url) else { return false }
+        return PetalStore.shared.needsRepair(recipe.id)
     }
 
     // MARK: - Import

@@ -43,6 +43,11 @@ public extension ContentResolver {
             break
         }
 
+        if let linkedPage = article.content.flatMap(LemmyDialect.linkedPageURL(inContent:)) {
+            contentURL = linkedPage
+            isRedditLinkedArticle = true
+        }
+
         if await tryHackerNewsExtraction() { return }
         if await extractFromSpecificSource(source) { return }
         if await tryProviderExtraction() { return }
