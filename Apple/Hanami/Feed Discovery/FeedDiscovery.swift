@@ -68,6 +68,9 @@ public actor FeedDiscovery {
         }
         if Self.isSingleFeedLink(pageURL) { return [] }
 
+        let siteFeeds = await discoverSiteFeeds(for: pageURL)
+        if !siteFeeds.isEmpty { return siteFeeds }
+
         let feeds = await discoverFromHTML(url: pageURL)
         if !feeds.isEmpty { return feeds }
 
