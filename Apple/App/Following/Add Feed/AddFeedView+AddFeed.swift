@@ -10,6 +10,10 @@ extension AddFeedView {
         guard !InstagramProvider.isFeedURL(discovered.url) || InstagramProvider.isEnabled else {
             return
         }
+        if FeedProviderRegistry.adultSite(forFeedURL: discovered.url) != nil {
+            Task { await addAdultContentFeed(discovered) }
+            return
+        }
         if XProvider.isFeedURL(discovered.url) && !feedManager.hasXFeeds {
             pendingXFeed = discovered
             Task {
@@ -52,6 +56,19 @@ extension AddFeedView {
             addedURLs.insert(discovered.url)
         } catch {
             errorMessage = error.localizedDescription
+        }
+    }
+
+    func addAdultContentFeed(_ discovered: DiscoveredFeed) async {
+        guard !addingURLs.contains(discovered.url),
+              !addedURLs.contains(discovered.url) else { return }
+        errorMessage = nil
+        addingURLs.insert(discovered.url)
+        let result = await AdultContentGate.authorizeInForeground(feedURL: discovered.url)
+        addingURLs.remove(discovered.url)
+        switch result {
+        case .success: await addFeedDirectly(discovered)
+        case .failure(let error): errorMessage = error.localizedMessage
         }
     }
 

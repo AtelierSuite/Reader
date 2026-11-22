@@ -7,7 +7,6 @@ struct ScrollArticlePage: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.navigateToFeed) private var navigateToFeed
-    @AppStorage("YouTube.OpenMode") private var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
 
     let article: Article
     let pageSize: CGSize
@@ -23,7 +22,6 @@ struct ScrollArticlePage: View {
     @State private var isVideoFeed = false
     @State private var isCircleIcon = false
     @State private var backgroundImage: UIImage?
-    @State private var showSafari = false
     @State private var expandedArticle: Article?
 
     @Namespace private var headerNamespace
@@ -64,12 +62,6 @@ struct ScrollArticlePage: View {
                 } else {
                     compactContentLayer
                 }
-            }
-        }
-        .sheet(isPresented: $showSafari) {
-            if let url = URL(string: article.url) {
-                SafariView(url: url)
-                    .ignoresSafeArea()
             }
         }
         .task {
@@ -213,14 +205,8 @@ struct ScrollArticlePage: View {
     private func openArticleURL() {
         feedManager.markReadOnScroll(article)
         if article.isYouTubeURL {
-            switch youTubeOpenMode {
-            case .inAppPlayer, .youTubeApp:
-                YouTubeHelper.openInApp(url: article.url)
-                return
-            case .browser:
-                showSafari = true
-                return
-            }
+            YouTubeHelper.openInApp(url: article.url)
+            return
         }
         if let url = URL(string: article.url) {
             openURL(url)

@@ -1821,6 +1821,71 @@
         }
       }
     },
+    "ContentOpenMode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhalte öffnen in"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Content In"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir le contenu dans"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri contenuti in"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コンテンツの開く方法"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "콘텐츠 열기"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhoud openen in"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mở nội dung trong"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开内容方式"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開啟內容方式"
+          }
+        }
+      }
+    },
     "DefaultDisplayStyle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2536,6 +2601,461 @@
         }
       }
     },
+    "ExcludedSites" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausgeschlossene Websites"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluded Sites"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sites exclus"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siti esclusi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "除外するサイト"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "제외된 사이트"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uitgesloten sites"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trang web bị loại trừ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "排除的网站"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "排除的網站"
+          }
+        }
+      }
+    },
+    "ExcludedSites.Add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website hinzufügen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Site"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un site"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi sito"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サイトを追加"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사이트 추가"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site toevoegen"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm trang web"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加网站"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加入網站"
+          }
+        }
+      }
+    },
+    "ExcludedSites.Confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "추가"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voeg toe"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加入"
+          }
+        }
+      }
+    },
+    "ExcludedSites.Edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bearbeiten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "編集"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "편집"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wijzig"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sửa"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "編輯"
+          }
+        }
+      }
+    },
+    "ExcludedSites.Footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhalte und Links von diesen Websites werden in deinem Standardbrowser geöffnet."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content and links from these sites open in your default browser."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le contenu et les liens de ces sites s’ouvrent dans votre navigateur par défaut."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I contenuti e i link di questi siti si aprono nel browser predefinito."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "これらのサイトのコンテンツとリンクは、デフォルトのブラウザで開きます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 사이트의 콘텐츠와 링크는 기본 브라우저에서 열립니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhoud en koppelingen van deze sites worden geopend in je standaardbrowser."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nội dung và liên kết từ các trang web này sẽ mở trong trình duyệt mặc định."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "来自这些网站的内容和链接将在默认浏览器中打开。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "來自這些網站的內容和連結會在預設瀏覽器中開啟。"
+          }
+        }
+      }
+    },
+    "ExcludedSites.Placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "beispiel.de"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "example.com"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "exemple.com"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "esempio.com"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "example.com"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "example.com"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "voorbeeld.nl"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "example.com"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "example.com"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "example.com"
+          }
+        }
+      }
+    },
+    "ExcludedSites.RestoreDefaults" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standardwerte wiederherstellen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Defaults"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurer les valeurs par défaut"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ripristina predefiniti"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デフォルトに戻す"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본값으로 복원"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herstel standaardwaarden"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Khôi phục mặc định"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "恢复默认设置"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回復預設值"
+          }
+        }
+      }
+    },
     "FetchContentPeriodically" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3117,71 +3637,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "洞見"
-          }
-        }
-      }
-    },
-    "LinkOpenMode" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Links öffnen in"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Links In"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir les liens dans"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apri link in"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "リンクの開く方法"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "링크 열기"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Koppelingen openen in"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mở liên kết trong"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开链接方式"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "開啟連結方式"
           }
         }
       }
@@ -4689,13 +5144,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds, die innerhalb dieses Zeitraums automatisch aktualisiert wurden, werden übersprungen. Eine manuelle Aktualisierung lädt immer alles neu. Neu hinzugefügte Feeds werden sofort geladen."
+            "value" : "Feeds, die innerhalb dieses Zeitraums automatisch aktualisiert wurden, werden übersprungen. Eine manuelle Aktualisierung lädt immer alles neu. Neu gefolgte Feeds werden sofort geladen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds refreshed automatically within this window are skipped. A manual refresh always refreshes everything. Newly added feeds always refresh."
+            "value" : "Feeds refreshed automatically within this window are skipped. A manual refresh always refreshes everything. Newly followed feeds always refresh."
           }
         },
         "fr" : {
@@ -4707,43 +5162,43 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I feed aggiornati automaticamente entro questa finestra vengono saltati. Un aggiornamento manuale aggiorna sempre tutto. I feed appena aggiunti si aggiornano sempre."
+            "value" : "I feed aggiornati automaticamente entro questa finestra vengono saltati. Un aggiornamento manuale aggiorna sempre tutto. I feed appena seguiti si aggiornano sempre."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "この期間内に自動更新されたフィードはスキップされます。手動での更新では常にすべてが更新されます。新しく追加されたフィードは必ず更新されます。"
+            "value" : "この期間内に自動更新されたフィードはスキップされます。手動での更新では常にすべてが更新されます。新しくフォローしたフィードは必ず更新されます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 기간 동안 자동으로 새로고친 피드는 건너뜁니다. 수동 새로고침은 항상 전체를 새로고칩니다. 새로 추가된 피드는 항상 새로고칩니다."
+            "value" : "이 기간 동안 자동으로 새로고친 피드는 건너뜁니다. 수동 새로고침은 항상 전체를 새로고칩니다. 새로 팔로우한 피드는 항상 새로고칩니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feeds die binnen dit venster automatisch zijn ververst, worden overgeslagen. Een handmatige verversing ververst altijd alles. Nieuw toegevoegde feeds worden altijd ververst."
+            "value" : "Feeds die binnen dit venster automatisch zijn ververst, worden overgeslagen. Een handmatige verversing ververst altijd alles. Nieuw gevolgde feeds worden altijd ververst."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Các nguồn được làm mới tự động trong khoảng thời gian này sẽ bị bỏ qua. Làm mới thủ công luôn làm mới tất cả. Nguồn mới thêm luôn được làm mới."
+            "value" : "Các nguồn được làm mới tự động trong khoảng thời gian này sẽ bị bỏ qua. Làm mới thủ công luôn làm mới tất cả. Nguồn mới theo dõi luôn được làm mới."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在此时间窗口内自动刷新过的订阅源会被跳过。手动刷新始终会刷新所有订阅源。新添加的订阅源始终会刷新。"
+            "value" : "在此时间窗口内自动刷新过的订阅源会被跳过。手动刷新始终会刷新所有订阅源。新关注的订阅源始终会刷新。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在此時間範圍內已自動重新整理的訂閱源會被略過。手動重新整理一律重新整理全部。新加入的訂閱源一律重新整理。"
+            "value" : "在此時間範圍內已自動重新整理的訂閱源會被略過。手動重新整理一律重新整理全部。新追蹤的訂閱源一律重新整理。"
           }
         }
       }
@@ -7478,201 +7933,6 @@
         }
       }
     },
-    "YouTube.Browser" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In-App-Browser"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In-App Browser"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navigateur intégré"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Browser integrato"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アプリ内ブラウザ"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "인앱 브라우저"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingebouwde browser"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trình duyệt trong ứng dụng"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "应用内浏览器"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "應用程式內瀏覽器"
-          }
-        }
-      }
-    },
-    "YouTube.InAppPlayer" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In-App-Player"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In-App Player"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lecteur intégré"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lettore integrato"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アプリ内プレーヤー"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "인앱 플레이어"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingebouwde speler"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trình phát trong ứng dụng"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "应用内播放器"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "應用程式內播放器"
-          }
-        }
-      }
-    },
-    "YouTube.OpenMode" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube-Videos öffnen in"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open YouTube Videos In"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir les vidéos YouTube dans"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apri video YouTube in"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "YouTube動画の開く方法"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube 동영상 열기"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube-video's openen in"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mở video YouTube trong"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开 YouTube 视频方式"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "開啟 YouTube 影片方式"
-          }
-        }
-      }
-    },
     "YouTube.SponsorBlock" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7864,71 +8124,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "使用SponsorBlock的群眾外包資料，自動跳過YouTube影片中的贊助片段、片頭、片尾和其他非內容部分。"
-          }
-        }
-      }
-    },
-    "YouTube.YouTubeApp" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube-App"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube App"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Application YouTube"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "App YouTube"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTubeアプリ"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube 앱"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube-app"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ứng dụng YouTube"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube应用"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube應用程式"
           }
         }
       }
@@ -9034,71 +9229,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "瀏覽器"
-          }
-        }
-      }
-    },
-    "Section.Links" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Links"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Links"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Liens"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Link"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "リンク"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "링크"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Koppelingen"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Liên kết"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "链接"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "連結"
           }
         }
       }

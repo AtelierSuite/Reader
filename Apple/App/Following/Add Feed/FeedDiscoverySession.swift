@@ -12,6 +12,7 @@ final class FeedDiscoverySession {
     private(set) var discoveredFeeds: [DiscoveredFeed] = []
     private(set) var isSearching = false
     private(set) var errorMessage: String?
+    private(set) var gateMessage: String?
     private(set) var addingURLs: Set<String> = []
     private(set) var addedURLs: Set<String> = []
 
@@ -61,6 +62,11 @@ final class FeedDiscoverySession {
         guard canAdd(feed), !addingURLs.contains(feed.url), !addedURLs.contains(feed.url) else { return }
         addingURLs.insert(feed.url)
         defer { addingURLs.remove(feed.url) }
+        gateMessage = nil
+        if case .failure(let error) = await AdultContentGate.authorizeInForeground(feedURL: feed.url) {
+            gateMessage = error.localizedMessage
+            return
+        }
         do {
             _ = try await feedManager.addFeedFetchingMetadata(url: feed.url, title: feed.title, siteURL: feed.siteURL)
             addedURLs.insert(feed.url)

@@ -18,9 +18,10 @@ extension BrowserView {
 
     private func openPendingArticle(_ articleID: Int64) {
         guard let article = feedManager.article(byID: articleID) else { return }
-        if article.isYouTubeURL, youTubeOpenMode == .youTubeApp {
+        if !article.isPodcastEpisode, !ContentOpenMode.opensInReader(article.url),
+           let url = URL(string: article.url) {
             feedManager.markRead(article)
-            YouTubeHelper.openInApp(url: article.url)
+            UIApplication.shared.open(url)
             return
         }
         store.openTab(pushing: article)
@@ -30,8 +31,9 @@ extension BrowserView {
         guard let request = pendingOpenRequest else { return }
         pendingOpenRequest = nil
         let article = Article.ephemeral(url: request.url, title: request.url)
-        if article.isYouTubeURL, youTubeOpenMode == .youTubeApp {
-            YouTubeHelper.openInApp(url: article.url)
+        if article.isYouTubeURL, !ContentOpenMode.opensInReader(article.url),
+           let url = URL(string: article.url) {
+            UIApplication.shared.open(url)
             return
         }
         store.openTab(pushing: EphemeralArticleDestination(

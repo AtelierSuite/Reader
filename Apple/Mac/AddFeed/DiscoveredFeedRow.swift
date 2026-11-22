@@ -29,7 +29,7 @@ struct DiscoveredFeedRow: View {
                 ProgressView()
                     .controlSize(.small)
             } else {
-                Button(String(localized: "FeedRules.Add", table: "Feeds"), action: onAdd)
+                Button(String(localized: "AddFeed.Follow", table: "Feeds"), action: onAdd)
                     .disabled(!canAdd)
             }
         }

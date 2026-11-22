@@ -12,7 +12,6 @@ struct ScrollStyleView: View {
     @State private var expandedArticleID: Int64?
     @State private var contextInsets: EdgeInsets = EdgeInsets()
 
-    @AppStorage("YouTube.OpenMode") private var youTubeOpenMode: YouTubeOpenMode = .inAppPlayer
 
     var body: some View {
         Color.clear
@@ -79,7 +78,7 @@ struct ScrollStyleView: View {
     }
 
     private func handleTap(on article: Article) {
-        if article.isYouTubeURL && youTubeOpenMode == .inAppPlayer {
+        if article.isYouTubeURL && ContentOpenMode.opensInReader(article.url) {
             feedManager.markReadOnScroll(article)
             MediaPresenter.shared.presentYouTube(article)
             return

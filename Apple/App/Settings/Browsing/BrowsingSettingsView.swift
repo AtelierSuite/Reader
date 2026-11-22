@@ -5,7 +5,7 @@ struct BrowsingSettingsView: View {
 
     @AppStorage("Articles.BatchingMode") private var batchingMode: BatchingMode = .items25
     @AppStorage("Display.ScrollMarkAsRead") private var scrollMarkAsRead: Bool = false
-    @AppStorage(LinkOpenMode.storageKey) private var linkOpenMode: LinkOpenMode = .inAppViewer
+    @AppStorage(ContentOpenMode.storageKey) private var contentOpenMode: ContentOpenMode = .inAppViewer
     @AppStorage(DoomscrollingMode.storageKey) private var doomscrollingMode: Bool = false
 
     private var scrollMarkAsReadBinding: Binding<Bool> {
@@ -86,21 +86,27 @@ struct BrowsingSettingsView: View {
             }
 
             Section {
-                Picker(selection: $linkOpenMode) {
+                Picker(selection: $contentOpenMode) {
                     Text(String(localized: "LinkOpenMode.InAppViewer", table: "Settings"))
-                        .tag(LinkOpenMode.inAppViewer)
+                        .tag(ContentOpenMode.inAppViewer)
                     Text(String(localized: "LinkOpenMode.Browser", table: "Settings"))
-                        .tag(LinkOpenMode.browser)
+                        .tag(ContentOpenMode.browser)
                 } label: {
-                    Text(String(localized: "LinkOpenMode", table: "Settings"))
+                    Text(String(localized: "ContentOpenMode", table: "Settings"))
                 }
-            } header: {
-                Text(String(localized: "Section.Links", table: "Settings"))
+                if contentOpenMode == .inAppViewer {
+                    NavigationLink {
+                        ExcludedSitesView()
+                    } label: {
+                        Text(String(localized: "ExcludedSites", table: "Settings"))
+                    }
+                }
             } footer: {
                 Text(String(localized: "LinkOpenMode.Footer", table: "Settings"))
             }
         }
         .settingsListStyle()
+        .animation(.smooth.speed(2.0), value: contentOpenMode)
         .navigationTitle(String(localized: "Section.Browsing", table: "Settings"))
         .toolbarTitleDisplayMode(.inline)
     }
