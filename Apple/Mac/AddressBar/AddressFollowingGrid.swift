@@ -27,7 +27,7 @@ struct AddressFollowingGrid: View {
     private var grid: some View {
         VStack(alignment: .leading, spacing: 20) {
             let feeds = feeds
-            ForEach(FeedSection.allCases, id: \.self) { section in
+            ForEach(FeedSection.displayOrder, id: \.self) { section in
                 let sectionFeeds = feeds
                     .filter { $0.feedSection == section }
                     .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }

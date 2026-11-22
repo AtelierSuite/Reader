@@ -20,7 +20,7 @@ struct SidebarTreeBuilder {
         if !lists.isEmpty {
             nodes.append(SidebarNode(.group(title: String(localized: "Tabs.Lists")), children: lists))
         }
-        let sectionItems = FeedSection.allCases.map { TodayQuickAccessItem.feedSection($0) }
+        let sectionItems = FeedSection.displayOrder.map { TodayQuickAccessItem.feedSection($0) }
         let sections = preferences.visible(sectionItems).compactMap(quickAccessNode)
         if !sections.isEmpty {
             let title = String(localized: "Sidebar.Following", table: "Feeds")

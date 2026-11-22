@@ -14,7 +14,7 @@ struct ClassicHomePage: View {
 
     private var feedSections: [FeedSection] {
         let presentSections = Set(feedManager.feeds.map(\.feedSection))
-        return FeedSection.allCases.filter { presentSections.contains($0) }
+        return FeedSection.displayOrder.filter { presentSections.contains($0) }
     }
 
     private var contentSource: HomeContentSource {

@@ -50,4 +50,12 @@ public nonisolated enum FeedSection: String, CaseIterable, Codable, Sendable {
         case .zenn: String(localized: "FeedSection.Zenn", table: "Feeds")
         }
     }
+
+    public static var displayOrder: [FeedSection] {
+        let pinned: [FeedSection] = [.feeds, .podcasts]
+        let others = allCases
+            .filter { !pinned.contains($0) }
+            .sorted { $0.localizedTitle.localizedStandardCompare($1.localizedTitle) == .orderedAscending }
+        return pinned + others
+    }
 }
