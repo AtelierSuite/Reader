@@ -11,7 +11,7 @@ nonisolated struct PetalOutlineTool: Tool {
     struct Arguments {}
 
     func call(arguments: Arguments) async throws -> String {
-        try workspace.perform(.readingPage) { PetalAgentWorkspace.outline(of: $0) }
+        try workspace.perform(.readingPage, detail: "outline") { PetalAgentWorkspace.outline(of: $0) }
     }
 }
 
@@ -27,7 +27,7 @@ nonisolated struct PetalSelectTool: Tool {
     }
 
     func call(arguments: Arguments) async throws -> String {
-        try workspace.perform(.tryingSelectors) {
+        try workspace.perform(.tryingSelectors, detail: arguments.selector) {
             PetalAgentWorkspace.describeMatches(for: arguments.selector, in: $0)
         }
     }
@@ -47,7 +47,7 @@ nonisolated struct PetalInspectTool: Tool {
     }
 
     func call(arguments: Arguments) async throws -> String {
-        try workspace.perform(.tryingSelectors) {
+        try workspace.perform(.tryingSelectors, detail: "\(arguments.selector)[\(arguments.index)]") {
             PetalAgentWorkspace.markup(for: arguments.selector, index: arguments.index, in: $0)
         }
     }

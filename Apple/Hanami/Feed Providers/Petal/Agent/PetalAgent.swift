@@ -17,7 +17,7 @@ public nonisolated enum PetalAgent {
         case timedOut
     }
 
-    static let toolCallLimit = 24
+    static let toolCallLimit = 16
     static let toolCallGrace = 3
     static let timeLimit: Duration = .seconds(120)
 
@@ -64,18 +64,32 @@ public nonisolated enum PetalAgent {
         } catch {
             log("WebFeedAgent", "model failed: \(error) quota=\(PrivateCloudComputeLanguageModel().quotaUsage)")
         }
-        let candidates = [answer, workspace.bestTestedRecipe].compactMap { $0 }
-            .map { candidate -> (recipe: PetalRecipe, score: Int) in
-                let recipe = candidate.recipe(name: workspace.pageTitle, siteURL: siteURL)
-                let articles = PetalEngine.parse(html: html, recipe: recipe)
-                return (recipe, PetalAgentWorkspace.isUsable(articles) ? PetalAgentWorkspace.score(articles) : 0)
+        for candidate in [answer, workspace.bestTestedRecipe].compactMap({ $0 }) {
+            let recipe = candidate.recipe(name: workspace.pageTitle, siteURL: siteURL)
+            let diagnosis = PetalEngine.diagnose(html: html, recipe: recipe)
+            if PetalAgentWorkspace.score(diagnosis) > 0 {
+                log("WebFeedAgent", "recipe item=\(recipe.itemSelector) title=\(recipe.titleSelector ?? "-")")
+                return withoutDeadSelectors(recipe, diagnosis: diagnosis)
             }
-        guard let best = candidates.max(by: { $0.score < $1.score }), best.score > 0 else {
-            log("WebFeedAgent", "no working recipe from \(candidates.count) candidates")
-            throw Failure.noWorkingRecipe
         }
-        log("WebFeedAgent", "recipe item=\(best.recipe.itemSelector) title=\(best.recipe.titleSelector ?? "-")")
-        return best.recipe
+        log("WebFeedAgent", "no working recipe")
+        throw Failure.noWorkingRecipe
+    }
+
+    private static func withoutDeadSelectors(_ recipe: PetalRecipe, diagnosis: PetalRecipeDiagnosis) -> PetalRecipe {
+        var cleaned = recipe
+        for field in diagnosis.invalidSelectors + diagnosis.unmatchedSelectors {
+            switch field {
+            case "summary": cleaned.summarySelector = nil
+            case "image": cleaned.imageSelector = nil
+            case "author": cleaned.authorSelector = nil
+            case "date":
+                cleaned.dateSelector = nil
+                cleaned.dateAttribute = nil
+            default: break
+            }
+        }
+        return cleaned
     }
 
     private static func withTimeLimit<Value: Sendable>(
@@ -105,8 +119,9 @@ public nonisolated enum PetalAgent {
         else, usually between 3 and 100 elements.
         3. Call inspect on one matched item to see its inner markup, then choose selectors for \
         the fields. Field selectors are relative to the item, not the page.
-        4. Call testRecipe. Fix any field that comes back empty or wrong and test again.
-        5. When the test looks right, answer with the final recipe.
+        4. Call testRecipe. If a field comes back empty or wrong, change its selector and test \
+        again. Try to fix a field at most twice; a missing summary, image, date or author is fine.
+        5. As soon as titles and links are right, answer with the final recipe.
 
         Rules:
         - Prefer short, stable selectors built from tag names and meaningful class names or \
@@ -121,6 +136,8 @@ public nonisolated enum PetalAgent {
         Lazy-loaded images are read from data-src or srcset automatically.
         - Class names with characters other than letters, digits, - and _ are left out of the \
         outline; do not use them.
+        - Every field selector is evaluated inside the item element. It cannot reach a parent \
+        or a sibling of the item, so leave a field empty when its data sits outside the item.
         - Leave a field empty when the page has nothing suitable. Never invent selectors you \
         have not seen in tool output.
         - You have a limited number of tool calls, so do not repeat a call with the same arguments.

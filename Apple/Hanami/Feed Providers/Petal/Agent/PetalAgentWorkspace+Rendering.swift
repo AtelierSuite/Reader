@@ -106,6 +106,7 @@ nonisolated extension PetalAgentWorkspace {
         var lines = ["\"\(selector)\" matches \(matches.count) elements. Samples:"]
         for (index, element) in matches.array().prefix(3).enumerated() {
             let attributes = (element.getAttributes()?.asList() ?? [])
+                .filter { keptAttributes.contains($0.getKey().lowercased()) }
                 .prefix(5)
                 .map { "\($0.getKey())=\"\(truncated($0.getValue(), limit: 60))\"" }
                 .joined(separator: " ")
@@ -125,12 +126,37 @@ nonisolated extension PetalAgentWorkspace {
         }
         guard let copy = elements[index].copy() as? Element else { return "Could not read that element." }
         for element in (try? copy.getAllElements().array()) ?? [] {
-            for attribute in element.getAttributes()?.asList() ?? [] where attribute.getValue().count > 80 {
-                _ = try? element.attr(attribute.getKey(), truncated(attribute.getValue(), limit: 80))
-            }
+            simplifyAttributes(of: element)
         }
         let outerHTML = (try? copy.outerHtml()) ?? ""
         return truncated(outerHTML, limit: markupCharacterLimit)
+    }
+
+    private static let keptAttributes: Set<String> = [
+        "class", "id", "href", "src", "srcset", "datetime", "title", "alt", "rel", "itemprop", "role"
+    ]
+
+    /// Leaves only what a selector or a field can use, so styling and framework attributes do not crowd the markup.
+    private static func simplifyAttributes(of element: Element) {
+        for attribute in element.getAttributes()?.asList() ?? [] {
+            let name = attribute.getKey().lowercased()
+            let isLazyImage = PetalEngine.lazyImageAttributes.contains(name)
+            guard keptAttributes.contains(name) || isLazyImage else {
+                _ = try? element.removeAttr(attribute.getKey())
+                continue
+            }
+            if name == "class" {
+                let classNames = attribute.getValue().split(whereSeparator: \.isWhitespace).map(String.init)
+                    .filter(isSelectorSafe)
+                if classNames.isEmpty {
+                    _ = try? element.removeAttr(attribute.getKey())
+                } else {
+                    _ = try? element.attr(attribute.getKey(), classNames.joined(separator: " "))
+                }
+            } else if attribute.getValue().count > 80 {
+                _ = try? element.attr(attribute.getKey(), truncated(attribute.getValue(), limit: 80))
+            }
+        }
     }
 
     private static func truncated(_ text: String, limit: Int) -> String {

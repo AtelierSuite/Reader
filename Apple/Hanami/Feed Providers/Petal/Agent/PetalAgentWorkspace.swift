@@ -12,6 +12,7 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
     private let lock = NSLock()
     private var toolCallCount = 0
     private var bestTest: (recipe: PetalAgentRecipe, score: Int)?
+    private var testedRecipes: [PetalAgentRecipe] = []
 
     static let limitMessage = "Tool call limit reached. Answer with your best recipe now."
 
@@ -32,23 +33,30 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
     }
 
     /// Runs `work` against the page. Past the limit the model is told to answer, and stopped if it keeps calling.
-    func perform(_ step: PetalAgent.Step, _ work: (Document) -> String) throws -> String {
+    func perform(_ step: PetalAgent.Step, detail: String, _ work: (Document) -> String) throws -> String {
         onStep(step)
         let (callNumber, output) = lock.withLock {
             toolCallCount += 1
             let output = toolCallCount <= PetalAgent.toolCallLimit ? work(document) : Self.limitMessage
             return (toolCallCount, output)
         }
-        log("WebFeedAgent", "tool call \(callNumber) \(step): \(output.prefix(300))")
+        log("WebFeedAgent", "tool call \(callNumber) \(step)(\(detail.prefix(120))): \(output.prefix(300))")
         guard callNumber <= PetalAgent.toolCallLimit + PetalAgent.toolCallGrace else {
             throw PetalAgent.Failure.toolCallLimitExceeded
         }
         return output
     }
 
-    func recordTest(of recipe: PetalAgentRecipe, articles: [ParsedArticle]) {
-        guard Self.isUsable(articles) else { return }
-        let score = Self.score(articles)
+    func hasTested(_ recipe: PetalAgentRecipe) -> Bool {
+        lock.withLock { testedRecipes.contains(recipe) }
+    }
+
+    func recordTest(of recipe: PetalAgentRecipe, diagnosis: PetalRecipeDiagnosis) {
+        lock.withLock {
+            if !testedRecipes.contains(recipe) { testedRecipes.append(recipe) }
+        }
+        let score = Self.score(diagnosis)
+        guard score > 0 else { return }
         lock.withLock {
             if score > (bestTest?.score ?? 0) {
                 bestTest = (recipe, score)
@@ -56,11 +64,16 @@ nonisolated final class PetalAgentWorkspace: @unchecked Sendable {
         }
     }
 
-    static func score(_ articles: [ParsedArticle]) -> Int {
-        articles.reduce(0) { total, article in
-            total + 2 + (article.publishedDate == nil ? 0 : 1) + (article.imageURL == nil ? 0 : 1)
+    /// Ranks how complete the entries are before how many there are, so a selector that sweeps in navigation links does not win.
+    static func score(_ diagnosis: PetalRecipeDiagnosis) -> Int {
+        let articles = diagnosis.articles
+        guard isUsable(articles), !diagnosis.hasBrokenEssentials else { return 0 }
+        let filledFields = articles.reduce(0) { total, article in
+            total + (article.publishedDate == nil ? 0 : 1) + (article.imageURL == nil ? 0 : 1)
                 + (article.summary == nil ? 0 : 1)
         }
+        let completeness = Double(filledFields) / Double(articles.count * 3)
+        return 1 + Int(completeness * 100) + min(articles.count, 30)
     }
 
     static func isUsable(_ articles: [ParsedArticle]) -> Bool {
