@@ -8,10 +8,18 @@ struct PetalBuilderPreviewSection: View {
     let errorMessage: String?
     let isFetching: Bool
     let hasFetchedHTML: Bool
+    var onRepair: (() -> Void)?
 
     var body: some View {
         Section {
             contentBody
+            if let onRepair {
+                Button {
+                    onRepair()
+                } label: {
+                    Label(String(localized: "Builder.Repair", table: "Petal"), systemImage: "wand.and.stars")
+                }
+            }
         } header: {
             header
         }
@@ -52,6 +60,14 @@ private struct PetalBuilderPreviewRow: View {
 
     let article: ParsedArticle
 
+    private var byline: String? {
+        let parts = [
+            article.author,
+            article.publishedDate?.formatted(date: .abbreviated, time: .omitted)
+        ].compactMap { $0 }
+        return parts.isEmpty ? nil : parts.joined(separator: " · ")
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(article.title)
@@ -61,6 +77,12 @@ private struct PetalBuilderPreviewRow: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
+            if let byline = byline {
+                Text(byline)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
             if let summary = article.summary, !summary.isEmpty {
                 Text(summary)
                     .font(.caption)
