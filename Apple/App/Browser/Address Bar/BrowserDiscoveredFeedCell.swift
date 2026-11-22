@@ -60,10 +60,17 @@ struct BrowserDiscoveredFeedCell: View {
     }
 
     private var addBadge: some View {
-        Image(systemName: "plus.circle.fill")
-            .foregroundStyle(.white, Color.accentColor)
-            .font(.title3)
-        .frame(width: 24, height: 24)
-        .background(.background, in: .circle)
+        Image(systemName: "plus")
+            .font(.system(size: 12, weight: .bold))
+            .foregroundStyle(.white)
+            .frame(width: 22, height: 22)
+            .background(
+                LinearGradient(
+                    colors: [Color.accentColor, Color.accentColor.mix(with: .white, by: 0.35)],
+                    startPoint: .bottom,
+                    endPoint: .top
+                ),
+                in: .circle
+            )
     }
 }
