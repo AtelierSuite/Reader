@@ -14,6 +14,7 @@ public extension Iconography {
         }
         attachDerivedMetrics(cacheKey: cacheKey, to: image)
         memoryCache[cacheKey] = image
+        forgetFailedLookup(cacheKey)
         return image
     }
 
