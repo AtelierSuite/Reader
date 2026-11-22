@@ -13,6 +13,8 @@ public nonisolated final class RSSParser: NSObject, XMLParserDelegate, @unchecke
     var mediaGroupDepth = 0
     var currentAudioURL = ""
     var currentDuration = ""
+    var currentSourceFields: [String: String] = [:]
+    var currentContentIsPlainText = false
 
     var feedTitle = ""
     var feedLink = ""
@@ -131,7 +133,10 @@ public nonisolated final class RSSParser: NSObject, XMLParserDelegate, @unchecke
 
     private func finishCurrentItem() {
         let trimmedAuthor = currentAuthor.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedContent = currentContent.trimmingCharacters(in: .whitespacesAndNewlines)
+        var trimmedContent = currentContent.trimmingCharacters(in: .whitespacesAndNewlines)
+        if currentContentIsPlainText, !trimmedContent.contains("<") {
+            trimmedContent = RSSParser.paragraphHTML(fromPlainText: trimmedContent)
+        }
         let trimmedAudioURL = currentAudioURL.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedLink = currentLink.trimmingCharacters(in: .whitespacesAndNewlines)
         let articleURL = trimmedLink.isEmpty ? trimmedAudioURL : trimmedLink
@@ -156,7 +161,9 @@ public nonisolated final class RSSParser: NSObject, XMLParserDelegate, @unchecke
             carouselImageURLs: currentMediaImageURLs.count > 1 ? currentMediaImageURLs : [],
             publishedDate: parseDate(preferredItemDateString()),
             audioURL: trimmedAudioURL.isEmpty ? nil : trimmedAudioURL,
-            duration: parseDuration(currentDuration.trimmingCharacters(in: .whitespacesAndNewlines))
+            duration: parseDuration(currentDuration.trimmingCharacters(in: .whitespacesAndNewlines)),
+            sourceFields: currentSourceFields.mapValues { $0.trimmingCharacters(in: .whitespacesAndNewlines) },
+            descriptionHTML: currentDescription.trimmingCharacters(in: .whitespacesAndNewlines)
         ))
     }
 }

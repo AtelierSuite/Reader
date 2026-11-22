@@ -37,6 +37,12 @@ struct PetalBuilderView: View {
         let fetchMode: PetalRecipe.FetchMode
     }
 
+    private var repairAction: (() -> Void)? {
+        guard case .edit = mode, PetalAgent.isAvailable, fetchedHTML != nil, previewArticles.isEmpty,
+              !isFetching, agentStep == nil else { return nil }
+        return { runAutoDetect() }
+    }
+
     init(mode: Mode) {
         self.mode = mode
         switch mode {
@@ -73,7 +79,8 @@ struct PetalBuilderView: View {
                     articles: previewArticles,
                     errorMessage: errorMessage,
                     isFetching: isFetching,
-                    hasFetchedHTML: fetchedHTML != nil
+                    hasFetchedHTML: fetchedHTML != nil,
+                    onRepair: repairAction
                 )
                 if case .edit = mode {
                     Section {

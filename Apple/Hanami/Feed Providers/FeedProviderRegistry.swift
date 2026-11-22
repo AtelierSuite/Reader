@@ -16,9 +16,15 @@ public nonisolated enum FeedProviderRegistry {
         TelegramProvider.self,
         AppStoreProvider.self,
         PixivProvider.self,
+        DMMProvider.self,
         DLsiteProvider.self,
         NetflixProvider.self,
         ArXivProvider.self,
+        HatenaBookmarkCommentsProvider.self,
+        LemmyCommentsProvider.self,
+        ZennCommentsProvider.self,
+        QiitaCommentsProvider.self,
+        MisskeyCommentsProvider.self,
         MastodonCommentsProvider.self
     ]
 

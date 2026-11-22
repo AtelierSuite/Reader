@@ -7,6 +7,11 @@ struct WebFeedRow: View {
     let onEdit: () -> Void
     let onExport: () -> Void
 
+    private var needsRepair: Bool {
+        guard let recipe = PetalStore.shared.recipe(forFeedURL: feed.url) else { return false }
+        return PetalStore.shared.needsRepair(recipe.id)
+    }
+
     var body: some View {
         HStack(spacing: 10) {
             FeedIconView(feed: feed, size: 24)
@@ -18,6 +23,13 @@ struct WebFeedRow: View {
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
                     .truncationMode(.middle)
+                if needsRepair {
+                    Label(String(localized: "Manage.NeedsRepair", table: "Petal"),
+                          systemImage: "exclamationmark.triangle.fill")
+                        .labelStyle(.titleAndIcon)
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
             }
             Spacer()
             Button(String(localized: "FeedEdit.EditRecipe", table: "Petal"),

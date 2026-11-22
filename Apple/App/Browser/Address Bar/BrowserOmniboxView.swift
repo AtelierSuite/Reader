@@ -7,10 +7,6 @@ import Hanami
 /// this overlay is laid out above the keyboard.
 struct BrowserOmniboxView: View {
 
-    /// Raised alongside the body-size rows: at the old height the first
-    /// section header was already scrolled out of view.
-    private static let suggestionListMaxHeight: CGFloat = 420
-
     /// The glass a `.bottomBar` item draws, read off the rendered view
     /// hierarchy: 48pt on every device and at every content size, since the
     /// bar clamps rather than growing with the text. The field is not a
@@ -23,16 +19,19 @@ struct BrowserOmniboxView: View {
     @Environment(FeedManager.self) private var feedManager
     @Environment(BrowserTabStore.self) private var store
     @Environment(BrowserOmniboxModel.self) private var omnibox
-    @Environment(\.browserAddFeedAction) private var addFeed
     @Environment(\.browserOmniboxSubmit) private var submitOmnibox
 
     private var suggestions: [BrowserSuggestion] {
         BrowserSuggestionResolver(feedManager: feedManager)
-            .suggestions(for: omnibox.text, contentMatches: omnibox.contentMatches)
+            .suggestions(
+                for: omnibox.query,
+                contentMatches: omnibox.contentMatches,
+                discoveredFeedURLs: omnibox.discoveredFeedURLs
+            )
     }
 
     private var isQueryEmpty: Bool {
-        omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        omnibox.query.isEmpty
     }
 
     var body: some View {
@@ -54,13 +53,6 @@ struct BrowserOmniboxView: View {
                     // page above it stays tappable the way Safari's does.
                     Spacer(minLength: 0)
                     suggestionList
-                        // Bottom aligned: a maxHeight frame centres its
-                        // content, which left the rows floating in the middle
-                        // of the box with a dead gap above the field.
-                        .frame(
-                            maxHeight: BrowserOmniboxView.suggestionListMaxHeight,
-                            alignment: .bottom
-                        )
                 }
             }
             // An inset rather than a stack sibling, so the scroll views run on
@@ -69,8 +61,11 @@ struct BrowserOmniboxView: View {
                 fieldBar
             }
         }
-        .task(id: omnibox.text) {
-            await refreshContentMatches()
+        .task(id: omnibox.query) {
+            await BrowserOmniboxActions(store: store, omnibox: omnibox).refreshContentMatches()
+        }
+        .task(id: omnibox.query) {
+            await BrowserOmniboxDiscovery(omnibox: omnibox, feedManager: feedManager).refresh()
         }
     }
 
@@ -132,42 +127,12 @@ struct BrowserOmniboxView: View {
     }
 
     private func suggestionRows(_ suggestions: [BrowserSuggestion]) -> some View {
-        LazyVStack(alignment: .leading, spacing: 0) {
-            ForEach(BrowserSuggestion.Section.allCases, id: \.rawValue) { section in
-                let sectionSuggestions = suggestions.filter { $0.section == section }
-                if !sectionSuggestions.isEmpty {
-                    Text(section.title)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 16)
-                        .padding(.bottom, 6)
-                    ForEach(sectionSuggestions) { suggestion in
-                        BrowserSuggestionRow(suggestion: suggestion) {
-                            apply(suggestion)
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 11)
-                    }
-                }
-            }
-        }
-        .padding(.bottom, 12)
-    }
-
-    private func refreshContentMatches() async {
-        let query = omnibox.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard query.count >= 2 else {
-            omnibox.contentMatches = []
-            return
-        }
-        try? await Task.sleep(for: .milliseconds(250))
-        guard !Task.isCancelled else { return }
-        let found = await Task.detached(priority: .userInitiated) {
-            (try? DatabaseManager.shared.searchArticles(query: query, limit: 4)) ?? []
-        }.value
-        guard !Task.isCancelled else { return }
-        omnibox.contentMatches = found
+        BrowserOmniboxResults(
+            suggestions: suggestions,
+            selectedSuggestionID: nil,
+            horizontalPadding: 20,
+            apply: apply
+        )
     }
 
     private func open(_ location: BrowserLocation) {
@@ -187,8 +152,6 @@ struct BrowserOmniboxView: View {
             store.push(article)
         case .searchContent(let query):
             store.navigate(to: .search(query))
-        case .discoverFeeds(let urlString):
-            addFeed?(urlString)
         }
         dismiss()
     }

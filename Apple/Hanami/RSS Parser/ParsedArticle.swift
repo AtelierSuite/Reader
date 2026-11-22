@@ -11,4 +11,10 @@ public nonisolated struct ParsedArticle: Sendable {
     public var publishedDate: Date?
     public var audioURL: String?
     public var duration: Int?
+    /// Site-specific elements such as `hatena:imageurl`, keyed by element name, for feed dialects to read.
+    public var sourceFields: [String: String] = [:]
+    /// The entry's description as the feed sent it, before it is cleaned into `summary`.
+    public var descriptionHTML: String?
+    /// False when the feed carries all of a post's media, so a missing image is not looked up on its page.
+    public var usesPageImage = true
 }

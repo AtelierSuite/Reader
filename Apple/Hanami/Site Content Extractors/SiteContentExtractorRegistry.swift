@@ -8,6 +8,7 @@ public nonisolated enum SiteContentExtractorRegistry {
         StackOverflowExtractor(),
         VergeExtractor(),
         ZennExtractor(),
+        QiitaExtractor(),
         MothershipExtractor(),
         TomsHardwareExtractor(),
         France24Extractor(),

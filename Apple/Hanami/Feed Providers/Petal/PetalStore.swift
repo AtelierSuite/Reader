@@ -56,6 +56,24 @@ public nonisolated final class PetalStore: @unchecked Sendable {
         let iconURL = iconURL(for: id)
         try? FileManager.default.removeItem(at: jsonURL)
         try? FileManager.default.removeItem(at: iconURL)
+        setNeedsRepair(false, for: id)
+    }
+
+    // MARK: - Repair
+
+    private static let needsRepairKey = "Petal.RecipesNeedingRepair"
+
+    /// True when the last refresh loaded the page but the recipe matched nothing on it.
+    public func needsRepair(_ id: UUID) -> Bool {
+        (UserDefaults.standard.stringArray(forKey: Self.needsRepairKey) ?? []).contains(id.uuidString)
+    }
+
+    public func setNeedsRepair(_ needsRepair: Bool, for id: UUID) {
+        var identifiers = Set(UserDefaults.standard.stringArray(forKey: Self.needsRepairKey) ?? [])
+        let changed = needsRepair
+            ? identifiers.insert(id.uuidString).inserted
+            : identifiers.remove(id.uuidString) != nil
+        if changed { UserDefaults.standard.set(identifiers.sorted(), forKey: Self.needsRepairKey) }
     }
 
     // MARK: - Icons

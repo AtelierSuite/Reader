@@ -66,10 +66,15 @@ public actor FeedDiscovery {
         if DLsiteProvider.isWorkPageURL(pageURL) {
             return await DLsiteProvider.discoveredFeeds(forWorkPageURL: pageURL)
         }
+        let dmmWorkFeeds = await DMMProvider.discoveredFeeds(forWorkPageURL: pageURL)
+        if !dmmWorkFeeds.isEmpty { return dmmWorkFeeds }
         if let socialFeed = await detectSocialMediaFeed(url: pageURL) {
             return [socialFeed]
         }
         if Self.isSingleFeedLink(pageURL) { return [] }
+
+        let siteFeeds = await discoverSiteFeeds(for: pageURL)
+        if !siteFeeds.isEmpty { return siteFeeds }
 
         let feeds = await discoverFromHTML(url: pageURL)
         if !feeds.isEmpty { return feeds }

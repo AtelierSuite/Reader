@@ -7,6 +7,9 @@ public extension FeedProviderRegistry {
         if DLsiteProvider.requiresAdultContentGate(feedURL: url) {
             return .dlsite
         }
+        if DMMProvider.isAdultFeedURL(url) {
+            return .fanza
+        }
         return nil
     }
 }

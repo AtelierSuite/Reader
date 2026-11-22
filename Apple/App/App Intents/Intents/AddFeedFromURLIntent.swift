@@ -1,6 +1,7 @@
 import AppIntents
 import Foundation
 import Hanami
+import WebKit
 
 struct AddFeedFromURLIntent: AppIntent {
 
@@ -35,6 +36,9 @@ struct AddFeedFromURLIntent: AppIntent {
             if database.feedExists(url: candidate.url) {
                 return .result(value: false)
             }
+            if await !hasAgeCookieIfAdult(feedURL: candidate.url) {
+                return .result(value: false)
+            }
             do {
                 try database.insertFeed(
                     title: candidate.title,
@@ -62,5 +66,13 @@ struct AddFeedFromURLIntent: AppIntent {
         } catch {
             return .result(value: false)
         }
+    }
+
+    @MainActor
+    private func hasAgeCookieIfAdult(feedURL: String) async -> Bool {
+        guard let site = FeedProviderRegistry.adultSite(forFeedURL: feedURL) else { return true }
+        let name = AdultContentGate.cookie(for: site).name
+        let cookies = await WKWebsiteDataStore.default().httpCookieStore.allCookies()
+        return cookies.contains { $0.name == name && ($0.expiresDate ?? .distantFuture) > .now }
     }
 }

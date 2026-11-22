@@ -7,12 +7,18 @@ public nonisolated struct GitHubExtractor: SiteContentExtractor {
         matchesHost(url, ["github.com"])
     }
 
+    /// Release and commit feeds carry the whole entry, and commit pages only fill in with scripts.
+    public func prefersFeedContent(for url: URL) -> Bool {
+        url.path.contains("/releases/tag/") || url.path.contains("/commit/")
+    }
+
     public func extract(
         document: Document,
         baseURL: URL,
         excludeTitle: String?
     ) -> ExtractionResult? {
         let containerSelectors = [
+            "[data-test-selector=body-content].markdown-body",
             "#readme article",
             "article.markdown-body",
             ".markdown-body.entry-content",

@@ -86,8 +86,9 @@ public extension ContentResolver {
     func tryFeedContentFallback() -> Bool {
         let articleURL = URL(string: article.url)
         let isOneCushionedArticle = articleURL.map(OneCushionedDomains.isOneCushioned) ?? false
-        let hasSiteExtractor = articleURL.flatMap(SiteContentExtractorRegistry.extractor(for:)) != nil
-            && !siteExtractorProducedNothing
+        let siteExtractor = articleURL.flatMap(SiteContentExtractorRegistry.extractor(for:))
+        let prefersFeedContent = articleURL.map { siteExtractor?.prefersFeedContent(for: $0) == true } ?? false
+        let hasSiteExtractor = siteExtractor != nil && !siteExtractorProducedNothing && !prefersFeedContent
 
         guard !isRedditLinkedArticle, !isOneCushionedArticle, !hasSiteExtractor,
               let content = article.content, !content.isEmpty else { return false }

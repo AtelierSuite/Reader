@@ -17,6 +17,9 @@ nonisolated extension RSSParser {
             resetItemState()
         case "link" where isAtom:
             handleAtomLink(attributeDict)
+        case "content" where isAtom && isInsideItem:
+            let type = attributeDict["type"]
+            currentContentIsPlainText = type == nil || type == "text"
         default:
             handleMediaRSSElement(elementName, attributes: attributeDict)
         }
@@ -29,7 +32,7 @@ nonisolated extension RSSParser {
         case "enclosure", "media:content":
             handleMediaElement(elementName, attributes: attributeDict)
         case "media:thumbnail":
-            if let url = attributeDict["url"] {
+            if let url = attributeDict["url"], !isAvatarSizedThumbnail(attributeDict) {
                 currentImageURL = url
             }
         default:
@@ -65,11 +68,24 @@ nonisolated extension RSSParser {
         mediaGroupDepth = 0
         currentAudioURL = ""
         currentDuration = ""
+        currentSourceFields = [:]
+        currentContentIsPlainText = false
+    }
+
+    /// GitHub and similar feeds attach the author's avatar as a 30pt thumbnail, which is not the entry's picture.
+    private func isAvatarSizedThumbnail(_ attributes: [String: String]) -> Bool {
+        guard let width = attributes["width"].flatMap(Int.init) else { return false }
+        return width <= 60
     }
 
     private func handleAtomLink(_ attributes: [String: String]) {
         let rel = attributes["rel"] ?? "alternate"
-        guard let href = attributes["href"], rel == "alternate" else { return }
+        guard let href = attributes["href"] else { return }
+        if rel == "enclosure", isInsideItem {
+            handleMediaElement("enclosure", attributes: ["url": href, "type": attributes["type"] ?? ""])
+            return
+        }
+        guard rel == "alternate" else { return }
         if isInsideItem {
             currentLink = href
         } else {
@@ -80,22 +96,35 @@ nonisolated extension RSSParser {
     private func handleMediaElement(_ elementName: String, attributes: [String: String]) {
         guard let url = attributes["url"], !url.isEmpty else { return }
 
-        if let type = attributes["type"] {
-            if type.hasPrefix("audio/") {
-                currentAudioURL = url
-                return
-            }
-            if type.hasPrefix("image/") {
-                addMediaImage(url)
-                return
-            }
+        let type = attributes["type"]?.lowercased() ?? ""
+        if type.hasPrefix("audio/") {
+            currentAudioURL = url
+            return
+        }
+        if type.hasPrefix("image/") {
+            addMediaImage(url)
+            return
+        }
+        if type.hasPrefix("text/html") {
+            currentSourceFields[RSSParser.linkedPageSourceField] = url
+            return
         }
 
         if attributes["medium"] == "image" {
             addMediaImage(url)
         } else if elementName == "media:content", currentImageURL.isEmpty {
             currentImageURL = url
+        } else if elementName == "enclosure", !type.contains("/"), RSSParser.looksLikeImageURL(url) {
+            addMediaImage(url)
         }
+    }
+
+    /// Zenn sends `type="false"` on its thumbnail enclosure, so a missing or bogus type falls back to the address.
+    static func looksLikeImageURL(_ url: String) -> Bool {
+        guard let components = URLComponents(string: url) else { return false }
+        let imageExtensions: Set<String> = ["jpg", "jpeg", "png", "gif", "webp", "avif", "heic"]
+        let pathExtension = (components.path as NSString).pathExtension.lowercased()
+        return imageExtensions.contains(pathExtension) || components.path.contains("/image/upload/")
     }
 
     // `media:group` lists renditions of one image, not separate images.
@@ -133,7 +162,10 @@ nonisolated extension RSSParser {
         case "pubDate", "published", "dc:date", "updated":
             currentDateStrings[elementName, default: ""] += string
         case "itunes:duration": currentDuration += string
-        default: break
+        default:
+            if RSSParser.sourceFieldElements.contains(elementName) {
+                currentSourceFields[elementName, default: ""] += string
+            }
         }
     }
 
