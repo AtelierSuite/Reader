@@ -8,7 +8,13 @@ extension FeedSection {
         case .instagram: "photo.on.rectangle"
         case .bluesky, .fediverse, .note, .reddit, .x: "person.2"
         case .substack: "envelope"
-        case .vimeo, .youtube, .niconico: "play.rectangle"
+        case .vimeo, .youtube, .niconico, .netflix: "play.rectangle"
+        case .dmm, .dlsite: "bag"
+        case .pixiv: "paintpalette"
+        case .telegram: "paperplane"
+        case .tumblr: "person.2"
+        case .github, .qiita, .zenn: "chevron.left.forwardslash.chevron.right"
+        case .hackerNews: "text.bubble"
         }
     }
 }

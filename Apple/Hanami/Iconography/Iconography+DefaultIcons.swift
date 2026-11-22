@@ -38,6 +38,16 @@ public extension Iconography {
         case .substack: domain = "substack.com"
         case .x: domain = "x.com"
         case .youtube: domain = "youtube.com"
+        case .dlsite: domain = "dlsite.com"
+        case .dmm: domain = "dmm.co.jp"
+        case .github: domain = "github.com"
+        case .hackerNews: domain = "news.ycombinator.com"
+        case .netflix: domain = "netflix.com"
+        case .pixiv: domain = "pixiv.net"
+        case .qiita: domain = "qiita.com"
+        case .telegram: domain = "telegram.org"
+        case .tumblr: domain = "tumblr.com"
+        case .zenn: domain = "zenn.dev"
         case .fediverse: return fediverseIcon()
         case .feeds, .podcasts, .vimeo, .niconico: return nil
         }

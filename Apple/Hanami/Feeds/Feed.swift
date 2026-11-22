@@ -212,7 +212,22 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
         if isRedditFeed { return .reddit }
         if isNoteFeed { return .note }
         if isSubstackFeed { return .substack }
+        if DMMProvider.isFeedURL(url) { return .dmm }
+        if DLsiteProvider.isFeedURL(url) { return .dlsite }
+        if NetflixProvider.isFeedURL(url) { return .netflix }
+        if PixivProvider.isFeedURL(url) { return .pixiv }
+        if TelegramProvider.isFeedURL(url) { return .telegram }
+        if hasHost("tumblr.com") { return .tumblr }
+        if hasHost("github.com") { return .github }
+        if hasHost(HackerNewsProvider.host) { return .hackerNews }
+        if hasHost("qiita.com") { return .qiita }
+        if hasHost("zenn.dev") { return .zenn }
         return .feeds
+    }
+
+    private func hasHost(_ host: String) -> Bool {
+        let domain = domain.lowercased()
+        return domain == host || domain.hasSuffix(".\(host)")
     }
 
     /// Detects unlisted Mastodon instances via the /@username.rss URL pattern.
