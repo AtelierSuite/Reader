@@ -7,10 +7,6 @@ import Hanami
 /// this overlay is laid out above the keyboard.
 struct BrowserOmniboxView: View {
 
-    /// Raised alongside the body-size rows: at the old height the first
-    /// section header was already scrolled out of view.
-    private static let suggestionListMaxHeight: CGFloat = 560
-
     /// The glass a `.bottomBar` item draws, read off the rendered view
     /// hierarchy: 48pt on every device and at every content size, since the
     /// bar clamps rather than growing with the text. The field is not a
@@ -53,13 +49,6 @@ struct BrowserOmniboxView: View {
                     // page above it stays tappable the way Safari's does.
                     Spacer(minLength: 0)
                     suggestionList
-                        // Bottom aligned: a maxHeight frame centres its
-                        // content, which left the rows floating in the middle
-                        // of the box with a dead gap above the field.
-                        .frame(
-                            maxHeight: BrowserOmniboxView.suggestionListMaxHeight,
-                            alignment: .bottom
-                        )
                 }
             }
             // An inset rather than a stack sibling, so the scroll views run on
