@@ -7,7 +7,6 @@ struct BrowserDiscoveredFeedCell: View {
     static let iconCornerRadius: CGFloat = 12
 
     let feed: DiscoveredFeed
-    let isAdded: Bool
     let isAdding: Bool
     let onAdd: () -> Void
     @State private var icon: UIImage?
@@ -36,7 +35,7 @@ struct BrowserDiscoveredFeedCell: View {
             .contentShape(.rect)
         }
         .buttonStyle(.plain)
-        .disabled(isAdded || isAdding)
+        .disabled(isAdding)
         .task(id: feed.url) {
             icon = await Iconography.shared.icon(for: domain, siteURL: feed.siteURL)
         }
@@ -54,10 +53,7 @@ struct BrowserDiscoveredFeedCell: View {
     @ViewBuilder
     private var statusBadge: some View {
         Group {
-            if isAdded {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.white, .green)
-            } else if isAdding {
+            if isAdding {
                 ProgressView()
                     .controlSize(.small)
             } else {

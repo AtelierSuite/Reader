@@ -10,8 +10,10 @@ struct BrowserOmniboxDiscoveredSection: View {
     let onAdd: (DiscoveredFeed) -> Void
     let onGenerateWebFeed: () -> Void
 
-    private var subscribedURLs: Set<String> {
-        Set(feedManager.feeds.map(\.url))
+    /// Feeds leave this grid once followed, turning up under Feeds instead.
+    private var unfollowedFeeds: [DiscoveredFeed] {
+        let followedURLs = Set(feedManager.feeds.map(\.url)).union(session.addedURLs)
+        return session.discoveredFeeds.filter { !followedURLs.contains($0.url) }
     }
 
     private var showsGenerateWebFeed: Bool {
@@ -20,7 +22,7 @@ struct BrowserOmniboxDiscoveredSection: View {
 
     private var isVisible: Bool {
         session.hasSearched
-            && (session.isSearching || !session.discoveredFeeds.isEmpty || showsGenerateWebFeed)
+            && (session.isSearching || !unfollowedFeeds.isEmpty || showsGenerateWebFeed)
     }
 
     var body: some View {
@@ -38,11 +40,9 @@ struct BrowserOmniboxDiscoveredSection: View {
                 .padding(.horizontal, horizontalPadding)
                 if !session.isSearching {
                     LazyVGrid(columns: BrowserOmniboxFeedGrid.columns, alignment: .leading, spacing: 16) {
-                        ForEach(session.discoveredFeeds) { feed in
+                        ForEach(unfollowedFeeds) { feed in
                             BrowserDiscoveredFeedCell(
                                 feed: feed,
-                                isAdded: session.addedURLs.contains(feed.url)
-                                    || subscribedURLs.contains(feed.url),
                                 isAdding: session.addingURLs.contains(feed.url),
                                 onAdd: { onAdd(feed) }
                             )
