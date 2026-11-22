@@ -82,21 +82,21 @@ PUBLIC "-//W3C//DTD SVG 1.1//EN"
   <line id="Baseline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1556" y2="1556"/>
   <line id="Capline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1485.54" y2="1485.54"/>
   <line id="left-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="522.047" x2="522.047" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="604.047" x2="604.047" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="596.047" x2="596.047" y1="600.785" y2="720.121"/>
   <line id="left-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1410.980" x2="1410.980" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1492.980" x2="1492.980" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1484.980" x2="1484.980" y1="600.785" y2="720.121"/>
   <line id="left-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2889.630" x2="2889.630" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2971.630" x2="2971.630" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2963.630" x2="2963.630" y1="600.785" y2="720.121"/>
  </g>
  <g id="Symbols">
   <g id="Ultralight-S" transform="matrix(1 0 0 1 522.047 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 63.5432 -70.6631 h 12.0213 l -26.264 30.0207 L 80.2 0.2008 h -24.1929 l -18.9467 -24.7744 -21.6841 24.7744 H 3.3484 l 28.0933 -32.1113 L 1.8 -70.6598 h 24.8071 l 17.1272 22.6445 Z M 59.326 -6.9924 h 6.6608 L 22.9876 -63.8455 H 15.8401 Z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M54.828 -63.25L64.334 -63.25L43.564 -39.509L68 -7.209L48.868 -7.209L33.885 -26.801L16.736 -7.209L7.224 -7.209L29.441 -32.603L6 -63.247L25.618 -63.247L39.162 -45.339L54.828 -63.25ZM51.492 -12.898L56.76 -12.898L22.755 -57.858L17.103 -57.858L51.492 -12.898Z"/>
   </g>
   <g id="Regular-S" transform="matrix(1 0 0 1 1410.98 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 63.5432 -70.6631 h 12.0213 l -26.264 30.0207 L 80.2 0.2008 h -24.1929 l -18.9467 -24.7744 -21.6841 24.7744 H 3.3484 l 28.0933 -32.1113 L 1.8 -70.6598 h 24.8071 l 17.1272 22.6445 Z M 59.326 -6.9924 h 6.6608 L 22.9876 -63.8455 H 15.8401 Z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M54.828 -63.25L64.334 -63.25L43.564 -39.509L68 -7.209L48.868 -7.209L33.885 -26.801L16.736 -7.209L7.224 -7.209L29.441 -32.603L6 -63.247L25.618 -63.247L39.162 -45.339L54.828 -63.25ZM51.492 -12.898L56.76 -12.898L22.755 -57.858L17.103 -57.858L51.492 -12.898Z"/>
   </g>
   <g id="Black-S" transform="matrix(1 0 0 1 2889.63 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 63.5432 -70.6631 h 12.0213 l -26.264 30.0207 L 80.2 0.2008 h -24.1929 l -18.9467 -24.7744 -21.6841 24.7744 H 3.3484 l 28.0933 -32.1113 L 1.8 -70.6598 h 24.8071 l 17.1272 22.6445 Z M 59.326 -6.9924 h 6.6608 L 22.9876 -63.8455 H 15.8401 Z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M54.828 -63.25L64.334 -63.25L43.564 -39.509L68 -7.209L48.868 -7.209L33.885 -26.801L16.736 -7.209L7.224 -7.209L29.441 -32.603L6 -63.247L25.618 -63.247L39.162 -45.339L54.828 -63.25ZM51.492 -12.898L56.76 -12.898L22.755 -57.858L17.103 -57.858L51.492 -12.898Z"/>
   </g>
  </g>
 </svg>

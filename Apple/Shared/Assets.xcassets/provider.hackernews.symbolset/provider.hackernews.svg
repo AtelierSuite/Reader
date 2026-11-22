@@ -82,21 +82,21 @@ PUBLIC "-//W3C//DTD SVG 1.1//EN"
   <line id="Baseline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1556" y2="1556"/>
   <line id="Capline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1485.54" y2="1485.54"/>
   <line id="left-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="522.047" x2="522.047" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="604.047" x2="604.047" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="596.047" x2="596.047" y1="600.785" y2="720.121"/>
   <line id="left-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1410.980" x2="1410.980" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1492.980" x2="1492.980" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1484.980" x2="1484.980" y1="600.785" y2="720.121"/>
   <line id="left-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2889.630" x2="2889.630" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2971.630" x2="2971.630" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2963.630" x2="2963.630" y1="600.785" y2="720.121"/>
  </g>
  <g id="Symbols">
   <g id="Ultralight-S" transform="matrix(1 0 0 1 522.047 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 11.25 -5.4795 V -64.9795 h 59.5 v 59.5 H 11.25 z M 28.4826 -50.3623 l 10.1943 19.1094 v 12.5545 h 3.9245 v -12.3264 l 10.2836 -19.335 h -4.3361 l -6.0913 12.086 c -0.9222 1.847 -1.7057 3.5551 -1.7057 3.5551 s -0.7363 -1.7552 -1.6139 -3.5551 L 33.1435 -50.3623 h -4.6608 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M6 -4.229L6 -66.23L68 -66.23L68 -4.229L6 -4.229L6 -4.229ZM23.957 -50.998L34.579 -31.086L34.579 -18.004L38.669 -18.004L38.669 -30.848L49.384 -50.996L44.866 -50.996L38.519 -38.402C37.558 -36.477 36.741 -34.697 36.741 -34.697C36.741 -34.697 35.974 -36.526 35.06 -38.402L28.813 -50.998L23.957 -50.998L23.957 -50.998Z"/>
   </g>
   <g id="Regular-S" transform="matrix(1 0 0 1 1410.98 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 11.25 -5.4795 V -64.9795 h 59.5 v 59.5 H 11.25 z M 28.4826 -50.3623 l 10.1943 19.1094 v 12.5545 h 3.9245 v -12.3264 l 10.2836 -19.335 h -4.3361 l -6.0913 12.086 c -0.9222 1.847 -1.7057 3.5551 -1.7057 3.5551 s -0.7363 -1.7552 -1.6139 -3.5551 L 33.1435 -50.3623 h -4.6608 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M6 -4.229L6 -66.23L68 -66.23L68 -4.229L6 -4.229L6 -4.229ZM23.957 -50.998L34.579 -31.086L34.579 -18.004L38.669 -18.004L38.669 -30.848L49.384 -50.996L44.866 -50.996L38.519 -38.402C37.558 -36.477 36.741 -34.697 36.741 -34.697C36.741 -34.697 35.974 -36.526 35.06 -38.402L28.813 -50.998L23.957 -50.998L23.957 -50.998Z"/>
   </g>
   <g id="Black-S" transform="matrix(1 0 0 1 2889.63 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 11.25 -5.4795 V -64.9795 h 59.5 v 59.5 H 11.25 z M 28.4826 -50.3623 l 10.1943 19.1094 v 12.5545 h 3.9245 v -12.3264 l 10.2836 -19.335 h -4.3361 l -6.0913 12.086 c -0.9222 1.847 -1.7057 3.5551 -1.7057 3.5551 s -0.7363 -1.7552 -1.6139 -3.5551 L 33.1435 -50.3623 h -4.6608 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M6 -4.229L6 -66.23L68 -66.23L68 -4.229L6 -4.229L6 -4.229ZM23.957 -50.998L34.579 -31.086L34.579 -18.004L38.669 -18.004L38.669 -30.848L49.384 -50.996L44.866 -50.996L38.519 -38.402C37.558 -36.477 36.741 -34.697 36.741 -34.697C36.741 -34.697 35.974 -36.526 35.06 -38.402L28.813 -50.998L23.957 -50.998L23.957 -50.998Z"/>
   </g>
  </g>
 </svg>

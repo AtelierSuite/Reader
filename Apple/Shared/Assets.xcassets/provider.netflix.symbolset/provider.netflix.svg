@@ -82,21 +82,21 @@ PUBLIC "-//W3C//DTD SVG 1.1//EN"
   <line id="Baseline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1556" y2="1556"/>
   <line id="Capline-L" style="fill:none;stroke:#27AAE1;opacity:1;stroke-width:0.5;" x1="263" x2="3036" y1="1485.54" y2="1485.54"/>
   <line id="left-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="522.047" x2="522.047" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="604.047" x2="604.047" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Ultralight-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="572.559" x2="572.559" y1="600.785" y2="720.121"/>
   <line id="left-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1410.980" x2="1410.980" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1492.980" x2="1492.980" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Regular-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="1461.492" x2="1461.492" y1="600.785" y2="720.121"/>
   <line id="left-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2889.630" x2="2889.630" y1="600.785" y2="720.121"/>
-  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2971.630" x2="2971.630" y1="600.785" y2="720.121"/>
+  <line id="right-margin-Black-S" style="fill:none;stroke:#FF3B30;stroke-width:0.5;opacity:1.0;" x1="2940.142" x2="2940.142" y1="600.785" y2="720.121"/>
  </g>
  <g id="Symbols">
   <g id="Ultralight-S" transform="matrix(1 0 0 1 522.047 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 20.974 -71.6295 v 0.0182 c 9.185 25.9532 16.289 46.0308 25.3222 71.5746 7.1102 0.176 14.7116 1.2072 14.7238 1.2072 -8.4934 -24.0362 -17.9664 -50.7992 -25.744 -72.8 z m 25.75 0 v 29.211 L 61.02 -2.0115 c -0.1304 -23.842 -0.0122 -48.2694 0.006 -69.615 z M 20.974 -68.4445 V 1.1705 c 5.6814 -0.6824 8.5236 -0.9464 14.3022 -1.2072 v -27.9674 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M6 -70.23L6 -70.212C14.832 -45.257 21.663 -25.952 30.348 -1.39C37.185 -1.221 44.494 -0.23 44.506 -0.23C36.339 -23.341 27.23 -49.075 19.752 -70.23L6 -70.23ZM30.76 -70.23L30.76 -42.142L44.506 -3.289C44.462 -11.23 44.448 -19.239 44.448 -27.169C44.448 -42.131 44.5 -56.812 44.512 -70.227L30.76 -70.23ZM6 -67.167L6 -0.23C11.463 -0.886 14.196 -1.139 19.752 -1.39L19.752 -28.282L6 -67.167Z"/>
   </g>
   <g id="Regular-S" transform="matrix(1 0 0 1 1410.98 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 20.974 -71.6295 v 0.0182 c 9.185 25.9532 16.289 46.0308 25.3222 71.5746 7.1102 0.176 14.7116 1.2072 14.7238 1.2072 -8.4934 -24.0362 -17.9664 -50.7992 -25.744 -72.8 z m 25.75 0 v 29.211 L 61.02 -2.0115 c -0.1304 -23.842 -0.0122 -48.2694 0.006 -69.615 z M 20.974 -68.4445 V 1.1705 c 5.6814 -0.6824 8.5236 -0.9464 14.3022 -1.2072 v -27.9674 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M6 -70.23L6 -70.212C14.832 -45.257 21.663 -25.952 30.348 -1.39C37.185 -1.221 44.494 -0.23 44.506 -0.23C36.339 -23.341 27.23 -49.075 19.752 -70.23L6 -70.23ZM30.76 -70.23L30.76 -42.142L44.506 -3.289C44.462 -11.23 44.448 -19.239 44.448 -27.169C44.448 -42.131 44.5 -56.812 44.512 -70.227L30.76 -70.23ZM6 -67.167L6 -0.23C11.463 -0.886 14.196 -1.139 19.752 -1.39L19.752 -28.282L6 -67.167Z"/>
   </g>
   <g id="Black-S" transform="matrix(1 0 0 1 2889.63 696)">
-   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M 20.974 -71.6295 v 0.0182 c 9.185 25.9532 16.289 46.0308 25.3222 71.5746 7.1102 0.176 14.7116 1.2072 14.7238 1.2072 -8.4934 -24.0362 -17.9664 -50.7992 -25.744 -72.8 z m 25.75 0 v 29.211 L 61.02 -2.0115 c -0.1304 -23.842 -0.0122 -48.2694 0.006 -69.615 z M 20.974 -68.4445 V 1.1705 c 5.6814 -0.6824 8.5236 -0.9464 14.3022 -1.2072 v -27.9674 z"/>
+   <path class="monochrome-0 multicolor-0:tintColor hierarchical-0:primary SFSymbolsPreviewWireframe" d="M6 -70.23L6 -70.212C14.832 -45.257 21.663 -25.952 30.348 -1.39C37.185 -1.221 44.494 -0.23 44.506 -0.23C36.339 -23.341 27.23 -49.075 19.752 -70.23L6 -70.23ZM30.76 -70.23L30.76 -42.142L44.506 -3.289C44.462 -11.23 44.448 -19.239 44.448 -27.169C44.448 -42.131 44.5 -56.812 44.512 -70.227L30.76 -70.23ZM6 -67.167L6 -0.23C11.463 -0.886 14.196 -1.139 19.752 -1.39L19.752 -28.282L6 -67.167Z"/>
   </g>
  </g>
 </svg>
