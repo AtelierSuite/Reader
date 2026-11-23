@@ -65,6 +65,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
             || PixivProvider.isFeedURL(url) || BlueskyFeedTarget.isFeedURL(url)
             || DMMProvider.isFeedURL(url)
             || DLsiteProvider.isFeedURL(url) || NetflixProvider.isFeedURL(url)
+            || MastodonProvider.isFeedURL(url)
     }
 
     /// The style a provider feed opens in unless the user picks another.
@@ -235,6 +236,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
 
     /// Detects unlisted Mastodon instances via the /@username.rss URL pattern.
     private var hasMastodonFeedURL: Bool {
+        if MastodonProvider.isFeedURL(url) { return true }
         guard let urlObj = URL(string: url) else { return false }
         let path = urlObj.path
         return path.hasPrefix("/@") && path.hasSuffix(".rss")

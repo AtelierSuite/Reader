@@ -54,6 +54,11 @@ public actor FeedDiscovery {
         results.append(contentsOf: htmlFeeds)
 
         if results.isEmpty {
+            let mastodonFeeds = await MastodonProvider.discoveredFeeds(forDomain: domain)
+            results.append(contentsOf: mastodonFeeds)
+        }
+
+        if results.isEmpty {
             let probeFeeds = await probeCommonPaths(domain: domain)
             results.append(contentsOf: probeFeeds)
         }
@@ -82,6 +87,9 @@ public actor FeedDiscovery {
         if let rssFeed = await probeRSSSuffix(for: pageURL) {
             return [rssFeed]
         }
+
+        let mastodonFeeds = await MastodonProvider.discoveredFeeds(forPageURL: pageURL)
+        if !mastodonFeeds.isEmpty { return mastodonFeeds }
 
         return await probeCommonPaths(domain: pageURL.host ?? "")
     }
