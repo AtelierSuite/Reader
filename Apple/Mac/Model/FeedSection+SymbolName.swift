@@ -15,7 +15,7 @@ extension FeedSection {
         case .tumblr: "person.2"
         case .github, .qiita, .zenn: "chevron.left.forwardslash.chevron.right"
         case .hackerNews: "text.bubble"
-        case .appStore: "app.badge"
+        case .appStore, .playStore: "app.badge"
         }
     }
 }

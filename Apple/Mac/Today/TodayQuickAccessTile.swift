@@ -46,10 +46,20 @@ struct TodayQuickAccessTile: View {
     }
 
     private var iconView: some View {
-        symbol
-            .font(.system(size: 26))
-            .foregroundStyle(primaryStyle, section?.providerStyle == nil ? primaryStyle : AnyShapeStyle(.white))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(section?.providerTileTint.map(AnyShapeStyle.init) ?? AnyShapeStyle(.quinary))
+        Group {
+            if section?.usesMulticolorProviderSymbol == true {
+                symbol
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 31, height: 31)
+                    .offset(x: 1)
+            } else {
+                symbol
+                    .font(.system(size: 26))
+                    .foregroundStyle(primaryStyle, section?.providerStyle == nil ? primaryStyle : AnyShapeStyle(.white))
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(section?.providerTileTint.map(AnyShapeStyle.init) ?? AnyShapeStyle(.quinary))
     }
 }

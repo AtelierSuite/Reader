@@ -23,11 +23,21 @@ struct BrowserTodayQuickAccessIcon: View {
     }
 
     var body: some View {
-        symbol
-            .font(.system(size: size * 28 / 56))
-            .imageScale(.medium)
-            .foregroundStyle(primaryStyle, section?.providerStyle == nil ? primaryStyle : AnyShapeStyle(.white))
-            .frame(width: size, height: size)
-            .quickAccessFlatTile(cornerRadius: cornerRadius, tint: section?.providerTileTint)
+        Group {
+            if section?.usesMulticolorProviderSymbol == true {
+                symbol
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: size * 33 / 56, height: size * 33 / 56)
+                    .offset(x: size * 1 / 56)
+            } else {
+                symbol
+                    .font(.system(size: size * 28 / 56))
+                    .imageScale(.medium)
+                    .foregroundStyle(primaryStyle, section?.providerStyle == nil ? primaryStyle : AnyShapeStyle(.white))
+            }
+        }
+        .frame(width: size, height: size)
+        .quickAccessFlatTile(cornerRadius: cornerRadius, tint: section?.providerTileTint)
     }
 }

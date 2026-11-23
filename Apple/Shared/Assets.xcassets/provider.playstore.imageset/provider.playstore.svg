@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 3 86 94" width="86" height="94">
+  <defs>
+    <clipPath id="play-clip">
+      <path d="M12 16.7 C12 7.4 22.1 1.7 30.1 6.3 L87.8 39.6 C95.8 44.2 95.8 55.8 87.8 60.4 L30.1 93.7 C22.1 98.3 12 92.6 12 83.3 Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#play-clip)">
+    <polygon points="0,0 55,50 0,100" fill="#4285F4"/>
+    <polygon points="0,0 100,0 100,14 55,50" fill="#34A853"/>
+    <polygon points="0,100 55,50 100,86 100,100" fill="#EA4335"/>
+    <polygon points="55,50 100,14 100,86" fill="#FBBC04"/>
+  </g>
+</svg>
