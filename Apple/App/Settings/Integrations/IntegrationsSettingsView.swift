@@ -31,6 +31,9 @@ struct IntegrationsSettingsView: View {
             }
 
             Section {
+                NavigationLink(String(localized: "Bluesky", table: "Integrations")) {
+                    BlueskySettingsView()
+                }
                 NavigationLink(String(localized: "Instagram", table: "Integrations")) {
                     InstagramSettingsView()
                 }
