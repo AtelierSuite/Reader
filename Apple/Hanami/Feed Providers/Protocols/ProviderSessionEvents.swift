@@ -10,12 +10,14 @@ public enum ProviderSessionEvents {
         case x
         case instagram
         case substack
+        case bluesky
 
         public func matches(_ feed: Feed) -> Bool {
             switch self {
             case .x: return feed.isXFeed
             case .instagram: return feed.isInstagramFeed
             case .substack: return feed.isSubstackFeed
+            case .bluesky: return feed.isBlueskyFeed
             }
         }
     }
