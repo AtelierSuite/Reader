@@ -13,7 +13,8 @@ public extension FeedProviderRegistry {
         PixivProvider.self,
         DMMProvider.self,
         DLsiteProvider.self,
-        NetflixProvider.self
+        NetflixProvider.self,
+        MastodonProvider.self
     ]
 
     static func refreshableProvider(forFeedURL url: String) -> (any WebFeedProvider.Type)? {

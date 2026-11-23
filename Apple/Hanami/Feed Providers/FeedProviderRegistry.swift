@@ -25,7 +25,8 @@ public nonisolated enum FeedProviderRegistry {
         ZennCommentsProvider.self,
         QiitaCommentsProvider.self,
         MisskeyCommentsProvider.self,
-        MastodonCommentsProvider.self
+        MastodonCommentsProvider.self,
+        MastodonProvider.self
     ]
 
     // MARK: - Convenience Fetchers

@@ -9,6 +9,9 @@ private nonisolated final class IconAssetBundle {}
 
 public extension Iconography {
     func defaultIcon(for feed: Feed) async -> PlatformImage? {
+        if MastodonProvider.isFeedURL(feed.url) {
+            return fediverseIcon()
+        }
         if feed.isFediverseFeed {
             return await profileIcon(siteURL: feed.siteURL) ?? fediverseIcon()
         }
