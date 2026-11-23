@@ -27,7 +27,7 @@ struct BlueskySavedFeedsSheet: View {
                     }
                     .disabled(isImporting)
                 } trailing: {
-                    Button(String(localized: "Bluesky.ImportSavedFeeds.Import", table: "Integrations")) {
+                    Button(role: .confirm) {
                         importSelectedFeeds()
                     }
                     .disabled(selectedFeedIDs.isEmpty || isImporting || isLoading)
