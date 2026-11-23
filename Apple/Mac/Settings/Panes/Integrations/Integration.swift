@@ -2,7 +2,7 @@ import Hanami
 import SwiftUI
 
 enum Integration: String, CaseIterable, Identifiable {
-    case webFeeds, podcasts, instagram, pixiv, substack, x, youtube
+    case webFeeds, podcasts, bluesky, instagram, pixiv, substack, x, youtube
 
     var id: String { rawValue }
 
@@ -10,6 +10,7 @@ enum Integration: String, CaseIterable, Identifiable {
         switch self {
         case .webFeeds: IntegrationText.string("Petal")
         case .podcasts: IntegrationText.string("Podcast")
+        case .bluesky: IntegrationText.string("Bluesky")
         case .instagram: IntegrationText.string("Instagram")
         case .pixiv: IntegrationText.string("Pixiv")
         case .substack: IntegrationText.string("Substack")
@@ -31,6 +32,7 @@ enum Integration: String, CaseIterable, Identifiable {
     var feedSection: FeedSection? {
         switch self {
         case .webFeeds, .podcasts, .pixiv: nil
+        case .bluesky: .bluesky
         case .instagram: .instagram
         case .substack: .substack
         case .x: .x

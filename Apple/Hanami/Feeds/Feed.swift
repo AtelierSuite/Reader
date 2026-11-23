@@ -196,6 +196,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
     public static func isOPMLPortableURL(_ url: String) -> Bool {
         if XProvider.isFeedURL(url) { return false }
         if InstagramProvider.isFeedURL(url) { return false }
+        if url == BlueskyFeedTarget.following.feedURL { return false }
         if PetalRecipe.isPetalFeedURL(url) { return false }
         return true
     }

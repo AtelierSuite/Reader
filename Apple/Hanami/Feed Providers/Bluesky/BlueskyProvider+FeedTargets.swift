@@ -18,13 +18,22 @@ extension BlueskyProvider {
         let metadata = try await fetchTargetMetadata(target)
         let posts: [ParsedBlueskyPost]
         switch target.kind {
+        case .following:
+            posts = try await fetchPostPages(
+                "app.bsky.feed.getTimeline",
+                query: [],
+                pageCount: pageCount,
+                requireAuth: true
+            )
         case .feed:
             posts = try await fetchPostPages(
                 "app.bsky.feed.getFeed",
                 query: [URLQueryItem(name: "feed", value: target.atURI)],
                 pageCount: pageCount
             )
-            if isAuthenticationPlaceholder(posts) { throw BlueskyAPIError.authenticationRequired }
+            if !hasSession(), isAuthenticationPlaceholder(posts) {
+                throw BlueskyAPIError.authenticationRequired
+            }
         case .list, .starterPack:
             guard let listURI = metadata.listURI else {
                 throw BlueskyAPIError.requestFailed(status: 200, message: "Missing list")
@@ -42,6 +51,12 @@ extension BlueskyProvider {
 
     nonisolated static func fetchTargetMetadata(_ target: BlueskyFeedTarget) async throws -> BlueskyTargetMetadata {
         switch target.kind {
+        case .following:
+            return BlueskyTargetMetadata(
+                title: String(localized: "Bluesky.Following.FeedTitle", table: "Integrations"),
+                avatarURL: nil,
+                listURI: nil
+            )
         case .feed:
             let root = try await xrpc(
                 "app.bsky.feed.getFeedGenerator", query: [URLQueryItem(name: "feed", value: target.atURI)]

@@ -54,6 +54,7 @@ private struct IntegrationDetail: View {
         switch integration {
         case .webFeeds: WebFeedsIntegrationSettings()
         case .podcasts: PodcastIntegrationSettings()
+        case .bluesky: BlueskyIntegrationSettings()
         case .instagram: InstagramIntegrationSettings()
         case .pixiv: PixivIntegrationSettings()
         case .substack: SubstackIntegrationSettings()

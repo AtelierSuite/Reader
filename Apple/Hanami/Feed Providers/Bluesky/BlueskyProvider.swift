@@ -1,6 +1,5 @@
 import Foundation
 
-/// Follows Bluesky profiles through the public AppView API without signing in.
 public final class BlueskyProvider: Sendable {
 
     public nonisolated static let host = "bsky.app"

@@ -3,12 +3,14 @@ import Foundation
 public nonisolated struct BlueskyFeedTarget: Sendable, Equatable {
 
     public enum Kind: String, Sendable, CaseIterable {
+        case following
         case feed
         case list
         case starterPack
 
         var scheme: String {
             switch self {
+            case .following: "bluesky-following"
             case .feed: "bluesky-feed"
             case .list: "bluesky-list"
             case .starterPack: "bluesky-starterpack"
@@ -17,12 +19,17 @@ public nonisolated struct BlueskyFeedTarget: Sendable, Equatable {
 
         var collection: String {
             switch self {
+            case .following: ""
             case .feed: "app.bsky.feed.generator"
             case .list: "app.bsky.graph.list"
             case .starterPack: "app.bsky.graph.starterpack"
             }
         }
     }
+
+    public static let following = BlueskyFeedTarget(
+        kind: .following, actor: "me", recordKey: "following"
+    )
 
     public let kind: Kind
     public let actor: String
@@ -32,6 +39,18 @@ public nonisolated struct BlueskyFeedTarget: Sendable, Equatable {
         self.kind = kind
         self.actor = actor
         self.recordKey = recordKey
+    }
+
+    public init?(atURI: String) {
+        guard atURI.hasPrefix("at://") else { return nil }
+        let segments = atURI.dropFirst("at://".count).split(separator: "/").map(String.init)
+        guard segments.count == 3,
+              !segments[0].isEmpty,
+              !segments[2].isEmpty,
+              let kind = Kind.allCases.first(where: { !$0.collection.isEmpty && $0.collection == segments[1] }) else {
+            return nil
+        }
+        self.init(kind: kind, actor: segments[0], recordKey: segments[2])
     }
 
     public var feedURL: String {
@@ -45,6 +64,7 @@ public nonisolated struct BlueskyFeedTarget: Sendable, Equatable {
     public var siteURL: String {
         let origin = "https://\(BlueskyProvider.host)"
         switch kind {
+        case .following: return origin
         case .feed: return "\(origin)/profile/\(actor)/feed/\(recordKey)"
         case .list: return "\(origin)/profile/\(actor)/lists/\(recordKey)"
         case .starterPack: return "\(origin)/starter-pack/\(actor)/\(recordKey)"
