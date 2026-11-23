@@ -6,6 +6,7 @@ public extension FeedSection {
         case .feeds, .podcasts: nil
         case .hackerNews: "provider.hackernews"
         case .appStore: "provider.appstore"
+        case .playStore: "provider.playstore"
         default: "provider.\(rawValue)"
         }
     }

@@ -62,6 +62,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
     public static func isProviderSchemeURL(_ url: String) -> Bool {
         XProvider.isFeedURL(url) || InstagramProvider.isFeedURL(url)
             || YouTubePlaylistProvider.isFeedURL(url) || AppStoreProvider.isFeedURL(url)
+            || PlayStoreProvider.isFeedURL(url)
             || PixivProvider.isFeedURL(url) || BlueskyFeedTarget.isFeedURL(url)
             || DMMProvider.isFeedURL(url)
             || DLsiteProvider.isFeedURL(url) || NetflixProvider.isFeedURL(url)
@@ -216,6 +217,7 @@ public nonisolated struct Feed: Identifiable, Hashable, Sendable {
         if isNoteFeed { return .note }
         if isSubstackFeed { return .substack }
         if AppStoreProvider.isFeedURL(url) { return .appStore }
+        if PlayStoreProvider.isFeedURL(url) { return .playStore }
         if DMMProvider.isFeedURL(url) { return .dmm }
         if DLsiteProvider.isFeedURL(url) { return .dlsite }
         if NetflixProvider.isFeedURL(url) { return .netflix }

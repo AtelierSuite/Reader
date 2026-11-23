@@ -10,6 +10,7 @@ public extension FeedProviderRegistry {
         RedditProvider.self,
         TelegramProvider.self,
         AppStoreProvider.self,
+        PlayStoreProvider.self,
         PixivProvider.self,
         DMMProvider.self,
         DLsiteProvider.self,
