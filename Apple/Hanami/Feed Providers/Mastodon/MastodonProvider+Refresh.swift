@@ -14,7 +14,7 @@ extension MastodonProvider: WebFeedProvider {
 
         var profileImageURL: String?
         if !options.contentOnly, feed.lastFetched == nil {
-            profileImageURL = await fetchInstance(host: target.host)?.preferredIconURL
+            profileImageURL = await fetchInstanceIconURL(host: target.host)
         }
 
         try await manager.storeProviderFeedContent(

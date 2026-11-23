@@ -4,7 +4,6 @@ nonisolated struct MastodonInstance: Decodable, Sendable {
     let title: String?
     let domain: String?
     let description: String?
-    let thumbnail: MastodonInstanceThumbnail?
     let icon: [MastodonInstanceIcon]?
 
     var displayTitle: String? {
@@ -12,20 +11,13 @@ nonisolated struct MastodonInstance: Decodable, Sendable {
         return trimmed.isEmpty ? nil : trimmed
     }
 
-    var preferredIconURL: String? {
-        if let customIcon = icon?.last(where: { !$0.src.contains("/packs/assets/") })?.src,
-           !customIcon.isEmpty {
-            return customIcon
+    var customIconURL: String? {
+        guard let customIcon = icon?.last(where: { !$0.src.contains("/packs/assets/") })?.src,
+              !customIcon.isEmpty else {
+            return nil
         }
-        if let thumbnailURL = thumbnail?.url, !thumbnailURL.isEmpty {
-            return thumbnailURL
-        }
-        return nil
+        return customIcon
     }
-}
-
-nonisolated struct MastodonInstanceThumbnail: Decodable, Sendable {
-    let url: String?
 }
 
 nonisolated struct MastodonInstanceIcon: Decodable, Sendable {
