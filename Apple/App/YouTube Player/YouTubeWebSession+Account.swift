@@ -20,32 +20,33 @@ extension YouTubeWebSession {
 
     static func fetchSignedInAccount() async -> String? {
         let cookies = await WKWebsiteDataStore.default().httpCookieStore.allCookies()
-        let matchingCookies = cookies.filter { cookie in
-            let domain = cookie.domain.lowercased()
-            return domain.contains("youtube.com") || domain.contains("google.com")
-        }
-        guard let sapisidCookie = matchingCookies.first(where: { $0.name == "SAPISID" })
-            ?? matchingCookies.first(where: { $0.name == "__Secure-3PAPISID" }),
+        let youtubeCookies = cookies.filter { $0.domain.lowercased().hasSuffix("youtube.com") }
+        guard let sapisid = youtubeCookies.first(where: { $0.name == "SAPISID" })?.value
+                ?? youtubeCookies.first(where: { $0.name == "__Secure-3PAPISID" })?.value,
               let accountMenuURL = URL(string: "\(youtubeOrigin)/youtubei/v1/account/account_menu") else {
             return cachedSignedInAccount
         }
 
         let timestamp = Int(Date().timeIntervalSince1970)
-        let hashInput = "\(timestamp) \(sapisidCookie.value) \(youtubeOrigin)"
-        let digest = Insecure.SHA1.hash(data: Data(hashInput.utf8))
-            .map { String(format: "%02x", $0) }
-            .joined()
+        var authorization = ["SAPISIDHASH \(timestamp)_\(sapisidHash(sapisid, timestamp: timestamp))"]
+        if let firstParty = youtubeCookies.first(where: { $0.name == "__Secure-1PAPISID" })?.value {
+            authorization.append("SAPISID1PHASH \(timestamp)_\(sapisidHash(firstParty, timestamp: timestamp))")
+        }
+        if let thirdParty = youtubeCookies.first(where: { $0.name == "__Secure-3PAPISID" })?.value {
+            authorization.append("SAPISID3PHASH \(timestamp)_\(sapisidHash(thirdParty, timestamp: timestamp))")
+        }
 
         var request = URLRequest(url: accountMenuURL, timeoutInterval: 15)
         request.httpMethod = "POST"
-        request.setValue("SAPISIDHASH \(timestamp)_\(digest)", forHTTPHeaderField: "Authorization")
+        request.setValue(authorization.joined(separator: " "), forHTTPHeaderField: "Authorization")
+        request.setValue("0", forHTTPHeaderField: "X-Goog-AuthUser")
         request.setValue(youtubeOrigin, forHTTPHeaderField: "Origin")
         request.setValue("\(youtubeOrigin)/", forHTTPHeaderField: "Referer")
         request.setValue(youtubeOrigin, forHTTPHeaderField: "X-Origin")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(sakuraUserAgent, forHTTPHeaderField: "User-Agent")
         request.setValue(
-            HTTPCookie.requestHeaderFields(with: matchingCookies)["Cookie"],
+            HTTPCookie.requestHeaderFields(with: youtubeCookies)["Cookie"],
             forHTTPHeaderField: "Cookie"
         )
         request.httpShouldHandleCookies = false
@@ -62,6 +63,12 @@ extension YouTubeWebSession {
 
         UserDefaults.standard.set(account, forKey: accountCacheKey)
         return account
+    }
+
+    private static func sapisidHash(_ value: String, timestamp: Int) -> String {
+        Insecure.SHA1.hash(data: Data("\(timestamp) \(value) \(youtubeOrigin)".utf8))
+            .map { String(format: "%02x", $0) }
+            .joined()
     }
 
     private static func parseAccountMenuResponse(_ data: Data) -> String? {

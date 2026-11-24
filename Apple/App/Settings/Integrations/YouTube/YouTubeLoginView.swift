@@ -66,8 +66,8 @@ private struct YouTubeLoginWebView: WebViewRepresentable {
                 try? await Task.sleep(for: .seconds(1))
                 guard !Task.isCancelled else { return }
 
-                let loggedIn = await YouTubeWebSession.hasSession()
-                if loggedIn {
+                if await YouTubeWebSession.hasYouTubeDomainSession() {
+                    _ = await YouTubeWebSession.hasSession()
                     self.isLoggedIn = true
                 }
             }
