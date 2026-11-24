@@ -5,25 +5,20 @@ struct BlueskyIntegrationSettings: View {
 
     @Environment(FeedManager.self) private var feedManager
     @State private var isSignedIn = false
-    @State private var signedInHandle: String?
     @State private var isAddingFollowingFeed = false
     @State private var isShowingSavedFeeds = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if let handle = signedInHandle {
-                Text(String(localized: "Bluesky.SignedInAs", table: "Integrations") + ": @\(handle)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
             AccountSessionRow(
                 signInTitle: IntegrationText.string("Bluesky.SignIn"),
                 signOutTitle: IntegrationText.string("Bluesky.SignOut"),
                 checkSession: { BlueskyProvider.hasSession() },
+                cachedAccount: { BlueskyProvider.signedInHandle.map { "@\($0)" } },
+                fetchAccount: { BlueskyProvider.signedInHandle.map { "@\($0)" } },
                 signOut: { await BlueskyProvider.clearSession() },
                 onSessionChange: { signedIn in
                     isSignedIn = signedIn
-                    signedInHandle = BlueskyProvider.signedInHandle
                 },
                 loginView: { BlueskyLoginView() }
             )
