@@ -9,6 +9,7 @@ public extension XProvider {
         let userTweets: String
         let tweetDetail: String
         let tweetResultByRestId: String
+        let userByRestId: String?
     }
 
     @MainActor
@@ -21,6 +22,7 @@ public extension XProvider {
         userTweetsQueryID = stored.userTweets
         tweetDetailQueryID = stored.tweetDetail
         tweetResultByRestIdQueryID = stored.tweetResultByRestId
+        userByRestIdQueryID = stored.userByRestId
         return true
     }
 
@@ -34,7 +36,8 @@ public extension XProvider {
                   userByScreenName: userByScreenName,
                   userTweets: userTweets,
                   tweetDetail: tweetDetail,
-                  tweetResultByRestId: tweetResultByRestId
+                  tweetResultByRestId: tweetResultByRestId,
+                  userByRestId: userByRestIdQueryID
               )) else { return }
         UserDefaults.standard.set(data, forKey: storedQueryIDsDefaultsKey)
     }
@@ -45,6 +48,7 @@ public extension XProvider {
         userTweetsQueryID = nil
         tweetDetailQueryID = nil
         tweetResultByRestIdQueryID = nil
+        userByRestIdQueryID = nil
         queryIDsFetched = false
         queryIDsRestoredFromStorage = false
         UserDefaults.standard.removeObject(forKey: storedQueryIDsDefaultsKey)

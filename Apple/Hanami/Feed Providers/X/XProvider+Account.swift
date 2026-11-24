@@ -2,78 +2,58 @@ import Foundation
 
 public extension XProvider {
 
+    nonisolated static func signedInUserID() -> String? {
+        guard let twid = cookieStore.load()?.first(where: { $0.name == "twid" })?.value else {
+            return nil
+        }
+        let decoded = twid.removingPercentEncoding ?? twid
+        guard decoded.hasPrefix("u=") else { return nil }
+        let userID = String(decoded.dropFirst(2))
+        guard !userID.isEmpty, userID.allSatisfy(\.isNumber) else { return nil }
+        return userID
+    }
+
+    @MainActor
     static func fetchSignedInAccount() async -> String? {
-        guard let cookies = readXCookiesFromKeychain() else { return nil }
-        let provider = XProvider()
-
-        if let account = await fetchAccountFromSettings(provider: provider, cookies: cookies) {
-            setCachedSignedInAccount(account)
-            return account
+        guard let cookies = readXCookiesFromKeychain(),
+              let userID = signedInUserID() else {
+            return cachedSignedInAccount
         }
-        if let account = await fetchAccountFromVerifyCredentials(provider: provider, cookies: cookies) {
-            setCachedSignedInAccount(account)
-            return account
+        await fetchQueryIDsIfNeeded()
+        if userByRestIdQueryID == nil, await refetchQueryIDsIfRestoredFromStorage() {
+            log("XProvider", "Refetched query IDs for UserByRestId")
         }
-        return cachedSignedInAccount
-    }
-
-    private static func fetchAccountFromSettings(
-        provider: XProvider,
-        cookies: XCookies
-    ) async -> String? {
-        guard let settingsURL = URL(string: "https://api.x.com/1.1/account/settings.json") else {
-            return nil
+        guard let queryID = userByRestIdQueryID,
+              let url = buildGraphQLURL(
+                queryID: queryID,
+                operationName: "UserByRestId",
+                variables: ["userId": userID, "withSafetyModeUserFields": true],
+                features: userByScreenNameFeatures
+              ) else {
+            return cachedSignedInAccount
         }
-        let request = provider.buildRequest(url: settingsURL, cookies: cookies)
+        let request = XProvider().buildRequest(url: url, cookies: cookies)
         guard let (data, response) = try? await URLSession.shared.data(for: request),
-              let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200,
-              let decoded = try? JSONDecoder().decode(XAccountSettingsResponse.self, from: data) else {
-            return nil
+              (response as? HTTPURLResponse)?.statusCode == 200,
+              let screenName = parseScreenName(from: data) else {
+            return cachedSignedInAccount
         }
-        let screenName = decoded.screenName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return screenName.isEmpty ? nil : "@\(screenName)"
+        let account = "@\(screenName)"
+        setCachedSignedInAccount(account)
+        return account
     }
 
-    private static func fetchAccountFromVerifyCredentials(
-        provider: XProvider,
-        cookies: XCookies
-    ) async -> String? {
-        let credentialsEndpoint = "https://api.x.com/1.1/account/verify_credentials.json"
-            + "?skip_status=true&include_entities=false"
-        guard let credentialsURL = URL(string: credentialsEndpoint) else {
+    private nonisolated static func parseScreenName(from data: Data) -> String? {
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let dataObject = json["data"] as? [String: Any],
+              let user = dataObject["user"] as? [String: Any],
+              let result = user["result"] as? [String: Any] else {
             return nil
         }
-        let request = provider.buildRequest(url: credentialsURL, cookies: cookies)
-        guard let (data, response) = try? await URLSession.shared.data(for: request),
-              let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200,
-              let decoded = try? JSONDecoder().decode(XVerifyCredentialsResponse.self, from: data) else {
-            return nil
-        }
-        let screenName = decoded.screenName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        if !screenName.isEmpty {
-            return "@\(screenName)"
-        }
-        let displayName = decoded.name?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return displayName.isEmpty ? nil : displayName
-    }
-}
-
-private nonisolated struct XAccountSettingsResponse: Decodable, Sendable {
-    let screenName: String?
-
-    enum CodingKeys: String, CodingKey {
-        case screenName = "screen_name"
-    }
-}
-
-private nonisolated struct XVerifyCredentialsResponse: Decodable, Sendable {
-    let screenName: String?
-    let name: String?
-
-    enum CodingKeys: String, CodingKey {
-        case screenName = "screen_name"
-        case name
+        let core = result["core"] as? [String: Any]
+        let legacy = result["legacy"] as? [String: Any]
+        let screenName = (core?["screen_name"] as? String) ?? (legacy?["screen_name"] as? String)
+        let trimmed = screenName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        return trimmed.isEmpty ? nil : trimmed
     }
 }

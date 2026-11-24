@@ -16,6 +16,7 @@ public final class XProvider: Authenticated {
     public static var userTweetsQueryID: String?
     public static var tweetDetailQueryID: String?
     public static var tweetResultByRestIdQueryID: String?
+    public static var userByRestIdQueryID: String?
 
     public static let userByScreenNameFeatures: [String: Bool] = [
         "hidden_profile_subscriptions_enabled": true,
