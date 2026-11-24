@@ -12,6 +12,7 @@ struct ArticleDetailView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.navigateToEphemeralArticle) var navigateToEphemeralArticle
     @Environment(\.navigateToFeed) var navigateToFeed
+    @Environment(\.currentFeedID) var currentFeedID
     let article: Article
     /// When non-nil, forces a specific text-extraction mode for ephemeral
     /// articles (those opened via `sakura://open`).

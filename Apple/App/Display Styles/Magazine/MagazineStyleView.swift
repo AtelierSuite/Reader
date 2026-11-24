@@ -29,6 +29,7 @@ struct MagazineStyleView: View {
                         .contextMenu {
                             ArticleReadMenuButton(article: article)
                             ArticleBookmarkMenuButton(article: article)
+                            ArticleGoToFeedMenuButton(article: article)
                             BookmarkMenuItems(article: article)
                         }
                     }

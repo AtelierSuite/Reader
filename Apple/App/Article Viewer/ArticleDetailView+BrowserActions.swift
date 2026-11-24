@@ -53,6 +53,18 @@ extension ArticleDetailView {
                         systemImage: isBookmarked ? "bookmark.fill" : "bookmark"
                     )
                 }
+                if let navigateToFeed,
+                   let feed = feedManager.feed(forArticle: article),
+                   currentFeedID != feed.id {
+                    Button {
+                        navigateToFeed(feed)
+                    } label: {
+                        Label(
+                            String(localized: "Article.GoToFeed", table: "Articles"),
+                            systemImage: "dot.radiowaves.up.forward"
+                        )
+                    }
+                }
             }
 
             if canTranslateInBrowser || canSummarizeInBrowser {
