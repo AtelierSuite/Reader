@@ -12,6 +12,9 @@ public extension Iconography {
         if MastodonProvider.isFeedURL(feed.url) {
             return fediverseIcon()
         }
+        if feed.url == BlueskyFeedTarget.following.feedURL {
+            return await icon(for: .bluesky)
+        }
         if feed.isFediverseFeed {
             return await profileIcon(siteURL: feed.siteURL) ?? fediverseIcon()
         }

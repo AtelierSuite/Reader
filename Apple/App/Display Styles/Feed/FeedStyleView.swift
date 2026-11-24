@@ -105,6 +105,7 @@ struct FeedStyleView: View {
 
     @ViewBuilder
     private func rowContextMenu(for article: Article) -> some View {
+        ArticleGoToFeedMenuButton(article: article)
         BookmarkMenuItems(article: article)
     }
 }

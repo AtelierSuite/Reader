@@ -2,7 +2,10 @@ import Foundation
 
 extension BlueskyProvider {
 
-    nonisolated static func parseFeedViewPost(_ entry: [String: Any]) -> ParsedBlueskyPost? {
+    nonisolated static func parseFeedViewPost(
+        _ entry: [String: Any],
+        preferences: BlueskyModerationPreferences = .signedOut
+    ) -> ParsedBlueskyPost? {
         if let reason = entry["reason"] as? [String: Any],
            (reason["$type"] as? String) == "app.bsky.feed.defs#reasonRepost" {
             return nil
@@ -14,7 +17,9 @@ extension BlueskyProvider {
               let authorHandle = author["handle"] as? String,
               let postURL = postWebURL(atURI: uri, authorHandle: authorHandle) else { return nil }
 
-        let moderation = BlueskyModeration.decision(labels: post["labels"], record: record, author: author)
+        let moderation = BlueskyModeration.decision(
+            labels: post["labels"], record: record, author: author, preferences: preferences
+        )
         guard moderation != .hide else { return nil }
 
         let embed = post["embed"] as? [String: Any]
@@ -29,7 +34,7 @@ extension BlueskyProvider {
             videoThumbnailURL: media.videoThumbnailURL,
             publishedDate: (record["createdAt"] as? String).flatMap(parseISO8601(_:))
         )
-        parsed.quote = quotedRecord(in: embed).flatMap(parseQuote(_:))
+        parsed.quote = quotedRecord(in: embed).flatMap { parseQuote($0, preferences: preferences) }
         return parsed
     }
 
@@ -44,14 +49,19 @@ extension BlueskyProvider {
         }
     }
 
-    private nonisolated static func parseQuote(_ view: [String: Any]) -> ParsedBlueskyQuote? {
+    private nonisolated static func parseQuote(
+        _ view: [String: Any],
+        preferences: BlueskyModerationPreferences
+    ) -> ParsedBlueskyQuote? {
         guard (view["$type"] as? String) == "app.bsky.embed.record#viewRecord",
               let uri = view["uri"] as? String, uri.contains("/app.bsky.feed.post/"),
               let author = view["author"] as? [String: Any],
               let authorHandle = author["handle"] as? String,
               let quoteURL = postWebURL(atURI: uri, authorHandle: authorHandle) else { return nil }
         let record = view["value"] as? [String: Any]
-        let moderation = BlueskyModeration.decision(labels: view["labels"], record: record, author: author)
+        let moderation = BlueskyModeration.decision(
+            labels: view["labels"], record: record, author: author, preferences: preferences
+        )
         guard moderation != .hide else { return nil }
         let embeds = (view["embeds"] as? [[String: Any]]) ?? []
         let images = moderation == .hideMedia ? [] : embeds.flatMap { extractMedia(from: $0).images }

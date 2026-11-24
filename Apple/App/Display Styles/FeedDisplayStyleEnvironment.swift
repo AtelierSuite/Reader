@@ -7,10 +7,19 @@ private struct FeedNavigationActionKey: EnvironmentKey {
     static let defaultValue: ((Feed) -> Void)? = nil
 }
 
+private struct CurrentFeedIDKey: EnvironmentKey {
+    static let defaultValue: Int64? = nil
+}
+
 extension EnvironmentValues {
     var navigateToFeed: ((Feed) -> Void)? {
         get { self[FeedNavigationActionKey.self] }
         set { self[FeedNavigationActionKey.self] = newValue }
+    }
+
+    var currentFeedID: Int64? {
+        get { self[CurrentFeedIDKey.self] }
+        set { self[CurrentFeedIDKey.self] = newValue }
     }
 }
 

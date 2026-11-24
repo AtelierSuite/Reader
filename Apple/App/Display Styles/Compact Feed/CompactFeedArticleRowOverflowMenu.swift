@@ -21,6 +21,8 @@ struct CompactFeedArticleRowOverflowMenu: View {
                 )
             }
 
+            ArticleGoToFeedMenuButton(article: article)
+
             if let shareURL = URL(string: article.url) {
                 ShareLink(item: shareURL) {
                     Label(
