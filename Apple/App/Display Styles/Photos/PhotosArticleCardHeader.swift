@@ -49,6 +49,7 @@ struct PhotosArticleCardHeader: View {
                         systemImage: isRead ? "envelope" : "envelope.open"
                     )
                 }
+                ArticleGoToFeedMenuButton(article: article)
                 BookmarkMenuItems(article: article)
             } label: {
                 Image(systemName: "ellipsis")

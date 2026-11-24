@@ -25,6 +25,7 @@ struct VideoStyleView: View {
                         ArticleReadMenuButton(article: article, labelStyle: .playedUnplayed)
                         Divider()
                         ArticleBookmarkMenuButton(article: article)
+                        ArticleGoToFeedMenuButton(article: article)
                         ArticleCopyLinkMenuButton(article: article)
                         ArticleShareMenuButton(article: article)
                         BookmarkMenuItems(article: article)

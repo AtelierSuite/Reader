@@ -166,6 +166,7 @@ struct FeedArticlesView: View {
             effectiveStyleBinding: $effectiveDisplayStyle
         )
         .environment(\.feedBackgroundColors, prominentColors)
+        .environment(\.currentFeedID, feed.id)
         .animation(.smooth.speed(2.0), value: styleSupportsRichHeader)
         .refreshable {
             log("FeedArticlesView", ".refreshable triggered id=\(feed.id)")

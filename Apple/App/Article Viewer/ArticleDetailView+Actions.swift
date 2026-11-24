@@ -44,6 +44,21 @@ extension ArticleDetailView: ArticleActions {
                 }
             }
 
+            if !article.isEphemeral,
+               let navigateToFeed,
+               let feed = feedManager.feed(forArticle: article),
+               currentFeedID != feed.id {
+                Divider()
+                Button {
+                    navigateToFeed(feed)
+                } label: {
+                    Label(
+                        String(localized: "Article.GoToFeed", table: "Articles"),
+                        systemImage: "dot.radiowaves.up.forward"
+                    )
+                }
+            }
+
             if includesOpenLinkAction {
                 Divider()
                 if includesOpenInAppAction {

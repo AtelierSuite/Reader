@@ -38,6 +38,7 @@ struct GridStyleView: View {
                         .contextMenu {
                             ArticleReadMenuButton(article: article)
                             Divider()
+                            ArticleGoToFeedMenuButton(article: article)
                             ArticleShareMenuButton(article: article)
                             BookmarkMenuItems(article: article)
                         }

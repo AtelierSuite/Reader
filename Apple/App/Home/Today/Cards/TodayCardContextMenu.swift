@@ -27,6 +27,7 @@ struct TodayCardContextMenu: View {
                 systemImage: isBookmarked ? "bookmark.fill" : "bookmark"
             )
         }
+        ArticleGoToFeedMenuButton(article: article)
     }
 
     private func markActionTitle(isRead: Bool) -> String {

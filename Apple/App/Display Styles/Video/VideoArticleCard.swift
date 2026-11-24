@@ -103,6 +103,7 @@ struct VideoArticleCard: View {
                             systemImage: feedManager.isBookmarked(article) ? "bookmark.fill" : "bookmark"
                         )
                     }
+                    ArticleGoToFeedMenuButton(article: article)
                     Button {
                         UIPasteboard.general.string = article.url
                     } label: {
