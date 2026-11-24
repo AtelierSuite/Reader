@@ -7,6 +7,7 @@ struct YouTubeSettingsView: View {
     @AppStorage("YouTube.SponsorBlock.Categories") private var sponsorBlockCategories = "sponsor,selfpromo,interaction"
 
     @State private var isYouTubeSignedIn = false
+    @State private var signedInAccount: String?
     @State private var showYouTubeLogin = false
     @State private var isCheckingSession = true
 
@@ -17,10 +18,14 @@ struct YouTubeSettingsView: View {
                     ProgressView()
                         .frame(maxWidth: .infinity, alignment: .leading)
                 } else if isYouTubeSignedIn {
-                    Button(String(localized: "YouTubePlayer.SignOut", table: "Integrations")) {
+                    if let signedInAccount {
+                        SignedInAccountRow(account: signedInAccount)
+                    }
+                    Button(String(localized: "YouTubePlayer.SignOut", table: "Integrations"), role: .destructive) {
                         Task {
                             await YouTubePlayerView.clearYouTubeSession()
                             isYouTubeSignedIn = false
+                            signedInAccount = nil
                         }
                     }
                 } else {
@@ -77,15 +82,25 @@ struct YouTubeSettingsView: View {
         .toolbarTitleDisplayMode(.inline)
         .sheet(isPresented: $showYouTubeLogin) {
             Task {
-                isYouTubeSignedIn = await YouTubePlayerView.hasYouTubeSession()
+                await refreshSession()
             }
         } content: {
             YouTubeLoginView()
         }
         .task {
             await YouTubePlayerView.warmUpWebView()
-            isYouTubeSignedIn = await YouTubePlayerView.hasYouTubeSession()
+            await refreshSession()
             isCheckingSession = false
+        }
+    }
+
+    private func refreshSession() async {
+        isYouTubeSignedIn = await YouTubePlayerView.hasYouTubeSession()
+        if isYouTubeSignedIn {
+            signedInAccount = YouTubeWebSession.cachedSignedInAccount
+            signedInAccount = await YouTubeWebSession.fetchSignedInAccount()
+        } else {
+            signedInAccount = nil
         }
     }
 }

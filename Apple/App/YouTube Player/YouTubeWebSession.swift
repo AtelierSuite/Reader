@@ -32,6 +32,15 @@ enum YouTubeWebSession {
             await store.httpCookieStore.deleteCookie(cookie)
         }
         UserDefaults.standard.set(false, forKey: cacheKey)
+        clearCachedSignedInAccount()
+    }
+
+    static func hasYouTubeDomainSession() async -> Bool {
+        let cookies = await WKWebsiteDataStore.default().httpCookieStore.allCookies()
+        return cookies.contains { cookie in
+            cookie.domain.lowercased().hasSuffix("youtube.com")
+                && (cookie.name == "SID" || cookie.name == "LOGIN_INFO")
+        }
     }
 
     private static func cookiesShowSession() async -> Bool {

@@ -7,6 +7,7 @@ struct InstagramSettingsView: View {
 
     @State private var isCheckingLogin = true
     @State private var isInstagramSignedIn = false
+    @State private var signedInAccount: String?
     @State private var showInstagramLogin = false
 
     var body: some View {
@@ -15,10 +16,14 @@ struct InstagramSettingsView: View {
                 if isCheckingLogin {
                     ProgressView()
                 } else if isInstagramSignedIn {
-                    Button(String(localized: "InstagramProfileFeeds.SignOut", table: "Integrations")) {
+                    if let signedInAccount {
+                        SignedInAccountRow(account: signedInAccount)
+                    }
+                    Button(String(localized: "InstagramProfileFeeds.SignOut", table: "Integrations"), role: .destructive) {
                         Task {
                             await InstagramProvider.clearSession()
                             isInstagramSignedIn = false
+                            signedInAccount = nil
                         }
                     }
                 } else {
@@ -43,16 +48,25 @@ struct InstagramSettingsView: View {
         .toolbarTitleDisplayMode(.inline)
         .sheet(isPresented: $showInstagramLogin) {
             Task {
-                isCheckingLogin = true
-                isInstagramSignedIn = InstagramProvider.hasSession()
-                isCheckingLogin = false
+                await refreshSession()
             }
         } content: {
             InstagramLoginView()
         }
         .task {
-            isInstagramSignedIn = InstagramProvider.hasSession()
-            isCheckingLogin = false
+            await refreshSession()
+        }
+    }
+
+    private func refreshSession() async {
+        isCheckingLogin = true
+        isInstagramSignedIn = InstagramProvider.hasSession()
+        isCheckingLogin = false
+        if isInstagramSignedIn {
+            signedInAccount = InstagramProvider.cachedSignedInAccount
+            signedInAccount = await InstagramProvider.fetchSignedInAccount()
+        } else {
+            signedInAccount = nil
         }
     }
 }

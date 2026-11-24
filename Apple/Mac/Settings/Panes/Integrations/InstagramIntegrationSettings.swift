@@ -11,6 +11,8 @@ struct InstagramIntegrationSettings: View {
                 signInTitle: IntegrationText.string("InstagramProfileFeeds.SignIn"),
                 signOutTitle: IntegrationText.string("InstagramProfileFeeds.SignOut"),
                 checkSession: { InstagramProvider.hasSession() },
+                cachedAccount: { InstagramProvider.cachedSignedInAccount },
+                fetchAccount: { await InstagramProvider.fetchSignedInAccount() },
                 signOut: { await InstagramProvider.clearSession() },
                 loginView: { InstagramLoginView() }
             )

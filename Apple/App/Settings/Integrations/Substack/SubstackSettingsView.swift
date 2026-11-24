@@ -5,6 +5,7 @@ struct SubstackSettingsView: View {
 
     @State private var isCheckingLogin = true
     @State private var isSignedIn = false
+    @State private var signedInAccount: String?
     @State private var showLogin = false
 
     var body: some View {
@@ -13,10 +14,14 @@ struct SubstackSettingsView: View {
                 if isCheckingLogin {
                     ProgressView()
                 } else if isSignedIn {
-                    Button(String(localized: "Substack.SignOut", table: "Integrations")) {
+                    if let signedInAccount {
+                        SignedInAccountRow(account: signedInAccount)
+                    }
+                    Button(String(localized: "Substack.SignOut", table: "Integrations"), role: .destructive) {
                         Task {
                             await SubstackAuth.clearSession()
                             isSignedIn = false
+                            signedInAccount = nil
                         }
                     }
                 } else {
@@ -31,15 +36,26 @@ struct SubstackSettingsView: View {
         .navigationTitle(String(localized: "Substack", table: "Integrations"))
         .toolbarTitleDisplayMode(.inline)
         .sheet(isPresented: $showLogin) {
-            isCheckingLogin = true
-            isSignedIn = SubstackAuth.hasSession()
-            isCheckingLogin = false
+            Task {
+                await refreshSession()
+            }
         } content: {
             SubstackLoginView()
         }
         .task {
-            isSignedIn = SubstackAuth.hasSession()
-            isCheckingLogin = false
+            await refreshSession()
+        }
+    }
+
+    private func refreshSession() async {
+        isCheckingLogin = true
+        isSignedIn = SubstackAuth.hasSession()
+        isCheckingLogin = false
+        if isSignedIn {
+            signedInAccount = SubstackAuth.cachedSignedInAccount
+            signedInAccount = await SubstackAuth.fetchSignedInAccount()
+        } else {
+            signedInAccount = nil
         }
     }
 }

@@ -7,6 +7,7 @@ struct PixivSettingsView: View {
 
     @State private var isCheckingLogin = true
     @State private var isPixivSignedIn = false
+    @State private var signedInAccount: String?
     @State private var showPixivLogin = false
     @State private var isAddingFollowingFeed = false
 
@@ -16,10 +17,14 @@ struct PixivSettingsView: View {
                 if isCheckingLogin {
                     ProgressView()
                 } else if isPixivSignedIn {
-                    Button(String(localized: "PixivFeeds.SignOut", table: "Integrations")) {
+                    if let signedInAccount {
+                        SignedInAccountRow(account: signedInAccount)
+                    }
+                    Button(String(localized: "PixivFeeds.SignOut", table: "Integrations"), role: .destructive) {
                         Task {
                             await PixivProvider.clearSession()
                             isPixivSignedIn = false
+                            signedInAccount = nil
                         }
                     }
                 } else {
@@ -45,16 +50,25 @@ struct PixivSettingsView: View {
         .toolbarTitleDisplayMode(.inline)
         .sheet(isPresented: $showPixivLogin) {
             Task {
-                isCheckingLogin = true
-                isPixivSignedIn = PixivProvider.hasSession()
-                isCheckingLogin = false
+                await refreshSession()
             }
         } content: {
             PixivLoginView()
         }
         .task {
-            isPixivSignedIn = PixivProvider.hasSession()
-            isCheckingLogin = false
+            await refreshSession()
+        }
+    }
+
+    private func refreshSession() async {
+        isCheckingLogin = true
+        isPixivSignedIn = PixivProvider.hasSession()
+        isCheckingLogin = false
+        if isPixivSignedIn {
+            signedInAccount = PixivProvider.cachedSignedInAccount
+            signedInAccount = await PixivProvider.fetchSignedInAccount()
+        } else {
+            signedInAccount = nil
         }
     }
 

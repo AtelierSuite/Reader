@@ -9,6 +9,8 @@ struct SubstackIntegrationSettings: View {
                 signInTitle: IntegrationText.string("Substack.SignIn"),
                 signOutTitle: IntegrationText.string("Substack.SignOut"),
                 checkSession: { SubstackAuth.hasSession() },
+                cachedAccount: { SubstackAuth.cachedSignedInAccount },
+                fetchAccount: { await SubstackAuth.fetchSignedInAccount() },
                 signOut: { await SubstackAuth.clearSession() },
                 loginView: { SubstackLoginView() }
             )

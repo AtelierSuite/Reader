@@ -365,6 +365,7 @@
 				"YouTube Player/YouTubePlayerWebView+Coordinator.swift",
 				"YouTube Player/YouTubeTimeObserver.swift",
 				"YouTube Player/YouTubeWebSession.swift",
+				"YouTube Player/YouTubeWebSession+Account.swift",
 			);
 			target = 4D41430A000000000000000B /* Sakura for Mac */;
 		};

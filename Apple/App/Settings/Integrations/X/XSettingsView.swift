@@ -5,6 +5,7 @@ struct XSettingsView: View {
 
     @State private var isCheckingLogin = true
     @State private var isXSignedIn = false
+    @State private var signedInAccount: String?
     @State private var showXLogin = false
 
     var body: some View {
@@ -13,15 +14,19 @@ struct XSettingsView: View {
                 if isCheckingLogin {
                     ProgressView()
                 } else if isXSignedIn {
+                    if let signedInAccount {
+                        SignedInAccountRow(account: signedInAccount)
+                    }
                     Button(String(localized: "XProfileFeeds.RefreshAuth", table: "Integrations")) {
                         Task {
                             await XProvider.refetchQueryIDs()
                         }
                     }
-                    Button(String(localized: "XProfileFeeds.SignOut", table: "Integrations")) {
+                    Button(String(localized: "XProfileFeeds.SignOut", table: "Integrations"), role: .destructive) {
                         Task {
                             await XProvider.clearSession()
                             isXSignedIn = false
+                            signedInAccount = nil
                         }
                     }
                 } else {
@@ -38,16 +43,25 @@ struct XSettingsView: View {
         .toolbarTitleDisplayMode(.inline)
         .sheet(isPresented: $showXLogin) {
             Task {
-                isCheckingLogin = true
-                isXSignedIn = XProvider.hasSession()
-                isCheckingLogin = false
+                await refreshSession()
             }
         } content: {
             XLoginView()
         }
         .task {
-            isXSignedIn = XProvider.hasSession()
-            isCheckingLogin = false
+            await refreshSession()
+        }
+    }
+
+    private func refreshSession() async {
+        isCheckingLogin = true
+        isXSignedIn = XProvider.hasSession()
+        isCheckingLogin = false
+        if isXSignedIn {
+            signedInAccount = XProvider.cachedSignedInAccount
+            signedInAccount = await XProvider.fetchSignedInAccount()
+        } else {
+            signedInAccount = nil
         }
     }
 }

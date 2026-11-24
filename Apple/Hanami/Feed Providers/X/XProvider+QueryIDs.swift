@@ -113,7 +113,7 @@ public extension XProvider {
     }
 
     private static func extractQueryIDs(from bundleText: String) {
-        let pattern = #"queryId:"([^"]+)",operationName:"(UserByScreenName|UserTweets|TweetDetail|TweetResultByRestId)""#
+        let pattern = #"queryId:"([^"]+)",operationName:"(UserByScreenName|UserTweets|TweetDetail|TweetResultByRestId|UserByRestId)""#
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
 
         let matches = regex.matches(
@@ -141,6 +141,9 @@ public extension XProvider {
             case "TweetResultByRestId" where tweetResultByRestIdQueryID == nil:
                 tweetResultByRestIdQueryID = queryID
                 log("XProvider:QueryIDs", "OK: TweetResultByRestId: \(queryID)")
+            case "UserByRestId" where userByRestIdQueryID == nil:
+                userByRestIdQueryID = queryID
+                log("XProvider:QueryIDs", "OK: UserByRestId: \(queryID)")
             default:
                 break
             }
