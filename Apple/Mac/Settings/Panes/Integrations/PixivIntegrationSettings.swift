@@ -13,6 +13,8 @@ struct PixivIntegrationSettings: View {
                 signInTitle: IntegrationText.string("PixivFeeds.SignIn"),
                 signOutTitle: IntegrationText.string("PixivFeeds.SignOut"),
                 checkSession: { PixivProvider.hasSession() },
+                cachedAccount: { PixivProvider.cachedSignedInAccount },
+                fetchAccount: { await PixivProvider.fetchSignedInAccount() },
                 signOut: { await PixivProvider.clearSession() },
                 onSessionChange: { isSignedIn = $0 },
                 loginView: { PixivLoginView() }

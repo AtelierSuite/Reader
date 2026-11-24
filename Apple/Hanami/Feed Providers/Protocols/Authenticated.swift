@@ -60,9 +60,22 @@ public extension Authenticated {
         return cookies.contains { cookieDomainMatches($0.domain.lowercased()) }
     }
 
+    nonisolated static var cachedSignedInAccount: String? {
+        SignedInAccountCache.load(for: String(describing: Self.self))
+    }
+
+    nonisolated static func setCachedSignedInAccount(_ account: String?) {
+        SignedInAccountCache.save(account, for: String(describing: Self.self))
+    }
+
+    nonisolated static func clearCachedSignedInAccount() {
+        SignedInAccountCache.clear(for: String(describing: Self.self))
+    }
+
     @MainActor
     static func clearSession() async {
         cookieStore.clear()
+        clearCachedSignedInAccount()
         let store = WKWebsiteDataStore.default()
         let cookies = await store.httpCookieStore.allCookies()
         for cookie in cookies where cookieDomainMatches(cookie.domain.lowercased()) {

@@ -9,6 +9,8 @@ struct XIntegrationSettings: View {
                 signInTitle: IntegrationText.string("XProfileFeeds.SignIn"),
                 signOutTitle: IntegrationText.string("XProfileFeeds.SignOut"),
                 checkSession: { XProvider.hasSession() },
+                cachedAccount: { XProvider.cachedSignedInAccount },
+                fetchAccount: { await XProvider.fetchSignedInAccount() },
                 signOut: { await XProvider.clearSession() },
                 loginView: { XLoginView() }
             )

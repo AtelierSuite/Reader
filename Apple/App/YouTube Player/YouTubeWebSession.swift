@@ -32,6 +32,7 @@ enum YouTubeWebSession {
             await store.httpCookieStore.deleteCookie(cookie)
         }
         UserDefaults.standard.set(false, forKey: cacheKey)
+        clearCachedSignedInAccount()
     }
 
     private static func cookiesShowSession() async -> Bool {

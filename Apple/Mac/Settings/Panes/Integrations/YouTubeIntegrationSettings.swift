@@ -9,6 +9,8 @@ struct YouTubeIntegrationSettings: View {
                 signInTitle: IntegrationText.string("YouTubePlayer.SignIn"),
                 signOutTitle: IntegrationText.string("YouTubePlayer.SignOut"),
                 checkSession: { await YouTubeWebSession.hasSession() },
+                cachedAccount: { YouTubeWebSession.cachedSignedInAccount },
+                fetchAccount: { await YouTubeWebSession.fetchSignedInAccount() },
                 signOut: { await YouTubeWebSession.clearSession() },
                 loginView: { YouTubeLoginView() }
             )
